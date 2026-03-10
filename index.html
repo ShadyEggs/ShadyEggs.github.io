@@ -103,31 +103,43 @@ text-align:center;
 margin-bottom:40px;
 }
 
-/* ABOUT SPLIT LAYOUT */
+/* ABOUT SECTION */
 
 .about-grid{
 display:grid;
-grid-template-columns:300px 1fr;
-gap:50px;
+grid-template-columns:220px 1fr;
+gap:60px;
 align-items:center;
 max-width:900px;
 margin:auto;
 }
 
 .profile-pic{
-width:260px;
-height:260px;
+width:200px;
+height:200px;
 object-fit:cover;
 border-radius:50%;
-border:5px solid #4a90e2;
-box-shadow:0 10px 35px rgba(0,0,0,0.2);
+border:4px solid #4a90e2;
+box-shadow:0 10px 30px rgba(0,0,0,0.15);
+transition:0.3s;
+}
+
+.profile-pic:hover{
+transform:scale(1.05);
+}
+
+.about-text{
+background:white;
+padding:35px;
+border-radius:14px;
+box-shadow:0 15px 40px rgba(0,0,0,0.08);
 }
 
 .about-text p{
 line-height:1.8;
 font-size:18px;
 color:#444;
-margin-bottom:20px;
+margin-bottom:18px;
 }
 
 /* PROJECTS */
