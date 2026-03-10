@@ -1,3 +1,4 @@
+```html
 <!DOCTYPE html>
 <html lang="en">
 
@@ -103,7 +104,7 @@ text-align:center;
 margin-bottom:40px;
 }
 
-/* ABOUT SECTION FIX */
+/* ABOUT */
 
 #about p{
 max-width:700px;
@@ -213,23 +214,6 @@ transition:.3s;
 
 .apple-send:hover{
 transform:scale(1.04);
-}
-
-.apple-send .icon{
-transition:.6s;
-}
-
-.apple-send.sending .icon{
-transform:translateX(40px) translateY(-20px) rotate(20deg);
-opacity:0;
-}
-
-.apple-send.sent{
-background:#34c759;
-}
-
-.apple-send.sent .text::after{
-content:" ✓";
 }
 
 /* FOOTER */
@@ -357,14 +341,8 @@ What motivates me most is the moment when analysis reveals something new—the i
 <label>Message</label>
 <textarea name="message" rows="6" required></textarea>
 
-<button type="submit" class="apple-send" onclick="sendForm(this)">
-
-<span class="text">Send Message</span>
-
-<span class="icon">
-<i class="fa-solid fa-paper-plane"></i>
-</span>
-
+<button type="submit" class="apple-send">
+Send Message
 </button>
 
 </form>
@@ -379,5 +357,81 @@ What motivates me most is the moment when analysis reveals something new—the i
 
 </footer>
 
+<script>
+
+/* HERO DATA ANIMATION */
+
+const canvas = document.getElementById("dashboardCanvas")
+const ctx = canvas.getContext("2d")
+
+canvas.width = window.innerWidth
+canvas.height = window.innerHeight
+
+let bars = [120,180,90,220,160]
+let progress = 0
+
+function drawBars(){
+
+bars.forEach((h,i)=>{
+
+let x = 200 + i*120
+
+ctx.fillStyle = "rgba(74,144,226,.8)"
+
+ctx.fillRect(x,canvas.height,60,-h*progress)
+
+})
+
+}
+
+function drawLine(){
+
+ctx.beginPath()
+ctx.strokeStyle = "white"
+ctx.lineWidth = 2
+
+ctx.moveTo(230,canvas.height-bars[0]*progress)
+
+for(let i=1;i<bars.length;i++){
+
+let x = 230 + i*120
+let y = canvas.height-bars[i]*progress
+
+ctx.lineTo(x,y)
+
+ctx.beginPath()
+ctx.arc(x,y,4,0,Math.PI*2)
+ctx.fillStyle="white"
+ctx.fill()
+
+ctx.beginPath()
+ctx.moveTo(x,y)
+
+}
+
+ctx.stroke()
+
+}
+
+function animate(){
+
+ctx.clearRect(0,0,canvas.width,canvas.height)
+
+if(progress<1){
+progress += 0.01
+}
+
+drawBars()
+drawLine()
+
+requestAnimationFrame(animate)
+
+}
+
+animate()
+
+</script>
+
 </body>
 </html>
+```
