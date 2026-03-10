@@ -1,3 +1,4 @@
+```html
 <!DOCTYPE html>
 <html lang="en">
 
@@ -103,7 +104,7 @@ text-align:center;
 margin-bottom:40px;
 }
 
-/* ABOUT */
+/* ABOUT SECTION FIX */
 
 #about p{
 max-width:700px;
@@ -168,7 +169,7 @@ color:white;
 /* CONTACT FORM */
 
 .contact-form{
-background:rgba(255,255,255,0.9);
+background:rgba(255,255,255,0.8);
 padding:40px;
 border-radius:16px;
 box-shadow:0 15px 40px rgba(0,0,0,0.08);
@@ -202,5 +203,183 @@ justify-content:center;
 gap:10px;
 width:100%;
 padding:14px;
-font-size:16p
+font-size:16px;
+border:none;
+border-radius:999px;
+background:#111;
+color:white;
+cursor:pointer;
+transition:.3s;
+}
+
+.apple-send:hover{
+transform:scale(1.04);
+}
+
+.apple-send .icon{
+transition:.6s;
+}
+
+.apple-send.sending .icon{
+transform:translateX(40px) translateY(-20px) rotate(20deg);
+opacity:0;
+}
+
+.apple-send.sent{
+background:#34c759;
+}
+
+.apple-send.sent .text::after{
+content:" ✓";
+}
+
+/* FOOTER */
+
+footer{
+text-align:center;
+padding:30px;
+background:#111;
+color:white;
+}
+
+</style>
+
+</head>
+
+<body>
+
+<header class="hero">
+
+<canvas id="dashboardCanvas"></canvas>
+
+<div class="container hero-content">
+
+<h1>Alfred Rico</h1>
+<p>Aspiring Data Analyst</p>
+
+<div class="social-links">
+<a href="https://www.linkedin.com/in/alfred-rico-3992338a/" target="_blank"><i class="fab fa-linkedin"></i></a>
+<a href="https://github.com/ShadyEggs" target="_blank"><i class="fab fa-github"></i></a>
+</div>
+
+</div>
+
+</header>
+
+<nav>
+
+<ul>
+<li><a href="#about">About</a></li>
+<li><a href="#projects">Projects</a></li>
+<li><a href="#contact">Contact</a></li>
+</ul>
+
+</nav>
+
+<section id="about" class="section">
+
+<div class="container">
+
+<h2>About Me</h2>
+
+<p>
+I’m an aspiring data analyst passionate about discovering insights hidden within data. I enjoy transforming raw datasets through cleaning, statistical analysis, and modeling to uncover patterns and meaningful trends.
+</p>
+
+<p>
+What motivates me most is the moment when analysis reveals something new—the insight that turns data into understanding. My goal is to use data to answer questions, uncover opportunities, and support informed decision-making.
+</p>
+
+</div>
+
+</section>
+
+<section id="projects" class="section">
+
+<div class="container">
+
+<h2>My Projects</h2>
+
+<div class="project-filters">
+
+<button class="filter-btn active" data-filter="all">All</button>
+<button class="filter-btn" data-filter="python">Python</button>
+<button class="filter-btn" data-filter="sql">SQL</button>
+<button class="filter-btn" data-filter="powerbi">Power BI</button>
+
+</div>
+
+<div class="projects-grid">
+
+<div class="project-card" data-category="python">
+<img src="https://picsum.photos/400/250">
+<div class="project-card-content">
+<h3>TikTok Claims Analysis</h3>
+<p>Exploratory data analysis on TikTok claims dataset.</p>
+</div>
+</div>
+
+<div class="project-card" data-category="sql">
+<img src="https://picsum.photos/401/250">
+<div class="project-card-content">
+<h3>SQL Sales Dashboard</h3>
+<p>SQL queries and reporting analysis.</p>
+</div>
+</div>
+
+<div class="project-card" data-category="powerbi">
+<img src="https://picsum.photos/402/250">
+<div class="project-card-content">
+<h3>Power BI KPI Dashboard</h3>
+<p>Interactive business analytics dashboard.</p>
+</div>
+</div>
+
+</div>
+
+</div>
+
+</section>
+
+<section id="contact" class="section">
+
+<div class="container">
+
+<h2>Send me a message</h2>
+
+<form action="https://formsubmit.co/alfred.m.rico@gmail.com" method="POST" class="contact-form">
+
+<label>Name</label>
+<input type="text" name="name" required>
+
+<label>Email</label>
+<input type="email" name="email" required>
+
+<label>Message</label>
+<textarea name="message" rows="6" required></textarea>
+
+<button type="submit" class="apple-send" onclick="sendForm(this)">
+
+<span class="text">Send Message</span>
+
+<span class="icon">
+<i class="fa-solid fa-paper-plane"></i>
+</span>
+
+</button>
+
+</form>
+
+</div>
+
+</section>
+
+<footer>
+
+<p>© 2026 Alfred Rico</p>
+
+</footer>
+
+</body>
+</html>
 ```
