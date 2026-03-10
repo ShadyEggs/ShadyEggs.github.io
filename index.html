@@ -95,7 +95,7 @@ font-weight:600;
 /* SECTIONS */
 
 .section{
-padding:70px 0;
+padding:80px 0;
 }
 
 h2{
@@ -103,15 +103,31 @@ text-align:center;
 margin-bottom:40px;
 }
 
-/* ABOUT */
+/* ABOUT SPLIT LAYOUT */
 
-#about p{
-max-width:700px;
-margin:20px auto;
+.about-grid{
+display:grid;
+grid-template-columns:300px 1fr;
+gap:50px;
+align-items:center;
+max-width:900px;
+margin:auto;
+}
+
+.profile-pic{
+width:260px;
+height:260px;
+object-fit:cover;
+border-radius:50%;
+border:5px solid #4a90e2;
+box-shadow:0 10px 35px rgba(0,0,0,0.2);
+}
+
+.about-text p{
 line-height:1.8;
 font-size:18px;
-text-align:center;
 color:#444;
+margin-bottom:20px;
 }
 
 /* PROJECTS */
@@ -168,7 +184,7 @@ color:white;
 /* CONTACT FORM */
 
 .contact-form{
-background:rgba(255,255,255,0.8);
+background:rgba(255,255,255,0.9);
 padding:40px;
 border-radius:16px;
 box-shadow:0 15px 40px rgba(0,0,0,0.08);
@@ -192,8 +208,6 @@ outline:none;
 border-color:#4a90e2;
 box-shadow:0 0 0 3px rgba(74,144,226,0.15);
 }
-
-/* SEND BUTTON */
 
 .apple-send{
 display:flex;
@@ -264,6 +278,12 @@ color:white;
 
 <h2>About Me</h2>
 
+<div class="about-grid">
+
+<img src="profile.jpg" alt="Alfred Rico" class="profile-pic">
+
+<div class="about-text">
+
 <p>
 I’m an aspiring data analyst passionate about discovering insights hidden within data. I enjoy transforming raw datasets through cleaning, statistical analysis, and modeling to uncover patterns and meaningful trends.
 </p>
@@ -271,6 +291,10 @@ I’m an aspiring data analyst passionate about discovering insights hidden with
 <p>
 What motivates me most is the moment when analysis reveals something new—the insight that turns data into understanding. My goal is to use data to answer questions, uncover opportunities, and support informed decision-making.
 </p>
+
+</div>
+
+</div>
 
 </div>
 
@@ -327,7 +351,7 @@ What motivates me most is the moment when analysis reveals something new—the i
 
 <div class="container">
 
-<h2>Let's Connect!</h2>
+<h2>Send me a message</h2>
 
 <form action="https://formsubmit.co/alfred.m.rico@gmail.com" method="POST" class="contact-form">
 
@@ -358,24 +382,24 @@ Send Message
 
 <script>
 
-/* HERO DATA ANIMATION */
+/* HERO DATA DASHBOARD ANIMATION */
 
-const canvas = document.getElementById("dashboardCanvas")
-const ctx = canvas.getContext("2d")
+const canvas=document.getElementById("dashboardCanvas")
+const ctx=canvas.getContext("2d")
 
-canvas.width = window.innerWidth
-canvas.height = window.innerHeight
+canvas.width=window.innerWidth
+canvas.height=window.innerHeight
 
-let bars = [120,180,90,220,160]
-let progress = 0
+let bars=[120,180,90,220,160]
+let progress=0
 
 function drawBars(){
 
 bars.forEach((h,i)=>{
 
-let x = 200 + i*120
+let x=200+i*120
 
-ctx.fillStyle = "rgba(74,144,226,.8)"
+ctx.fillStyle="rgba(74,144,226,.8)"
 ctx.fillRect(x,canvas.height,60,-h*progress)
 
 })
@@ -385,18 +409,18 @@ ctx.fillRect(x,canvas.height,60,-h*progress)
 function drawLine(){
 
 ctx.beginPath()
-ctx.strokeStyle = "white"
-ctx.lineWidth = 2
+ctx.strokeStyle="white"
+ctx.lineWidth=2
 
-let startX = 230
-let startY = canvas.height - bars[0]*progress
+let startX=230
+let startY=canvas.height-bars[0]*progress
 
 ctx.moveTo(startX,startY)
 
 for(let i=1;i<bars.length;i++){
 
-let x = 230 + i*120
-let y = canvas.height - bars[i]*progress
+let x=230+i*120
+let y=canvas.height-bars[i]*progress
 
 ctx.lineTo(x,y)
 
@@ -404,12 +428,10 @@ ctx.lineTo(x,y)
 
 ctx.stroke()
 
-/* Draw data points */
-
 for(let i=0;i<bars.length;i++){
 
-let x = 230 + i*120
-let y = canvas.height - bars[i]*progress
+let x=230+i*120
+let y=canvas.height-bars[i]*progress
 
 ctx.beginPath()
 ctx.arc(x,y,4,0,Math.PI*2)
@@ -424,8 +446,8 @@ function animate(){
 
 ctx.clearRect(0,0,canvas.width,canvas.height)
 
-if(progress < 1){
-progress += 0.01
+if(progress<1){
+progress+=0.01
 }
 
 drawBars()
@@ -438,5 +460,6 @@ requestAnimationFrame(animate)
 animate()
 
 </script>
+
 </body>
 </html>
