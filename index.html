@@ -333,28 +333,34 @@ color:#555;
 
 /* CERTIFICATION TILE */
 
+.skill-card.cert{
+display:flex;
+flex-direction:column;
+align-items:center;
+justify-content:center;
+padding:22px 18px;
+text-decoration:none;
+color:#333;
+max-width:240px;
+margin:auto;
+}
+
+.cert-google{
+height:26px;
+margin-bottom:10px;
+}
+
 .cert-title{
 font-weight:600;
 font-size:14px;
-margin-bottom:12px;
+line-height:1.4;
+text-align:center;
+margin-bottom:10px;
 }
 
-.cert-logos{
-display:flex;
-justify-content:center;
-align-items:center;
-gap:12px;
-margin-top:6px;
-}
-
-.cert-logos img{
-height:20px;
-object-fit:contain;
-}
-
-.skill-card.cert{
-text-decoration:none;
-color:#333;
+.cert-coursera{
+height:18px;
+opacity:.85;
 }
 
 /* FOOTER */
@@ -401,6 +407,7 @@ color:white;
 <div class="main-layout">
 
 <section id="about">
+
 <h2>About Me</h2>
 
 <div class="about-grid">
@@ -543,15 +550,14 @@ RStudio
 
 <a href="#" target="_blank" class="skill-card cert">
 
+<img class="cert-google" src="https://upload.wikimedia.org/wikipedia/commons/2/2f/Google_2015_logo.svg">
+
 <div class="cert-title">
 Google Data Analytics<br>
 Professional Certificate
 </div>
 
-<div class="cert-logos">
-<img src="https://upload.wikimedia.org/wikipedia/commons/2/2f/Google_2015_logo.svg">
-<img src="https://upload.wikimedia.org/wikipedia/commons/9/97/Coursera-Logo_600x600.svg">
-</div>
+<img class="cert-coursera" src="https://upload.wikimedia.org/wikipedia/commons/9/97/Coursera-Logo_600x600.svg">
 
 </a>
 
@@ -573,6 +579,8 @@ Professional Certificate
 
 <script>
 
+/* CAROUSEL */
+
 let index = 0
 const carousel = document.getElementById("carousel")
 const cards = document.querySelectorAll(".project-card")
@@ -592,7 +600,7 @@ cards[index].classList.add("active")
 
 }
 
-/* HERO CHART */
+/* HERO BAR CHART */
 
 const canvas = document.getElementById("dashboardCanvas")
 const ctx = canvas.getContext("2d")
