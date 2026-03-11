@@ -26,8 +26,6 @@ background:#f5f5f7;
 scroll-behavior:smooth;
 }
 
-/* GLOBAL */
-
 .container{
 width:90%;
 max-width:1100px;
@@ -53,39 +51,28 @@ radial-gradient(circle at 80% 70%, rgba(14,165,233,.35), transparent 45%),
 linear-gradient(135deg,#020617,#0f172a 60%,#1e293b);
 }
 
-/* glow layer */
-
 .hero::before{
 content:"";
 position:absolute;
 inset:0;
-
 background:
 radial-gradient(circle at 50% 80%,
 rgba(74,144,226,0.35) 0%,
 rgba(74,144,226,0.15) 25%,
 transparent 60%);
-
 z-index:0;
-pointer-events:none;
 }
-
-/* grid texture */
 
 .hero::after{
 content:"";
 position:absolute;
 inset:0;
-
 background-image:
 linear-gradient(rgba(255,255,255,0.05) 1px, transparent 1px),
 linear-gradient(90deg, rgba(255,255,255,0.05) 1px, transparent 1px);
-
 background-size:40px 40px;
 z-index:0;
 }
-
-/* LIGHT SWEEP */
 
 .light-sweep{
 position:absolute;
@@ -93,29 +80,16 @@ top:0;
 left:-50%;
 width:50%;
 height:100%;
-
-background:linear-gradient(
-120deg,
-transparent,
-rgba(255,255,255,0.08),
-transparent
-);
-
+background:linear-gradient(120deg,transparent,rgba(255,255,255,0.08),transparent);
 transform:skewX(-20deg);
 animation:sweep 12s linear infinite;
-
 z-index:1;
-pointer-events:none;
 }
 
 @keyframes sweep{
-
 0%{left:-50%;}
 100%{left:120%;}
-
 }
-
-/* CANVAS */
 
 #dashboardCanvas{
 position:absolute;
@@ -208,11 +182,6 @@ object-fit:cover;
 border-radius:50%;
 border:4px solid #4a90e2;
 box-shadow:0 10px 30px rgba(0,0,0,0.15);
-transition:transform .3s ease;
-}
-
-.profile-pic:hover{
-transform:scale(1.05);
 }
 
 .about-text{
@@ -231,11 +200,6 @@ top:80px;
 border-top:12px solid transparent;
 border-bottom:12px solid transparent;
 border-right:14px solid white;
-}
-
-.about-text p{
-text-indent:20px;
-line-height:1.7;
 }
 
 /* CONTACT */
@@ -268,11 +232,6 @@ cursor:pointer;
 }
 
 /* PROJECTS */
-
-.projects-container{
-max-width:1100px;
-margin:auto;
-}
 
 .projects-scroll{
 overflow-x:auto;
@@ -316,6 +275,17 @@ object-fit:cover;
 
 .project-card-content{
 padding:12px;
+}
+
+.project-card h3{
+font-size:14px;
+margin:0 0 5px 0;
+}
+
+.project-card p{
+font-size:12px;
+margin:0;
+color:#555;
 }
 
 /* TOOLS */
@@ -398,7 +368,6 @@ color:white;
 <header class="hero">
 
 <div class="light-sweep"></div>
-
 <canvas id="dashboardCanvas"></canvas>
 
 <div class="container hero-content">
@@ -457,8 +426,6 @@ color:white;
 <section id="projects">
 <h2>My Projects</h2>
 
-<div class="projects-container">
-
 <div class="projects-scroll">
 
 <div class="project-page">
@@ -495,6 +462,36 @@ color:white;
 </div>
 </div>
 
+<div class="project-card">
+<img src="https://images.unsplash.com/photo-1551288049-bebda4e38f71">
+<div class="project-card-content">
+<h3>Marketing Funnel Analysis</h3>
+<p>Conversion optimization.</p>
+</div>
+</div>
+
+<div class="project-card">
+<img src="https://images.unsplash.com/photo-1460925895917-afdab827c52f">
+<div class="project-card-content">
+<h3>Customer Churn Model</h3>
+<p>Predictive modeling.</p>
+</div>
+</div>
+
+<div class="project-card">
+<img src="https://images.unsplash.com/photo-1543286386-713bdd548da4">
+<div class="project-card-content">
+<h3>Retail Demand Forecast</h3>
+<p>Time series forecasting.</p>
+</div>
+</div>
+
+<div class="project-card">
+<img src="https://images.unsplash.com/photo-1581092334651-ddf26d9a09d0">
+<div class="project-card-content">
+<h3>Financial Risk Dashboard</h3>
+<p>Interactive reporting.</p>
+</div>
 </div>
 
 </div>
@@ -557,6 +554,77 @@ Issued via Coursera
 <footer>
 <p>© 2026 Alfred Rico</p>
 </footer>
+
+<script>
+
+const canvas=document.getElementById("dashboardCanvas")
+const ctx=canvas.getContext("2d")
+
+let bars=[]
+
+function resizeCanvas(){
+canvas.width=window.innerWidth
+canvas.height=document.querySelector(".hero").offsetHeight
+bars=[]
+const spacing=28
+const count=Math.ceil(canvas.width/spacing)
+
+for(let i=0;i<count;i++){
+bars.push({
+x:i*spacing,
+height:Math.random()*120+40,
+speed:Math.random()*0.6+0.2
+})
+}
+}
+
+resizeCanvas()
+window.addEventListener("resize",resizeCanvas)
+
+function drawRoundedRect(x,y,width,height,radius){
+ctx.beginPath()
+ctx.moveTo(x,y+radius)
+ctx.lineTo(x,y+height)
+ctx.lineTo(x+width,y+height)
+ctx.lineTo(x+width,y+radius)
+ctx.quadraticCurveTo(x+width,y,x+width-radius,y)
+ctx.lineTo(x+radius,y)
+ctx.quadraticCurveTo(x,y,x,y+radius)
+ctx.fill()
+}
+
+function animateBars(){
+
+ctx.clearRect(0,0,canvas.width,canvas.height)
+
+bars.forEach(bar=>{
+
+bar.height+=Math.sin(Date.now()*0.002*bar.speed)
+bar.x+=0.05*bar.speed
+
+if(bar.x>canvas.width){
+bar.x=-20
+}
+
+ctx.fillStyle="rgba(74,144,226,0.7)"
+
+drawRoundedRect(
+bar.x,
+canvas.height-bar.height,
+18,
+bar.height,
+6
+)
+
+})
+
+requestAnimationFrame(animateBars)
+
+}
+
+animateBars()
+
+</script>
 
 </body>
 </html>
