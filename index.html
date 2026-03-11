@@ -311,21 +311,21 @@ transform:translateY(-5px) scale(1.03);
 box-shadow:0 16px 30px rgba(0,0,0,0.12);
 }
 
-/* PYTHON PACKAGE TILE */
+/* PYTHON ECOSYSTEM TILE */
 
-.package-tile{
+.python-tile{
 grid-column:span 2;
 text-align:left;
 padding:20px;
 }
 
-.package-tile h4{
+.python-tile h4{
 margin:8px 0 4px 0;
 font-size:14px;
 color:#4a90e2;
 }
 
-.package-tile p{
+.python-tile p{
 margin:0 0 8px 0;
 font-size:13px;
 color:#555;
@@ -475,12 +475,10 @@ color:white;
 
 <div class="skills-grid">
 
-<div class="skill-card">
-<i class="fa-brands fa-python"></i>
-Python
-</div>
+<div class="skill-card python-tile">
 
-<div class="skill-card package-tile">
+<i class="fa-brands fa-python"></i>
+<strong>Python</strong>
 
 <h4>Data Science & Analysis</h4>
 <p>NumPy • Pandas • Matplotlib • Seaborn</p>
@@ -551,28 +549,7 @@ IBM Data Analyst
 
 <script>
 
-/* PROJECT CAROUSEL */
-
-let index = 0
-const carousel = document.getElementById("carousel")
-const cards = document.querySelectorAll(".project-card")
-
-function moveCarousel(direction){
-
-index += direction
-
-if(index < 0) index = 0
-if(index > cards.length - 1) index = cards.length - 1
-
-const cardWidth = cards[0].offsetWidth + 20
-carousel.style.transform = `translateX(${-index * cardWidth}px)`
-
-cards.forEach(c => c.classList.remove("active"))
-cards[index].classList.add("active")
-
-}
-
-/* HERO CHART */
+/* HERO BAR GRAPH ANIMATION */
 
 const canvas = document.getElementById("dashboardCanvas")
 const ctx = canvas.getContext("2d")
