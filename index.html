@@ -152,12 +152,11 @@ border-radius:50%;
 border:4px solid #4a90e2;
 box-shadow:0 10px 30px rgba(0,0,0,0.15);
 margin:auto;
-transform:translateY(-20px);
 transition:transform .3s ease;
 }
 
 .profile-pic:hover{
-transform:translateY(-20px) scale(1.05);
+transform:scale(1.05);
 }
 
 .about-text{
@@ -531,7 +530,7 @@ color:white;
 
 <div class="cert-column">
 
-<a href="https://www.coursera.org/account/accomplishments/professional-cert/MSCMJL682NT9" target="_blank" class="cert-link">
+<a href="YOUR_CERT_LINK_HERE" target="_blank" class="cert-link">
 
 <div class="cert">
 
@@ -558,6 +557,104 @@ Google Data Analytics Professional Certificate
 <footer>
 <p>© 2026 Alfred Rico</p>
 </footer>
+
+<script>
+
+let index = 0
+const carousel = document.getElementById("carousel")
+const cards = document.querySelectorAll(".project-card")
+
+function moveCarousel(direction){
+
+index += direction
+
+if(index < 0) index = 0
+if(index > cards.length - 1) index = cards.length - 1
+
+const cardWidth = cards[0].offsetWidth + 20
+carousel.style.transform = `translateX(${-index * cardWidth}px)`
+
+cards.forEach(c => c.classList.remove("active"))
+cards[index].classList.add("active")
+
+}
+
+const canvas = document.getElementById("dashboardCanvas")
+const ctx = canvas.getContext("2d")
+
+function resizeCanvas(){
+canvas.width = canvas.offsetWidth
+canvas.height = canvas.offsetHeight
+}
+
+resizeCanvas()
+window.addEventListener("resize", resizeCanvas)
+
+let bars=[120,180,90,220,160]
+let barWidth=60
+let gap=50
+let progress=0
+
+function drawBars(){
+
+const chartWidth = bars.length*(barWidth+gap)
+const startX = (canvas.width-chartWidth)/2
+const baseY = canvas.height
+
+bars.forEach((h,i)=>{
+
+let x = startX + i*(barWidth+gap)
+
+ctx.fillStyle="rgba(74,144,226,.6)"
+ctx.fillRect(x,baseY,barWidth,-h*progress)
+
+})
+
+}
+
+function drawLine(){
+
+const chartWidth = bars.length*(barWidth+gap)
+const startX = (canvas.width-chartWidth)/2 + barWidth/2
+const baseY = canvas.height
+
+ctx.beginPath()
+ctx.strokeStyle="#8fd3ff"
+ctx.lineWidth=2
+
+ctx.moveTo(startX,baseY-bars[0]*progress)
+
+for(let i=1;i<bars.length;i++){
+
+let x=startX+i*(barWidth+gap)
+let y=baseY-bars[i]*progress
+
+ctx.lineTo(x,y)
+
+}
+
+ctx.stroke()
+
+}
+
+function animate(){
+
+ctx.clearRect(0,0,canvas.width,canvas.height)
+
+if(progress<1){
+progress+=0.01
+}
+
+drawBars()
+drawLine()
+
+requestAnimationFrame(animate)
+
+}
+
+animate()
+
+</script>
 
 </body>
 </html>
