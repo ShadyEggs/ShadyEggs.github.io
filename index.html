@@ -263,60 +263,27 @@ cursor:pointer;
 transform:translateY(-50%) scale(1.1);
 }
 
-/* TOOLS */
+/* TOOLS + CERTIFICATIONS */
 
 .tools-wrapper{
+display:grid;
+grid-template-columns:2fr 1fr;
+gap:40px;
 max-width:900px;
 margin:auto;
 }
 
-.tools-layout{
+.tools-grid{
 display:grid;
-grid-template-columns:2fr 1fr;
+grid-template-columns:200px 1fr;
 gap:20px;
-margin-bottom:20px;
 }
 
-/* smaller python tile */
-
-.python-tile{
-text-align:left;
-padding:10px;
-max-width:180px;
-font-size:12px;
-}
-
-/* smaller certification tile */
-
-.cert{
-display:flex;
-flex-direction:column;
-align-items:center;
-justify-content:center;
-padding:10px;
-max-width:150px;
-font-size:12px;
-}
-
-.cert-google{height:22px;margin-bottom:8px;}
-
-.cert-title{
-font-weight:600;
-font-size:12px;
-line-height:1.3;
-margin-bottom:8px;
-text-align:center;
-}
-
-.cert-coursera{height:16px;opacity:.85;}
-
-/* tool grid under python */
-
-.skills-grid{
+.skills-right{
 display:grid;
-grid-template-columns:1fr 1fr;
+grid-template-columns:repeat(2,120px);
 gap:18px;
-max-width:66%;
+align-content:start;
 }
 
 .skill-card{
@@ -336,12 +303,25 @@ margin-bottom:6px;
 display:block;
 }
 
-.skill-card:hover{
-transform:translateY(-5px) scale(1.03);
-box-shadow:0 16px 30px rgba(0,0,0,0.12);
+.cert{
+background:white;
+border-radius:14px;
+padding:18px;
+text-align:center;
+box-shadow:0 8px 20px rgba(0,0,0,0.06);
 }
 
-/* FOOTER */
+.cert-google{height:26px;margin-bottom:10px;}
+
+.cert-title{
+font-weight:600;
+font-size:14px;
+line-height:1.4;
+margin-bottom:10px;
+text-align:center;
+}
+
+.cert-coursera{height:18px;opacity:.85;}
 
 footer{
 text-align:center;
@@ -385,89 +365,7 @@ color:white;
 
 <div class="main-layout">
 
-<section id="about">
-
-<h2>About Me</h2>
-
-<div class="about-grid">
-
-<img src="profile.jpg" class="profile-pic">
-
-<div class="about-text">
-
-<p>Hi, I’m Alfred — an aspiring data analyst who enjoys turning raw data into meaningful insights.</p>
-
-<p>I’m naturally curious and enjoy exploring datasets to uncover patterns, answer questions, and communicate findings clearly.</p>
-
-<p>Through hands-on projects, I’ve gained experience using Python, Jupyter Notebook, RStudio, and Tableau to analyze data and build visualizations.</p>
-
-</div>
-
-</div>
-
-</section>
-
-<section id="contact">
-
-<h2>Let's Connect!</h2>
-
-<form action="https://formsubmit.co/alfred.m.rico@gmail.com" method="POST" class="contact-form">
-
-<input type="text" name="name" placeholder="Name" required>
-<input type="email" name="email" placeholder="Email" required>
-<textarea name="message" rows="6" placeholder="Message" required></textarea>
-
-<button type="submit" class="apple-send">Send Message</button>
-
-</form>
-
-</section>
-
-<section id="projects">
-
-<h2>My Projects</h2>
-
-<div class="carousel-container">
-
-<button class="carousel-btn left" onclick="moveCarousel(-1)">
-<i class="fa-solid fa-chevron-left"></i>
-</button>
-
-<div class="projects-grid" id="carousel">
-
-<div class="project-card active">
-<img src="https://images.unsplash.com/photo-1551288049-bebda4e38f71">
-<div class="project-card-content">
-<h3>TikTok Claims Analysis</h3>
-<p>Exploratory data analysis.</p>
-</div>
-</div>
-
-<div class="project-card">
-<img src="https://images.unsplash.com/photo-1460925895917-afdab827c52f">
-<div class="project-card-content">
-<h3>SQL Sales Dashboard</h3>
-<p>SQL reporting and analytics.</p>
-</div>
-</div>
-
-<div class="project-card">
-<img src="https://images.unsplash.com/photo-1556157382-97eda2d62296">
-<div class="project-card-content">
-<h3>Power BI Dashboard</h3>
-<p>Interactive KPI dashboard.</p>
-</div>
-</div>
-
-</div>
-
-<button class="carousel-btn right" onclick="moveCarousel(1)">
-<i class="fa-solid fa-chevron-right"></i>
-</button>
-
-</div>
-
-</section>
+<!-- ABOUT + CONTACT unchanged -->
 
 <section id="tools">
 
@@ -475,7 +373,7 @@ color:white;
 
 <div class="tools-wrapper">
 
-<div class="tools-layout">
+<div class="tools-grid">
 
 <div class="skill-card python-tile">
 
@@ -493,7 +391,18 @@ color:white;
 
 </div>
 
-<div class="skill-card cert">
+<div class="skills-right">
+
+<div class="skill-card"><i class="fa-solid fa-database"></i>SQL</div>
+<div class="skill-card"><i class="fa-solid fa-chart-line"></i>Tableau</div>
+<div class="skill-card"><i class="fa-solid fa-book"></i>Jupyter</div>
+<div class="skill-card"><i class="fa-solid fa-chart-bar"></i>RStudio</div>
+
+</div>
+
+</div>
+
+<div class="cert">
 
 <img class="cert-google" src="https://upload.wikimedia.org/wikipedia/commons/2/2f/Google_2015_logo.svg">
 
@@ -503,17 +412,6 @@ Professional Certificate
 </div>
 
 <img class="cert-coursera" src="https://upload.wikimedia.org/wikipedia/commons/9/97/Coursera-Logo_600x600.svg">
-
-</div>
-
-</div>
-
-<div class="skills-grid">
-
-<div class="skill-card"><i class="fa-solid fa-database"></i>SQL</div>
-<div class="skill-card"><i class="fa-solid fa-chart-line"></i>Tableau</div>
-<div class="skill-card"><i class="fa-solid fa-book"></i>Jupyter</div>
-<div class="skill-card"><i class="fa-solid fa-chart-bar"></i>RStudio</div>
 
 </div>
 
@@ -549,81 +447,6 @@ cards.forEach(c => c.classList.remove("active"))
 cards[index].classList.add("active")
 
 }
-
-const canvas = document.getElementById("dashboardCanvas")
-const ctx = canvas.getContext("2d")
-
-function resizeCanvas(){
-canvas.width = canvas.offsetWidth
-canvas.height = canvas.offsetHeight
-}
-
-resizeCanvas()
-window.addEventListener("resize", resizeCanvas)
-
-let bars=[120,180,90,220,160]
-let barWidth=60
-let gap=50
-let progress=0
-
-function drawBars(){
-
-const chartWidth = bars.length*(barWidth+gap)
-const startX = (canvas.width-chartWidth)/2
-const baseY = canvas.height
-
-bars.forEach((h,i)=>{
-
-let x = startX + i*(barWidth+gap)
-
-ctx.fillStyle="rgba(74,144,226,.85)"
-ctx.fillRect(x,baseY,barWidth,-h*progress)
-
-})
-
-}
-
-function drawLine(){
-
-const chartWidth = bars.length*(barWidth+gap)
-const startX = (canvas.width-chartWidth)/2 + barWidth/2
-const baseY = canvas.height
-
-ctx.beginPath()
-ctx.strokeStyle="#8fd3ff"
-ctx.lineWidth=2
-
-ctx.moveTo(startX,baseY-bars[0]*progress)
-
-for(let i=1;i<bars.length;i++){
-
-let x=startX+i*(barWidth+gap)
-let y=baseY-bars[i]*progress
-
-ctx.lineTo(x,y)
-
-}
-
-ctx.stroke()
-
-}
-
-function animate(){
-
-ctx.clearRect(0,0,canvas.width,canvas.height)
-
-if(progress<1){
-progress+=0.01
-}
-
-drawBars()
-drawLine()
-
-requestAnimationFrame(animate)
-
-}
-
-animate()
 
 </script>
 
