@@ -73,7 +73,6 @@ opacity:.6;
 .hero-content{
 position:relative;
 z-index:2;
-margin-top:10px;
 }
 
 .hero h1{
@@ -119,9 +118,9 @@ grid-template-areas:
 "about contact"
 "tools tools"
 "projects projects";
-gap:60px;
+gap:40px;
 max-width:1200px;
-margin:80px auto;
+margin:60px auto;
 padding:0 40px;
 }
 
@@ -134,7 +133,7 @@ padding:0 40px;
 
 h2{
 text-align:center;
-margin-bottom:40px;
+margin-bottom:30px;
 }
 
 /* ABOUT */
@@ -202,34 +201,51 @@ color:white;
 cursor:pointer;
 }
 
-/* APPLE STYLE SKILLS */
+/* TOOLS + CERTIFICATIONS */
 
-.skills-grid{
-display:grid;
-grid-template-columns:repeat(auto-fit,minmax(150px,1fr));
-gap:25px;
+.tools-wrapper{
 max-width:900px;
 margin:auto;
 }
 
+.tools-group{
+margin-bottom:30px;
+}
+
+.tools-group h3{
+text-align:center;
+font-size:18px;
+margin-bottom:15px;
+color:#666;
+font-weight:600;
+}
+
+.skills-grid{
+display:grid;
+grid-template-columns:repeat(auto-fit,minmax(120px,1fr));
+gap:18px;
+}
+
 .skill-card{
 background:white;
-border-radius:18px;
-padding:30px 20px;
+border-radius:14px;
+padding:18px 12px;
 text-align:center;
-box-shadow:0 10px 25px rgba(0,0,0,0.06);
+box-shadow:0 8px 20px rgba(0,0,0,0.06);
 transition:all .25s ease;
+font-size:14px;
 }
 
 .skill-card i{
-font-size:30px;
+font-size:22px;
 color:#4a90e2;
-margin-bottom:10px;
+margin-bottom:6px;
+display:block;
 }
 
 .skill-card:hover{
-transform:translateY(-8px) scale(1.04);
-box-shadow:0 20px 40px rgba(0,0,0,0.12);
+transform:translateY(-5px) scale(1.03);
+box-shadow:0 16px 30px rgba(0,0,0,0.12);
 }
 
 .skill-card.cert{
@@ -242,7 +258,7 @@ color:#333;
 .carousel-container{
 position:relative;
 max-width:900px;
-margin:0 auto;
+margin:auto;
 overflow:hidden;
 }
 
@@ -292,7 +308,6 @@ height:42px;
 border-radius:50%;
 box-shadow:0 8px 20px rgba(0,0,0,0.15);
 cursor:pointer;
-z-index:5;
 }
 
 .carousel-btn.left{ left:10px; }
@@ -359,9 +374,9 @@ color:white;
 
 <p>Hi, I’m Alfred — an aspiring data analyst who enjoys turning raw data into meaningful insights.</p>
 
-<p>I’m naturally curious and enjoy exploring datasets to uncover patterns, answer questions, and communicate findings in a clear and practical way.</p>
+<p>I’m naturally curious and enjoy exploring datasets to uncover patterns, answer questions, and communicate findings clearly.</p>
 
-<p>Through hands-on projects, I’ve gained experience using tools such as Python, Jupyter Notebook, RStudio, and Tableau to clean data, perform analysis, and create visualizations that tell the story behind the data.</p>
+<p>Through hands-on projects, I’ve gained experience using Python, Jupyter Notebook, RStudio, and Tableau to analyze data and build visualizations.</p>
 
 </div>
 
@@ -389,42 +404,43 @@ color:white;
 
 <h2>Tools & Certifications</h2>
 
+<div class="tools-wrapper">
+
+<div class="tools-group">
+
+<h3>Tools</h3>
+
 <div class="skills-grid">
 
-<div class="skill-card">
-<i class="fa-brands fa-python"></i>
-<p>Python</p>
+<div class="skill-card"><i class="fa-brands fa-python"></i>Python</div>
+<div class="skill-card"><i class="fa-solid fa-database"></i>SQL</div>
+<div class="skill-card"><i class="fa-solid fa-chart-line"></i>Tableau</div>
+<div class="skill-card"><i class="fa-solid fa-book"></i>Jupyter</div>
+<div class="skill-card"><i class="fa-solid fa-chart-bar"></i>RStudio</div>
+
 </div>
 
-<div class="skill-card">
-<i class="fa-solid fa-database"></i>
-<p>SQL</p>
 </div>
 
-<div class="skill-card">
-<i class="fa-solid fa-chart-line"></i>
-<p>Tableau</p>
-</div>
+<div class="tools-group">
 
-<div class="skill-card">
-<i class="fa-solid fa-book"></i>
-<p>Jupyter Notebook</p>
-</div>
+<h3>Certifications</h3>
 
-<div class="skill-card">
-<i class="fa-solid fa-chart-bar"></i>
-<p>RStudio</p>
-</div>
+<div class="skills-grid">
 
 <a href="#" target="_blank" class="skill-card cert">
 <i class="fa-solid fa-award"></i>
-<p>Google Data Analytics</p>
+Google Data Analytics
 </a>
 
 <a href="#" target="_blank" class="skill-card cert">
 <i class="fa-solid fa-award"></i>
-<p>IBM Data Analyst</p>
+IBM Data Analyst
 </a>
+
+</div>
+
+</div>
 
 </div>
 
@@ -436,14 +452,14 @@ color:white;
 
 <div class="carousel-container">
 
-<button class="carousel-btn left" onclick="moveCarousel(-1)">
+<button class="carousel-btn left">
 <i class="fa-solid fa-chevron-left"></i>
 </button>
 
-<div class="projects-grid" id="carousel">
+<div class="projects-grid">
 
 <div class="project-card active">
-<img src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?auto=format&fit=crop&w=800&q=80">
+<img src="https://images.unsplash.com/photo-1551288049-bebda4e38f71">
 <div class="project-card-content">
 <h3>TikTok Claims Analysis</h3>
 <p>Exploratory data analysis.</p>
@@ -451,7 +467,7 @@ color:white;
 </div>
 
 <div class="project-card">
-<img src="https://images.unsplash.com/photo-1460925895917-afdab827c52f?auto=format&fit=crop&w=800&q=80">
+<img src="https://images.unsplash.com/photo-1460925895917-afdab827c52f">
 <div class="project-card-content">
 <h3>SQL Sales Dashboard</h3>
 <p>SQL reporting and analytics.</p>
@@ -459,7 +475,7 @@ color:white;
 </div>
 
 <div class="project-card">
-<img src="https://images.unsplash.com/photo-1556157382-97eda2d62296?auto=format&fit=crop&w=800&q=80">
+<img src="https://images.unsplash.com/photo-1556157382-97eda2d62296">
 <div class="project-card-content">
 <h3>Power BI Dashboard</h3>
 <p>Interactive KPI dashboard.</p>
@@ -468,7 +484,7 @@ color:white;
 
 </div>
 
-<button class="carousel-btn right" onclick="moveCarousel(1)">
+<button class="carousel-btn right">
 <i class="fa-solid fa-chevron-right"></i>
 </button>
 
