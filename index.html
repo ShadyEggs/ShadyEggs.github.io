@@ -53,30 +53,6 @@ radial-gradient(circle at 80% 70%, rgba(14,165,233,.35), transparent 45%),
 linear-gradient(135deg,#020617,#0f172a 60%,#1e293b);
 }
 
-.hero::before{
-content:"";
-position:absolute;
-inset:0;
-background:
-radial-gradient(circle at 50% 80%,
-rgba(74,144,226,0.35) 0%,
-rgba(74,144,226,0.15) 25%,
-transparent 60%);
-z-index:0;
-pointer-events:none;
-}
-
-.hero::after{
-content:"";
-position:absolute;
-inset:0;
-background-image:
-linear-gradient(rgba(255,255,255,0.05) 1px, transparent 1px),
-linear-gradient(90deg, rgba(255,255,255,0.05) 1px, transparent 1px);
-background-size:40px 40px;
-z-index:0;
-}
-
 .light-sweep{
 position:absolute;
 top:0;
@@ -86,8 +62,6 @@ height:100%;
 background:linear-gradient(120deg,transparent,rgba(255,255,255,0.08),transparent);
 transform:skewX(-20deg);
 animation:sweep 12s linear infinite;
-z-index:1;
-pointer-events:none;
 }
 
 @keyframes sweep{
@@ -102,12 +76,11 @@ left:0;
 width:100%;
 height:100%;
 opacity:.35;
-z-index:2;
 }
 
 .hero-content{
 position:relative;
-z-index:3;
+z-index:2;
 transform:translateY(-60px);
 }
 
@@ -171,81 +144,7 @@ text-align:center;
 margin-bottom:30px;
 }
 
-/* ABOUT */
-
-.about-grid{
-display:grid;
-grid-template-columns:200px 1fr;
-gap:30px;
-}
-
-.profile-pic{
-width:180px;
-height:180px;
-object-fit:cover;
-border-radius:50%;
-border:4px solid #4a90e2;
-box-shadow:0 10px 30px rgba(0,0,0,0.15);
-transition:transform .3s ease;
-}
-
-.profile-pic:hover{
-transform:scale(1.05);
-}
-
-.about-text{
-position:relative;
-background:white;
-padding:30px;
-border-radius:16px;
-box-shadow:0 20px 50px rgba(0,0,0,0.08);
-}
-
-.about-text::before{
-content:"";
-position:absolute;
-left:-14px;
-top:80px;
-border-top:12px solid transparent;
-border-bottom:12px solid transparent;
-border-right:14px solid white;
-}
-
-.about-text p{
-text-indent:20px;
-line-height:1.7;
-}
-
-/* CONTACT */
-
-.contact-form{
-background:white;
-padding:40px;
-border-radius:16px;
-box-shadow:0 15px 40px rgba(0,0,0,0.08);
-}
-
-.contact-form input,
-.contact-form textarea{
-width:100%;
-padding:12px;
-margin-top:6px;
-margin-bottom:15px;
-border-radius:8px;
-border:1px solid #ddd;
-}
-
-.apple-send{
-width:100%;
-padding:14px;
-border:none;
-border-radius:999px;
-background:#111;
-color:white;
-cursor:pointer;
-}
-
-/* PROJECT SECTION */
+/* PROJECT CARDS */
 
 .projects-container{
 display:flex;
@@ -256,104 +155,60 @@ justify-content:center;
 display:grid;
 grid-auto-flow:column;
 grid-template-rows:repeat(2,1fr);
-grid-auto-columns:160px;
+grid-auto-columns:170px;
 gap:20px;
 overflow-x:auto;
 scroll-snap-type:x mandatory;
-padding-bottom:10px;
-}
-
-.projects-scroll-wrapper::-webkit-scrollbar{
-display:none;
 }
 
 .project-card{
-background:white;
-border-radius:14px;
+position:relative;
+border-radius:16px;
 overflow:hidden;
-box-shadow:0 10px 25px rgba(0,0,0,0.05);
-width:160px;
+aspect-ratio:1;
 scroll-snap-align:start;
-transition:transform .25s ease, box-shadow .25s ease;
-}
-
-.project-card:hover{
-transform:translateY(-6px);
-box-shadow:0 20px 40px rgba(0,0,0,0.12);
+cursor:pointer;
 }
 
 .project-card img{
 width:100%;
-height:120px;
+height:100%;
 object-fit:cover;
+transition:transform .4s ease;
 }
 
-.project-card-content{
-padding:12px;
-font-size:13px;
+.project-card:hover img{
+transform:scale(1.1);
 }
 
-/* TOOLS */
-
-.tools-column{
-display:grid;
-grid-template-columns:1fr 90px 90px;
-grid-template-rows:1fr 1fr;
-gap:12px;
-max-width:420px;
-margin-left:auto;
-}
-
-.python-tile{
-grid-row:1 / span 2;
+.project-overlay{
+position:absolute;
+bottom:0;
+left:0;
+right:0;
 padding:14px;
+color:white;
+
+background:linear-gradient(
+transparent,
+rgba(0,0,0,0.75)
+);
 }
 
-.skill-card{
-background:white;
-border-radius:12px;
-padding:12px;
-text-align:center;
-box-shadow:0 6px 16px rgba(0,0,0,0.06);
-font-size:13px;
+.project-overlay h3{
+margin:0 0 6px 0;
+font-size:15px;
 }
 
-.skill-card i{
-font-size:18px;
-color:#4a90e2;
-margin-bottom:4px;
-display:block;
+.project-overlay ul{
+margin:0;
+padding-left:16px;
+font-size:11px;
+line-height:1.3;
 }
 
-.skill-card.small{
-aspect-ratio:1;
-display:flex;
-flex-direction:column;
-justify-content:center;
-align-items:center;
-}
-
-/* CERT */
-
-.cert-column{
-display:flex;
-justify-content:flex-start;
-}
-
-.cert{
-background:white;
-border-radius:14px;
-padding:14px 18px;
-text-align:center;
-box-shadow:0 12px 30px rgba(0,0,0,0.08);
-max-width:220px;
-border-top:6px solid #4285F4;
-transition:all .25s ease;
-}
-
-.cert:hover{
-transform:translateY(-6px) scale(1.03);
-box-shadow:0 20px 40px rgba(0,0,0,0.15);
+.project-overlay li{
+margin-bottom:2px;
 }
 
 /* FOOTER */
@@ -399,35 +254,6 @@ color:white;
 
 <div class="main-layout">
 
-<section id="about">
-<h2>About Me</h2>
-
-<div class="about-grid">
-
-<div>
-<img src="profile.jpg" class="profile-pic">
-</div>
-
-<div class="about-text">
-<p>Hi, I’m Alfred — an aspiring data analyst who enjoys turning messy data into clear insights and finding patterns that explain what’s really going on.</p>
-<p>Through hands-on projects, I’ve worked with Python, SQL, and visualization tools to analyze data and communicate findings in a way that’s easy to understand.</p>
-<p>I'm always looking for new problems to explore and new ways to learn.</p>
-</div>
-
-</div>
-</section>
-
-<section id="contact">
-<h2>Let's Connect!</h2>
-
-<form action="https://formsubmit.co/alfred.m.rico@gmail.com" method="POST" class="contact-form">
-<input type="text" name="name" placeholder="Name" required>
-<input type="email" name="email" placeholder="Email" required>
-<textarea name="message" rows="6" placeholder="Message" required></textarea>
-<button type="submit" class="apple-send">Send Message</button>
-</form>
-</section>
-
 <section id="projects">
 
 <h2>My Projects</h2>
@@ -437,88 +263,58 @@ color:white;
 <div class="projects-scroll-wrapper">
 
 <div class="project-card">
-<img src="https://images.unsplash.com/photo-1551288049-bebda4e38f71">
-<div class="project-card-content">
+<img src="https://images.unsplash.com/photo-1611162616475-46b635cb6868">
+<div class="project-overlay">
 <h3>TikTok Claims Analysis</h3>
-<p>Exploratory data analysis.</p>
+<ul>
+<li>EDA</li>
+<li>Trend detection</li>
+<li>Python analysis</li>
+<li>Visualization</li>
+</ul>
 </div>
 </div>
 
 <div class="project-card">
-<img src="https://images.unsplash.com/photo-1460925895917-afdab827c52f">
-<div class="project-card-content">
+<img src="https://images.unsplash.com/photo-1551288049-bebda4e38f71">
+<div class="project-overlay">
 <h3>SQL Sales Dashboard</h3>
-<p>SQL reporting and analytics.</p>
+<ul>
+<li>SQL queries</li>
+<li>Revenue metrics</li>
+<li>KPI tracking</li>
+<li>Dashboard design</li>
+</ul>
+</div>
+</div>
+
+<div class="project-card">
+<img src="https://images.unsplash.com/photo-1556155092-490a1ba16284">
+<div class="project-overlay">
+<h3>Customer Segmentation</h3>
+<ul>
+<li>Clustering</li>
+<li>Feature engineering</li>
+<li>Customer groups</li>
+<li>Insights</li>
+</ul>
 </div>
 </div>
 
 <div class="project-card">
 <img src="https://images.unsplash.com/photo-1543286386-713bdd548da4">
-<div class="project-card-content">
-<h3>Customer Insights</h3>
-<p>Python clustering analysis.</p>
-</div>
-</div>
-
-<div class="project-card">
-<img src="https://images.unsplash.com/photo-1581092334651-ddf26d9a09d0">
-<div class="project-card-content">
+<div class="project-overlay">
 <h3>Power BI Dashboard</h3>
-<p>Interactive KPI dashboard.</p>
+<ul>
+<li>KPI metrics</li>
+<li>Interactive charts</li>
+<li>Business insights</li>
+<li>Dashboard UX</li>
+</ul>
 </div>
 </div>
 
 </div>
-
-</div>
-
-</section>
-
-<section id="tools">
-<h2>Tools</h2>
-
-<div class="tools-column">
-
-<div class="skill-card python-tile">
-<i class="fa-brands fa-python"></i>
-<strong>Python</strong>
-<p>NumPy • Pandas • Matplotlib • Seaborn</p>
-<p>Scikit-learn • Plotly</p>
-</div>
-
-<div class="skill-card small"><i class="fa-solid fa-database"></i>SQL</div>
-<div class="skill-card small"><i class="fa-solid fa-book"></i>Jupyter</div>
-<div class="skill-card small"><i class="fa-solid fa-chart-bar"></i>RStudio</div>
-<div class="skill-card small"><i class="fa-solid fa-chart-line"></i>Tableau</div>
-
-</div>
-</section>
-
-<section id="certifications">
-<h2>Certifications</h2>
-
-<div class="cert-column">
-
-<a href="https://www.coursera.org/account/accomplishments/professional-cert/MSCMJL682NT9" target="_blank">
-
-<div class="cert">
-
-<img style="height:24px" src="https://upload.wikimedia.org/wikipedia/commons/2/2f/Google_2015_logo.svg">
-
-<div style="font-weight:700;font-size:14px;">
-Google Data Analytics Professional Certificate
-</div>
-
-<div style="font-size:11px;color:#666;">
-Issued via Coursera
-</div>
-
-<img style="height:16px" src="https://upload.wikimedia.org/wikipedia/commons/9/97/Coursera-Logo_600x600.svg">
-
-</div>
-
-</a>
-
 </div>
 
 </section>
