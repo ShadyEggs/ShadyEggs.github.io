@@ -26,8 +26,6 @@ background:#f5f5f7;
 scroll-behavior:smooth;
 }
 
-/* GLOBAL */
-
 .container{
 width:90%;
 max-width:1100px;
@@ -53,39 +51,28 @@ radial-gradient(circle at 80% 70%, rgba(14,165,233,.35), transparent 45%),
 linear-gradient(135deg,#020617,#0f172a 60%,#1e293b);
 }
 
-/* glow layer */
-
 .hero::before{
 content:"";
 position:absolute;
 inset:0;
-
 background:
 radial-gradient(circle at 50% 80%,
 rgba(74,144,226,0.35) 0%,
 rgba(74,144,226,0.15) 25%,
 transparent 60%);
-
 z-index:0;
-pointer-events:none;
 }
-
-/* grid texture */
 
 .hero::after{
 content:"";
 position:absolute;
 inset:0;
-
 background-image:
 linear-gradient(rgba(255,255,255,0.05) 1px, transparent 1px),
 linear-gradient(90deg, rgba(255,255,255,0.05) 1px, transparent 1px);
-
 background-size:40px 40px;
 z-index:0;
 }
-
-/* LIGHT SWEEP */
 
 .light-sweep{
 position:absolute;
@@ -93,29 +80,16 @@ top:0;
 left:-50%;
 width:50%;
 height:100%;
-
-background:linear-gradient(
-120deg,
-transparent,
-rgba(255,255,255,0.08),
-transparent
-);
-
+background:linear-gradient(120deg,transparent,rgba(255,255,255,0.08),transparent);
 transform:skewX(-20deg);
 animation:sweep 12s linear infinite;
-
 z-index:1;
-pointer-events:none;
 }
 
 @keyframes sweep{
-
 0%{left:-50%;}
 100%{left:120%;}
-
 }
-
-/* CANVAS */
 
 #dashboardCanvas{
 position:absolute;
@@ -208,11 +182,6 @@ object-fit:cover;
 border-radius:50%;
 border:4px solid #4a90e2;
 box-shadow:0 10px 30px rgba(0,0,0,0.15);
-transition:transform .3s ease;
-}
-
-.profile-pic:hover{
-transform:scale(1.05);
 }
 
 .about-text{
@@ -231,11 +200,6 @@ top:80px;
 border-top:12px solid transparent;
 border-bottom:12px solid transparent;
 border-right:14px solid white;
-}
-
-.about-text p{
-text-indent:20px;
-line-height:1.7;
 }
 
 /* CONTACT */
@@ -269,65 +233,59 @@ cursor:pointer;
 
 /* PROJECTS */
 
-.projects-scroll-wrapper{
+.projects-scroll{
 overflow-x:auto;
 scroll-snap-type:x mandatory;
-display:grid;
-grid-auto-flow:column;
-grid-template-rows:repeat(2,1fr);
-gap:20px;
-padding-bottom:20px;
+display:flex;
+gap:30px;
 scroll-behavior:smooth;
+padding-bottom:20px;
 }
 
-.projects-scroll-wrapper::-webkit-scrollbar{
+.projects-scroll::-webkit-scrollbar{
 display:none;
+}
+
+.project-page{
+display:grid;
+grid-template-columns:repeat(4,200px);
+grid-template-rows:repeat(2,1fr);
+gap:20px;
+scroll-snap-align:start;
 }
 
 .project-card{
 background:white;
 border-radius:14px;
 overflow:hidden;
-box-shadow:0 10px 25px rgba(0,0,0,0.05);
-width:260px;
-scroll-snap-align:start;
+box-shadow:0 8px 20px rgba(0,0,0,0.05);
 transition:transform .25s ease, box-shadow .25s ease;
 }
 
 .project-card:hover{
 transform:translateY(-6px);
-box-shadow:0 20px 40px rgba(0,0,0,0.12);
+box-shadow:0 18px 35px rgba(0,0,0,0.12);
 }
 
 .project-card img{
 width:100%;
-height:150px;
+height:120px;
 object-fit:cover;
 }
 
 .project-card-content{
-padding:16px;
+padding:12px;
 }
 
-/* DOTS */
-
-.scroll-dots{
-display:flex;
-justify-content:center;
-gap:8px;
-margin-top:10px;
+.project-card h3{
+font-size:14px;
+margin:0 0 5px 0;
 }
 
-.dot{
-width:8px;
-height:8px;
-border-radius:50%;
-background:#ccc;
-}
-
-.dot.active{
-background:#111;
-transform:scale(1.4);
+.project-card p{
+font-size:12px;
+margin:0;
+color:#555;
 }
 
 /* TOOLS */
@@ -410,7 +368,6 @@ color:white;
 <header class="hero">
 
 <div class="light-sweep"></div>
-
 <canvas id="dashboardCanvas"></canvas>
 
 <div class="container hero-content">
@@ -469,7 +426,9 @@ color:white;
 <section id="projects">
 <h2>My Projects</h2>
 
-<div class="projects-scroll-wrapper">
+<div class="projects-scroll">
+
+<div class="project-page">
 
 <div class="project-card">
 <img src="https://images.unsplash.com/photo-1551288049-bebda4e38f71">
@@ -501,6 +460,40 @@ color:white;
 <h3>Power BI Dashboard</h3>
 <p>Interactive KPI dashboard.</p>
 </div>
+</div>
+
+<div class="project-card">
+<img src="https://images.unsplash.com/photo-1551288049-bebda4e38f71">
+<div class="project-card-content">
+<h3>Marketing Funnel Analysis</h3>
+<p>Conversion optimization.</p>
+</div>
+</div>
+
+<div class="project-card">
+<img src="https://images.unsplash.com/photo-1460925895917-afdab827c52f">
+<div class="project-card-content">
+<h3>Customer Churn Model</h3>
+<p>Predictive modeling.</p>
+</div>
+</div>
+
+<div class="project-card">
+<img src="https://images.unsplash.com/photo-1543286386-713bdd548da4">
+<div class="project-card-content">
+<h3>Retail Demand Forecast</h3>
+<p>Time series forecasting.</p>
+</div>
+</div>
+
+<div class="project-card">
+<img src="https://images.unsplash.com/photo-1581092334651-ddf26d9a09d0">
+<div class="project-card-content">
+<h3>Financial Risk Dashboard</h3>
+<p>Interactive reporting.</p>
+</div>
+</div>
+
 </div>
 
 </div>
@@ -564,40 +557,31 @@ Issued via Coursera
 
 <script>
 
-/* HERO BAR GRAPH */
-
 const canvas=document.getElementById("dashboardCanvas")
 const ctx=canvas.getContext("2d")
 
 let bars=[]
 
 function resizeCanvas(){
-
 canvas.width=window.innerWidth
 canvas.height=document.querySelector(".hero").offsetHeight
-
 bars=[]
-
 const spacing=28
 const count=Math.ceil(canvas.width/spacing)
 
 for(let i=0;i<count;i++){
-
 bars.push({
 x:i*spacing,
 height:Math.random()*120+40,
 speed:Math.random()*0.6+0.2
 })
-
 }
-
 }
 
 resizeCanvas()
 window.addEventListener("resize",resizeCanvas)
 
 function drawRoundedRect(x,y,width,height,radius){
-
 ctx.beginPath()
 ctx.moveTo(x,y+radius)
 ctx.lineTo(x,y+height)
@@ -607,7 +591,6 @@ ctx.quadraticCurveTo(x+width,y,x+width-radius,y)
 ctx.lineTo(x+radius,y)
 ctx.quadraticCurveTo(x,y,x,y+radius)
 ctx.fill()
-
 }
 
 function animateBars(){
@@ -617,9 +600,6 @@ ctx.clearRect(0,0,canvas.width,canvas.height)
 bars.forEach(bar=>{
 
 bar.height+=Math.sin(Date.now()*0.002*bar.speed)
-
-/* slow drift */
-
 bar.x+=0.05*bar.speed
 
 if(bar.x>canvas.width){
