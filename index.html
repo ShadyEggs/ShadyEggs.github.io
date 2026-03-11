@@ -185,25 +185,37 @@ border-bottom:12px solid transparent;
 border-right:18px solid white;
 }
 
-/* PROJECTS */
+/* PROJECT CAROUSEL */
+
+.carousel-container{
+position:relative;
+overflow:hidden;
+}
 
 .projects-grid{
-display:grid;
-grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
+display:flex;
 gap:20px;
+transition:transform .5s ease;
 }
 
 .project-card{
 background:white;
 border-radius:12px;
 overflow:hidden;
-transition:.3s;
 box-shadow:0 10px 25px rgba(0,0,0,0.05);
+min-width:260px;
+flex-shrink:0;
+transform:scale(.9);
+transition:.3s;
+}
+
+.project-card.active{
+transform:scale(1);
+box-shadow:0 20px 40px rgba(0,0,0,0.15);
 }
 
 .project-card:hover{
-transform:translateY(-8px);
-box-shadow:0 20px 40px rgba(0,0,0,0.1);
+transform:translateY(-8px) scale(1);
 }
 
 .project-card img{
@@ -214,6 +226,30 @@ object-fit:cover;
 
 .project-card-content{
 padding:16px;
+}
+
+/* CAROUSEL BUTTONS */
+
+.carousel-btn{
+position:absolute;
+top:50%;
+transform:translateY(-50%);
+background:white;
+border:none;
+width:42px;
+height:42px;
+border-radius:50%;
+box-shadow:0 8px 20px rgba(0,0,0,0.15);
+cursor:pointer;
+z-index:5;
+}
+
+.carousel-btn.left{
+left:-20px;
+}
+
+.carousel-btn.right{
+right:-20px;
 }
 
 /* FILTER BUTTONS */
@@ -379,16 +415,22 @@ display:none;
 
 <div class="project-filters">
 
-<button class="filter-btn active" data-filter="all">All</button>
-<button class="filter-btn" data-filter="python">Python</button>
-<button class="filter-btn" data-filter="sql">SQL</button>
-<button class="filter-btn" data-filter="powerbi">Power BI</button>
+<button class="filter-btn active">All</button>
+<button class="filter-btn">Python</button>
+<button class="filter-btn">SQL</button>
+<button class="filter-btn">Power BI</button>
 
 </div>
 
-<div class="projects-grid">
+<div class="carousel-container">
 
-<div class="project-card">
+<button class="carousel-btn left" onclick="moveCarousel(-1)">
+<i class="fa-solid fa-chevron-left"></i>
+</button>
+
+<div class="projects-grid" id="carousel">
+
+<div class="project-card active">
 <img src="https://picsum.photos/400/250">
 <div class="project-card-content">
 <h3>TikTok Claims Analysis</h3>
@@ -414,6 +456,12 @@ display:none;
 
 </div>
 
+<button class="carousel-btn right" onclick="moveCarousel(1)">
+<i class="fa-solid fa-chevron-right"></i>
+</button>
+
+</div>
+
 </section>
 
 </div>
@@ -425,6 +473,26 @@ display:none;
 </footer>
 
 <script>
+
+let index = 0
+const carousel = document.getElementById("carousel")
+const cards = document.querySelectorAll(".project-card")
+
+function moveCarousel(direction){
+
+index += direction
+
+if(index < 0) index = 0
+if(index > cards.length - 1) index = cards.length - 1
+
+carousel.style.transform = `translateX(${-index * 280}px)`
+
+cards.forEach(c => c.classList.remove("active"))
+cards[index].classList.add("active")
+
+}
+
+/* HERO CHART */
 
 const canvas = document.getElementById("dashboardCanvas")
 const ctx = canvas.getContext("2d")
