@@ -199,7 +199,7 @@ color:white;
 cursor:pointer;
 }
 
-/* PROJECT CAROUSEL */
+/* PROJECTS */
 
 .carousel-container{
 position:relative;
@@ -241,8 +241,6 @@ object-fit:cover;
 padding:16px;
 }
 
-/* CAROUSEL BUTTONS */
-
 .carousel-btn{
 position:absolute;
 top:50%;
@@ -259,7 +257,7 @@ cursor:pointer;
 .carousel-btn.left{ left:10px; }
 .carousel-btn.right{ right:10px; }
 
-/* TOOLS & CERTIFICATIONS */
+/* TOOLS */
 
 .tools-wrapper{
 max-width:900px;
@@ -307,7 +305,7 @@ margin:0 0 6px;
 font-size:12px;
 }
 
-/* CERTIFICATION TILE */
+/* CERT TILE */
 
 .cert-column{
 display:flex;
@@ -317,7 +315,7 @@ justify-content:center;
 .cert{
 background:white;
 border-radius:12px;
-padding:12px 16px 6px 16px;
+padding:12px 16px 4px 16px;
 text-align:center;
 box-shadow:0 6px 16px rgba(0,0,0,0.06);
 max-width:220px;
@@ -341,7 +339,7 @@ opacity:.85;
 margin-bottom:0;
 }
 
-/* SIMPLE HOVER EFFECT */
+/* HOVER EFFECT */
 
 .skill-card,
 .cert{
@@ -364,13 +362,11 @@ color:white;
 }
 
 </style>
-
 </head>
 
 <body>
 
 <header class="hero">
-
 <canvas id="dashboardCanvas"></canvas>
 
 <div class="container hero-content">
@@ -384,7 +380,6 @@ color:white;
 </div>
 
 </div>
-
 </header>
 
 <nav>
@@ -396,7 +391,123 @@ color:white;
 </ul>
 </nav>
 
-<!-- rest of the page including projects, tools, JS, and footer remains unchanged -->
+<!-- ABOUT -->
+<section id="about"></section>
+
+<!-- CONTACT -->
+<section id="contact"></section>
+
+<!-- PROJECTS -->
+<section id="projects"></section>
+
+<!-- TOOLS -->
+<section id="tools"></section>
+
+<footer>
+<p>© 2026 Alfred Rico</p>
+</footer>
+
+<script>
+
+/* carousel */
+
+let index = 0
+const carousel = document.getElementById("carousel")
+const cards = document.querySelectorAll(".project-card")
+
+function moveCarousel(direction){
+
+index += direction
+
+if(index < 0) index = 0
+if(index > cards.length - 1) index = cards.length - 1
+
+const cardWidth = cards[0].offsetWidth + 20
+carousel.style.transform = `translateX(${-index * cardWidth}px)`
+
+cards.forEach(c => c.classList.remove("active"))
+cards[index].classList.add("active")
+
+}
+
+/* hero animation */
+
+const canvas = document.getElementById("dashboardCanvas")
+const ctx = canvas.getContext("2d")
+
+function resizeCanvas(){
+canvas.width = canvas.offsetWidth
+canvas.height = canvas.offsetHeight
+}
+
+resizeCanvas()
+window.addEventListener("resize", resizeCanvas)
+
+let bars=[120,180,90,220,160]
+let barWidth=60
+let gap=50
+let progress=0
+
+function drawBars(){
+
+const chartWidth = bars.length*(barWidth+gap)
+const startX = (canvas.width-chartWidth)/2
+const baseY = canvas.height
+
+bars.forEach((h,i)=>{
+
+let x = startX + i*(barWidth+gap)
+
+ctx.fillStyle="rgba(74,144,226,.85)"
+ctx.fillRect(x,baseY,barWidth,-h*progress)
+
+})
+
+}
+
+function drawLine(){
+
+const chartWidth = bars.length*(barWidth+gap)
+const startX = (canvas.width-chartWidth)/2 + barWidth/2
+const baseY = canvas.height
+
+ctx.beginPath()
+ctx.strokeStyle="#8fd3ff"
+ctx.lineWidth=2
+
+ctx.moveTo(startX,baseY-bars[0]*progress)
+
+for(let i=1;i<bars.length;i++){
+
+let x=startX+i*(barWidth+gap)
+let y=baseY-bars[i]*progress
+
+ctx.lineTo(x,y)
+
+}
+
+ctx.stroke()
+
+}
+
+function animate(){
+
+ctx.clearRect(0,0,canvas.width,canvas.height)
+
+if(progress<1){
+progress+=0.01
+}
+
+drawBars()
+drawLine()
+
+requestAnimationFrame(animate)
+
+}
+
+animate()
+
+</script>
 
 </body>
 </html>
