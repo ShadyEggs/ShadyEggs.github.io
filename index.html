@@ -269,53 +269,65 @@ cursor:pointer;
 
 /* PROJECTS */
 
-.projects-container{
-max-width:1100px;
-margin:auto;
-}
-
-.projects-scroll{
+.projects-scroll-wrapper{
 overflow-x:auto;
 scroll-snap-type:x mandatory;
-display:flex;
-gap:30px;
-scroll-behavior:smooth;
-padding-bottom:20px;
-}
-
-.projects-scroll::-webkit-scrollbar{
-display:none;
-}
-
-.project-page{
 display:grid;
-grid-template-columns:repeat(4,200px);
+grid-auto-flow:column;
 grid-template-rows:repeat(2,1fr);
 gap:20px;
-scroll-snap-align:start;
+padding-bottom:20px;
+scroll-behavior:smooth;
+}
+
+.projects-scroll-wrapper::-webkit-scrollbar{
+display:none;
 }
 
 .project-card{
 background:white;
 border-radius:14px;
 overflow:hidden;
-box-shadow:0 8px 20px rgba(0,0,0,0.05);
+box-shadow:0 10px 25px rgba(0,0,0,0.05);
+width:260px;
+scroll-snap-align:start;
 transition:transform .25s ease, box-shadow .25s ease;
 }
 
 .project-card:hover{
 transform:translateY(-6px);
-box-shadow:0 18px 35px rgba(0,0,0,0.12);
+box-shadow:0 20px 40px rgba(0,0,0,0.12);
 }
 
 .project-card img{
 width:100%;
-height:120px;
+height:150px;
 object-fit:cover;
 }
 
 .project-card-content{
-padding:12px;
+padding:16px;
+}
+
+/* DOTS */
+
+.scroll-dots{
+display:flex;
+justify-content:center;
+gap:8px;
+margin-top:10px;
+}
+
+.dot{
+width:8px;
+height:8px;
+border-radius:50%;
+background:#ccc;
+}
+
+.dot.active{
+background:#111;
+transform:scale(1.4);
 }
 
 /* TOOLS */
@@ -457,11 +469,7 @@ color:white;
 <section id="projects">
 <h2>My Projects</h2>
 
-<div class="projects-container">
-
-<div class="projects-scroll">
-
-<div class="project-page">
+<div class="projects-scroll-wrapper">
 
 <div class="project-card">
 <img src="https://images.unsplash.com/photo-1551288049-bebda4e38f71">
@@ -493,10 +501,6 @@ color:white;
 <h3>Power BI Dashboard</h3>
 <p>Interactive KPI dashboard.</p>
 </div>
-</div>
-
-</div>
-
 </div>
 
 </div>
@@ -557,6 +561,90 @@ Issued via Coursera
 <footer>
 <p>© 2026 Alfred Rico</p>
 </footer>
+
+<script>
+
+/* HERO BAR GRAPH */
+
+const canvas=document.getElementById("dashboardCanvas")
+const ctx=canvas.getContext("2d")
+
+let bars=[]
+
+function resizeCanvas(){
+
+canvas.width=window.innerWidth
+canvas.height=document.querySelector(".hero").offsetHeight
+
+bars=[]
+
+const spacing=28
+const count=Math.ceil(canvas.width/spacing)
+
+for(let i=0;i<count;i++){
+
+bars.push({
+x:i*spacing,
+height:Math.random()*120+40,
+speed:Math.random()*0.6+0.2
+})
+
+}
+
+}
+
+resizeCanvas()
+window.addEventListener("resize",resizeCanvas)
+
+function drawRoundedRect(x,y,width,height,radius){
+
+ctx.beginPath()
+ctx.moveTo(x,y+radius)
+ctx.lineTo(x,y+height)
+ctx.lineTo(x+width,y+height)
+ctx.lineTo(x+width,y+radius)
+ctx.quadraticCurveTo(x+width,y,x+width-radius,y)
+ctx.lineTo(x+radius,y)
+ctx.quadraticCurveTo(x,y,x,y+radius)
+ctx.fill()
+
+}
+
+function animateBars(){
+
+ctx.clearRect(0,0,canvas.width,canvas.height)
+
+bars.forEach(bar=>{
+
+bar.height+=Math.sin(Date.now()*0.002*bar.speed)
+
+/* slow drift */
+
+bar.x+=0.05*bar.speed
+
+if(bar.x>canvas.width){
+bar.x=-20
+}
+
+ctx.fillStyle="rgba(74,144,226,0.7)"
+
+drawRoundedRect(
+bar.x,
+canvas.height-bar.height,
+18,
+bar.height,
+6
+)
+
+})
+
+requestAnimationFrame(animateBars)
+
+}
+
+animateBars()
+
+</script>
 
 </body>
 </html>
