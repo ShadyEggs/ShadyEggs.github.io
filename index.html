@@ -230,6 +230,7 @@ overflow:hidden;
 display:flex;
 gap:20px;
 transition:transform .5s ease;
+justify-content:center;
 }
 
 .project-card{
@@ -456,6 +457,8 @@ color:white;
 </form>
 </section>
 
+<!-- PROJECTS -->
+
 <section id="projects">
 
 <h2>My Projects</h2>
@@ -502,6 +505,8 @@ color:white;
 
 </section>
 
+<!-- TOOLS -->
+
 <section id="tools">
 <h2>Tools</h2>
 
@@ -528,6 +533,8 @@ color:white;
 
 </div>
 </section>
+
+<!-- CERTIFICATIONS -->
 
 <section id="certifications">
 
@@ -573,18 +580,15 @@ const cards = document.querySelectorAll(".project-card")
 
 function moveCarousel(direction){
 
-const maxIndex = cards.length - 1
-
 index += direction
 
 if(index < 0) index = 0
-if(index > maxIndex) index = maxIndex
+if(index > cards.length - 1) index = cards.length - 1
 
-const cardWidth = cards[0].getBoundingClientRect().width + 20
-
+const cardWidth = cards[0].offsetWidth + 20
 carousel.style.transform = `translateX(${-index * cardWidth}px)`
 
-cards.forEach(card => card.classList.remove("active"))
+cards.forEach(c => c.classList.remove("active"))
 cards[index].classList.add("active")
 
 }
