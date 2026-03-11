@@ -26,8 +26,6 @@ background:#f5f5f7;
 scroll-behavior:smooth;
 }
 
-/* GLOBAL */
-
 .container{
 width:90%;
 max-width:1100px;
@@ -245,7 +243,7 @@ color:white;
 cursor:pointer;
 }
 
-/* PROJECT SECTION */
+/* PROJECTS */
 
 .projects-container{
 display:flex;
@@ -323,13 +321,13 @@ margin-left:auto;
 
 .python-tile{
 grid-row:1/span 2;
+text-align:left;
 }
 
 .skill-card{
 background:white;
 border-radius:12px;
-padding:14px;
-text-align:center;
+padding:16px;
 box-shadow:0 6px 16px rgba(0,0,0,0.06);
 font-size:13px;
 }
@@ -340,12 +338,13 @@ display:flex;
 flex-direction:column;
 justify-content:center;
 align-items:center;
+text-align:center;
 }
 
 .skill-card i{
 font-size:18px;
 color:#4a90e2;
-margin-bottom:4px;
+margin-bottom:6px;
 }
 
 /* CERT */
@@ -517,8 +516,17 @@ color:white;
 <div class="skill-card python-tile">
 <i class="fa-brands fa-python"></i>
 <strong>Python</strong>
-<p>NumPy • Pandas • Matplotlib • Seaborn</p>
-<p>Scikit-learn • Plotly</p>
+
+<p><strong>Data Science and Analysis</strong><br>
+- NumPy &nbsp;&nbsp; - Pandas<br>
+- Matplotlib &nbsp;&nbsp; - Seaborn</p>
+
+<p><strong>Machine Learning</strong><br>
+Scikit-learn</p>
+
+<p><strong>Visualization</strong><br>
+Plotly</p>
+
 </div>
 
 <div class="skill-card small"><i class="fa-solid fa-database"></i>SQL</div>
@@ -588,7 +596,7 @@ for(let i=0;i<count;i++){
 bars.push({
 x:i*spacing,
 height:Math.random()*120+40,
-speed:(Math.random()*0.6+0.2)*0.5
+speed:(Math.random()*0.6+0.2)*0.25
 })
 
 }
@@ -618,9 +626,9 @@ ctx.clearRect(0,0,canvas.width,canvas.height)
 
 bars.forEach(bar=>{
 
-bar.height+=Math.sin(Date.now()*0.001*bar.speed)
+bar.height+=Math.sin(Date.now()*0.0005*bar.speed)
 
-bar.x+=0.025*bar.speed
+bar.x+=0.0125*bar.speed
 
 if(bar.x>canvas.width){
 bar.x=-20
