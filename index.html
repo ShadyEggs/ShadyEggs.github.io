@@ -116,8 +116,8 @@ display:grid;
 grid-template-columns:1fr 1fr;
 grid-template-areas:
 "about contact"
-"tools tools"
-"projects projects";
+"projects projects"
+"tools tools";
 gap:40px;
 max-width:1200px;
 margin:60px auto;
@@ -126,8 +126,8 @@ padding:0 40px;
 
 #about{ grid-area:about; }
 #contact{ grid-area:contact; }
-#tools{ grid-area:tools; }
 #projects{ grid-area:projects; }
+#tools{ grid-area:tools; }
 
 /* SECTION TITLES */
 
@@ -201,58 +201,6 @@ color:white;
 cursor:pointer;
 }
 
-/* TOOLS + CERTIFICATIONS */
-
-.tools-wrapper{
-max-width:900px;
-margin:auto;
-}
-
-.tools-group{
-margin-bottom:30px;
-}
-
-.tools-group h3{
-text-align:center;
-font-size:18px;
-margin-bottom:15px;
-color:#666;
-font-weight:600;
-}
-
-.skills-grid{
-display:grid;
-grid-template-columns:repeat(auto-fit,minmax(120px,1fr));
-gap:18px;
-}
-
-.skill-card{
-background:white;
-border-radius:14px;
-padding:18px 12px;
-text-align:center;
-box-shadow:0 8px 20px rgba(0,0,0,0.06);
-transition:all .25s ease;
-font-size:14px;
-}
-
-.skill-card i{
-font-size:22px;
-color:#4a90e2;
-margin-bottom:6px;
-display:block;
-}
-
-.skill-card:hover{
-transform:translateY(-5px) scale(1.03);
-box-shadow:0 16px 30px rgba(0,0,0,0.12);
-}
-
-.skill-card.cert{
-text-decoration:none;
-color:#333;
-}
-
 /* PROJECT CAROUSEL */
 
 .carousel-container{
@@ -317,6 +265,58 @@ cursor:pointer;
 transform:translateY(-50%) scale(1.1);
 }
 
+/* TOOLS + CERTIFICATIONS */
+
+.tools-wrapper{
+max-width:900px;
+margin:auto;
+}
+
+.tools-group{
+margin-bottom:30px;
+}
+
+.tools-group h3{
+text-align:center;
+font-size:18px;
+margin-bottom:15px;
+color:#666;
+font-weight:600;
+}
+
+.skills-grid{
+display:grid;
+grid-template-columns:repeat(auto-fit,minmax(120px,1fr));
+gap:18px;
+}
+
+.skill-card{
+background:white;
+border-radius:14px;
+padding:18px 12px;
+text-align:center;
+box-shadow:0 8px 20px rgba(0,0,0,0.06);
+transition:all .25s ease;
+font-size:14px;
+}
+
+.skill-card i{
+font-size:22px;
+color:#4a90e2;
+margin-bottom:6px;
+display:block;
+}
+
+.skill-card:hover{
+transform:translateY(-5px) scale(1.03);
+box-shadow:0 16px 30px rgba(0,0,0,0.12);
+}
+
+.skill-card.cert{
+text-decoration:none;
+color:#333;
+}
+
 /* FOOTER */
 
 footer{
@@ -351,21 +351,17 @@ color:white;
 </header>
 
 <nav>
-
 <ul>
 <li><a href="#about">About</a></li>
 <li><a href="#projects">Projects</a></li>
 <li><a href="#contact">Contact</a></li>
 </ul>
-
 </nav>
 
 <div class="main-layout">
 
 <section id="about">
-
 <h2>About Me</h2>
-
 <div class="about-grid">
 
 <img src="profile.jpg" class="profile-pic">
@@ -374,14 +370,13 @@ color:white;
 
 <p>Hi, I’m Alfred — an aspiring data analyst who enjoys turning raw data into meaningful insights.</p>
 
-<p>I’m naturally curious and enjoy exploring datasets to uncover patterns, answer questions, and communicate findings clearly.</p>
+<p>I’m naturally curious and enjoy exploring datasets to uncover patterns and answer questions.</p>
 
-<p>Through hands-on projects, I’ve gained experience using Python, Jupyter Notebook, RStudio, and Tableau to analyze data and build visualizations.</p>
-
-</div>
+<p>I use tools like Python, Jupyter Notebook, RStudio, and Tableau to analyze data and create visualizations.</p>
 
 </div>
 
+</div>
 </section>
 
 <section id="contact">
@@ -397,6 +392,52 @@ color:white;
 <button type="submit" class="apple-send">Send Message</button>
 
 </form>
+
+</section>
+
+<section id="projects">
+
+<h2>My Projects</h2>
+
+<div class="carousel-container">
+
+<button class="carousel-btn left" onclick="moveCarousel(-1)">
+<i class="fa-solid fa-chevron-left"></i>
+</button>
+
+<div class="projects-grid" id="carousel">
+
+<div class="project-card active">
+<img src="https://images.unsplash.com/photo-1551288049-bebda4e38f71">
+<div class="project-card-content">
+<h3>TikTok Claims Analysis</h3>
+<p>Exploratory data analysis.</p>
+</div>
+</div>
+
+<div class="project-card">
+<img src="https://images.unsplash.com/photo-1460925895917-afdab827c52f">
+<div class="project-card-content">
+<h3>SQL Sales Dashboard</h3>
+<p>SQL reporting and analytics.</p>
+</div>
+</div>
+
+<div class="project-card">
+<img src="https://images.unsplash.com/photo-1556157382-97eda2d62296">
+<div class="project-card-content">
+<h3>Power BI Dashboard</h3>
+<p>Interactive KPI dashboard.</p>
+</div>
+</div>
+
+</div>
+
+<button class="carousel-btn right" onclick="moveCarousel(1)">
+<i class="fa-solid fa-chevron-right"></i>
+</button>
+
+</div>
 
 </section>
 
@@ -446,59 +487,111 @@ IBM Data Analyst
 
 </section>
 
-<section id="projects">
-
-<h2>My Projects</h2>
-
-<div class="carousel-container">
-
-<button class="carousel-btn left">
-<i class="fa-solid fa-chevron-left"></i>
-</button>
-
-<div class="projects-grid">
-
-<div class="project-card active">
-<img src="https://images.unsplash.com/photo-1551288049-bebda4e38f71">
-<div class="project-card-content">
-<h3>TikTok Claims Analysis</h3>
-<p>Exploratory data analysis.</p>
-</div>
-</div>
-
-<div class="project-card">
-<img src="https://images.unsplash.com/photo-1460925895917-afdab827c52f">
-<div class="project-card-content">
-<h3>SQL Sales Dashboard</h3>
-<p>SQL reporting and analytics.</p>
-</div>
-</div>
-
-<div class="project-card">
-<img src="https://images.unsplash.com/photo-1556157382-97eda2d62296">
-<div class="project-card-content">
-<h3>Power BI Dashboard</h3>
-<p>Interactive KPI dashboard.</p>
-</div>
-</div>
-
-</div>
-
-<button class="carousel-btn right">
-<i class="fa-solid fa-chevron-right"></i>
-</button>
-
-</div>
-
-</section>
-
 </div>
 
 <footer>
-
 <p>© 2026 Alfred Rico</p>
-
 </footer>
+
+<script>
+
+let index = 0
+const carousel = document.getElementById("carousel")
+const cards = document.querySelectorAll(".project-card")
+
+function moveCarousel(direction){
+
+index += direction
+
+if(index < 0) index = 0
+if(index > cards.length - 1) index = cards.length - 1
+
+const cardWidth = cards[0].offsetWidth + 20
+carousel.style.transform = `translateX(${-index * cardWidth}px)`
+
+cards.forEach(c => c.classList.remove("active"))
+cards[index].classList.add("active")
+
+}
+
+/* HERO BAR GRAPH ANIMATION */
+
+const canvas = document.getElementById("dashboardCanvas")
+const ctx = canvas.getContext("2d")
+
+function resizeCanvas(){
+canvas.width = canvas.offsetWidth
+canvas.height = canvas.offsetHeight
+}
+
+resizeCanvas()
+window.addEventListener("resize", resizeCanvas)
+
+let bars=[120,180,90,220,160]
+let barWidth=60
+let gap=50
+let progress=0
+
+function drawBars(){
+
+const chartWidth = bars.length*(barWidth+gap)
+const startX = (canvas.width-chartWidth)/2
+const baseY = canvas.height - 5
+
+bars.forEach((h,i)=>{
+
+let x = startX + i*(barWidth+gap)
+
+ctx.fillStyle="rgba(74,144,226,.85)"
+ctx.fillRect(x,baseY,barWidth,-h*progress)
+
+})
+
+}
+
+function drawLine(){
+
+const chartWidth = bars.length*(barWidth+gap)
+const startX = (canvas.width-chartWidth)/2 + barWidth/2
+const baseY = canvas.height - 5
+
+ctx.beginPath()
+ctx.strokeStyle="#8fd3ff"
+ctx.lineWidth=2
+
+ctx.moveTo(startX,baseY-bars[0]*progress)
+
+for(let i=1;i<bars.length;i++){
+
+let x=startX+i*(barWidth+gap)
+let y=baseY-bars[i]*progress
+
+ctx.lineTo(x,y)
+
+}
+
+ctx.stroke()
+
+}
+
+function animate(){
+
+ctx.clearRect(0,0,canvas.width,canvas.height)
+
+if(progress<1){
+progress+=0.01
+}
+
+drawBars()
+drawLine()
+
+requestAnimationFrame(animate)
+
+}
+
+animate()
+
+</script>
 
 </body>
 </html>
