@@ -349,19 +349,6 @@ background:#111;
 color:white;
 }
 
-/* MOBILE */
-
-@media (max-width:900px){
-.main-layout{
-grid-template-columns:1fr;
-grid-template-areas:
-"about"
-"contact"
-"projects"
-"certifications";
-}
-}
-
 </style>
 </head>
 
@@ -392,35 +379,54 @@ grid-template-areas:
 
 <div class="main-layout">
 
+<!-- ABOUT -->
+
 <section id="about">
 <h2>About Me</h2>
+
 <div class="about-grid">
+
 <div>
 <img src="profile.jpg" class="profile-pic">
 </div>
+
 <div class="about-text">
+
 <p>Hi, I’m Alfred — an aspiring data analyst who enjoys turning messy data into clear insights and finding patterns that explain what’s really going on.</p>
+
 <p>Through hands-on projects, I’ve worked with Python, SQL, and visualization tools to analyze data and communicate findings in a way that’s easy to understand.</p>
+
 <p>I'm always looking for new problems to explore and new ways to learn.</p>
+
 </div>
 </div>
 </section>
 
+<!-- CONTACT -->
+
 <section id="contact">
 <h2>Let's Connect!</h2>
+
 <form action="https://formsubmit.co/alfred.m.rico@gmail.com" method="POST" class="contact-form">
+
 <input type="text" name="name" placeholder="Name" required>
 <input type="email" name="email" placeholder="Email" required>
+
 <textarea name="message" rows="6" placeholder="Message" required></textarea>
+
 <button type="submit" class="apple-send">Send Message</button>
+
 </form>
 </section>
+
+<!-- PROJECTS -->
 
 <section id="projects">
 
 <h2>My Projects</h2>
 
 <div class="project-filters">
+
 <button class="filter-btn active" data-filter="all">All</button>
 <button class="filter-btn" data-filter="python">Python</button>
 <button class="filter-btn" data-filter="r">R</button>
@@ -428,42 +434,64 @@ grid-template-areas:
 <button class="filter-btn" data-filter="tableau">Tableau</button>
 <button class="filter-btn" data-filter="excel">Excel</button>
 <button class="filter-btn" data-filter="sheets">Google Sheets</button>
+
 </div>
 
 <div class="projects-container">
+
 <div class="projects-scroll-wrapper">
 
-<a class="project-card" data-tags="r" href="https://shadyeggs.github.io/Fifa21-Data-Cleaning-Project/" target="_blank">
+<a class="project-card"
+data-tags="r"
+href="https://shadyeggs.github.io/Fifa21-Data-Cleaning-Project/"
+target="_blank">
+
 <img src="https://images.unsplash.com/photo-1518091043644-c1d4457512c6">
+
 <div class="project-overlay">
+
 <h3>Fifa 21 Data Cleaning</h3>
+
 <div class="project-tags">
-<span>R</span><span>dplyr</span><span>tidyr</span><span>ggplot2</span><span>plotly</span>
+<span>R</span>
+<span>dplyr</span>
+<span>tidyr</span>
+<span>ggplot2</span>
+<span>plotly</span>
 </div>
+
 </div>
 </a>
 
-<a class="project-card" data-tags="sql tableau excel sheets"
+<a class="project-card"
+data-tags="sql tableau excel sheets"
 href="https://public.tableau.com/app/profile/alfred.rico/viz/CyclisticCaseStudy_17031395269510/Dashboard1"
 target="_blank">
 
 <img src="https://images.unsplash.com/photo-1551288049-bebda4e38f71">
 
 <div class="project-overlay">
+
 <h3>Cyclistic Case Study</h3>
+
 <div class="project-tags">
-<span>SQL</span><span>Tableau</span><span>Excel</span><span>Google Sheets</span>
-</div>
+<span>SQL</span>
+<span>Tableau</span>
+<span>Excel</span>
+<span>Google Sheets</span>
 </div>
 
+</div>
 </a>
 
 </div>
 </div>
-
 </section>
 
+<!-- CERTIFICATIONS -->
+
 <section id="certifications">
+
 <h2>Certifications</h2>
 
 <div class="cert-column">
@@ -500,7 +528,157 @@ Issued via Coursera
 
 <script>
 
-/* MULTI FILTER */
+/* HERO ANIMATION */
+
+const canvas=document.getElementById("dashboardCanvas")
+const ctx=canvas.getContext("2d")
+
+let bars=[]
+let particles=[]
+
+const spacing=28
+const barWidth=18
+
+const palette=[
+"rgba(52,152,219,0.45)",
+"rgba(26,188,156,0.45)",
+"rgba(160,160,160,0.45)"
+]
+
+function setupCanvas(){
+
+const hero=document.querySelector(".hero")
+
+canvas.width=hero.offsetWidth
+canvas.height=hero.offsetHeight
+
+bars=[]
+particles=[]
+
+const count=Math.floor(canvas.width/spacing)
+const totalWidth=count*spacing
+const offsetX=(canvas.width-totalWidth)/2
+
+for(let i=0;i<count;i++){
+
+const h=Math.random()*120+60
+
+bars.push({
+x:offsetX+i*spacing,
+height:h,
+target:h,
+color:palette[Math.floor(Math.random()*palette.length)]
+})
+
+}
+
+const particleCount = window.innerWidth < 700 ? 18 : 35
+
+for(let i=0;i<particleCount;i++){
+particles.push({
+x:Math.random()*canvas.width,
+y:Math.random()*canvas.height,
+size:Math.random()*2+1,
+speed:Math.random()*0.4+0.1
+})
+}
+
+}
+
+function drawParticles(){
+
+particles.forEach(p=>{
+
+p.y -= p.speed
+
+if(p.y < 0){
+p.y = canvas.height
+p.x = Math.random()*canvas.width
+}
+
+ctx.fillStyle="rgba(255,255,255,0.25)"
+ctx.beginPath()
+ctx.arc(p.x,p.y,p.size,0,Math.PI*2)
+ctx.fill()
+
+})
+
+}
+
+function drawRoundedRect(x,y,width,height,radius){
+
+ctx.beginPath()
+ctx.moveTo(x,y+radius)
+ctx.lineTo(x,y+height)
+ctx.lineTo(x+width,y+height)
+ctx.lineTo(x+width,y+radius)
+ctx.quadraticCurveTo(x+width,y,x+width-radius,y)
+ctx.lineTo(x+radius,y)
+ctx.quadraticCurveTo(x,y,x,y+radius)
+ctx.fill()
+
+}
+
+function animate(){
+
+ctx.clearRect(0,0,canvas.width,canvas.height)
+
+drawParticles()
+
+bars.forEach(bar=>{
+
+bar.height+=(bar.target-bar.height)*0.05
+
+ctx.fillStyle=bar.color
+
+drawRoundedRect(
+bar.x,
+canvas.height-bar.height,
+barWidth,
+bar.height,
+6
+)
+
+ctx.fillStyle="rgba(255,255,255,0.15)"
+
+drawRoundedRect(
+bar.x+3,
+canvas.height-bar.height,
+barWidth/3,
+bar.height,
+6
+)
+
+})
+
+requestAnimationFrame(animate)
+
+}
+
+function updateRandomBars(){
+
+const used=new Set()
+
+while(used.size<6 && used.size<bars.length){
+
+const index=Math.floor(Math.random()*bars.length)
+
+if(!used.has(index)){
+
+used.add(index)
+
+const change=(Math.random()*120)-60
+const newHeight=bars[index].target+change
+
+bars[index].target=Math.max(40,Math.min(220,newHeight))
+
+}
+
+}
+
+}
+
+/* PROJECT FILTERING */
 
 const filterButtons=document.querySelectorAll(".filter-btn")
 const projects=document.querySelectorAll(".project-card")
@@ -548,6 +726,13 @@ card.classList.add("hide")
 })
 
 })
+
+setupCanvas()
+animate()
+
+setInterval(updateRandomBars,5000)
+
+window.addEventListener("resize",setupCanvas)
 
 </script>
 
