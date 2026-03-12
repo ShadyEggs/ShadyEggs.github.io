@@ -19,8 +19,6 @@
 
 <style>
 
-/* ORIGINAL STYLES */
-
 body{
 font-family:'Lato',sans-serif;
 margin:0;
@@ -154,22 +152,87 @@ margin-bottom:30px;
 color:white;
 }
 
+/* ABOUT */
+
+.about-grid{
+display:grid;
+grid-template-columns:200px 1fr;
+gap:30px;
+}
+
+.profile-pic{
+width:180px;
+height:180px;
+object-fit:cover;
+border-radius:50%;
+border:4px solid #4a90e2;
+box-shadow:0 10px 30px rgba(0,0,0,0.15);
+transition:transform .3s ease;
+}
+
+.profile-pic:hover{
+transform:scale(1.05);
+}
+
+.about-text{
+position:relative;
+background:white;
+padding:30px;
+border-radius:16px;
+box-shadow:0 20px 50px rgba(0,0,0,0.08);
+}
+
+.about-text::before{
+content:"";
+position:absolute;
+left:-14px;
+top:80px;
+border-top:12px solid transparent;
+border-bottom:12px solid transparent;
+border-right:14px solid white;
+}
+
+.about-text p{
+text-indent:20px;
+line-height:1.7;
+}
+
+/* CONTACT */
+
+.contact-form{
+background:white;
+padding:40px;
+border-radius:16px;
+box-shadow:0 15px 40px rgba(0,0,0,0.08);
+}
+
+.contact-form input,
+.contact-form textarea{
+width:100%;
+padding:12px;
+margin-top:6px;
+margin-bottom:15px;
+border-radius:8px;
+border:1px solid #ddd;
+}
+
+.apple-send{
+width:100%;
+padding:14px;
+border:none;
+border-radius:999px;
+background:#111;
+color:white;
+cursor:pointer;
+}
+
 /* PROJECTS */
 
 .projects-container{
-overflow:hidden;
-}
-
-.projects-slider{
-display:flex;
-transition:transform .45s ease;
-width:200%;
-}
-
-.projects-page{
-width:100%;
 display:flex;
 justify-content:center;
+flex-direction:column;
+align-items:center;
 }
 
 .projects-scroll-wrapper{
@@ -178,7 +241,13 @@ grid-auto-flow:column;
 grid-template-rows:repeat(2,1fr);
 grid-auto-columns:170px;
 gap:20px;
+overflow-x:auto;
+scroll-snap-type:x mandatory;
 padding-bottom:10px;
+}
+
+.projects-scroll-wrapper::-webkit-scrollbar{
+display:none;
 }
 
 .project-card{
@@ -186,6 +255,7 @@ position:relative;
 border-radius:16px;
 overflow:hidden;
 aspect-ratio:1;
+scroll-snap-align:start;
 cursor:pointer;
 text-decoration:none;
 color:inherit;
@@ -225,38 +295,44 @@ font-size:11px;
 line-height:1.3;
 }
 
-/* BLUR UNLINKED PROJECTS */
+/* LOCKED PROJECT BLUR */
 
 .project-card.locked img{
-filter:blur(6px) brightness(.65);
+filter:blur(6px) brightness(.6);
 }
 
 .project-card.locked .project-overlay{
 backdrop-filter:blur(6px);
 }
 
-/* DOT NAV */
+/* PAGE NAV */
 
-.project-dots{
-text-align:center;
-margin-top:18px;
+.project-nav{
+margin-top:10px;
 }
 
-.project-dots span{
-display:inline-block;
-width:8px;
-height:8px;
-background:#888;
-border-radius:50%;
-margin:0 6px;
+.project-nav button{
+background:#111;
+color:white;
+border:none;
+padding:6px 12px;
+margin:3px;
+border-radius:14px;
 cursor:pointer;
+font-size:12px;
 }
 
-.project-dots span.active{
-background:white;
+/* HIDE PAGES */
+
+.project-page{
+display:none;
 }
 
-/* OTHER SECTIONS (UNCHANGED) */
+.project-page.active{
+display:block;
+}
+
+/* TOOLS */
 
 .tools-column{
 display:grid;
@@ -267,18 +343,14 @@ max-width:420px;
 margin-left:auto;
 }
 
-.skill-card{
-background:white;
-border-radius:12px;
-padding:16px;
-box-shadow:0 6px 16px rgba(0,0,0,0.06);
-font-size:13px;
-}
+/* CERT */
 
 .cert-column{
 display:flex;
 justify-content:flex-start;
 }
+
+/* FOOTER */
 
 footer{
 text-align:center;
@@ -293,6 +365,7 @@ color:white;
 <body>
 
 <header class="hero">
+
 <canvas id="dashboardCanvas"></canvas>
 
 <div class="container hero-content">
@@ -304,6 +377,7 @@ color:white;
 <a href="https://github.com/ShadyEggs" target="_blank"><i class="fab fa-github"></i></a>
 </div>
 </div>
+
 </header>
 
 <nav>
@@ -316,23 +390,26 @@ color:white;
 
 <div class="main-layout">
 
+<!-- PROJECTS -->
+
 <section id="projects">
 <h2>My Projects</h2>
 
-<div class="projects-container">
-
-<div class="projects-slider" id="projectSlider">
-
 <!-- PAGE 1 -->
 
-<div class="projects-page">
+<div class="project-page active" id="page1">
+<div class="projects-container">
 <div class="projects-scroll-wrapper">
+
+<!-- original cards -->
 
 <a href="https://shadyeggs.github.io/Fifa21-Data-Cleaning-Project/" target="_blank" class="project-card">
 <img src="https://images.unsplash.com/photo-1518091043644-c1d4457512c6">
 <div class="project-overlay">
 <h3>Fifa 21 Data Cleaning</h3>
-<ul><li>R</li><li>dplyr</li><li>tidyr</li><li>ggplot2</li></ul>
+<ul>
+<li>R</li><li>dplyr</li><li>tidyr</li><li>ggplot2</li>
+</ul>
 </div>
 </a>
 
@@ -340,7 +417,9 @@ color:white;
 <img src="https://images.unsplash.com/photo-1551288049-bebda4e38f71">
 <div class="project-overlay">
 <h3>Cyclistic Case Study</h3>
-<ul><li>Tableau</li><li>SQL</li><li>Excel</li></ul>
+<ul>
+<li>Tableau</li><li>SQL</li>
+</ul>
 </div>
 </a>
 
@@ -354,6 +433,8 @@ color:white;
 <div class="project-overlay"><h3>Power BI Dashboard</h3></div>
 </div>
 
+<!-- new cards -->
+
 <div class="project-card locked">
 <img src="https://images.unsplash.com/photo-1557804506-669a67965ba0">
 <div class="project-overlay"><h3>Sales Analysis</h3></div>
@@ -366,30 +447,30 @@ color:white;
 
 </div>
 </div>
+</div>
 
 <!-- PAGE 2 -->
 
-<div class="projects-page">
+<div class="project-page" id="page2">
+<div class="projects-container">
 <div class="projects-scroll-wrapper">
 
-<div class="project-card locked"><img src="https://images.unsplash.com/photo-1551288049-bebda4e38f71"><div class="project-overlay"><h3>Project 7</h3></div></div>
-<div class="project-card locked"><img src="https://images.unsplash.com/photo-1500530855697-b586d89ba3ee"><div class="project-overlay"><h3>Project 8</h3></div></div>
-<div class="project-card locked"><img src="https://images.unsplash.com/photo-1448375240586-882707db888b"><div class="project-overlay"><h3>Project 9</h3></div></div>
-<div class="project-card locked"><img src="https://images.unsplash.com/photo-1498050108023-c5249f4df085"><div class="project-overlay"><h3>Project 10</h3></div></div>
-<div class="project-card locked"><img src="https://images.unsplash.com/photo-1526378722484-cc5c510ae0c3"><div class="project-overlay"><h3>Project 11</h3></div></div>
-<div class="project-card locked"><img src="https://images.unsplash.com/photo-1504384308090-c894fdcc538d"><div class="project-overlay"><h3>Project 12</h3></div></div>
+<div class="project-card locked"><img src="https://images.unsplash.com/photo-1498050108023-c5249f4df085"><div class="project-overlay"><h3>Project 7</h3></div></div>
+<div class="project-card locked"><img src="https://images.unsplash.com/photo-1504384308090-c894fdcc538d"><div class="project-overlay"><h3>Project 8</h3></div></div>
+<div class="project-card locked"><img src="https://images.unsplash.com/photo-1526378722484-cc5c510ae0c3"><div class="project-overlay"><h3>Project 9</h3></div></div>
+<div class="project-card locked"><img src="https://images.unsplash.com/photo-1551288049-bebda4e38f71"><div class="project-overlay"><h3>Project 10</h3></div></div>
+<div class="project-card locked"><img src="https://images.unsplash.com/photo-1500530855697-b586d89ba3ee"><div class="project-overlay"><h3>Project 11</h3></div></div>
+<div class="project-card locked"><img src="https://images.unsplash.com/photo-1448375240586-882707db888b"><div class="project-overlay"><h3>Project 12</h3></div></div>
 
 </div>
 </div>
-
 </div>
 
-<div class="project-dots">
-<span class="active" onclick="slideProjects(0)"></span>
-<span onclick="slideProjects(1)"></span>
+<div class="project-nav">
+<button onclick="showPage(1)">1</button>
+<button onclick="showPage(2)">2</button>
 </div>
 
-</div>
 </section>
 
 </div>
@@ -400,27 +481,10 @@ color:white;
 
 <script>
 
-/* SLIDER */
-
-let slider=document.getElementById("projectSlider")
-let dots=document.querySelectorAll(".project-dots span")
-
-function slideProjects(page){
-slider.style.transform="translateX(-"+(page*100)+"%)"
-dots.forEach(d=>d.classList.remove("active"))
-dots[page].classList.add("active")
+function showPage(page){
+document.querySelectorAll(".project-page").forEach(p=>p.classList.remove("active"))
+document.getElementById("page"+page).classList.add("active")
 }
-
-/* SWIPE SUPPORT */
-
-let startX=0
-slider.addEventListener("touchstart",e=>startX=e.touches[0].clientX)
-
-slider.addEventListener("touchend",e=>{
-let endX=e.changedTouches[0].clientX
-if(startX-endX>50) slideProjects(1)
-if(endX-startX>50) slideProjects(0)
-})
 
 </script>
 
