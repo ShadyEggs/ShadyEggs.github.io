@@ -442,13 +442,15 @@ margin:auto;
 
 </header>
 
-<!-- Everything else below remains identical to your reference code -->
+<!-- ALL OTHER HTML SECTIONS REMAIN IDENTICAL -->
 
-<!-- scripts -->
+<footer>
+<p>© 2026 Alfred Rico</p>
+</footer>
 
 <script>
 
-/* PARTICLES */
+/* PARTICLE SYSTEM */
 
 const particleCanvas=document.getElementById("particleCanvas")
 const pctx=particleCanvas.getContext("2d")
@@ -464,7 +466,7 @@ particleCanvas.height=hero.offsetHeight
 
 particles=[]
 
-for(let i=0;i<50;i++){
+for(let i=0;i<60;i++){
 
 particles.push({
 x:Math.random()*particleCanvas.width,
@@ -488,10 +490,10 @@ particles.forEach(p=>{
 p.x+=p.vx
 p.y+=p.vy
 
-if(p.x<0) p.x=particleCanvas.width
-if(p.x>particleCanvas.width) p.x=0
-if(p.y<0) p.y=particleCanvas.height
-if(p.y>particleCanvas.height) p.y=0
+if(p.x<0)p.x=particleCanvas.width
+if(p.x>particleCanvas.width)p.x=0
+if(p.y<0)p.y=particleCanvas.height
+if(p.y>particleCanvas.height)p.y=0
 
 pctx.beginPath()
 pctx.arc(p.x,p.y,p.r,0,Math.PI*2)
