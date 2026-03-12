@@ -394,15 +394,11 @@ color:white;
 
 </header>
 
-<!-- (All your existing HTML sections remain exactly the same) -->
-
 <footer>
 <p>© 2026 Alfred Rico</p>
 </footer>
 
 <script>
-
-/* ===== ORIGINAL CANVAS CODE ===== */
 
 const canvas=document.getElementById("dashboardCanvas")
 const ctx=canvas.getContext("2d")
@@ -415,7 +411,6 @@ const barWidth=18
 
 let lastWidth = window.innerWidth
 
-/* --- your original palette --- */
 const palette=[
 "rgba(52,152,219,0.35)",
 "rgba(26,188,156,0.35)",
@@ -428,8 +423,6 @@ const palette=[
 "rgba(63,81,181,0.35)",
 "rgba(139,195,74,0.35)"
 ]
-
-/* --- everything below unchanged except resize fix --- */
 
 function setupCanvas(){
 
@@ -492,8 +485,6 @@ function animate(){
 
 ctx.clearRect(0,0,canvas.width,canvas.height)
 
-/* PARTICLES */
-
 particles.forEach(p=>{
 
 p.y -= p.speed
@@ -512,8 +503,6 @@ ctx.fill()
 ctx.shadowBlur=0
 
 })
-
-/* BARS */
 
 bars.forEach(bar=>{
 
@@ -577,7 +566,7 @@ animate()
 
 setInterval(updateRandomBars,5000)
 
-/* ===== MOBILE SCROLL FIX ===== */
+/* MOBILE SCROLL SAFE RESIZE */
 
 window.addEventListener("resize",()=>{
 
