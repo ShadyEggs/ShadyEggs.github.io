@@ -378,7 +378,23 @@ color:white;
 
 <body>
 
-<!-- ALL YOUR HTML CONTENT REMAINS EXACTLY THE SAME -->
+<header class="hero">
+
+<canvas id="dashboardCanvas"></canvas>
+
+<div class="container hero-content">
+<h1>Alfred Rico</h1>
+<p>Aspiring Data Analyst</p>
+
+<div class="social-links">
+<a href="https://www.linkedin.com/in/alfred-rico-3992338a/" target="_blank"><i class="fab fa-linkedin"></i></a>
+<a href="https://github.com/ShadyEggs" target="_blank"><i class="fab fa-github"></i></a>
+</div>
+</div>
+
+</header>
+
+<!-- REST OF YOUR HTML REMAINS IDENTICAL -->
 
 <script>
 
@@ -390,6 +406,19 @@ let particles=[]
 
 const spacing=28
 const barWidth=18
+
+const palette=[
+"rgba(52,152,219,0.35)",
+"rgba(26,188,156,0.35)",
+"rgba(46,204,113,0.35)",
+"rgba(230,126,34,0.35)",
+"rgba(241,196,15,0.35)",
+"rgba(155,89,182,0.35)",
+"rgba(233,30,99,0.35)",
+"rgba(0,188,212,0.35)",
+"rgba(63,81,181,0.35)",
+"rgba(139,195,74,0.35)"
+]
 
 let lastWidth = window.innerWidth
 
@@ -415,12 +444,12 @@ bars.push({
 x:offsetX + i*spacing,
 height:h,
 target:h,
-color:"rgba(52,152,219,0.35)"
+color:palette[Math.floor(Math.random()*palette.length)]
 })
 
 }
 
-const particleCount = window.innerWidth < 700 ? 12 : 30
+const particleCount = window.innerWidth < 700 ? 15 : 30
 
 for(let i=0;i<particleCount;i++){
 
@@ -436,9 +465,25 @@ alpha:Math.random()*0.5+0.2
 
 }
 
+function drawRoundedRect(x,y,width,height,radius){
+
+ctx.beginPath()
+ctx.moveTo(x,y+radius)
+ctx.lineTo(x,y+height)
+ctx.lineTo(x+width,y+height)
+ctx.lineTo(x+width,y+radius)
+ctx.quadraticCurveTo(x+width,y,x+width-radius,y)
+ctx.lineTo(x+radius,y)
+ctx.quadraticCurveTo(x,y,x,y+radius)
+ctx.fill()
+
+}
+
 function animate(){
 
 ctx.clearRect(0,0,canvas.width,canvas.height)
+
+/* PARTICLES */
 
 particles.forEach(p=>{
 
@@ -461,7 +506,18 @@ bars.forEach(bar=>{
 bar.height+=(bar.target-bar.height)*0.05
 
 ctx.fillStyle=bar.color
-ctx.fillRect(bar.x,canvas.height-bar.height,barWidth,bar.height)
+ctx.shadowColor=bar.color
+ctx.shadowBlur=8
+
+drawRoundedRect(
+bar.x,
+canvas.height-bar.height,
+barWidth,
+bar.height,
+6
+)
+
+ctx.shadowBlur=0
 
 })
 
@@ -469,16 +525,18 @@ requestAnimationFrame(animate)
 
 }
 
-setupCanvas()
-animate()
-
-setInterval(()=>{
+function updateRandomBars(){
 
 bars.forEach(bar=>{
 bar.target=Math.random()*160+60
 })
 
-},5000)
+}
+
+setupCanvas()
+animate()
+
+setInterval(updateRandomBars,5000)
 
 window.addEventListener("resize",()=>{
 
