@@ -167,6 +167,34 @@ object-fit:cover;
 border-radius:50%;
 border:4px solid #4a90e2;
 box-shadow:0 10px 30px rgba(0,0,0,0.15);
+transition:transform .3s ease;
+}
+
+.profile-pic:hover{
+transform:scale(1.05);
+}
+
+.about-text{
+position:relative;
+background:white;
+padding:30px;
+border-radius:16px;
+box-shadow:0 20px 50px rgba(0,0,0,0.08);
+}
+
+.about-text::before{
+content:"";
+position:absolute;
+left:-14px;
+top:80px;
+border-top:12px solid transparent;
+border-bottom:12px solid transparent;
+border-right:14px solid white;
+}
+
+.about-text p{
+text-indent:20px;
+line-height:1.7;
 }
 
 /* CONTACT */
@@ -260,7 +288,7 @@ opacity:.2;
 filter:grayscale(100%);
 }
 
-/* TOOLS */
+/* TOOLS FILTER */
 
 .tools-grid{
 display:grid;
@@ -291,8 +319,6 @@ box-shadow:0 6px 18px rgba(74,144,226,.25);
 
 .tool-tile.active{background:#4a90e2;}
 
-/* BRAND COLORS */
-
 .tool-tile[data-tool="Python"].active{background:#3776AB;}
 .tool-tile[data-tool="R"].active{background:#276DC3;}
 .tool-tile[data-tool="SQL"].active{background:#F29111;}
@@ -317,6 +343,12 @@ padding:14px 18px;
 text-align:center;
 box-shadow:0 12px 30px rgba(0,0,0,0.08);
 max-width:220px;
+transition:all .25s ease;
+}
+
+.cert:hover{
+transform:translateY(-6px) scale(1.03);
+box-shadow:0 20px 40px rgba(0,0,0,0.15);
 }
 
 /* FOOTER */
@@ -328,26 +360,13 @@ background:#111;
 color:white;
 }
 
-/* MOBILE */
-
-@media (max-width:900px){
-.main-layout{
-grid-template-columns:1fr;
-grid-template-areas:
-"about"
-"contact"
-"projects"
-"tools"
-"certifications";
-}
-}
-
 </style>
 </head>
 
 <body>
 
 <header class="hero">
+
 <canvas id="dashboardCanvas"></canvas>
 
 <div class="container hero-content">
@@ -358,7 +377,9 @@ grid-template-areas:
 <a href="https://www.linkedin.com/in/alfred-rico-3992338a/" target="_blank"><i class="fab fa-linkedin"></i></a>
 <a href="https://github.com/ShadyEggs" target="_blank"><i class="fab fa-github"></i></a>
 </div>
+
 </div>
+
 </header>
 
 <nav>
@@ -371,6 +392,7 @@ grid-template-areas:
 
 <div class="main-layout">
 
+<!-- ABOUT -->
 <section id="about">
 <h2>About Me</h2>
 <div class="about-grid">
@@ -378,10 +400,12 @@ grid-template-areas:
 <div class="about-text">
 <p>Hi, I’m Alfred — an aspiring data analyst who enjoys turning messy data into clear insights and finding patterns that explain what’s really going on.</p>
 <p>Through hands-on projects, I’ve worked with Python, SQL, and visualization tools to analyze data and communicate findings in a way that’s easy to understand.</p>
+<p>I'm always looking for new problems to explore and new ways to learn.</p>
 </div>
 </div>
 </section>
 
+<!-- CONTACT -->
 <section id="contact">
 <h2>Let's Connect!</h2>
 <form action="https://formsubmit.co/alfred.m.rico@gmail.com" method="POST" class="contact-form">
@@ -392,6 +416,7 @@ grid-template-areas:
 </form>
 </section>
 
+<!-- PROJECTS -->
 <section id="projects">
 <h2>My Projects</h2>
 
@@ -425,30 +450,70 @@ grid-template-areas:
 </div>
 </a>
 
+<div class="project-card">
+<img src="https://images.unsplash.com/photo-1500530855697-b586d89ba3ee">
+<div class="project-overlay">
+<h3>Customer Segmentation</h3>
+<ul>
+<li>Clustering</li>
+<li>Feature engineering</li>
+<li>Customer groups</li>
+<li>Insights</li>
+</ul>
+</div>
+</div>
+
+<div class="project-card">
+<img src="https://images.unsplash.com/photo-1448375240586-882707db888b">
+<div class="project-overlay">
+<h3>Power BI Dashboard</h3>
+<ul>
+<li>KPI metrics</li>
+<li>Interactive charts</li>
+<li>Business insights</li>
+<li>Dashboard UX</li>
+</ul>
+</div>
+</div>
+
 </div>
 </div>
 </section>
 
+<!-- TOOLS -->
 <section id="tools">
 <h2>Tools</h2>
 <div id="tools-grid" class="tools-grid"></div>
 </section>
 
+<!-- CERTIFICATIONS -->
 <section id="certifications">
 <h2>Certifications</h2>
+
 <div class="cert-column">
+
 <a href="https://www.coursera.org/account/accomplishments/professional-cert/MSCMJL682NT9" target="_blank">
+
 <div class="cert">
+
 <img style="height:24px" src="https://upload.wikimedia.org/wikipedia/commons/2/2f/Google_2015_logo.svg">
+
 <div style="font-weight:700;font-size:14px;">
 Google Data Analytics Professional Certificate
 </div>
+
 <div style="font-size:11px;color:#666;">
 Issued via Coursera
 </div>
+
+<img style="height:16px" src="https://upload.wikimedia.org/wikipedia/commons/9/97/Coursera-Logo_600x600.svg">
+
 </div>
+
 </a>
+
 </div>
+
 </section>
 
 </div>
@@ -458,6 +523,163 @@ Issued via Coursera
 </footer>
 
 <script>
+
+/* HERO ANIMATION */
+
+const canvas=document.getElementById("dashboardCanvas")
+const ctx=canvas.getContext("2d")
+
+let bars=[]
+let particles=[]
+
+const spacing=28
+const barWidth=18
+
+const palette=[
+"rgba(52,152,219,0.45)",
+"rgba(26,188,156,0.45)",
+"rgba(160,160,160,0.45)"
+]
+
+function setupCanvas(){
+
+const hero=document.querySelector(".hero")
+
+canvas.width=hero.offsetWidth
+canvas.height=hero.offsetHeight
+
+bars=[]
+particles=[]
+
+const count=Math.floor(canvas.width/spacing)
+const totalWidth=count*spacing
+const offsetX=(canvas.width-totalWidth)/2
+
+for(let i=0;i<count;i++){
+
+const h=Math.random()*120+60
+
+bars.push({
+x:offsetX + i*spacing,
+height:h,
+target:h,
+color:palette[Math.floor(Math.random()*palette.length)]
+})
+
+}
+
+const particleCount = window.innerWidth < 700 ? 18 : 35
+
+for(let i=0;i<particleCount;i++){
+particles.push({
+x:Math.random()*canvas.width,
+y:Math.random()*canvas.height,
+size:Math.random()*2+1,
+speed:Math.random()*0.4+0.1
+})
+}
+
+}
+
+function drawParticles(){
+
+particles.forEach(p=>{
+
+p.y -= p.speed
+
+if(p.y < 0){
+p.y = canvas.height
+p.x = Math.random()*canvas.width
+}
+
+ctx.fillStyle="rgba(255,255,255,0.25)"
+ctx.beginPath()
+ctx.arc(p.x,p.y,p.size,0,Math.PI*2)
+ctx.fill()
+
+})
+
+}
+
+function drawRoundedRect(x,y,width,height,radius){
+
+ctx.beginPath()
+ctx.moveTo(x,y+radius)
+ctx.lineTo(x,y+height)
+ctx.lineTo(x+width,y+height)
+ctx.lineTo(x+width,y+radius)
+ctx.quadraticCurveTo(x+width,y,x+width-radius,y)
+ctx.lineTo(x+radius,y)
+ctx.quadraticCurveTo(x,y,x,y+radius)
+ctx.fill()
+
+}
+
+function animate(){
+
+ctx.clearRect(0,0,canvas.width,canvas.height)
+
+drawParticles()
+
+bars.forEach(bar=>{
+
+bar.height+=(bar.target-bar.height)*0.05
+
+ctx.fillStyle=bar.color
+
+drawRoundedRect(
+bar.x,
+canvas.height-bar.height,
+barWidth,
+bar.height,
+6
+)
+
+ctx.fillStyle="rgba(255,255,255,0.15)"
+
+drawRoundedRect(
+bar.x+3,
+canvas.height-bar.height,
+barWidth/3,
+bar.height,
+6
+)
+
+})
+
+requestAnimationFrame(animate)
+
+}
+
+function updateRandomBars(){
+
+const used=new Set()
+
+while(used.size<6 && used.size<bars.length){
+
+const index=Math.floor(Math.random()*bars.length)
+
+if(!used.has(index)){
+
+used.add(index)
+
+const change=(Math.random()*120)-60
+const newHeight=bars[index].target+change
+
+bars[index].target=Math.max(40,Math.min(220,newHeight))
+
+}
+
+}
+
+}
+
+setupCanvas()
+animate()
+
+setInterval(updateRandomBars,5000)
+
+window.addEventListener("resize",setupCanvas)
 
 /* TOOL FILTER SYSTEM */
 
@@ -475,7 +697,6 @@ const grid=document.getElementById("tools-grid")
 toolSet.forEach(tool=>{
 
 const tile=document.createElement("div")
-
 tile.className="tool-tile"
 tile.textContent=tool
 tile.dataset.tool=tool
