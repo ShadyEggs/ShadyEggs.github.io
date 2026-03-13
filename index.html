@@ -245,7 +245,18 @@ font-size:13px;
 transition:.25s;
 }
 
-/* Active company colors */
+/* ensure tag classes do NOT color the buttons by default */
+
+.filter-btn.tag-python,
+.filter-btn.tag-r,
+.filter-btn.tag-sql,
+.filter-btn.tag-tableau,
+.filter-btn.tag-excel,
+.filter-btn.tag-sheets{
+background:#2f3a46;
+}
+
+/* active colors */
 
 .filter-btn.active.tag-all{background:#4a90e2;}
 .filter-btn.active.tag-python{background:#3776AB;}
@@ -531,10 +542,141 @@ Issued via Coursera
 
 <script>
 
-/* FILTER SYSTEM (improved logic) */
+/* HERO DASHBOARD ANIMATION */
+
+const canvas=document.getElementById("dashboardCanvas")
+const ctx=canvas.getContext("2d")
+
+let bars=[]
+let particles=[]
+
+const spacing=28
+const barWidth=18
+
+const palette=[
+"rgba(52,152,219,0.45)",
+"rgba(26,188,156,0.45)",
+"rgba(160,160,160,0.45)"
+]
+
+function setupCanvas(){
+
+const hero=document.querySelector(".hero")
+
+canvas.width=hero.offsetWidth
+canvas.height=hero.offsetHeight
+
+bars=[]
+particles=[]
+
+const count=Math.floor(canvas.width/spacing)
+const totalWidth=count*spacing
+const offsetX=(canvas.width-totalWidth)/2
+
+for(let i=0;i<count;i++){
+
+const h=Math.random()*120+60
+
+bars.push({
+x:offsetX+i*spacing,
+height:h,
+target:h,
+color:palette[Math.floor(Math.random()*palette.length)]
+})
+
+}
+
+for(let i=0;i<30;i++){
+particles.push({
+x:Math.random()*canvas.width,
+y:Math.random()*canvas.height,
+size:Math.random()*2+1,
+speed:Math.random()*0.4+0.1
+})
+}
+
+}
+
+function randomizeBars(){
+for(let i=0;i<6;i++){
+const index=Math.floor(Math.random()*bars.length)
+bars[index].target=Math.random()*120+60
+}
+}
+
+setInterval(randomizeBars,5000)
+
+function drawParticles(){
+
+particles.forEach(p=>{
+
+p.y-=p.speed
+
+if(p.y<0){
+p.y=canvas.height
+p.x=Math.random()*canvas.width
+}
+
+ctx.fillStyle="rgba(255,255,255,0.25)"
+ctx.beginPath()
+ctx.arc(p.x,p.y,p.size,0,Math.PI*2)
+ctx.fill()
+
+})
+
+}
+
+function drawRoundedRect(x,y,width,height,radius){
+
+ctx.beginPath()
+ctx.moveTo(x,y+radius)
+ctx.lineTo(x,y+height)
+ctx.lineTo(x+width,y+height)
+ctx.lineTo(x+width,y+radius)
+ctx.quadraticCurveTo(x+width,y,x+width-radius,y)
+ctx.lineTo(x+radius,y)
+ctx.quadraticCurveTo(x,y,x,y+radius)
+ctx.fill()
+
+}
+
+function animate(){
+
+ctx.clearRect(0,0,canvas.width,canvas.height)
+
+drawParticles()
+
+bars.forEach(bar=>{
+
+bar.height+=(bar.target-bar.height)*0.05
+
+ctx.fillStyle=bar.color
+
+drawRoundedRect(
+bar.x,
+canvas.height-bar.height,
+barWidth,
+bar.height,
+6
+)
+
+})
+
+requestAnimationFrame(animate)
+
+}
+
+setupCanvas()
+animate()
+
+window.addEventListener("resize",setupCanvas)
+
+/* FILTER SYSTEM */
 
 const filterButtons=document.querySelectorAll(".filter-btn")
 const projects=document.querySelectorAll(".project-card")
+
+let activeFilters=[]
 
 filterButtons.forEach(btn=>{
 
@@ -544,33 +686,40 @@ const filter=btn.dataset.filter
 
 if(filter==="all"){
 
+activeFilters=[]
 filterButtons.forEach(b=>b.classList.remove("active"))
 btn.classList.add("active")
-
 projects.forEach(card=>card.classList.remove("hide"))
 return
+
 }
 
 btn.classList.toggle("active")
 
 document.querySelector('[data-filter="all"]').classList.remove("active")
 
-const active=[...document.querySelectorAll(".filter-btn.active")]
+activeFilters=[...document.querySelectorAll(".filter-btn.active")]
 .map(b=>b.dataset.filter)
+.filter(f=>f!=="all")
 
-if(active.length===0){
+if(activeFilters.length===0){
+
 document.querySelector('[data-filter="all"]').classList.add("active")
 projects.forEach(card=>card.classList.remove("hide"))
 return
+
 }
 
 projects.forEach(card=>{
 
 const tags=card.dataset.tags
+const match=activeFilters.every(f=>tags.includes(f))
 
-const match=active.every(f=>tags.includes(f))
-
-card.classList.toggle("hide",!match)
+if(match){
+card.classList.remove("hide")
+}else{
+card.classList.add("hide")
+}
 
 })
 
