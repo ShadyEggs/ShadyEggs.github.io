@@ -224,7 +224,7 @@ color:white;
 cursor:pointer;
 }
 
-/* FILTERS */
+/* FILTER BUTTONS */
 
 .project-filters{
 display:flex;
@@ -242,9 +242,8 @@ background:#2f3a46;
 color:white;
 cursor:pointer;
 font-size:13px;
+transition:.25s;
 }
-
-/* ACTIVE TOOL COLORS */
 
 .filter-btn.active.tag-all{background:#4a90e2;}
 .filter-btn.active.tag-python{background:#3776AB;}
@@ -325,8 +324,6 @@ padding:2px 6px;
 border-radius:6px;
 color:white;
 }
-
-/* COMPANY COLORS */
 
 .tag-python{background:#3776AB;}
 .tag-r{background:#276DC3;}
@@ -450,17 +447,13 @@ color:white;
 
 <div class="projects-grid">
 
-<a class="project-card"
-data-tags="r"
-href="https://shadyeggs.github.io/Fifa21-Data-Cleaning-Project/"
-target="_blank">
+<a class="project-card" data-tags="r"
+href="https://shadyeggs.github.io/Fifa21-Data-Cleaning-Project/" target="_blank">
 
 <img src="https://images.unsplash.com/photo-1518091043644-c1d4457512c6">
 
 <div class="project-overlay">
-
 <h3>Fifa 21 Data Cleaning</h3>
-
 <div class="project-tags">
 <span class="tag-r">R</span>
 <span>dplyr</span>
@@ -468,8 +461,8 @@ target="_blank">
 <span>ggplot2</span>
 <span>plotly</span>
 </div>
-
 </div>
+
 </a>
 
 <a class="project-card"
@@ -535,6 +528,135 @@ Issued via Coursera
 </footer>
 
 <script>
+
+/* HERO DASHBOARD ANIMATION */
+
+const canvas=document.getElementById("dashboardCanvas")
+const ctx=canvas.getContext("2d")
+
+let bars=[]
+let particles=[]
+
+const spacing=28
+const barWidth=18
+
+const palette=[
+"rgba(52,152,219,0.45)",
+"rgba(26,188,156,0.45)",
+"rgba(160,160,160,0.45)"
+]
+
+function setupCanvas(){
+
+const hero=document.querySelector(".hero")
+
+canvas.width=hero.offsetWidth
+canvas.height=hero.offsetHeight
+
+bars=[]
+particles=[]
+
+const count=Math.floor(canvas.width/spacing)
+const totalWidth=count*spacing
+const offsetX=(canvas.width-totalWidth)/2
+
+for(let i=0;i<count;i++){
+
+const h=Math.random()*120+60
+
+bars.push({
+x:offsetX+i*spacing,
+height:h,
+target:h,
+color:palette[Math.floor(Math.random()*palette.length)]
+})
+
+}
+
+for(let i=0;i<30;i++){
+particles.push({
+x:Math.random()*canvas.width,
+y:Math.random()*canvas.height,
+size:Math.random()*2+1,
+speed:Math.random()*0.4+0.1
+})
+}
+
+}
+
+function randomizeBars(){
+for(let i=0;i<6;i++){
+const index=Math.floor(Math.random()*bars.length)
+bars[index].target=Math.random()*120+60
+}
+}
+
+setInterval(randomizeBars,5000)
+
+function drawParticles(){
+
+particles.forEach(p=>{
+
+p.y-=p.speed
+
+if(p.y<0){
+p.y=canvas.height
+p.x=Math.random()*canvas.width
+}
+
+ctx.fillStyle="rgba(255,255,255,0.25)"
+ctx.beginPath()
+ctx.arc(p.x,p.y,p.size,0,Math.PI*2)
+ctx.fill()
+
+})
+
+}
+
+function drawRoundedRect(x,y,width,height,radius){
+
+ctx.beginPath()
+ctx.moveTo(x,y+radius)
+ctx.lineTo(x,y+height)
+ctx.lineTo(x+width,y+height)
+ctx.lineTo(x+width,y+radius)
+ctx.quadraticCurveTo(x+width,y,x+width-radius,y)
+ctx.lineTo(x+radius,y)
+ctx.quadraticCurveTo(x,y,x,y+radius)
+ctx.fill()
+
+}
+
+function animate(){
+
+ctx.clearRect(0,0,canvas.width,canvas.height)
+
+drawParticles()
+
+bars.forEach(bar=>{
+
+bar.height+=(bar.target-bar.height)*0.05
+
+ctx.fillStyle=bar.color
+
+drawRoundedRect(
+bar.x,
+canvas.height-bar.height,
+barWidth,
+bar.height,
+6
+)
+
+})
+
+requestAnimationFrame(animate)
+
+}
+
+setupCanvas()
+animate()
+
+window.addEventListener("resize",setupCanvas)
 
 /* FILTER SYSTEM */
 
