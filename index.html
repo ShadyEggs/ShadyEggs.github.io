@@ -224,7 +224,7 @@ color:white;
 cursor:pointer;
 }
 
-/* FILTER BUTTONS */
+/* FILTERS */
 
 .project-filters{
 display:flex;
@@ -238,22 +238,23 @@ margin-bottom:25px;
 padding:8px 14px;
 border-radius:20px;
 border:none;
+background:#2f3a46;
 color:white;
 cursor:pointer;
 font-size:13px;
 }
 
-/* TOOL COLORS */
+/* ACTIVE TOOL COLORS */
 
-.btn-python{background:#3776AB;}
-.btn-r{background:#276DC3;}
-.btn-sql{background:#336791;}
-.btn-tableau{background:#E97627;}
-.btn-excel{background:#217346;}
-.btn-sheets{background:#34A853;}
-.btn-all{background:#4a90e2;}
+.filter-btn.active.tag-all{background:#4a90e2;}
+.filter-btn.active.tag-python{background:#3776AB;}
+.filter-btn.active.tag-r{background:#276DC3;}
+.filter-btn.active.tag-sql{background:#336791;}
+.filter-btn.active.tag-tableau{background:#E97627;}
+.filter-btn.active.tag-excel{background:#217346;}
+.filter-btn.active.tag-sheets{background:#34A853;}
 
-/* PROJECT GRID */
+/* PROJECT WINDOW */
 
 .projects-window{
 max-width:920px;
@@ -268,6 +269,8 @@ display:grid;
 grid-template-columns:repeat(4,1fr);
 gap:20px;
 }
+
+/* PROJECT CARD */
 
 .project-card{
 position:relative;
@@ -305,6 +308,11 @@ color:white;
 background:linear-gradient(transparent,rgba(0,0,0,0.85));
 }
 
+.project-overlay h3{
+margin:0 0 6px 0;
+font-size:15px;
+}
+
 .project-tags{
 display:flex;
 flex-wrap:wrap;
@@ -318,12 +326,36 @@ border-radius:6px;
 color:white;
 }
 
+/* COMPANY COLORS */
+
 .tag-python{background:#3776AB;}
 .tag-r{background:#276DC3;}
 .tag-sql{background:#336791;}
 .tag-tableau{background:#E97627;}
 .tag-excel{background:#217346;}
 .tag-sheets{background:#34A853;}
+
+/* CERT */
+
+.cert-column{
+display:flex;
+justify-content:center;
+}
+
+.cert{
+background:white;
+border-radius:14px;
+padding:14px 18px;
+text-align:center;
+box-shadow:0 12px 30px rgba(0,0,0,0.08);
+max-width:220px;
+transition:all .25s ease;
+}
+
+.cert:hover{
+transform:translateY(-6px) scale(1.03);
+box-shadow:0 20px 40px rgba(0,0,0,0.15);
+}
 
 footer{
 text-align:center;
@@ -338,6 +370,7 @@ color:white;
 <body>
 
 <header class="hero">
+
 <canvas id="dashboardCanvas"></canvas>
 
 <div class="container hero-content">
@@ -349,6 +382,7 @@ color:white;
 <a href="https://github.com/ShadyEggs" target="_blank"><i class="fab fa-github"></i></a>
 </div>
 </div>
+
 </header>
 
 <nav>
@@ -360,19 +394,55 @@ color:white;
 
 <div class="main-layout">
 
+<section id="about">
+<h2>About Me</h2>
+
+<div class="about-grid">
+
+<div>
+<img src="profile.jpg" class="profile-pic">
+</div>
+
+<div class="about-text">
+
+<p>Hi, I’m Alfred — an aspiring data analyst who enjoys turning messy data into clear insights and finding patterns that explain what’s really going on.</p>
+
+<p>Through hands-on projects, I’ve worked with Python, SQL, and visualization tools to analyze data and communicate findings in a way that’s easy to understand.</p>
+
+<p>I'm always looking for new problems to explore and new ways to learn.</p>
+
+</div>
+</div>
+</section>
+
+<section id="contact">
+<h2>Let's Connect!</h2>
+
+<form action="https://formsubmit.co/alfred.m.rico@gmail.com" method="POST" class="contact-form">
+
+<input type="text" name="name" placeholder="Name" required>
+<input type="email" name="email" placeholder="Email" required>
+
+<textarea name="message" rows="6" placeholder="Message" required></textarea>
+
+<button type="submit" class="apple-send">Send Message</button>
+
+</form>
+</section>
+
 <section id="projects">
 
 <h2>My Projects</h2>
 
 <div class="project-filters">
 
-<button class="filter-btn btn-all active" data-filter="all">All</button>
-<button class="filter-btn btn-python" data-filter="python">Python</button>
-<button class="filter-btn btn-r" data-filter="r">R</button>
-<button class="filter-btn btn-sql" data-filter="sql">SQL</button>
-<button class="filter-btn btn-tableau" data-filter="tableau">Tableau</button>
-<button class="filter-btn btn-excel" data-filter="excel">Excel</button>
-<button class="filter-btn btn-sheets" data-filter="sheets">Sheets</button>
+<button class="filter-btn active tag-all" data-filter="all">All</button>
+<button class="filter-btn tag-python" data-filter="python">Python</button>
+<button class="filter-btn tag-r" data-filter="r">R</button>
+<button class="filter-btn tag-sql" data-filter="sql">SQL</button>
+<button class="filter-btn tag-tableau" data-filter="tableau">Tableau</button>
+<button class="filter-btn tag-excel" data-filter="excel">Excel</button>
+<button class="filter-btn tag-sheets" data-filter="sheets">Google Sheets</button>
 
 </div>
 
@@ -380,12 +450,15 @@ color:white;
 
 <div class="projects-grid">
 
-<a class="project-card" data-tags="r"
-href="https://shadyeggs.github.io/Fifa21-Data-Cleaning-Project/" target="_blank">
+<a class="project-card"
+data-tags="r"
+href="https://shadyeggs.github.io/Fifa21-Data-Cleaning-Project/"
+target="_blank">
 
 <img src="https://images.unsplash.com/photo-1518091043644-c1d4457512c6">
 
 <div class="project-overlay">
+
 <h3>Fifa 21 Data Cleaning</h3>
 
 <div class="project-tags">
@@ -407,6 +480,7 @@ target="_blank">
 <img src="https://images.unsplash.com/photo-1551288049-bebda4e38f71">
 
 <div class="project-overlay">
+
 <h3>Cyclistic Case Study</h3>
 
 <div class="project-tags">
@@ -421,6 +495,37 @@ target="_blank">
 
 </div>
 </div>
+
+</section>
+
+<section id="certifications">
+
+<h2>Certifications</h2>
+
+<div class="cert-column">
+
+<a href="https://www.coursera.org/account/accomplishments/professional-cert/MSCMJL682NT9" target="_blank">
+
+<div class="cert">
+
+<img style="height:24px" src="https://upload.wikimedia.org/wikipedia/commons/2/2f/Google_2015_logo.svg">
+
+<div style="font-weight:700;font-size:14px;">
+Google Data Analytics Professional Certificate
+</div>
+
+<div style="font-size:11px;color:#666;">
+Issued via Coursera
+</div>
+
+<img style="height:16px" src="https://upload.wikimedia.org/wikipedia/commons/9/97/Coursera-Logo_600x600.svg">
+
+</div>
+
+</a>
+
+</div>
+
 </section>
 
 </div>
@@ -430,78 +535,6 @@ target="_blank">
 </footer>
 
 <script>
-
-/* BAR ANIMATION */
-
-const canvas=document.getElementById("dashboardCanvas")
-const ctx=canvas.getContext("2d")
-
-let bars=[]
-const spacing=28
-const barWidth=18
-
-function setupCanvas(){
-
-const hero=document.querySelector(".hero")
-
-canvas.width=hero.offsetWidth
-canvas.height=hero.offsetHeight
-
-bars=[]
-
-const count=Math.floor(canvas.width/spacing)
-const offset=(canvas.width-count*spacing)/2
-
-for(let i=0;i<count;i++){
-
-const h=Math.random()*120+60
-
-bars.push({
-x:offset+i*spacing,
-height:h,
-target:h,
-color:["#3498db","#1abc9c","#aaaaaa"][Math.floor(Math.random()*3)]
-})
-
-}
-
-}
-
-function randomizeBars(){
-
-for(let i=0;i<6;i++){
-
-const index=Math.floor(Math.random()*bars.length)
-bars[index].target=Math.random()*120+60
-
-}
-
-}
-
-setInterval(randomizeBars,5000)
-
-function animate(){
-
-ctx.clearRect(0,0,canvas.width,canvas.height)
-
-bars.forEach(bar=>{
-
-bar.height+=(bar.target-bar.height)*0.05
-
-ctx.fillStyle=bar.color
-
-ctx.fillRect(bar.x,canvas.height-bar.height,barWidth,bar.height)
-
-})
-
-requestAnimationFrame(animate)
-
-}
-
-setupCanvas()
-animate()
-
-window.addEventListener("resize",setupCanvas)
 
 /* FILTER SYSTEM */
 
@@ -527,6 +560,7 @@ return
 }
 
 btn.classList.toggle("active")
+
 document.querySelector('[data-filter="all"]').classList.remove("active")
 
 activeFilters=[...document.querySelectorAll(".filter-btn.active")]
