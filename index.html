@@ -49,7 +49,20 @@ background-size:40px 40px;
 
 .hero-content{position:relative;z-index:3;margin-top:-40px}
 
-.hero h1{font-size:38px;font-family:'Playfair Display',serif;margin-bottom:5px}
+.hero h1{
+font-family:'Playfair Display',serif;
+font-size:44px;
+letter-spacing:.5px;
+margin-bottom:6px;
+text-shadow:0 4px 18px rgba(0,0,0,.5);
+}
+
+.hero p{
+font-size:16px;
+letter-spacing:.8px;
+color:#cbd5e1;
+margin-top:4px;
+}
 
 .social-links a{color:white;margin:0 10px;font-size:22px}
 
@@ -79,7 +92,27 @@ gap:40px;
 #projects{grid-area:projects}
 #certifications{grid-area:certifications}
 
-h2{text-align:center;margin-bottom:30px;color:white}
+/* SECTION TITLES */
+
+h2{
+text-align:center;
+margin-bottom:32px;
+color:white;
+font-family:'Playfair Display',serif;
+font-size:26px;
+letter-spacing:.6px;
+position:relative;
+}
+
+h2::after{
+content:"";
+display:block;
+width:50px;
+height:3px;
+margin:10px auto 0;
+background:#4a90e2;
+border-radius:2px;
+}
 
 /* ABOUT */
 
@@ -152,7 +185,7 @@ background:#2f3a46;color:white;cursor:pointer;
 font-size:13px;min-height:36px;
 }
 
-/* TAG BUTTON CODE LEFT UNCHANGED */
+/* TAG BUTTON CODE UNCHANGED */
 
 .filter-btn.active.tag-all{background:#4a90e2}
 .filter-btn.active.tag-python{background:#3776AB}
@@ -263,7 +296,12 @@ grid-template-areas:
 
 @media (max-width:600px){
 
-.hero h1{font-size:30px}
+.hero h1{font-size:34px}
+
+h2{
+font-size:24px;
+margin-bottom:24px;
+}
 
 .projects-window{height:auto}
 
@@ -274,8 +312,8 @@ grid-template-areas:
 }
 
 </style>
-</head>
 
+</head>
 <body>
 
 <header class="hero">
@@ -290,8 +328,8 @@ grid-template-areas:
 <a href="https://www.linkedin.com/in/alfred-rico-3992338a/" target="_blank"><i class="fab fa-linkedin"></i></a>
 <a href="https://github.com/ShadyEggs" target="_blank"><i class="fab fa-github"></i></a>
 </div>
-
 </div>
+
 </header>
 
 <nav>
@@ -304,7 +342,6 @@ grid-template-areas:
 <div class="main-layout">
 
 <section id="about">
-
 <h2>About Me</h2>
 
 <div class="about-grid">
@@ -320,9 +357,7 @@ grid-template-areas:
 <p>My projects focus on exploratory data analysis, trend detection, and building clear visual stories from complex datasets.</p>
 
 </div>
-
 </div>
-
 </section>
 
 <section id="contact">
@@ -332,7 +367,6 @@ grid-template-areas:
 <form action="https://formsubmit.co/alfred.m.rico@gmail.com" method="POST" class="contact-form">
 
 <input type="text" name="name" placeholder="Name" required>
-
 <input type="email" name="email" placeholder="Email" required>
 
 <textarea name="message" rows="6" placeholder="Message" required></textarea>
@@ -340,7 +374,6 @@ grid-template-areas:
 <button type="submit" class="apple-send">Send Message</button>
 
 </form>
-
 </section>
 
 <section id="projects">
@@ -380,7 +413,6 @@ href="https://shadyeggs.github.io/Fifa21-Data-Cleaning-Project/" target="_blank"
 </div>
 
 </div>
-
 </a>
 
 <a class="project-card"
@@ -401,12 +433,10 @@ target="_blank">
 </div>
 
 </div>
-
 </a>
 
 </div>
 </div>
-
 </section>
 
 <section id="certifications">
@@ -436,7 +466,6 @@ Issued via Coursera
 </a>
 
 </div>
-
 </section>
 
 </div>
@@ -480,19 +509,22 @@ for(let i=0;i<count;i++){
 
 const h=Math.random()*120+60
 
-bars.push({x:offsetX+i*spacing,height:h,target:h,color:palette[Math.floor(Math.random()*palette.length)]})
+bars.push({
+x:offsetX+i*spacing,
+height:h,
+target:h,
+color:palette[Math.floor(Math.random()*palette.length)]
+})
 
 }
 
 for(let i=0;i<30;i++){
-
 particles.push({
 x:Math.random()*canvas.width,
 y:Math.random()*canvas.height,
 size:Math.random()*2+1,
 speed:Math.random()*.4+.1
 })
-
 }
 
 }
@@ -565,7 +597,9 @@ window.addEventListener("resize",setupCanvas)
 
 /* FILTER SYSTEM */
 
-const packageMap={r:["dplyr","tidyr","ggplot2","plotly"]}
+const packageMap={
+r:["dplyr","tidyr","ggplot2","plotly"]
+}
 
 const languageButtons=document.querySelectorAll(".filter-btn")
 const packageContainer=document.querySelector(".package-filters")
@@ -593,7 +627,8 @@ return
 btn.classList.toggle("active")
 document.querySelector('[data-filter="all"]').classList.remove("active")
 
-activeLanguages=[...document.querySelectorAll(".project-filters .active")].map(b=>b.dataset.filter)
+activeLanguages=[...document.querySelectorAll(".project-filters .active")]
+.map(b=>b.dataset.filter)
 
 updatePackageFilters()
 showProjects()
@@ -608,7 +643,6 @@ packageContainer.innerHTML=""
 activePackages=[]
 
 activeLanguages.forEach(lang=>{
-
 if(packageMap[lang]){
 
 packageMap[lang].forEach(pkg=>{
@@ -622,7 +656,8 @@ btn.onclick=()=>{
 
 btn.classList.toggle("active")
 
-activePackages=[...document.querySelectorAll(".package-btn.active")].map(b=>b.dataset.filter)
+activePackages=[...document.querySelectorAll(".package-btn.active")]
+.map(b=>b.dataset.filter)
 
 showProjects()
 
