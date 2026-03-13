@@ -273,6 +273,8 @@ box-shadow:0 22px 50px rgba(0,0,0,.55),inset 0 1px 0 rgba(255,255,255,.12);
 
 footer{text-align:center;padding:14px;background:#111;color:white}
 
+/* MOBILE */
+
 @media (max-width:900px){
 
 .main-layout{
@@ -285,7 +287,9 @@ grid-template-areas:
 }
 
 .about-grid{grid-template-columns:1fr;text-align:center}
+
 .profile-pic{margin:auto}
+
 .projects-grid{grid-template-columns:repeat(3,1fr)}
 
 }
@@ -293,15 +297,22 @@ grid-template-areas:
 @media (max-width:600px){
 
 .hero h1{font-size:34px}
-h2{font-size:24px;margin-bottom:24px}
+
+h2{
+font-size:24px;
+margin-bottom:24px;
+}
 
 .projects-window{height:auto}
+
 .projects-grid{grid-template-columns:repeat(2,1fr)}
+
 .project-tags span{padding:4px 9px}
 
 }
 
 </style>
+
 </head>
 <body>
 
@@ -317,8 +328,8 @@ h2{font-size:24px;margin-bottom:24px}
 <a href="https://www.linkedin.com/in/alfred-rico-3992338a/" target="_blank"><i class="fab fa-linkedin"></i></a>
 <a href="https://github.com/ShadyEggs" target="_blank"><i class="fab fa-github"></i></a>
 </div>
-
 </div>
+
 </header>
 
 <nav>
@@ -328,9 +339,136 @@ h2{font-size:24px;margin-bottom:24px}
 </ul>
 </nav>
 
-<!-- Main layout identical to previous version -->
+<div class="main-layout">
 
-<!-- (All sections unchanged) -->
+<section id="about">
+<h2>About Me</h2>
+
+<div class="about-grid">
+
+<img src="profile.jpg" class="profile-pic">
+
+<div class="about-text">
+
+<p>Hi, I'm Alfred — a data analyst focused on turning messy datasets into clear, actionable insights. My projects focus on exploratory data analysis, trend detection, and building clear visual stories from complex datasets.</p>
+
+<p>Using tools like Python, SQL, and data visualization platforms, I explore patterns, build dashboards, and communicate findings that help explain what the data is really saying.</p>
+
+<p>My projects focus on exploratory data analysis, trend detection, and building clear visual stories from complex datasets.</p>
+
+</div>
+</div>
+</section>
+
+<section id="contact">
+
+<h2>Let's Connect!</h2>
+
+<form action="https://formsubmit.co/alfred.m.rico@gmail.com" method="POST" class="contact-form">
+
+<input type="text" name="name" placeholder="Name" required>
+<input type="email" name="email" placeholder="Email" required>
+
+<textarea name="message" rows="6" placeholder="Message" required></textarea>
+
+<button type="submit" class="apple-send">Send Message</button>
+
+</form>
+</section>
+
+<section id="projects">
+
+<h2>My Projects</h2>
+
+<div class="project-filters">
+<button class="filter-btn active tag-all" data-filter="all">All</button>
+<button class="filter-btn tag-python" data-filter="python">Python</button>
+<button class="filter-btn tag-r" data-filter="r">R</button>
+<button class="filter-btn tag-sql" data-filter="sql">SQL</button>
+<button class="filter-btn tag-tableau" data-filter="tableau">Tableau</button>
+<button class="filter-btn tag-excel" data-filter="excel">Excel</button>
+<button class="filter-btn tag-sheets" data-filter="sheets">Google Sheets</button>
+</div>
+
+<div class="package-filters"></div>
+
+<div class="projects-window">
+
+<div class="projects-grid">
+
+<a class="project-card" data-tags="r dplyr tidyr ggplot2 plotly"
+href="https://shadyeggs.github.io/Fifa21-Data-Cleaning-Project/" target="_blank">
+
+<img src="https://images.unsplash.com/photo-1518091043644-c1d4457512c6?w=800&q=80">
+
+<div class="project-overlay">
+<h3>Fifa 21 Data Cleaning</h3>
+
+<div class="project-tags">
+<span class="tag-r">R</span>
+<span class="tag-package">dplyr</span>
+<span class="tag-package">tidyr</span>
+<span class="tag-package">ggplot2</span>
+<span class="tag-package">plotly</span>
+</div>
+
+</div>
+</a>
+
+<a class="project-card"
+data-tags="sql tableau excel sheets"
+href="https://public.tableau.com/app/profile/alfred.rico/viz/CyclisticCaseStudy_17031395269510/Dashboard1"
+target="_blank">
+
+<img src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=800&q=80">
+
+<div class="project-overlay">
+<h3>Cyclistic Case Study</h3>
+
+<div class="project-tags">
+<span class="tag-sql">SQL</span>
+<span class="tag-tableau">Tableau</span>
+<span class="tag-excel">Excel</span>
+<span class="tag-sheets">Sheets</span>
+</div>
+
+</div>
+</a>
+
+</div>
+</div>
+</section>
+
+<section id="certifications">
+
+<h2>Certifications</h2>
+
+<div class="cert-column">
+
+<a href="https://www.coursera.org/account/accomplishments/professional-cert/MSCMJL682NT9" target="_blank">
+
+<div class="cert">
+
+<img height="24" src="https://upload.wikimedia.org/wikipedia/commons/2/2f/Google_2015_logo.svg">
+
+<div style="font-weight:700;font-size:14px;">
+Google Data Analytics Professional Certificate
+</div>
+
+<div style="font-size:11px;color:#c7c7cc;">
+Issued via Coursera
+</div>
+
+<img height="16" src="https://upload.wikimedia.org/wikipedia/commons/9/97/Coursera-Logo_600x600.svg">
+
+</div>
+
+</a>
+
+</div>
+</section>
+
+</div>
 
 <footer>
 <p>© 2026 Alfred Rico</p>
@@ -343,14 +481,14 @@ h2{font-size:24px;margin-bottom:24px}
 const canvas=document.getElementById("dashboardCanvas")
 const ctx=canvas.getContext("2d")
 
-let bars=[],particles=[],points=[]
+let bars=[],particles=[]
 const spacing=28
 const barWidth=18
 
 const palette=[
-"rgba(52,152,219,.18)",
-"rgba(26,188,156,.18)",
-"rgba(200,200,200,.16)"
+"rgba(52,152,219,.45)",
+"rgba(26,188,156,.45)",
+"rgba(160,160,160,.45)"
 ]
 
 function setupCanvas(){
@@ -362,7 +500,6 @@ canvas.height=hero.offsetHeight
 
 bars=[]
 particles=[]
-points=[]
 
 const count=Math.floor(canvas.width/spacing)
 const totalWidth=count*spacing
@@ -372,15 +509,12 @@ for(let i=0;i<count;i++){
 
 const h=Math.random()*120+60
 
-bars.push({x:offsetX+i*spacing,height:h,target:h,color:palette[Math.floor(Math.random()*palette.length)]})
-
-if(Math.random()>.5){
-points.push({
+bars.push({
 x:offsetX+i*spacing,
-y:canvas.height-h,
-speed:Math.random()*.5+.3
+height:h,
+target:h,
+color:palette[Math.floor(Math.random()*palette.length)]
 })
-}
 
 }
 
@@ -447,30 +581,8 @@ drawParticles()
 bars.forEach(bar=>{
 
 bar.height+=(bar.target-bar.height)*.05
-
-ctx.shadowColor="rgba(255,255,255,.15)"
-ctx.shadowBlur=8
-
 ctx.fillStyle=bar.color
 drawRoundedRect(bar.x,canvas.height-bar.height,barWidth,bar.height,6)
-
-ctx.fillStyle="rgba(255,255,255,.06)"
-drawRoundedRect(bar.x,canvas.height-bar.height,barWidth/2,bar.height,6)
-
-ctx.shadowBlur=0
-
-})
-
-points.forEach(p=>{
-
-p.x+=p.speed
-
-if(p.x>canvas.width)p.x=0
-
-ctx.fillStyle="rgba(255,255,255,.4)"
-ctx.beginPath()
-ctx.arc(p.x,p.y,2.5,0,Math.PI*2)
-ctx.fill()
 
 })
 
@@ -483,7 +595,106 @@ animate()
 
 window.addEventListener("resize",setupCanvas)
 
-/* FILTER SYSTEM — UNCHANGED */
+/* FILTER SYSTEM */
+
+const packageMap={
+r:["dplyr","tidyr","ggplot2","plotly"]
+}
+
+const languageButtons=document.querySelectorAll(".filter-btn")
+const packageContainer=document.querySelector(".package-filters")
+const projects=[...document.querySelectorAll(".project-card")]
+
+let activeLanguages=[]
+let activePackages=[]
+
+languageButtons.forEach(btn=>{
+
+btn.onclick=()=>{
+
+const filter=btn.dataset.filter
+
+if(filter==="all"){
+activeLanguages=[]
+activePackages=[]
+languageButtons.forEach(b=>b.classList.remove("active"))
+btn.classList.add("active")
+packageContainer.innerHTML=""
+showProjects()
+return
+}
+
+btn.classList.toggle("active")
+document.querySelector('[data-filter="all"]').classList.remove("active")
+
+activeLanguages=[...document.querySelectorAll(".project-filters .active")]
+.map(b=>b.dataset.filter)
+
+updatePackageFilters()
+showProjects()
+
+}
+
+})
+
+function updatePackageFilters(){
+
+packageContainer.innerHTML=""
+activePackages=[]
+
+activeLanguages.forEach(lang=>{
+if(packageMap[lang]){
+
+packageMap[lang].forEach(pkg=>{
+
+const btn=document.createElement("button")
+btn.className="filter-btn package-btn"
+btn.textContent=pkg
+btn.dataset.filter=pkg
+
+btn.onclick=()=>{
+
+btn.classList.toggle("active")
+
+activePackages=[...document.querySelectorAll(".package-btn.active")]
+.map(b=>b.dataset.filter)
+
+showProjects()
+
+}
+
+packageContainer.appendChild(btn)
+
+})
+
+}
+
+})
+
+}
+
+function showProjects(){
+
+projects.forEach(card=>{
+
+const tags=card.dataset.tags
+
+let languageMatch=true
+let packageMatch=true
+
+if(activeLanguages.length){
+languageMatch=activeLanguages.every(l=>tags.includes(l))
+}
+
+if(activePackages.length){
+packageMatch=activePackages.every(p=>tags.includes(p))
+}
+
+card.classList.toggle("hide",!(languageMatch && packageMatch))
+
+})
+
+}
 
 </script>
 
