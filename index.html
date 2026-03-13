@@ -215,8 +215,6 @@ cursor:pointer;
 font-size:13px;
 }
 
-/* filter colors */
-
 .filter-btn.active.tag-all{background:#4a90e2;}
 .filter-btn.active.tag-python{background:#3776AB;}
 .filter-btn.active.tag-r{background:#276DC3;}
@@ -296,8 +294,6 @@ color:white;
 font-weight:600;
 }
 
-/* project tag colors */
-
 .project-tags .tag-python{background:#3776AB;}
 .project-tags .tag-r{background:#276DC3;}
 .project-tags .tag-sql{background:#336791;}
@@ -306,8 +302,6 @@ font-weight:600;
 .project-tags .tag-sheets{background:#34A853;}
 
 .tag-package{background:#555;}
-
-/* CERT TILE */
 
 .cert-column{display:flex;justify-content:center;}
 
@@ -355,9 +349,7 @@ grid-template-columns:1fr;
 text-align:center;
 }
 
-.profile-pic{
-margin:auto;
-}
+.profile-pic{margin:auto;}
 
 .projects-grid{
 grid-template-columns:repeat(3,1fr);
@@ -369,9 +361,7 @@ grid-template-columns:repeat(3,1fr);
 
 .hero h1{font-size:30px}
 
-.projects-window{
-height:auto;
-}
+.projects-window{height:auto;}
 
 .projects-grid{
 grid-template-columns:repeat(2,1fr);
@@ -409,8 +399,6 @@ grid-template-columns:repeat(2,1fr);
 
 <div class="main-layout">
 
-<!-- ABOUT -->
-
 <section id="about">
 <h2>About Me</h2>
 
@@ -429,8 +417,6 @@ grid-template-columns:repeat(2,1fr);
 </div>
 </section>
 
-<!-- CONTACT -->
-
 <section id="contact">
 <h2>Let's Connect!</h2>
 
@@ -445,8 +431,6 @@ grid-template-columns:repeat(2,1fr);
 
 </form>
 </section>
-
-<!-- PROJECTS -->
 
 <section id="projects">
 
@@ -501,8 +485,6 @@ target="_blank">
 
 </section>
 
-<!-- CERTIFICATIONS -->
-
 <section id="certifications">
 
 <h2>Certifications</h2>
@@ -541,7 +523,7 @@ Issued via Coursera
 
 <script>
 
-/* HERO ANIMATION (unchanged) */
+/* HERO DASHBOARD ANIMATION */
 
 const canvas=document.getElementById("dashboardCanvas")
 const ctx=canvas.getContext("2d")
@@ -664,7 +646,7 @@ animate()
 
 window.addEventListener("resize",setupCanvas)
 
-/* AUTO TAG FILTER SYSTEM */
+/* AUTO FILTER SYSTEM */
 
 const languageList=["python","r","sql","tableau","excel","sheets"]
 
