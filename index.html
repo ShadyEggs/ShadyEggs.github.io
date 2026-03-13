@@ -185,9 +185,20 @@ background:#2f3a46;color:white;cursor:pointer;
 font-size:13px;min-height:36px;
 }
 
+/* LANGUAGE BUTTON ACTIVE COLORS */
+
+.filter-btn.tag-python.active{background:#3776AB}
+.filter-btn.tag-r.active{background:#276DC3}
+.filter-btn.tag-sql.active{background:#336791}
+.filter-btn.tag-tableau.active{background:#E97627}
+.filter-btn.tag-excel.active{background:#217346}
+.filter-btn.tag-sheets.active{background:#34A853}
+.filter-btn.tag-all.active{background:#4a90e2}
+
 .package-btn.active{background:#4a90e2}
 
 /* PROJECT GRID */
+
 .projects-window{max-width:920px;margin:auto;height:650px;overflow-y:auto}
 
 .projects-grid{
@@ -584,13 +595,11 @@ animate()
 
 window.addEventListener("resize",setupCanvas)
 
-/* OPTIMIZED FILTER SYSTEM */
+/* FILTER SYSTEM */
 
 const languageButtons=document.querySelectorAll(".filter-btn")
 const packageContainer=document.querySelector(".package-filters")
 const projects=[...document.querySelectorAll(".project-card")]
-
-/* pre-parse tags for performance with many projects */
 
 projects.forEach(card=>{
 card.tags=card.dataset.tags.split(" ")
