@@ -274,13 +274,10 @@ aspect-ratio:1;
 cursor:pointer;
 text-decoration:none;
 color:inherit;
-transition:opacity .3s ease, transform .3s ease;
 }
 
 .project-card.hide{
-opacity:0;
-transform:scale(.9);
-pointer-events:none;
+display:none;
 }
 
 .project-card img{
@@ -391,7 +388,6 @@ color:white;
 
 <div class="main-layout">
 
-<!-- ABOUT -->
 <section id="about">
 <h2>About Me</h2>
 
@@ -413,7 +409,6 @@ color:white;
 </div>
 </section>
 
-<!-- CONTACT -->
 <section id="contact">
 <h2>Let's Connect!</h2>
 
@@ -429,7 +424,6 @@ color:white;
 </form>
 </section>
 
-<!-- PROJECTS -->
 <section id="projects">
 
 <h2>My Projects</h2>
@@ -498,7 +492,6 @@ target="_blank">
 
 </section>
 
-<!-- CERT -->
 <section id="certifications">
 
 <h2>Certifications</h2>
@@ -669,6 +662,53 @@ setupCanvas()
 animate()
 
 window.addEventListener("resize",setupCanvas)
+
+/* FILTERS */
+
+const filterButtons=document.querySelectorAll(".filter-btn")
+const projects=document.querySelectorAll(".project-card")
+
+let activeFilters=[]
+
+filterButtons.forEach(btn=>{
+
+btn.addEventListener("click",()=>{
+
+const filter=btn.dataset.filter
+
+if(filter==="all"){
+activeFilters=[]
+filterButtons.forEach(b=>b.classList.remove("active"))
+btn.classList.add("active")
+
+projects.forEach(card=>card.classList.remove("hide"))
+return
+}
+
+btn.classList.toggle("active")
+document.querySelector('[data-filter="all"]').classList.remove("active")
+
+activeFilters=[...document.querySelectorAll(".filter-btn.active")]
+.map(b=>b.dataset.filter)
+.filter(f=>f!=="all")
+
+projects.forEach(card=>{
+
+const tags=card.dataset.tags
+
+const match=activeFilters.every(f=>tags.includes(f))
+
+if(activeFilters.length===0 || match){
+card.classList.remove("hide")
+}else{
+card.classList.add("hide")
+}
+
+})
+
+})
+
+})
 
 </script>
 
