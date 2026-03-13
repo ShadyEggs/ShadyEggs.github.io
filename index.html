@@ -150,11 +150,6 @@ object-fit:cover;
 border-radius:50%;
 border:4px solid #4a90e2;
 box-shadow:0 10px 30px rgba(0,0,0,.15);
-transition:transform .3s ease;
-}
-
-.profile-pic:hover{
-transform:scale(1.05);
 }
 
 .about-text{
@@ -162,6 +157,22 @@ background:white;
 padding:30px;
 border-radius:16px;
 box-shadow:0 20px 50px rgba(0,0,0,.08);
+position:relative;
+transition:transform .3s ease;
+}
+
+.about-text:hover{
+transform:scale(1.03);
+}
+
+.about-text::before{
+content:"";
+position:absolute;
+left:-14px;
+top:80px;
+border-top:12px solid transparent;
+border-bottom:12px solid transparent;
+border-right:14px solid white;
 }
 
 /* CONTACT */
@@ -219,10 +230,10 @@ min-height:36px;
 .filter-btn.active.tag-all{background:#4a90e2}
 .filter-btn.active.tag-python{background:#3776AB}
 .filter-btn.active.tag-r{background:#276DC3}
-.filter-btn.active.tag-sql{background:#336791}
-.filter-btn.active.tag-tableau{background:#E97627}
-.filter-btn.active.tag-excel{background:#217346}
-.filter-btn.active.tag-sheets{background:#34A853}
+filter-btn.active.tag-sql{background:#336791}
+filter-btn.active.tag-tableau{background:#E97627}
+filter-btn.active.tag-excel{background:#217346}
+filter-btn.active.tag-sheets{background:#34A853}
 
 .package-btn.active{background:#4a90e2}
 
@@ -249,6 +260,7 @@ aspect-ratio:1;
 cursor:pointer;
 text-decoration:none;
 color:inherit;
+touch-action:manipulation;
 }
 
 .project-card.hide{display:none}
@@ -418,10 +430,10 @@ padding:4px 9px;
 
 <div class="about-grid">
 
-<img src="profile.jpg" class="profile-pic" alt="Portrait of Alfred Rico">
+<img src="profile.jpg" class="profile-pic">
 
 <div class="about-text">
-<p>Hi, I'm Alfred — a data analyst focused on turning messy datasets into clear, actionable insights. My projects focus on exploratory data analysis, trend detection, and building clear visual stories from complex datasets.</p>
+<p>Hi, I'm Alfred — a data analyst focused on turning messy datasets into clear, actionable insights.  My projects focus on exploratory data analysis, trend detection, and building clear visual stories from complex datasets.</p>
 
 <p>Using tools like Python, SQL, and data visualization platforms, I explore patterns, build dashboards, and communicate findings that help explain what the data is really saying.</p>
 
@@ -469,7 +481,7 @@ padding:4px 9px;
 <a class="project-card" data-tags="r dplyr tidyr ggplot2 plotly"
 href="https://shadyeggs.github.io/Fifa21-Data-Cleaning-Project/" target="_blank">
 
-<img src="https://images.unsplash.com/photo-1518091043644-c1d4457512c6?w=800&q=80" alt="Fifa 21 dataset cleaning and analysis">
+<img src="https://images.unsplash.com/photo-1518091043644-c1d4457512c6?w=800&q=80">
 
 <div class="project-overlay">
 <h3>Fifa 21 Data Cleaning</h3>
@@ -489,7 +501,7 @@ data-tags="sql tableau excel sheets"
 href="https://public.tableau.com/app/profile/alfred.rico/viz/CyclisticCaseStudy_17031395269510/Dashboard1"
 target="_blank">
 
-<img src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=800&q=80" alt="Cyclistic bike share analysis dashboard">
+<img src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=800&q=80">
 
 <div class="project-overlay">
 <h3>Cyclistic Case Study</h3>
@@ -507,7 +519,6 @@ target="_blank">
 </div>
 
 </section>
-
 <section id="certifications">
 
 <h2>Certifications</h2>
@@ -572,7 +583,8 @@ bars=[]
 particles=[]
 
 const count=Math.floor(canvas.width/spacing)
-const offsetX=(canvas.width-(count*spacing))/2
+const totalWidth=count*spacing
+const offsetX=(canvas.width-totalWidth)/2
 
 for(let i=0;i<count;i++){
 
@@ -712,12 +724,9 @@ packageContainer.innerHTML=""
 activePackages=[]
 
 activeLanguages.forEach(lang=>{
-
 if(packageMap[lang]){
 
-const uniquePackages=new Set(packageMap[lang])
-
-uniquePackages.forEach(pkg=>{
+packageMap[lang].forEach(pkg=>{
 
 const btn=document.createElement("button")
 btn.className="filter-btn package-btn"
@@ -728,13 +737,8 @@ btn.onclick=()=>{
 
 btn.classList.toggle("active")
 
-const tag=pkg
-
-if(btn.classList.contains("active")){
-activePackages.push(tag)
-}else{
-activePackages=activePackages.filter(p=>p!==tag)
-}
+activePackages=[...document.querySelectorAll(".package-btn.active")]
+.map(b=>b.dataset.filter)
 
 showProjects()
 
