@@ -1,6 +1,5 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
 
 <meta charset="UTF-8">
@@ -19,25 +18,14 @@
 
 <style>
 
-body{
-font-family:'Lato',sans-serif;
-margin:0;
-background:#1f2933;
-scroll-behavior:smooth;
-}
+body{font-family:'Lato',sans-serif;margin:0;background:#1f2933;scroll-behavior:smooth}
 
 /* HERO */
 
 .hero{
-position:relative;
-height:32vh;
-min-height:240px;
-display:flex;
-align-items:center;
-justify-content:center;
-text-align:center;
-overflow:hidden;
-color:white;
+position:relative;height:32vh;min-height:240px;
+display:flex;align-items:center;justify-content:center;
+text-align:center;overflow:hidden;color:white;
 background:
 radial-gradient(circle at 20% 30%,rgba(120,120,120,.35),transparent 40%),
 radial-gradient(circle at 80% 70%,rgba(180,180,180,.25),transparent 45%),
@@ -45,75 +33,38 @@ linear-gradient(135deg,#020617,#111827 60%,#1f2933);
 }
 
 .hero::before{
-content:"";
-position:absolute;
-inset:0;
+content:"";position:absolute;inset:0;
 background:radial-gradient(circle at 50% 80%,rgba(200,200,200,.25),transparent 60%);
 }
 
 .hero::after{
-content:"";
-position:absolute;
-inset:0;
+content:"";position:absolute;inset:0;
 background-image:
 linear-gradient(rgba(255,255,255,.05) 1px,transparent 1px),
 linear-gradient(90deg,rgba(255,255,255,.05) 1px,transparent 1px);
 background-size:40px 40px;
 }
 
-#dashboardCanvas{
-position:absolute;
-inset:0;
-opacity:.45;
-z-index:2;
-}
+#dashboardCanvas{position:absolute;inset:0;opacity:.45;z-index:2}
 
-.hero-content{
-position:relative;
-z-index:3;
-margin-top:-40px;
-}
+.hero-content{position:relative;z-index:3;margin-top:-40px}
 
-.hero h1{
-font-size:38px;
-font-family:'Playfair Display',serif;
-margin-bottom:5px;
-}
+.hero h1{font-size:38px;font-family:'Playfair Display',serif;margin-bottom:5px}
 
-.social-links a{
-color:white;
-margin:0 10px;
-font-size:22px;
-}
+.social-links a{color:white;margin:0 10px;font-size:22px}
 
 /* NAV */
 
-nav{
-background:white;
-box-shadow:0 2px 10px rgba(0,0,0,.08);
-}
+nav{background:white;box-shadow:0 2px 10px rgba(0,0,0,.08)}
 
-nav ul{
-display:flex;
-justify-content:center;
-list-style:none;
-padding:15px;
-margin:0;
-}
+nav ul{display:flex;justify-content:center;list-style:none;padding:15px;margin:0}
 
-nav a{
-text-decoration:none;
-margin:0 12px;
-color:#333;
-font-weight:600;
-}
+nav a{text-decoration:none;margin:0 12px;color:#333;font-weight:600}
 
 /* MAIN GRID */
 
 .main-layout{
-max-width:1100px;
-margin:60px auto;
-padding:0 30px;
+max-width:1100px;margin:60px auto;padding:0 30px;
 display:grid;
 grid-template-columns:1fr 1fr;
 grid-template-areas:
@@ -128,26 +79,18 @@ gap:40px;
 #projects{grid-area:projects}
 #certifications{grid-area:certifications}
 
-h2{
-text-align:center;
-margin-bottom:30px;
-color:white;
-}
+h2{text-align:center;margin-bottom:30px;color:white}
 
 /* ABOUT */
 
 .about-grid{
 display:grid;
 grid-template-columns:200px 1fr;
-gap:30px;
-align-items:center;
+gap:30px;align-items:center;
 }
 
 .profile-pic{
-width:180px;
-height:180px;
-object-fit:cover;
-border-radius:50%;
+width:180px;height:180px;object-fit:cover;border-radius:50%;
 border:4px solid #4a90e2;
 box-shadow:0 10px 30px rgba(0,0,0,.15);
 }
@@ -155,12 +98,10 @@ box-shadow:0 10px 30px rgba(0,0,0,.15);
 /* CHAT BUBBLE */
 
 .about-text{
-position:relative;
-background:white;
-padding:30px;
+position:relative;background:white;padding:30px;
 border-radius:18px;
 box-shadow:0 20px 50px rgba(0,0,0,.08);
-transition:transform .3s ease, box-shadow .3s ease;
+transition:transform .3s ease,box-shadow .3s ease;
 }
 
 .about-text:hover{
@@ -177,57 +118,41 @@ border-width:10px;
 border-style:solid;
 border-color:transparent white transparent transparent;
 }
+
 /* CONTACT */
 
 .contact-form{
-background:white;
-padding:40px;
-border-radius:16px;
+background:white;padding:40px;border-radius:16px;
 box-shadow:0 15px 40px rgba(0,0,0,.08);
 }
 
 .contact-form input,
 .contact-form textarea{
-width:100%;
-padding:12px;
-margin:6px 0 15px;
-border-radius:8px;
-border:1px solid #ddd;
+width:100%;padding:12px;margin:6px 0 15px;
+border-radius:8px;border:1px solid #ddd;
 }
 
 .apple-send{
-width:100%;
-padding:14px;
-border:none;
-border-radius:999px;
-background:#111;
-color:white;
-cursor:pointer;
+width:100%;padding:14px;border:none;
+border-radius:999px;background:#111;color:white;cursor:pointer;
 }
 
 /* FILTERS */
 
-.project-filters,
-.package-filters{
-display:flex;
-justify-content:center;
-flex-wrap:wrap;
-gap:10px;
+.project-filters,.package-filters{
+display:flex;justify-content:center;flex-wrap:wrap;gap:10px
 }
 
 .project-filters{margin-bottom:12px}
 .package-filters{margin-bottom:25px}
 
 .filter-btn{
-padding:8px 14px;
-border-radius:20px;
-border:none;
-background:#2f3a46;
-color:white;
-cursor:pointer;
-font-size:13px;
-min-height:36px;
+padding:8px 14px;border-radius:20px;border:none;
+background:#2f3a46;color:white;cursor:pointer;
+font-size:13px;min-height:36px;
 }
+
+/* TAG BUTTON CODE LEFT UNCHANGED */
 
 .filter-btn.active.tag-all{background:#4a90e2}
 .filter-btn.active.tag-python{background:#3776AB}
@@ -241,12 +166,7 @@ min-height:36px;
 
 /* PROJECT GRID */
 
-.projects-window{
-max-width:920px;
-margin:auto;
-height:650px;
-overflow-y:auto;
-}
+.projects-window{max-width:920px;margin:auto;height:650px;overflow-y:auto}
 
 .projects-grid{
 display:grid;
@@ -255,22 +175,15 @@ gap:20px;
 }
 
 .project-card{
-position:relative;
-border-radius:16px;
-overflow:hidden;
-aspect-ratio:1;
-cursor:pointer;
-text-decoration:none;
-color:inherit;
-touch-action:manipulation;
+position:relative;border-radius:16px;overflow:hidden;
+aspect-ratio:1;cursor:pointer;text-decoration:none;
+color:inherit;touch-action:manipulation;
 }
 
 .project-card.hide{display:none}
 
 .project-card img{
-width:100%;
-height:100%;
-object-fit:cover;
+width:100%;height:100%;object-fit:cover;
 transition:transform .4s ease,filter .4s ease;
 }
 
@@ -280,33 +193,21 @@ transform:scale(1.08);
 }
 
 .project-overlay{
-position:absolute;
-bottom:0;
-left:0;
-right:0;
-padding:16px;
-color:white;
+position:absolute;bottom:0;left:0;right:0;
+padding:16px;color:white;
 background:linear-gradient(transparent,rgba(0,0,0,.85));
 }
 
 .project-overlay h3{
-font-size:17px;
-font-weight:700;
-margin:0 0 8px;
+font-size:17px;font-weight:700;margin:0 0 8px;
 }
 
 .project-tags{
-display:flex;
-flex-wrap:wrap;
-gap:6px;
-font-size:12px;
+display:flex;flex-wrap:wrap;gap:6px;font-size:12px;
 }
 
 .project-tags span{
-padding:3px 8px;
-border-radius:6px;
-color:white;
-font-weight:600;
+padding:3px 8px;border-radius:6px;color:white;font-weight:600;
 }
 
 .project-tags .tag-python{background:#3776AB}
@@ -320,18 +221,12 @@ font-weight:600;
 
 /* CERT */
 
-.cert-column{
-display:flex;
-justify-content:center;
-}
+.cert-column{display:flex;justify-content:center}
 
 .cert{
 background:linear-gradient(145deg,#3a3a3c,#2c2c2e);
-border-radius:14px;
-padding:18px 20px;
-text-align:center;
-box-shadow:0 12px 30px rgba(0,0,0,.45),
-inset 0 1px 0 rgba(255,255,255,.08);
+border-radius:14px;padding:18px 20px;text-align:center;
+box-shadow:0 12px 30px rgba(0,0,0,.45),inset 0 1px 0 rgba(255,255,255,.08);
 border:1px solid rgba(255,255,255,.08);
 max-width:220px;
 transition:.25s ease;
@@ -340,16 +235,10 @@ color:white;
 
 .cert:hover{
 transform:translateY(-6px) scale(1.03);
-box-shadow:0 22px 50px rgba(0,0,0,.55),
-inset 0 1px 0 rgba(255,255,255,.12);
+box-shadow:0 22px 50px rgba(0,0,0,.55),inset 0 1px 0 rgba(255,255,255,.12);
 }
 
-footer{
-text-align:center;
-padding:14px;
-background:#111;
-color:white;
-}
+footer{text-align:center;padding:14px;background:#111;color:white}
 
 /* MOBILE */
 
@@ -364,18 +253,11 @@ grid-template-areas:
 "certifications";
 }
 
-.about-grid{
-grid-template-columns:1fr;
-text-align:center;
-}
+.about-grid{grid-template-columns:1fr;text-align:center}
 
-.profile-pic{
-margin:auto;
-}
+.profile-pic{margin:auto}
 
-.projects-grid{
-grid-template-columns:repeat(3,1fr);
-}
+.projects-grid{grid-template-columns:repeat(3,1fr)}
 
 }
 
@@ -383,17 +265,11 @@ grid-template-columns:repeat(3,1fr);
 
 .hero h1{font-size:30px}
 
-.projects-window{
-height:auto;
-}
+.projects-window{height:auto}
 
-.projects-grid{
-grid-template-columns:repeat(2,1fr);
-}
+.projects-grid{grid-template-columns:repeat(2,1fr)}
 
-.project-tags span{
-padding:4px 9px;
-}
+.project-tags span{padding:4px 9px}
 
 }
 
@@ -401,6 +277,7 @@ padding:4px 9px;
 </head>
 
 <body>
+
 <header class="hero">
 
 <canvas id="dashboardCanvas"></canvas>
@@ -413,8 +290,8 @@ padding:4px 9px;
 <a href="https://www.linkedin.com/in/alfred-rico-3992338a/" target="_blank"><i class="fab fa-linkedin"></i></a>
 <a href="https://github.com/ShadyEggs" target="_blank"><i class="fab fa-github"></i></a>
 </div>
-</div>
 
+</div>
 </header>
 
 <nav>
@@ -427,6 +304,7 @@ padding:4px 9px;
 <div class="main-layout">
 
 <section id="about">
+
 <h2>About Me</h2>
 
 <div class="about-grid">
@@ -434,22 +312,27 @@ padding:4px 9px;
 <img src="profile.jpg" class="profile-pic">
 
 <div class="about-text">
+
 <p>Hi, I'm Alfred — a data analyst focused on turning messy datasets into clear, actionable insights. My projects focus on exploratory data analysis, trend detection, and building clear visual stories from complex datasets.</p>
 
 <p>Using tools like Python, SQL, and data visualization platforms, I explore patterns, build dashboards, and communicate findings that help explain what the data is really saying.</p>
 
 <p>My projects focus on exploratory data analysis, trend detection, and building clear visual stories from complex datasets.</p>
+
 </div>
 
 </div>
+
 </section>
 
 <section id="contact">
+
 <h2>Let's Connect!</h2>
 
 <form action="https://formsubmit.co/alfred.m.rico@gmail.com" method="POST" class="contact-form">
 
 <input type="text" name="name" placeholder="Name" required>
+
 <input type="email" name="email" placeholder="Email" required>
 
 <textarea name="message" rows="6" placeholder="Message" required></textarea>
@@ -457,6 +340,7 @@ padding:4px 9px;
 <button type="submit" class="apple-send">Send Message</button>
 
 </form>
+
 </section>
 
 <section id="projects">
@@ -486,6 +370,7 @@ href="https://shadyeggs.github.io/Fifa21-Data-Cleaning-Project/" target="_blank"
 
 <div class="project-overlay">
 <h3>Fifa 21 Data Cleaning</h3>
+
 <div class="project-tags">
 <span class="tag-r">R</span>
 <span class="tag-package">dplyr</span>
@@ -493,6 +378,7 @@ href="https://shadyeggs.github.io/Fifa21-Data-Cleaning-Project/" target="_blank"
 <span class="tag-package">ggplot2</span>
 <span class="tag-package">plotly</span>
 </div>
+
 </div>
 
 </a>
@@ -506,12 +392,14 @@ target="_blank">
 
 <div class="project-overlay">
 <h3>Cyclistic Case Study</h3>
+
 <div class="project-tags">
 <span class="tag-sql">SQL</span>
 <span class="tag-tableau">Tableau</span>
 <span class="tag-excel">Excel</span>
 <span class="tag-sheets">Sheets</span>
 </div>
+
 </div>
 
 </a>
@@ -592,22 +480,19 @@ for(let i=0;i<count;i++){
 
 const h=Math.random()*120+60
 
-bars.push({
-x:offsetX+i*spacing,
-height:h,
-target:h,
-color:palette[Math.floor(Math.random()*palette.length)]
-})
+bars.push({x:offsetX+i*spacing,height:h,target:h,color:palette[Math.floor(Math.random()*palette.length)]})
 
 }
 
 for(let i=0;i<30;i++){
+
 particles.push({
 x:Math.random()*canvas.width,
 y:Math.random()*canvas.height,
 size:Math.random()*2+1,
 speed:Math.random()*.4+.1
 })
+
 }
 
 }
@@ -680,9 +565,7 @@ window.addEventListener("resize",setupCanvas)
 
 /* FILTER SYSTEM */
 
-const packageMap={
-r:["dplyr","tidyr","ggplot2","plotly"]
-}
+const packageMap={r:["dplyr","tidyr","ggplot2","plotly"]}
 
 const languageButtons=document.querySelectorAll(".filter-btn")
 const packageContainer=document.querySelector(".package-filters")
@@ -710,8 +593,7 @@ return
 btn.classList.toggle("active")
 document.querySelector('[data-filter="all"]').classList.remove("active")
 
-activeLanguages=[...document.querySelectorAll(".project-filters .active")]
-.map(b=>b.dataset.filter)
+activeLanguages=[...document.querySelectorAll(".project-filters .active")].map(b=>b.dataset.filter)
 
 updatePackageFilters()
 showProjects()
@@ -726,6 +608,7 @@ packageContainer.innerHTML=""
 activePackages=[]
 
 activeLanguages.forEach(lang=>{
+
 if(packageMap[lang]){
 
 packageMap[lang].forEach(pkg=>{
@@ -739,8 +622,7 @@ btn.onclick=()=>{
 
 btn.classList.toggle("active")
 
-activePackages=[...document.querySelectorAll(".package-btn.active")]
-.map(b=>b.dataset.filter)
+activePackages=[...document.querySelectorAll(".package-btn.active")].map(b=>b.dataset.filter)
 
 showProjects()
 
