@@ -1497,7 +1497,7 @@ Issued via Coursera
 
 <script>
 
-/* HERO DASHBOARD ANIMATION — FULL IMAGE PALETTE */
+/* HERO DASHBOARD ANIMATION — SPIRAL PALETTE */
 
 const canvas=document.getElementById("dashboardCanvas")
 const ctx=canvas.getContext("2d")
@@ -1507,25 +1507,17 @@ let bars=[],particles=[]
 const spacing=28
 const barWidth=18
 
-/* COOL COLORS */
+/* EXACT PALETTE FROM IMAGE */
 
-const coolPalette=[
-"#0B3C5D",
-"#155E75",
-"#1D7FA6",
-"#2F9FC5",
-"#4FB6D3",
-"#6CCBE0",
-"#8BDDF4"
+const palette=[
+"#01204E",
+"#028391",
+"#F6DCAC",
+"#FAA968",
+"#F85525"
 ]
 
-/* ORANGE ACCENTS */
-
-const warmPalette=[
-"#F39C12",
-"#F5B041",
-"#EB984E"
-]
+let paletteOffset=0
 
 function hexToRGBA(hex,a){
 
@@ -1534,6 +1526,7 @@ const g=parseInt(hex.slice(3,5),16)
 const b=parseInt(hex.slice(5,7),16)
 
 return `rgba(${r},${g},${b},${a})`
+
 }
 
 function setupCanvas(){
@@ -1550,23 +1543,13 @@ const count=Math.floor(canvas.width/spacing)
 const totalWidth=count*spacing
 const offsetX=(canvas.width-totalWidth)/2
 
-/* GRADIENT WITH OCCASIONAL ORANGE ACCENTS */
+/* SPIRAL COLOR GROUPING */
 
 for(let i=0;i<count;i++){
 
-let color
+const spiralIndex=(Math.floor(i/4)+paletteOffset)%palette.length
 
-if(Math.random()<0.12){
-
-color=warmPalette[Math.floor(Math.random()*warmPalette.length)]
-
-}else{
-
-const t=i/(count-1)
-const index=Math.floor(t*(coolPalette.length-1))
-color=coolPalette[index]
-
-}
+const color=palette[spiralIndex]
 
 const h=Math.random()*120+60
 
@@ -1603,6 +1586,18 @@ const index=Math.floor(Math.random()*bars.length)
 bars[index].target=Math.random()*120+60
 
 }
+
+/* SHIFT SPIRAL GROUPS */
+
+paletteOffset=(paletteOffset+1)%palette.length
+
+bars.forEach((bar,i)=>{
+
+const spiralIndex=(Math.floor(i/4)+paletteOffset)%palette.length
+
+bar.baseColor=palette[spiralIndex]
+
+})
 
 }
 
