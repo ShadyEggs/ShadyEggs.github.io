@@ -275,12 +275,12 @@ aspect-ratio:1;
 cursor:pointer;
 text-decoration:none;
 color:inherit;
-transition:opacity .3s ease, transform .3s ease;
+transition: opacity .35s ease, transform .35s ease;
 }
 
 .project-card.hide{
 opacity:0;
-transform:scale(.9);
+transform:scale(.85);
 pointer-events:none;
 }
 
@@ -367,8 +367,9 @@ color:white;
 
 <body>
 
-<header class="hero">
+<!-- HERO -->
 
+<header class="hero">
 <canvas id="dashboardCanvas"></canvas>
 
 <div class="container hero-content">
@@ -380,7 +381,6 @@ color:white;
 <a href="https://github.com/ShadyEggs" target="_blank"><i class="fab fa-github"></i></a>
 </div>
 </div>
-
 </header>
 
 <nav>
@@ -398,19 +398,14 @@ color:white;
 <h2>About Me</h2>
 
 <div class="about-grid">
-
 <div>
 <img src="profile.jpg" class="profile-pic">
 </div>
 
 <div class="about-text">
-
 <p>Hi, I’m Alfred — an aspiring data analyst who enjoys turning messy data into clear insights and finding patterns that explain what’s really going on.</p>
-
 <p>Through hands-on projects, I’ve worked with Python, SQL, and visualization tools to analyze data and communicate findings in a way that’s easy to understand.</p>
-
 <p>I'm always looking for new problems to explore and new ways to learn.</p>
-
 </div>
 </div>
 </section>
@@ -424,7 +419,6 @@ color:white;
 
 <input type="text" name="name" placeholder="Name" required>
 <input type="email" name="email" placeholder="Email" required>
-
 <textarea name="message" rows="6" placeholder="Message" required></textarea>
 
 <button type="submit" class="apple-send">Send Message</button>
@@ -435,11 +429,9 @@ color:white;
 <!-- PROJECTS -->
 
 <section id="projects">
-
 <h2>My Projects</h2>
 
 <div class="project-filters">
-
 <button class="filter-btn active" data-filter="all">All</button>
 <button class="filter-btn" data-filter="python">Python</button>
 <button class="filter-btn" data-filter="r">R</button>
@@ -447,11 +439,9 @@ color:white;
 <button class="filter-btn" data-filter="tableau">Tableau</button>
 <button class="filter-btn" data-filter="excel">Excel</button>
 <button class="filter-btn" data-filter="sheets">Google Sheets</button>
-
 </div>
 
 <div class="projects-window">
-
 <div class="projects-grid">
 
 <a class="project-card"
@@ -462,9 +452,7 @@ target="_blank">
 <img src="https://images.unsplash.com/photo-1518091043644-c1d4457512c6">
 
 <div class="project-overlay">
-
 <h3>Fifa 21 Data Cleaning</h3>
-
 <div class="project-tags">
 <span class="tag-r">R</span>
 <span>dplyr</span>
@@ -472,8 +460,8 @@ target="_blank">
 <span>ggplot2</span>
 <span>plotly</span>
 </div>
-
 </div>
+
 </a>
 
 <a class="project-card"
@@ -484,17 +472,15 @@ target="_blank">
 <img src="https://images.unsplash.com/photo-1551288049-bebda4e38f71">
 
 <div class="project-overlay">
-
 <h3>Cyclistic Case Study</h3>
-
 <div class="project-tags">
 <span class="tag-sql">SQL</span>
 <span class="tag-tableau">Tableau</span>
 <span class="tag-excel">Excel</span>
 <span class="tag-sheets">Google Sheets</span>
 </div>
-
 </div>
+
 </a>
 
 </div>
@@ -504,7 +490,6 @@ target="_blank">
 <!-- CERTIFICATIONS -->
 
 <section id="certifications">
-
 <h2>Certifications</h2>
 
 <div class="cert-column">
@@ -512,7 +497,6 @@ target="_blank">
 <a href="https://www.coursera.org/account/accomplishments/professional-cert/MSCMJL682NT9" target="_blank">
 
 <div class="cert">
-
 <img style="height:24px" src="https://upload.wikimedia.org/wikipedia/commons/2/2f/Google_2015_logo.svg">
 
 <div style="font-weight:700;font-size:14px;">
@@ -524,13 +508,11 @@ Issued via Coursera
 </div>
 
 <img style="height:16px" src="https://upload.wikimedia.org/wikipedia/commons/9/97/Coursera-Logo_600x600.svg">
-
 </div>
 
 </a>
 
 </div>
-
 </section>
 
 </div>
