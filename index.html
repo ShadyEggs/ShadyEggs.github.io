@@ -221,7 +221,18 @@ cursor:pointer;
 font-size:13px;
 }
 
-/* LANGUAGE ACTIVE COLORS */
+/* ensure language buttons gray by default */
+
+.filter-btn.tag-python,
+.filter-btn.tag-r,
+.filter-btn.tag-sql,
+.filter-btn.tag-tableau,
+.filter-btn.tag-excel,
+.filter-btn.tag-sheets{
+background:#2f3a46;
+}
+
+/* active filter colors */
 
 .filter-btn.active.tag-all{background:#4a90e2;}
 .filter-btn.active.tag-python{background:#3776AB;}
@@ -298,22 +309,20 @@ color:white;
 font-weight:600;
 }
 
-/* TOOL TAG COLORS */
+/* COMPANY COLORS ONLY FOR PROJECT TAGS */
 
-.tag-python{background:#3776AB;}
-.tag-r{background:#276DC3;}
-.tag-sql{background:#336791;}
-.tag-tableau{background:#E97627;}
-.tag-excel{background:#217346;}
-.tag-sheets{background:#34A853;}
-
-/* PACKAGE TAGS */
+.project-tags .tag-python{background:#3776AB;}
+.project-tags .tag-r{background:#276DC3;}
+.project-tags .tag-sql{background:#336791;}
+.project-tags .tag-tableau{background:#E97627;}
+.project-tags .tag-excel{background:#217346;}
+.project-tags .tag-sheets{background:#34A853;}
 
 .tag-package{
 background:#555;
 }
 
-/* CERT */
+/* CERT TILE */
 
 .cert-column{
 display:flex;
