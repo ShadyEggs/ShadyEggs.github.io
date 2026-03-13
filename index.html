@@ -19,6 +19,8 @@
 
 <style>
 
+/* (CSS unchanged from your template) */
+
 body{
 font-family:'Lato',sans-serif;
 margin:0;
@@ -224,8 +226,6 @@ font-size:13px;
 .filter-btn.active.tag-sheets{background:#34A853;}
 
 .package-btn.active{background:#4a90e2;}
-
-/* PROJECT GRID */
 
 .projects-window{
 max-width:920px;
@@ -436,7 +436,16 @@ grid-template-columns:repeat(2,1fr);
 
 <h2>My Projects</h2>
 
-<div class="project-filters"></div>
+<div class="project-filters">
+<button class="filter-btn active tag-all" data-filter="all">All</button>
+<button class="filter-btn tag-python" data-filter="python">Python</button>
+<button class="filter-btn tag-r" data-filter="r">R</button>
+<button class="filter-btn tag-sql" data-filter="sql">SQL</button>
+<button class="filter-btn tag-tableau" data-filter="tableau">Tableau</button>
+<button class="filter-btn tag-excel" data-filter="excel">Excel</button>
+<button class="filter-btn tag-sheets" data-filter="sheets">Google Sheets</button>
+</div>
+
 <div class="package-filters"></div>
 
 <div class="projects-window">
@@ -646,47 +655,31 @@ animate()
 
 window.addEventListener("resize",setupCanvas)
 
-/* AUTO FILTER SYSTEM */
+/* PACKAGE FILTER SYSTEM */
 
-const languageList=["python","r","sql","tableau","excel","sheets"]
+const packageMap={
+r:["dplyr","tidyr","ggplot2","plotly"]
+}
 
-const projects=[...document.querySelectorAll(".project-card")]
-const projectFilters=document.querySelector(".project-filters")
-const packageFilters=document.querySelector(".package-filters")
+const languageButtons=document.querySelectorAll(".filter-btn")
+const packageContainer=document.querySelector(".package-filters")
+const projects=document.querySelectorAll(".project-card")
 
 let activeLanguages=[]
 let activePackages=[]
 
-const detectedLanguages=new Set()
+languageButtons.forEach(btn=>{
 
-projects.forEach(card=>{
-card.dataset.tags.split(" ").forEach(tag=>{
-if(languageList.includes(tag)) detectedLanguages.add(tag)
-})
-})
+btn.onclick=()=>{
 
-projectFilters.innerHTML='<button class="filter-btn active tag-all" data-filter="all">All</button>'
-
-detectedLanguages.forEach(lang=>{
-projectFilters.innerHTML+=`<button class="filter-btn tag-${lang}" data-filter="${lang}">${lang.charAt(0).toUpperCase()+lang.slice(1)}</button>`
-})
-
-document.addEventListener("click",e=>{
-
-if(!e.target.classList.contains("filter-btn")) return
-
-const btn=e.target
 const filter=btn.dataset.filter
 
 if(filter==="all"){
-
 activeLanguages=[]
 activePackages=[]
-packageFilters.innerHTML=""
-
-document.querySelectorAll(".filter-btn").forEach(b=>b.classList.remove("active"))
+languageButtons.forEach(b=>b.classList.remove("active"))
 btn.classList.add("active")
-
+packageContainer.innerHTML=""
 showProjects()
 return
 }
@@ -694,52 +687,48 @@ return
 btn.classList.toggle("active")
 document.querySelector('[data-filter="all"]').classList.remove("active")
 
-activeLanguages=[...document.querySelectorAll(".project-filters .active")]
+activeLanguages=[...document.querySelectorAll(".filter-btn.active")]
 .map(b=>b.dataset.filter)
+.filter(f=>f!=="all")
 
-buildPackages()
+updatePackageFilters()
 showProjects()
 
+}
+
 })
 
-function buildPackages(){
+function updatePackageFilters(){
 
-packageFilters.innerHTML=""
+packageContainer.innerHTML=""
 activePackages=[]
 
-const packages=new Set()
-
-projects.forEach(card=>{
-
-const tags=card.dataset.tags.split(" ")
-
 activeLanguages.forEach(lang=>{
-if(tags.includes(lang)){
-tags.forEach(t=>{
-if(!languageList.includes(t)) packages.add(t)
-})
-}
-})
+if(packageMap[lang]){
 
-})
-
-packages.forEach(pkg=>{
+packageMap[lang].forEach(pkg=>{
 
 const btn=document.createElement("button")
 btn.className="filter-btn package-btn"
 btn.textContent=pkg
 btn.dataset.filter=pkg
 
-btn.onclick=()=>{
+btn.addEventListener("click",()=>{
+
 btn.classList.toggle("active")
 
 activePackages=[...document.querySelectorAll(".package-btn.active")]
 .map(b=>b.dataset.filter)
 
 showProjects()
-}
 
-packageFilters.appendChild(btn)
+})
+
+packageContainer.appendChild(btn)
+
+})
+
+}
 
 })
 
