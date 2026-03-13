@@ -389,79 +389,7 @@ inset 0 -4px 8px rgba(0,0,0,.35);
 
 /* PROJECT GRID */
 
-/* -------------------------
-   PROJECT WINDOW SCROLLING
-------------------------- */
-
-.projects-window{
-
-max-width:920px;
-margin:auto;
-height:650px;
-
-overflow-y:auto;
-overflow-x:hidden;
-
-scrollbar-width:auto;
-scrollbar-color:#028391 rgba(255,255,255,.05);
-
-}
-
-/* Chrome / Edge / Safari */
-
-.projects-window::-webkit-scrollbar{
-
-width:14px;
-
-}
-
-.projects-window::-webkit-scrollbar-track{
-
-background:rgba(255,255,255,.05);
-border-radius:10px;
-
-}
-
-.projects-window::-webkit-scrollbar-thumb{
-
-background:linear-gradient(
-180deg,
-#028391,
-#FAA968
-);
-
-border-radius:10px;
-
-box-shadow:
-inset 0 1px 2px rgba(255,255,255,.35),
-0 0 6px rgba(0,0,0,.35);
-
-}
-
-/* Hover state */
-
-.projects-window::-webkit-scrollbar-thumb:hover{
-
-background:linear-gradient(
-180deg,
-#028391,
-#F85525
-);
-
-}
-
-/* Mobile stability */
-
-@media (max-width:900px){
-
-.projects-window{
-
-height:auto;
-overflow-y:visible;
-
-}
-
-}
+.projects-window{max-width:920px;margin:auto;height:650px;overflow-y:auto}
 
 .projects-grid{
 display:grid;
@@ -580,79 +508,7 @@ font-size:24px;
 margin-bottom:24px;
 }
 
-/* -------------------------
-   PROJECT WINDOW SCROLLING
-------------------------- */
-
-.projects-window{
-
-max-width:920px;
-margin:auto;
-height:650px;
-
-overflow-y:auto;
-overflow-x:hidden;
-
-scrollbar-width:auto;
-scrollbar-color:#028391 rgba(255,255,255,.05);
-
-}
-
-/* Chrome / Edge / Safari */
-
-.projects-window::-webkit-scrollbar{
-
-width:14px;
-
-}
-
-.projects-window::-webkit-scrollbar-track{
-
-background:rgba(255,255,255,.05);
-border-radius:10px;
-
-}
-
-.projects-window::-webkit-scrollbar-thumb{
-
-background:linear-gradient(
-180deg,
-#028391,
-#FAA968
-);
-
-border-radius:10px;
-
-box-shadow:
-inset 0 1px 2px rgba(255,255,255,.35),
-0 0 6px rgba(0,0,0,.35);
-
-}
-
-/* Hover state */
-
-.projects-window::-webkit-scrollbar-thumb:hover{
-
-background:linear-gradient(
-180deg,
-#028391,
-#F85525
-);
-
-}
-
-/* Mobile stability */
-
-@media (max-width:900px){
-
-.projects-window{
-
-height:auto;
-overflow-y:visible;
-
-}
-
-}
+.projects-window{height:auto}
 
 .projects-grid{grid-template-columns:repeat(2,1fr)}
 
@@ -743,75 +599,100 @@ background:linear-gradient(
 
 
 /* -------------------------
-   PROJECT WINDOW SCROLLING
+   PERFORMANCE OPTIMIZATION
 ------------------------- */
 
+.project-card img{
+will-change:transform,filter;
+}
+
+.hero canvas{
+will-change:transform;
+}
+
 .projects-window{
+scroll-behavior:smooth;
+}
 
-max-width:920px;
-margin:auto;
-height:650px;
+/* Prevent horizontal overflow */
 
-overflow-y:auto;
+body{
 overflow-x:hidden;
-
-scrollbar-width:auto;
-scrollbar-color:#028391 rgba(255,255,255,.05);
-
 }
 
-/* Chrome / Edge / Safari */
-
-.projects-window::-webkit-scrollbar{
-
-width:14px;
-
-}
-
-.projects-window::-webkit-scrollbar-track{
-
-background:rgba(255,255,255,.05);
-border-radius:10px;
-
-}
-
-.projects-window::-webkit-scrollbar-thumb{
-
-background:linear-gradient(
-180deg,
-#028391,
-#FAA968
-);
-
-border-radius:10px;
-
-box-shadow:
-inset 0 1px 2px rgba(255,255,255,.35),
-0 0 6px rgba(0,0,0,.35);
-
-}
-
-/* Hover state */
-
-.projects-window::-webkit-scrollbar-thumb:hover{
-
-background:linear-gradient(
-180deg,
-#028391,
-#F85525
-);
-
-}
-
-/* Mobile stability */
+/* -------------------------
+   MOBILE CENTERING
+------------------------- */
 
 @media (max-width:900px){
 
+.main-layout{
+justify-items:center;
+text-align:center;
+}
+
+.about-grid{
+grid-template-columns:1fr;
+justify-items:center;
+}
+
+.profile-pic{
+margin:auto;
+display:block;
+}
+
+.contact-form{
+width:100%;
+max-width:420px;
+margin:auto;
+}
+
+.projects-window{
+width:100%;
+}
+
+/* -------------------------
+   FORCE 2x3 PROJECT GRID
+------------------------- */
+
+.projects-grid{
+
+grid-template-columns:repeat(2,1fr);
+gap:18px;
+
+}
+
+.project-card{
+
+aspect-ratio:1;
+
+}
+
+/* ensures grid stability */
+
 .projects-window{
 
+max-height:none;
 height:auto;
-overflow-y:visible;
 
+}
+
+}
+
+/* -------------------------
+   SMALL MOBILE SCREENS
+------------------------- */
+
+@media (max-width:600px){
+
+.projects-grid{
+
+grid-template-columns:repeat(2,1fr);
+
+}
+
+.hero h1{
+font-size:32px;
 }
 
 }
