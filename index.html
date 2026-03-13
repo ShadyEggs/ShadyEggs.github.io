@@ -1,633 +1,722 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-<title>Alfred Rico | Data Analysis Portfolio</title>
-
-<link rel="icon" type="image/png" href="/web_icon.png">
-
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-
-<link href="https://fonts.googleapis.com/css2?family=Lato:wght@400;700&family=Playfair+Display:wght@700&display=swap" rel="stylesheet">
-
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
-
-<style>
-
-body{font-family:'Lato',sans-serif;margin:0;background:#1f2933;scroll-behavior:smooth}
-
-/* HERO */
-
-.hero{
-position:relative;height:32vh;min-height:240px;
-display:flex;align-items:center;justify-content:center;
-text-align:center;overflow:hidden;color:white;
-background:
-radial-gradient(circle at 20% 30%,rgba(120,120,120,.35),transparent 40%),
-radial-gradient(circle at 80% 70%,rgba(180,180,180,.25),transparent 45%),
-linear-gradient(135deg,#020617,#111827 60%,#1f2933);
-}
-
-.hero::before{
-content:"";position:absolute;inset:0;
-background:radial-gradient(circle at 50% 80%,rgba(200,200,200,.25),transparent 60%);
-}
-
-.hero::after{
-content:"";position:absolute;inset:0;
-background-image:
-linear-gradient(rgba(255,255,255,.05) 1px,transparent 1px),
-linear-gradient(90deg,rgba(255,255,255,.05) 1px,transparent 1px);
-background-size:40px 40px;
-}
-
-#dashboardCanvas{position:absolute;inset:0;opacity:.45;z-index:2}
-
-.hero-content{position:relative;z-index:3;margin-top:-40px}
-
-.hero h1{
-font-family:'Playfair Display',serif;
-font-size:44px;
-letter-spacing:.5px;
-margin-bottom:6px;
-text-shadow:0 4px 18px rgba(0,0,0,.5);
-}
-
-.hero p{
-font-size:16px;
-letter-spacing:.8px;
-color:#cbd5e1;
-margin-top:4px;
-}
-
-.social-links a{color:white;margin:0 10px;font-size:22px}
-
-/* NAV */
-
-nav{background:white;box-shadow:0 2px 10px rgba(0,0,0,.08)}
-
-nav ul{display:flex;justify-content:center;list-style:none;padding:15px;margin:0}
-
-nav a{text-decoration:none;margin:0 12px;color:#333;font-weight:600}
-
-/* MAIN GRID */
-
-.main-layout{
-max-width:1100px;margin:60px auto;padding:0 30px;
-display:grid;
-grid-template-columns:1fr 1fr;
-grid-template-areas:
-"about contact"
-"projects projects"
-"certifications certifications";
-gap:40px;
-}
-
-#about{grid-area:about}
-#contact{grid-area:contact}
-#projects{grid-area:projects}
-#certifications{grid-area:certifications}
-
-h2{
-text-align:center;
-margin-bottom:32px;
-color:white;
-font-family:'Playfair Display',serif;
-font-size:26px;
-letter-spacing:.6px;
-position:relative;
-}
-
-h2::after{
-content:"";
-display:block;
-width:50px;
-height:3px;
-margin:10px auto 0;
-background:#4a90e2;
-border-radius:2px;
-}
-
-/* ABOUT */
-
-.about-grid{
-display:grid;
-grid-template-columns:200px 1fr;
-gap:30px;align-items:center;
-}
-
-.profile-pic{
-width:180px;height:180px;object-fit:cover;border-radius:50%;
-border:4px solid #4a90e2;
-box-shadow:0 10px 30px rgba(0,0,0,.15);
-}
-
-.about-text{
-position:relative;background:white;padding:30px;
-border-radius:18px;
-box-shadow:0 20px 50px rgba(0,0,0,.08);
-}
-
-/* CONTACT */
-
-.contact-form{
-background:white;padding:40px;border-radius:16px;
-box-shadow:0 15px 40px rgba(0,0,0,.08);
-}
-
-.contact-form input,
-.contact-form textarea{
-width:100%;padding:12px;margin:6px 0 15px;
-border-radius:8px;border:1px solid #ddd;
-}
-
-.apple-send{
-width:100%;padding:14px;border:none;
-border-radius:999px;background:#111;color:white;cursor:pointer;
-}
-/* FILTER BUTTONS */
-
-.project-filters,.package-filters{
-display:flex;justify-content:center;flex-wrap:wrap;gap:10px
-}
-
-.project-filters{margin-bottom:12px}
-.package-filters{margin-bottom:25px}
-
-.filter-btn{
-padding:8px 14px;border-radius:20px;border:none;
-background:#2f3a46;color:white;cursor:pointer;
-font-size:13px;min-height:36px;
-}
-
-.filter-btn.active.tag-all{background:#4a90e2}
-.filter-btn.active.tag-python{background:#3776AB}
-.filter-btn.active.tag-r{background:#276DC3}
-.filter-btn.active.tag-sql{background:#336791}
-.filter-btn.active.tag-tableau{background:#E97627}
-.filter-btn.active.tag-excel{background:#217346}
-.filter-btn.active.tag-sheets{background:#34A853}
-
-/* PROJECT GRID */
-
-.projects-window{max-width:920px;margin:auto;height:650px;overflow-y:auto}
-
-.projects-grid{
-display:grid;
-grid-template-columns:repeat(4,1fr);
-gap:20px;
-}
-
-.project-card{
-position:relative;border-radius:16px;overflow:hidden;
-aspect-ratio:1;cursor:pointer;text-decoration:none;
-color:inherit;
-}
-
-.project-card.hide{display:none}
-
-.project-card img{
-width:100%;height:100%;object-fit:cover;
-transition:transform .4s ease,filter .4s ease;
-}
-
-.project-card:hover img{
-filter:blur(4px) brightness(.55);
-transform:scale(1.08);
-}
-
-.project-overlay{
-position:absolute;bottom:0;left:0;right:0;
-padding:16px;color:white;
-background:linear-gradient(transparent,rgba(0,0,0,.85));
-}
-
-.project-tags{
-display:flex;flex-wrap:wrap;gap:6px;font-size:12px;
-}
-
-.project-tags span{
-padding:3px 8px;border-radius:6px;color:white;font-weight:600;
-}
-
-.project-tags .tag-python{background:#3776AB}
-.project-tags .tag-r{background:#276DC3}
-.project-tags .tag-sql{background:#336791}
-.project-tags .tag-tableau{background:#E97627}
-.project-tags .tag-excel{background:#217346}
-.project-tags .tag-sheets{background:#34A853}
-
-.tag-package{background:#555}
-
-</style>
-</head>
-<body>
-
-<header class="hero">
-
-<canvas id="dashboardCanvas"></canvas>
-
-<div class="hero-content">
-<h1>Alfred Rico</h1>
-<p>Aspiring Data Analyst</p>
-
-<div class="social-links">
-<a href="https://www.linkedin.com/in/alfred-rico-3992338a/" target="_blank"><i class="fab fa-linkedin"></i></a>
-<a href="https://github.com/ShadyEggs" target="_blank"><i class="fab fa-github"></i></a>
-</div>
-</div>
-
-</header>
-
-<nav>
-<ul>
-<li><a href="#projects">Projects</a></li>
-<li><a href="#certifications">Certifications</a></li>
-</ul>
-</nav>
-
-<div class="main-layout">
-
-<section id="about">
-<h2>About Me</h2>
-
-<div class="about-grid">
-
-<img src="profile.jpg" class="profile-pic">
-
-<div class="about-text">
-
-<p>Hi, I'm Alfred — a data analyst focused on turning messy datasets into clear, actionable insights. My projects focus on exploratory data analysis, trend detection, and building clear visual stories from complex datasets.</p>
-
-<p>Using tools like Python, SQL, and data visualization platforms, I explore patterns, build dashboards, and communicate findings that help explain what the data is really saying.</p>
-
-<p>My projects focus on exploratory data analysis, trend detection, and building clear visual stories from complex datasets.</p>
-
-</div>
-</div>
-</section>
-
-<section id="contact">
-
-<h2>Let's Connect!</h2>
-
-<form action="https://formsubmit.co/alfred.m.rico@gmail.com" method="POST" class="contact-form">
-
-<input type="text" name="name" placeholder="Name" required>
-<input type="email" name="email" placeholder="Email" required>
-
-<textarea name="message" rows="6" placeholder="Message" required></textarea>
-
-<button type="submit" class="apple-send">Send Message</button>
-
-</form>
-</section>
-
-<section id="projects">
-
-<h2>My Projects</h2>
-
-<div class="project-filters">
-<button class="filter-btn active tag-all" data-filter="all">All</button>
-<button class="filter-btn tag-python" data-filter="python">Python</button>
-<button class="filter-btn tag-r" data-filter="r">R</button>
-<button class="filter-btn tag-sql" data-filter="sql">SQL</button>
-<button class="filter-btn tag-tableau" data-filter="tableau">Tableau</button>
-<button class="filter-btn tag-excel" data-filter="excel">Excel</button>
-<button class="filter-btn tag-sheets" data-filter="sheets">Google Sheets</button>
-</div>
-
-<div class="package-filters"></div>
-
-<div class="projects-window">
-
-<div class="projects-grid">
-
-<!-- PROJECT 1 -->
-
-<a class="project-card" data-tags="r dplyr tidyr ggplot2 plotly"
-href="https://shadyeggs.github.io/Fifa21-Data-Cleaning-Project/" target="_blank">
-
-<img src="https://images.unsplash.com/photo-1518091043644-c1d4457512c6?w=800&q=80">
-
-<div class="project-overlay">
-<h3>Fifa 21 Data Cleaning</h3>
-
-<div class="project-tags">
-<span class="tag-r">R</span>
-<span class="tag-package">dplyr</span>
-<span class="tag-package">tidyr</span>
-<span class="tag-package">ggplot2</span>
-<span class="tag-package">plotly</span>
-</div>
-
-</div>
-</a>
-
-<!-- PROJECT 2 -->
-
-<a class="project-card"
-data-tags="sql tableau excel sheets"
-href="https://public.tableau.com/app/profile/alfred.rico/viz/CyclisticCaseStudy_17031395269510/Dashboard1"
-target="_blank">
-
-<img src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=800&q=80">
-
-<div class="project-overlay">
-<h3>Cyclistic Case Study</h3>
-
-<div class="project-tags">
-<span class="tag-sql">SQL</span>
-<span class="tag-tableau">Tableau</span>
-<span class="tag-excel">Excel</span>
-<span class="tag-sheets">Sheets</span>
-</div>
-
-</div>
-</a>
-</div>
-</div>
-</section>
-
-<section id="certifications">
-
-<h2>Certifications</h2>
-
-<div class="cert-column">
-
-<a href="https://www.coursera.org/account/accomplishments/professional-cert/MSCMJL682NT9" target="_blank">
-
-<div class="cert">
-
-<img height="24" src="https://upload.wikimedia.org/wikipedia/commons/2/2f/Google_2015_logo.svg">
-
-<div style="font-weight:700;font-size:14px;">
-Google Data Analytics Professional Certificate
-</div>
-
-<div style="font-size:11px;color:#c7c7cc;">
-Issued via Coursera
-</div>
-
-<img height="16" src="https://upload.wikimedia.org/wikipedia/commons/9/97/Coursera-Logo_600x600.svg">
-
-</div>
-
-</a>
-
-</div>
-</section>
-
-</div>
-
-<footer>
-<p>© 2026 Alfred Rico</p>
-</footer>
-
-<script>
-
-/* HERO DASHBOARD ANIMATION */
-
-const canvas=document.getElementById("dashboardCanvas")
-const ctx=canvas.getContext("2d")
-
-let bars=[],particles=[]
-const spacing=28
-const barWidth=18
-
-const palette=[
-"rgba(52,152,219,.45)",
-"rgba(26,188,156,.45)",
-"rgba(160,160,160,.45)"
-]
-
-function setupCanvas(){
-
-const hero=document.querySelector(".hero")
-
-canvas.width=hero.offsetWidth
-canvas.height=hero.offsetHeight
-
-bars=[]
-particles=[]
-
-const count=Math.floor(canvas.width/spacing)
-const totalWidth=count*spacing
-const offsetX=(canvas.width-totalWidth)/2
-
-for(let i=0;i<count;i++){
-
-const h=Math.random()*120+60
-
-bars.push({
-x:offsetX+i*spacing,
-height:h,
-target:h,
-color:palette[Math.floor(Math.random()*palette.length)]
-})
-
-}
-
-for(let i=0;i<30;i++){
-particles.push({
-x:Math.random()*canvas.width,
-y:Math.random()*canvas.height,
-size:Math.random()*2+1,
-speed:Math.random()*.4+.1
-})
-}
-
-}
-
-function randomizeBars(){
-for(let i=0;i<6;i++){
-const index=Math.floor(Math.random()*bars.length)
-bars[index].target=Math.random()*120+60
-}
-}
-
-setInterval(randomizeBars,5000)
-
-function drawParticles(){
-
-particles.forEach(p=>{
-
-p.y-=p.speed
-
-if(p.y<0){
-p.y=canvas.height
-p.x=Math.random()*canvas.width
-}
-
-ctx.fillStyle="rgba(255,255,255,.25)"
-ctx.beginPath()
-ctx.arc(p.x,p.y,p.size,0,Math.PI*2)
-ctx.fill()
-
-})
-
-}
-
-function drawRoundedRect(x,y,w,h,r){
-
-ctx.beginPath()
-ctx.moveTo(x,y+r)
-ctx.lineTo(x,y+h)
-ctx.lineTo(x+w,y+h)
-ctx.lineTo(x+w,y+r)
-ctx.quadraticCurveTo(x+w,y,x+w-r,y)
-ctx.lineTo(x+r,y)
-ctx.quadraticCurveTo(x,y,x,y+r)
-ctx.fill()
-
-}
-
-function animate(){
-
-ctx.clearRect(0,0,canvas.width,canvas.height)
-
-drawParticles()
-
-bars.forEach(bar=>{
-
-bar.height+=(bar.target-bar.height)*.05
-ctx.fillStyle=bar.color
-drawRoundedRect(bar.x,canvas.height-bar.height,barWidth,bar.height,6)
-
-})
-
-requestAnimationFrame(animate)
-
-}
-
-setupCanvas()
-animate()
-
-window.addEventListener("resize",setupCanvas)
-
-/* FIXED DYNAMIC FILTERING */
-
-const languageButtons=document.querySelectorAll(".filter-btn")
-const packageContainer=document.querySelector(".package-filters")
-const projects=[...document.querySelectorAll(".project-card")]
-
-const languages=["python","r","sql","tableau","excel","sheets"]
-
-let activeLanguages=[]
-let activePackages=[]
-
-function getPackages(selectedLanguages){
-
-let set=new Set()
-
-projects.forEach(card=>{
-
-const tags=card.dataset.tags.split(" ")
-
-const languageMatch=!selectedLanguages.length || selectedLanguages.some(lang=>tags.includes(lang))
-
-if(languageMatch){
-
-tags.forEach(tag=>{
-if(!languages.includes(tag)) set.add(tag)
-})
-
-}
-
-})
-
-return [...set].sort()
-
-}
-
-languageButtons.forEach(btn=>{
-
-btn.onclick=()=>{
-
-const filter=btn.dataset.filter
-
-if(filter==="all"){
-
-activeLanguages=[]
-activePackages=[]
-
-languageButtons.forEach(b=>b.classList.remove("active"))
-btn.classList.add("active")
-
-packageContainer.innerHTML=""
-
-showProjects()
-
-return
-
-}
-
-btn.classList.toggle("active")
-
-document.querySelector('[data-filter="all"]').classList.remove("active")
-
-activeLanguages=[...document.querySelectorAll(".project-filters .active")].map(b=>b.dataset.filter)
-
-buildPackageButtons()
-
-showProjects()
-
-}
-
-})
-
-function buildPackageButtons(){
-
-packageContainer.innerHTML=""
-activePackages=[]
-
-const packages=getPackages(activeLanguages)
-
-packages.forEach(pkg=>{
-
-const btn=document.createElement("button")
-
-btn.className="filter-btn package-btn"
-btn.textContent=pkg
-btn.dataset.filter=pkg
-
-btn.onclick=()=>{
-
-btn.classList.toggle("active")
-
-activePackages=[...document.querySelectorAll(".package-btn.active")].map(b=>b.dataset.filter)
-
-showProjects()
-
-}
-
-packageContainer.appendChild(btn)
-
-})
-
-}
-
-function showProjects(){
-
-projects.forEach(card=>{
-
-const tags=card.dataset.tags
-
-let languageMatch=!activeLanguages.length || activeLanguages.some(lang=>tags.includes(lang))
-
-let packageMatch=!activePackages.length || activePackages.every(pkg=>tags.includes(pkg))
-
-card.classList.toggle("hide",!(languageMatch && packageMatch))
-
-})
-
-}
-
-</script>
-
-</body>
-</html>
+1  <!DOCTYPE html>
+2  <html lang="en">
+3  <head>
+4  
+5  <meta charset="UTF-8">
+6  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+7  
+8  <title>Alfred Rico | Data Analysis Portfolio</title>
+9  
+10 <link rel="icon" type="image/png" href="/web_icon.png">
+11 
+12 <link rel="preconnect" href="https://fonts.googleapis.com">
+13 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+14 
+15 <link href="https://fonts.googleapis.com/css2?family=Lato:wght@400;700&family=Playfair+Display:wght@700&display=swap" rel="stylesheet">
+16 
+17 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+18 
+19 <style>
+20 
+21 body{font-family:'Lato',sans-serif;margin:0;background:#1f2933;scroll-behavior:smooth}
+22 
+23 /* HERO */
+24 
+25 .hero{
+26 position:relative;height:32vh;min-height:240px;
+27 display:flex;align-items:center;justify-content:center;
+28 text-align:center;overflow:hidden;color:white;
+29 background:
+30 radial-gradient(circle at 20% 30%,rgba(120,120,120,.35),transparent 40%),
+31 radial-gradient(circle at 80% 70%,rgba(180,180,180,.25),transparent 45%),
+32 linear-gradient(135deg,#020617,#111827 60%,#1f2933);
+33 }
+34 
+35 .hero::before{
+36 content:"";position:absolute;inset:0;
+37 background:radial-gradient(circle at 50% 80%,rgba(200,200,200,.25),transparent 60%);
+38 }
+39 
+40 .hero::after{
+41 content:"";position:absolute;inset:0;
+42 background-image:
+43 linear-gradient(rgba(255,255,255,.05) 1px,transparent 1px),
+44 linear-gradient(90deg,rgba(255,255,255,.05) 1px,transparent 1px);
+45 background-size:40px 40px;
+46 }
+47 
+48 #dashboardCanvas{position:absolute;inset:0;opacity:.45;z-index:2}
+49 
+50 .hero-content{position:relative;z-index:3;margin-top:-40px}
+51 
+52 .hero h1{
+53 font-family:'Playfair Display',serif;
+54 font-size:44px;
+55 letter-spacing:.5px;
+56 margin-bottom:6px;
+57 text-shadow:0 4px 18px rgba(0,0,0,.5);
+58 }
+59 
+60 .hero p{
+61 font-size:16px;
+62 letter-spacing:.8px;
+63 color:#cbd5e1;
+64 margin-top:4px;
+65 }
+66 
+67 .social-links a{color:white;margin:0 10px;font-size:22px}
+68 
+69 /* NAV */
+70 
+71 nav{background:white;box-shadow:0 2px 10px rgba(0,0,0,.08)}
+72 
+73 nav ul{display:flex;justify-content:center;list-style:none;padding:15px;margin:0}
+74 
+75 nav a{text-decoration:none;margin:0 12px;color:#333;font-weight:600}
+76 
+77 /* MAIN GRID */
+78 
+79 .main-layout{
+80 max-width:1100px;margin:60px auto;padding:0 30px;
+81 display:grid;
+82 grid-template-columns:1fr 1fr;
+83 grid-template-areas:
+84 "about contact"
+85 "projects projects"
+86 "certifications certifications";
+87 gap:40px;
+88 }
+89 
+90 #about{grid-area:about}
+91 #contact{grid-area:contact}
+92 #projects{grid-area:projects}
+93 #certifications{grid-area:certifications}
+94 
+95 /* SECTION TITLES */
+96 
+97 h2{
+98 text-align:center;
+99 margin-bottom:32px;
+100 color:white;
+101 font-family:'Playfair Display',serif;
+102 font-size:26px;
+103 letter-spacing:.6px;
+104 position:relative;
+105 }
+106 
+107 h2::after{
+108 content:"";
+109 display:block;
+110 width:50px;
+111 height:3px;
+112 margin:10px auto 0;
+113 background:#4a90e2;
+114 border-radius:2px;
+115 }
+116 
+117 /* ABOUT */
+118 
+119 .about-grid{
+120 display:grid;
+121 grid-template-columns:200px 1fr;
+122 gap:30px;align-items:center;
+123 }
+124 
+125 .profile-pic{
+126 width:180px;height:180px;object-fit:cover;border-radius:50%;
+127 border:4px solid #4a90e2;
+128 box-shadow:0 10px 30px rgba(0,0,0,.15);
+129 }
+130 
+131 /* CHAT BUBBLE */
+132 
+133 .about-text{
+134 position:relative;background:white;padding:30px;
+135 border-radius:18px;
+136 box-shadow:0 20px 50px rgba(0,0,0,.08);
+137 transition:transform .3s ease,box-shadow .3s ease;
+138 }
+139 
+140 .about-text:hover{
+141 transform:scale(1.03);
+142 box-shadow:0 25px 60px rgba(0,0,0,.15);
+143 }
+144 
+145 .about-text::before{
+146 content:"";
+147 position:absolute;
+148 left:-18px;
+149 top:70px;
+150 border-width:10px;
+151 border-style:solid;
+152 border-color:transparent white transparent transparent;
+153 }
+154 
+155 /* CONTACT */
+156 
+157 .contact-form{
+158 background:white;padding:40px;border-radius:16px;
+159 box-shadow:0 15px 40px rgba(0,0,0,.08);
+160 }
+161 
+162 .contact-form input,
+163 .contact-form textarea{
+164 width:100%;padding:12px;margin:6px 0 15px;
+165 border-radius:8px;border:1px solid #ddd;
+166 }
+167 
+168 .apple-send{
+169 width:100%;padding:14px;border:none;
+170 border-radius:999px;background:#111;color:white;cursor:pointer;
+171 }
+172 
+173 /* FILTERS */
+174 
+175 .project-filters,.package-filters{
+176 display:flex;justify-content:center;flex-wrap:wrap;gap:10px
+177 }
+178 
+179 .project-filters{margin-bottom:12px}
+180 .package-filters{margin-bottom:25px}
+181 
+182 .filter-btn{
+183 padding:8px 14px;border-radius:20px;border:none;
+184 background:#2f3a46;color:white;cursor:pointer;
+185 font-size:13px;min-height:36px;
+186 }
+187 
+188 .package-btn.active{background:#4a90e2}
+189 
+190 /* PROJECT GRID */
+191 .projects-window{max-width:920px;margin:auto;height:650px;overflow-y:auto}
+192 
+193 .projects-grid{
+194 display:grid;
+195 grid-template-columns:repeat(4,1fr);
+196 gap:20px;
+197 }
+198 
+199 .project-card{
+200 position:relative;border-radius:16px;overflow:hidden;
+201 aspect-ratio:1;cursor:pointer;text-decoration:none;
+202 color:inherit;touch-action:manipulation;
+203 }
+204 
+205 .project-card.hide{display:none}
+206 
+207 .project-card img{
+208 width:100%;height:100%;object-fit:cover;
+209 transition:transform .4s ease,filter .4s ease;
+210 }
+211 
+212 .project-card:hover img{
+213 filter:blur(4px) brightness(.55);
+214 transform:scale(1.08);
+215 }
+216 
+217 .project-overlay{
+218 position:absolute;bottom:0;left:0;right:0;
+219 padding:16px;color:white;
+220 background:linear-gradient(transparent,rgba(0,0,0,.85));
+221 }
+222 
+223 .project-overlay h3{
+224 font-size:17px;font-weight:700;margin:0 0 8px;
+225 }
+226 
+227 .project-tags{
+228 display:flex;flex-wrap:wrap;gap:6px;font-size:12px;
+229 }
+230 
+231 .project-tags span{
+232 padding:3px 8px;border-radius:6px;color:white;font-weight:600;
+233 }
+234 
+235 .project-tags .tag-python{background:#3776AB}
+236 .project-tags .tag-r{background:#276DC3}
+237 .project-tags .tag-sql{background:#336791}
+238 .project-tags .tag-tableau{background:#E97627}
+239 .project-tags .tag-excel{background:#217346}
+240 .project-tags .tag-sheets{background:#34A853}
+241 
+242 .tag-package{background:#555}
+243 
+244 /* CERT */
+245 
+246 .cert-column{display:flex;justify-content:center}
+247 
+248 .cert{
+249 background:linear-gradient(145deg,#3a3a3c,#2c2c2e);
+250 border-radius:14px;padding:18px 20px;text-align:center;
+251 box-shadow:0 12px 30px rgba(0,0,0,.45),inset 0 1px 0 rgba(255,255,255,.08);
+252 border:1px solid rgba(255,255,255,.08);
+253 max-width:220px;
+254 transition:.25s ease;
+255 color:white;
+256 }
+257 
+258 .cert:hover{
+259 transform:translateY(-6px) scale(1.03);
+260 box-shadow:0 22px 50px rgba(0,0,0,.55),inset 0 1px 0 rgba(255,255,255,.12);
+261 }
+262 
+263 footer{text-align:center;padding:14px;background:#111;color:white}
+264 
+265 /* MOBILE */
+266 
+267 @media (max-width:900px){
+268 
+269 .main-layout{
+270 grid-template-columns:1fr;
+271 grid-template-areas:
+272 "about"
+273 "contact"
+274 "projects"
+275 "certifications";
+276 }
+277 
+278 .about-grid{grid-template-columns:1fr;text-align:center}
+279 
+280 .profile-pic{margin:auto}
+281 
+282 .projects-grid{grid-template-columns:repeat(3,1fr)}
+283 
+284 }
+285 
+286 @media (max-width:600px){
+287 
+288 .hero h1{font-size:34px}
+289 
+290 h2{
+291 font-size:24px;
+292 margin-bottom:24px;
+293 }
+294 
+295 .projects-window{height:auto}
+296 
+297 .projects-grid{grid-template-columns:repeat(2,1fr)}
+298 
+299 .project-tags span{padding:4px 9px}
+300 
+301 }
+302 
+303 </style>
+304 
+305 </head>
+306 <body>
+307 
+308 <header class="hero">
+309 
+310 <canvas id="dashboardCanvas"></canvas>
+311 
+312 <div class="hero-content">
+313 <h1>Alfred Rico</h1>
+314 <p>Aspiring Data Analyst</p>
+315 
+316 <div class="social-links">
+317 <a href="https://www.linkedin.com/in/alfred-rico-3992338a/" target="_blank"><i class="fab fa-linkedin"></i></a>
+318 <a href="https://github.com/ShadyEggs" target="_blank"><i class="fab fa-github"></i></a>
+319 </div>
+320 </div>
+321 
+322 </header>
+323 
+324 <nav>
+325 <ul>
+326 <li><a href="#projects">Projects</a></li>
+327 <li><a href="#certifications">Certifications</a></li>
+328 </ul>
+329 </nav>
+330 
+331 <div class="main-layout">
+332 
+333 <section id="about">
+334 <h2>About Me</h2>
+335 
+336 <div class="about-grid">
+337 
+338 <img src="profile.jpg" class="profile-pic">
+339 
+340 <div class="about-text">
+341 
+342 <p>Hi, I'm Alfred — a data analyst focused on turning messy datasets into clear, actionable insights. My projects focus on exploratory data analysis, trend detection, and building clear visual stories from complex datasets.</p>
+343 
+344 <p>Using tools like Python, SQL, and data visualization platforms, I explore patterns, build dashboards, and communicate findings that help explain what the data is really saying.</p>
+345 
+346 <p>My projects focus on exploratory data analysis, trend detection, and building clear visual stories from complex datasets.</p>
+347 
+348 </div>
+349 </div>
+350 </section>
+351 
+352 <section id="contact">
+353 
+354 <h2>Let's Connect!</h2>
+355 
+356 <form action="https://formsubmit.co/alfred.m.rico@gmail.com" method="POST" class="contact-form">
+357 
+358 <input type="text" name="name" placeholder="Name" required>
+359 <input type="email" name="email" placeholder="Email" required>
+360 
+361 <textarea name="message" rows="6" placeholder="Message" required></textarea>
+362 
+363 <button type="submit" class="apple-send">Send Message</button>
+364 
+365 </form>
+366 </section>
+367 
+368 <section id="projects">
+369 
+370 <h2>My Projects</h2>
+371 
+372 <div class="project-filters">
+373 <button class="filter-btn active tag-all" data-filter="all">All</button>
+374 <button class="filter-btn tag-python" data-filter="python">Python</button>
+375 <button class="filter-btn tag-r" data-filter="r">R</button>
+376 <button class="filter-btn tag-sql" data-filter="sql">SQL</button>
+377 <button class="filter-btn tag-tableau" data-filter="tableau">Tableau</button>
+378 <button class="filter-btn tag-excel" data-filter="excel">Excel</button>
+379 <button class="filter-btn tag-sheets" data-filter="sheets">Google Sheets</button>
+380 </div>
+381 
+382 <div class="package-filters"></div>
+383 
+384 <div class="projects-window">
+385 
+386 <div class="projects-grid">
+387 
+388 <a class="project-card" data-tags="r dplyr tidyr ggplot2 plotly"
+389 href="https://shadyeggs.github.io/Fifa21-Data-Cleaning-Project/" target="_blank">
+390 
+391 <img src="https://images.unsplash.com/photo-1518091043644-c1d4457512c6?w=800&q=80">
+392 
+393 <div class="project-overlay">
+394 <h3>Fifa 21 Data Cleaning</h3>
+395 
+396 <div class="project-tags">
+397 <span class="tag-r">R</span>
+398 <span class="tag-package">dplyr</span>
+399 <span class="tag-package">tidyr</span>
+400 <span class="tag-package">ggplot2</span>
+401 <span class="tag-package">plotly</span>
+402 </div>
+403 
+404 </div>
+405 </a>
+406 
+407 <a class="project-card"
+408 data-tags="sql tableau excel sheets"
+409 href="https://public.tableau.com/app/profile/alfred.rico/viz/CyclisticCaseStudy_17031395269510/Dashboard1"
+410 target="_blank">
+411 
+412 <img src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=800&q=80">
+413 
+414 <div class="project-overlay">
+415 <h3>Cyclistic Case Study</h3>
+416 
+417 <div class="project-tags">
+418 <span class="tag-sql">SQL</span>
+419 <span class="tag-tableau">Tableau</span>
+420 <span class="tag-excel">Excel</span>
+421 <span class="tag-sheets">Sheets</span>
+422 </div>
+423 
+424 </div>
+425 </a>
+426 
+427 </div>
+428 </div>
+429 </section>
+430 
+431 <section id="certifications">
+432 
+433 <h2>Certifications</h2>
+434 
+435 <div class="cert-column">
+436 
+437 <a href="https://www.coursera.org/account/accomplishments/professional-cert/MSCMJL682NT9" target="_blank">
+438 
+439 <div class="cert">
+440 
+441 <img height="24" src="https://upload.wikimedia.org/wikipedia/commons/2/2f/Google_2015_logo.svg">
+442 
+443 <div style="font-weight:700;font-size:14px;">
+444 Google Data Analytics Professional Certificate
+445 </div>
+446 
+447 <div style="font-size:11px;color:#c7c7cc;">
+448 Issued via Coursera
+449 </div>
+450 
+451 <img height="16" src="https://upload.wikimedia.org/wikipedia/commons/9/97/Coursera-Logo_600x600.svg">
+452 
+453 </div>
+454 
+455 </a>
+456 
+457 </div>
+458 </section>
+459 
+460 </div>
+461 
+462 <footer>
+463 <p>© 2026 Alfred Rico</p>
+464 </footer>
+465 
+466 <script>
+467 
+468 /* HERO DASHBOARD ANIMATION */
+469 
+470 const canvas=document.getElementById("dashboardCanvas")
+471 const ctx=canvas.getContext("2d")
+472 
+473 let bars=[],particles=[]
+474 const spacing=28
+475 const barWidth=18
+476 
+477 const palette=[
+478 "rgba(52,152,219,.45)",
+479 "rgba(26,188,156,.45)",
+480 "rgba(160,160,160,.45)"
+481 ]
+482 
+483 function setupCanvas(){
+484 
+485 const hero=document.querySelector(".hero")
+486 
+487 canvas.width=hero.offsetWidth
+488 canvas.height=hero.offsetHeight
+489 
+490 bars=[]
+491 particles=[]
+492 
+493 const count=Math.floor(canvas.width/spacing)
+494 const totalWidth=count*spacing
+495 const offsetX=(canvas.width-totalWidth)/2
+496 
+497 for(let i=0;i<count;i++){
+498 
+499 const h=Math.random()*120+60
+500 
+501 bars.push({
+502 x:offsetX+i*spacing,
+503 height:h,
+504 target:h,
+505 color:palette[Math.floor(Math.random()*palette.length)]
+506 })
+507 
+508 }
+509 
+510 for(let i=0;i<30;i++){
+511 particles.push({
+512 x:Math.random()*canvas.width,
+513 y:Math.random()*canvas.height,
+514 size:Math.random()*2+1,
+515 speed:Math.random()*.4+.1
+516 })
+517 }
+518 
+519 }
+520 
+521 function randomizeBars(){
+522 for(let i=0;i<6;i++){
+523 const index=Math.floor(Math.random()*bars.length)
+524 bars[index].target=Math.random()*120+60
+525 }
+526 }
+527 
+528 setInterval(randomizeBars,5000)
+529 
+530 function drawParticles(){
+531 
+532 particles.forEach(p=>{
+533 
+534 p.y-=p.speed
+535 
+536 if(p.y<0){
+537 p.y=canvas.height
+538 p.x=Math.random()*canvas.width
+539 }
+540 
+541 ctx.fillStyle="rgba(255,255,255,.25)"
+542 ctx.beginPath()
+543 ctx.arc(p.x,p.y,p.size,0,Math.PI*2)
+544 ctx.fill()
+545 
+546 })
+547 
+548 }
+549 
+550 function drawRoundedRect(x,y,w,h,r){
+551 
+552 ctx.beginPath()
+553 ctx.moveTo(x,y+r)
+554 ctx.lineTo(x,y+h)
+555 ctx.lineTo(x+w,y+h)
+556 ctx.lineTo(x+w,y+r)
+557 ctx.quadraticCurveTo(x+w,y,x+w-r,y)
+558 ctx.lineTo(x+r,y)
+559 ctx.quadraticCurveTo(x,y,x,y+r)
+560 ctx.fill()
+561 
+562 }
+563 
+564 function animate(){
+565 
+566 ctx.clearRect(0,0,canvas.width,canvas.height)
+567 
+568 drawParticles()
+569 
+570 bars.forEach(bar=>{
+571 
+572 bar.height+=(bar.target-bar.height)*.05
+573 ctx.fillStyle=bar.color
+574 drawRoundedRect(bar.x,canvas.height-bar.height,barWidth,bar.height,6)
+575 
+576 })
+577 
+578 requestAnimationFrame(animate)
+579 
+580 }
+581 
+582 setupCanvas()
+583 animate()
+584 
+585 window.addEventListener("resize",setupCanvas)
+586 
+587 /* OPTIMIZED FILTER SYSTEM */
+588 
+589 const languageButtons=document.querySelectorAll(".filter-btn")
+590 const packageContainer=document.querySelector(".package-filters")
+591 const projects=[...document.querySelectorAll(".project-card")]
+592 
+593 /* pre-parse tags for performance with many projects */
+594 
+595 projects.forEach(card=>{
+596 card.tags=card.dataset.tags.split(" ")
+597 })
+598 
+599 const languages=new Set(["python","r","sql","tableau","excel","sheets"])
+600 
+601 let activeLanguages=[]
+602 let activePackages=[]
+603 
+604 function getPackages(selectedLanguages){
+605 
+606 let set=new Set()
+607 
+608 projects.forEach(card=>{
+609 
+610 const tags=card.tags
+611 
+612 const languageMatch=
+613 !selectedLanguages.length ||
+614 selectedLanguages.some(lang=>tags.includes(lang))
+615 
+616 if(languageMatch){
+617 
+618 tags.forEach(tag=>{
+619 if(!languages.has(tag)){
+620 set.add(tag)
+621 }
+622 })
+623 
+624 }
+625 
+626 })
+627 
+628 return [...set].sort()
+629 
+630 }
+631 
+632 languageButtons.forEach(btn=>{
+633 
+634 btn.onclick=()=>{
+635 
+636 const filter=btn.dataset.filter
+637 
+638 if(filter==="all"){
+639 
+640 activeLanguages=[]
+641 activePackages=[]
+642 
+643 languageButtons.forEach(b=>b.classList.remove("active"))
+644 btn.classList.add("active")
+645 
+646 packageContainer.innerHTML=""
+647 
+648 showProjects()
+649 
+650 return
+651 
+652 }
+653 
+654 btn.classList.toggle("active")
+655 
+656 document.querySelector('[data-filter="all"]').classList.remove("active")
+657 
+658 activeLanguages=[...document.querySelectorAll(".project-filters .active")]
+659 .map(b=>b.dataset.filter)
+660 
+661 buildPackageButtons()
+662 
+663 showProjects()
+664 
+665 }
+666 
+667 })
+668 
+669 function buildPackageButtons(){
+670 
+671 packageContainer.innerHTML=""
+672 activePackages=[]
+673 
+674 getPackages(activeLanguages).forEach(pkg=>{
+675 
+676 const btn=document.createElement("button")
+677 
+678 btn.className="filter-btn package-btn"
+679 btn.textContent=pkg
+680 btn.dataset.filter=pkg
+681 
+682 btn.onclick=()=>{
+683 
+684 btn.classList.toggle("active")
+685 
+686 activePackages=[...document.querySelectorAll(".package-btn.active")]
+687 .map(b=>b.dataset.filter)
+688 
+689 showProjects()
+690 
+691 }
+692 
+693 packageContainer.appendChild(btn)
+694 
+695 })
+696 
+697 }
+698 
+699 function showProjects(){
+700 
+701 projects.forEach(card=>{
+702 
+703 const tags=card.tags
+704 
+705 let languageMatch=
+706 !activeLanguages.length ||
+707 activeLanguages.some(lang=>tags.includes(lang))
+708 
+709 let packageMatch=
+710 !activePackages.length ||
+711 activePackages.every(pkg=>tags.includes(pkg))
+712 
+713 card.classList.toggle("hide",!(languageMatch && packageMatch))
+714 
+715 })
+716 
+717 }
+718 
+719 </script>
+720 
+721 </body>
+722 </html>
