@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
 
 <meta charset="UTF-8">
@@ -159,7 +160,7 @@ background:white;
 padding:30px;
 border-radius:18px;
 box-shadow:0 20px 50px rgba(0,0,0,.08);
-transition:.3s;
+transition:transform .3s ease, box-shadow .3s ease;
 }
 
 .about-text:hover{
@@ -176,7 +177,6 @@ border-width:10px;
 border-style:solid;
 border-color:transparent white transparent transparent;
 }
-
 /* CONTACT */
 
 .contact-form{
@@ -262,6 +262,7 @@ aspect-ratio:1;
 cursor:pointer;
 text-decoration:none;
 color:inherit;
+touch-action:manipulation;
 }
 
 .project-card.hide{display:none}
@@ -270,7 +271,7 @@ color:inherit;
 width:100%;
 height:100%;
 object-fit:cover;
-transition:.4s;
+transition:transform .4s ease,filter .4s ease;
 }
 
 .project-card:hover img{
@@ -288,6 +289,12 @@ color:white;
 background:linear-gradient(transparent,rgba(0,0,0,.85));
 }
 
+.project-overlay h3{
+font-size:17px;
+font-weight:700;
+margin:0 0 8px;
+}
+
 .project-tags{
 display:flex;
 flex-wrap:wrap;
@@ -302,13 +309,14 @@ color:white;
 font-weight:600;
 }
 
+.project-tags .tag-python{background:#3776AB}
+.project-tags .tag-r{background:#276DC3}
+.project-tags .tag-sql{background:#336791}
+.project-tags .tag-tableau{background:#E97627}
+.project-tags .tag-excel{background:#217346}
+.project-tags .tag-sheets{background:#34A853}
+
 .tag-package{background:#555}
-.tag-python{background:#3776AB}
-.tag-r{background:#276DC3}
-.tag-sql{background:#336791}
-.tag-tableau{background:#E97627}
-.tag-excel{background:#217346}
-.tag-sheets{background:#34A853}
 
 /* CERT */
 
@@ -322,15 +330,18 @@ background:linear-gradient(145deg,#3a3a3c,#2c2c2e);
 border-radius:14px;
 padding:18px 20px;
 text-align:center;
-box-shadow:0 12px 30px rgba(0,0,0,.45);
+box-shadow:0 12px 30px rgba(0,0,0,.45),
+inset 0 1px 0 rgba(255,255,255,.08);
 border:1px solid rgba(255,255,255,.08);
 max-width:220px;
-transition:.25s;
+transition:.25s ease;
 color:white;
 }
 
 .cert:hover{
 transform:translateY(-6px) scale(1.03);
+box-shadow:0 22px 50px rgba(0,0,0,.55),
+inset 0 1px 0 rgba(255,255,255,.12);
 }
 
 footer{
@@ -380,13 +391,16 @@ height:auto;
 grid-template-columns:repeat(2,1fr);
 }
 
+.project-tags span{
+padding:4px 9px;
+}
+
 }
 
 </style>
 </head>
 
 <body>
-
 <header class="hero">
 
 <canvas id="dashboardCanvas"></canvas>
@@ -399,8 +413,8 @@ grid-template-columns:repeat(2,1fr);
 <a href="https://www.linkedin.com/in/alfred-rico-3992338a/" target="_blank"><i class="fab fa-linkedin"></i></a>
 <a href="https://github.com/ShadyEggs" target="_blank"><i class="fab fa-github"></i></a>
 </div>
-
 </div>
+
 </header>
 
 <nav>
@@ -420,9 +434,11 @@ grid-template-columns:repeat(2,1fr);
 <img src="profile.jpg" class="profile-pic">
 
 <div class="about-text">
-<p>Hi, I'm Alfred — a data analyst focused on turning messy datasets into clear insights.</p>
-<p>I use Python, SQL, and visualization tools to explore patterns and communicate findings.</p>
-<p>My projects focus on exploratory analysis, trend detection, and visual storytelling.</p>
+<p>Hi, I'm Alfred — a data analyst focused on turning messy datasets into clear, actionable insights. My projects focus on exploratory data analysis, trend detection, and building clear visual stories from complex datasets.</p>
+
+<p>Using tools like Python, SQL, and data visualization platforms, I explore patterns, build dashboards, and communicate findings that help explain what the data is really saying.</p>
+
+<p>My projects focus on exploratory data analysis, trend detection, and building clear visual stories from complex datasets.</p>
 </div>
 
 </div>
@@ -432,15 +448,19 @@ grid-template-columns:repeat(2,1fr);
 <h2>Let's Connect!</h2>
 
 <form action="https://formsubmit.co/alfred.m.rico@gmail.com" method="POST" class="contact-form">
+
 <input type="text" name="name" placeholder="Name" required>
 <input type="email" name="email" placeholder="Email" required>
-<textarea name="message" rows="6" placeholder="Message" required></textarea>
-<button type="submit" class="apple-send">Send Message</button>
-</form>
 
+<textarea name="message" rows="6" placeholder="Message" required></textarea>
+
+<button type="submit" class="apple-send">Send Message</button>
+
+</form>
 </section>
 
 <section id="projects">
+
 <h2>My Projects</h2>
 
 <div class="project-filters">
@@ -456,6 +476,7 @@ grid-template-columns:repeat(2,1fr);
 <div class="package-filters"></div>
 
 <div class="projects-window">
+
 <div class="projects-grid">
 
 <a class="project-card" data-tags="r dplyr tidyr ggplot2 plotly"
@@ -465,7 +486,6 @@ href="https://shadyeggs.github.io/Fifa21-Data-Cleaning-Project/" target="_blank"
 
 <div class="project-overlay">
 <h3>Fifa 21 Data Cleaning</h3>
-
 <div class="project-tags">
 <span class="tag-r">R</span>
 <span class="tag-package">dplyr</span>
@@ -473,8 +493,8 @@ href="https://shadyeggs.github.io/Fifa21-Data-Cleaning-Project/" target="_blank"
 <span class="tag-package">ggplot2</span>
 <span class="tag-package">plotly</span>
 </div>
-
 </div>
+
 </a>
 
 <a class="project-card"
@@ -486,19 +506,19 @@ target="_blank">
 
 <div class="project-overlay">
 <h3>Cyclistic Case Study</h3>
-
 <div class="project-tags">
 <span class="tag-sql">SQL</span>
 <span class="tag-tableau">Tableau</span>
 <span class="tag-excel">Excel</span>
 <span class="tag-sheets">Sheets</span>
 </div>
-
 </div>
+
 </a>
 
 </div>
 </div>
+
 </section>
 
 <section id="certifications">
@@ -528,6 +548,7 @@ Issued via Coursera
 </a>
 
 </div>
+
 </section>
 
 </div>
@@ -659,7 +680,9 @@ window.addEventListener("resize",setupCanvas)
 
 /* FILTER SYSTEM */
 
-const packageMap={r:["dplyr","tidyr","ggplot2","plotly"]}
+const packageMap={
+r:["dplyr","tidyr","ggplot2","plotly"]
+}
 
 const languageButtons=document.querySelectorAll(".filter-btn")
 const packageContainer=document.querySelector(".package-filters")
