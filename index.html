@@ -297,7 +297,7 @@ border-radius:6px;
 background:#555;
 }
 
-/* CERT */
+/* CERT — DARK SILVER STYLE */
 
 .cert-column{
 display:flex;
@@ -305,12 +305,24 @@ justify-content:center;
 }
 
 .cert{
-background:white;
+background:linear-gradient(145deg,#3a3a3c,#2c2c2e);
 border-radius:14px;
-padding:14px 18px;
+padding:18px 20px;
 text-align:center;
-box-shadow:0 12px 30px rgba(0,0,0,.08);
+box-shadow:
+0 12px 30px rgba(0,0,0,.45),
+inset 0 1px 0 rgba(255,255,255,.08);
+border:1px solid rgba(255,255,255,.08);
 max-width:220px;
+transition:.25s ease;
+color:white;
+}
+
+.cert:hover{
+transform:translateY(-6px) scale(1.03);
+box-shadow:
+0 22px 50px rgba(0,0,0,.55),
+inset 0 1px 0 rgba(255,255,255,.12);
 }
 
 footer{
@@ -462,7 +474,7 @@ target="_blank">
 Google Data Analytics Professional Certificate
 </div>
 
-<div style="font-size:11px;color:#666;">
+<div style="font-size:11px;color:#c7c7cc;">
 Issued via Coursera
 </div>
 
