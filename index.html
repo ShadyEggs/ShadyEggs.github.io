@@ -51,8 +51,6 @@ radial-gradient(circle at 80% 70%, rgba(180,180,180,.25), transparent 45%),
 linear-gradient(135deg,#020617,#111827 60%,#1f2933);
 }
 
-/* hero glow */
-
 .hero::before{
 content:"";
 position:absolute;
@@ -64,8 +62,6 @@ rgba(200,200,200,0.10) 25%,
 transparent 60%);
 z-index:0;
 }
-
-/* hero grid overlay */
 
 .hero::after{
 content:"";
@@ -321,11 +317,22 @@ gap:4px;
 font-size:10px;
 }
 
+/* default tag */
+
 .project-tags span{
 background:rgba(255,255,255,0.2);
 padding:2px 6px;
 border-radius:6px;
 }
+
+/* TOOL COLORS */
+
+.tag-python{background:#3776AB;color:white;}
+.tag-r{background:#276DC3;color:white;}
+.tag-sql{background:#008C95;color:white;}
+.tag-tableau{background:#E97627;color:white;}
+.tag-excel{background:#217346;color:white;}
+.tag-sheets{background:#34A853;color:white;}
 
 /* CERT */
 
@@ -454,7 +461,7 @@ target="_blank">
 <h3>Fifa 21 Data Cleaning</h3>
 
 <div class="project-tags">
-<span>R</span>
+<span class="tag-r">R</span>
 <span>dplyr</span>
 <span>tidyr</span>
 <span>ggplot2</span>
@@ -476,10 +483,10 @@ target="_blank">
 <h3>Cyclistic Case Study</h3>
 
 <div class="project-tags">
-<span>SQL</span>
-<span>Tableau</span>
-<span>Excel</span>
-<span>Google Sheets</span>
+<span class="tag-sql">SQL</span>
+<span class="tag-tableau">Tableau</span>
+<span class="tag-excel">Excel</span>
+<span class="tag-sheets">Sheets</span>
 </div>
 
 </div>
@@ -647,6 +654,55 @@ setupCanvas()
 animate()
 
 window.addEventListener("resize",setupCanvas)
+
+/* MULTI FILTER */
+
+const filterButtons=document.querySelectorAll(".filter-btn")
+const projects=document.querySelectorAll(".project-card")
+
+let activeFilters=[]
+
+filterButtons.forEach(btn=>{
+
+btn.addEventListener("click",()=>{
+
+const filter=btn.dataset.filter
+
+if(filter==="all"){
+activeFilters=[]
+filterButtons.forEach(b=>b.classList.remove("active"))
+btn.classList.add("active")
+
+projects.forEach(card=>{
+card.classList.remove("hide")
+})
+
+return
+}
+
+btn.classList.toggle("active")
+document.querySelector('[data-filter="all"]').classList.remove("active")
+
+activeFilters=[...document.querySelectorAll(".filter-btn.active")]
+.map(b=>b.dataset.filter)
+.filter(f=>f!=="all")
+
+projects.forEach(card=>{
+
+const tags=card.dataset.tags
+const match=activeFilters.every(f=>tags.includes(f))
+
+if(activeFilters.length===0 || match){
+card.classList.remove("hide")
+}else{
+card.classList.add("hide")
+}
+
+})
+
+})
+
+})
 
 </script>
 
