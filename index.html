@@ -314,6 +314,8 @@ margin:0 0 6px 0;
 font-size:15px;
 }
 
+/* TOOL TAGS */
+
 .project-tags{
 display:flex;
 flex-wrap:wrap;
@@ -321,10 +323,11 @@ gap:4px;
 font-size:10px;
 }
 
-.project-tags span{
-background:rgba(255,255,255,0.2);
+.tool-tag{
+background:#4a90e2;
 padding:2px 6px;
 border-radius:6px;
+cursor:pointer;
 }
 
 /* CERT */
@@ -393,9 +396,8 @@ color:white;
 </div>
 
 <div class="about-text">
-<p>Hi, I’m Alfred — an aspiring data analyst who enjoys turning messy data into clear insights and finding patterns that explain what’s really going on.</p>
-<p>Through hands-on projects, I’ve worked with Python, SQL, and visualization tools to analyze data and communicate findings in a way that’s easy to understand.</p>
-<p>I'm always looking for new problems to explore and new ways to learn.</p>
+<p>Hi, I’m Alfred — an aspiring data analyst who enjoys turning messy data into clear insights.</p>
+<p>Through hands-on projects, I’ve worked with Python, SQL, and visualization tools.</p>
 </div>
 </div>
 </section>
@@ -429,29 +431,13 @@ color:white;
 <div class="projects-window">
 <div class="projects-grid">
 
-<a class="project-card" data-tags="r" href="https://shadyeggs.github.io/Fifa21-Data-Cleaning-Project/" target="_blank">
-<img src="https://images.unsplash.com/photo-1518091043644-c1d4457512c6">
-<div class="project-overlay">
-<h3>Fifa 21 Data Cleaning</h3>
-<div class="project-tags">
-<span>R</span>
-<span>dplyr</span>
-<span>tidyr</span>
-<span>ggplot2</span>
-<span>plotly</span>
-</div>
-</div>
-</a>
-
-<a class="project-card" data-tags="sql tableau excel sheets" href="https://public.tableau.com/app/profile/alfred.rico/viz/CyclisticCaseStudy_17031395269510/Dashboard1" target="_blank">
+<a class="project-card" data-tags="r sql" href="#">
 <img src="https://images.unsplash.com/photo-1551288049-bebda4e38f71">
 <div class="project-overlay">
-<h3>Cyclistic Case Study</h3>
+<h3>Example Project</h3>
 <div class="project-tags">
-<span>SQL</span>
-<span>Tableau</span>
-<span>Excel</span>
-<span>Google Sheets</span>
+<span class="tool-tag" data-filter="sql">SQL</span>
+<span class="tool-tag" data-filter="r">R</span>
 </div>
 </div>
 </a>
@@ -470,12 +456,15 @@ color:white;
 
 <div class="cert">
 <img style="height:24px" src="https://upload.wikimedia.org/wikipedia/commons/2/2f/Google_2015_logo.svg">
+
 <div style="font-weight:700;font-size:14px;">
 Google Data Analytics Professional Certificate
 </div>
+
 <div style="font-size:11px;color:#666;">
 Issued via Coursera
 </div>
+
 <img style="height:16px" src="https://upload.wikimedia.org/wikipedia/commons/9/97/Coursera-Logo_600x600.svg">
 </div>
 
