@@ -150,6 +150,80 @@ margin-bottom:30px;
 color:white;
 }
 
+/* ABOUT */
+
+.about-grid{
+display:grid;
+grid-template-columns:200px 1fr;
+gap:30px;
+}
+
+.profile-pic{
+width:180px;
+height:180px;
+object-fit:cover;
+border-radius:50%;
+border:4px solid #4a90e2;
+box-shadow:0 10px 30px rgba(0,0,0,0.15);
+transition:transform .3s ease;
+}
+
+.profile-pic:hover{
+transform:scale(1.05);
+}
+
+.about-text{
+position:relative;
+background:white;
+padding:30px;
+border-radius:16px;
+box-shadow:0 20px 50px rgba(0,0,0,0.08);
+}
+
+.about-text::before{
+content:"";
+position:absolute;
+left:-14px;
+top:80px;
+border-top:12px solid transparent;
+border-bottom:12px solid transparent;
+border-right:14px solid white;
+}
+
+.about-text p{
+text-indent:20px;
+line-height:1.7;
+}
+
+/* CONTACT */
+
+.contact-form{
+background:white;
+padding:40px;
+border-radius:16px;
+box-shadow:0 15px 40px rgba(0,0,0,0.08);
+}
+
+.contact-form input,
+.contact-form textarea{
+width:100%;
+padding:12px;
+margin-top:6px;
+margin-bottom:15px;
+border-radius:8px;
+border:1px solid #ddd;
+}
+
+.apple-send{
+width:100%;
+padding:14px;
+border:none;
+border-radius:999px;
+background:#111;
+color:white;
+cursor:pointer;
+}
+
 /* FILTER BUTTONS */
 
 .project-filters{
@@ -157,7 +231,7 @@ display:flex;
 justify-content:center;
 flex-wrap:wrap;
 gap:10px;
-margin-bottom:15px;
+margin-bottom:25px;
 }
 
 .filter-btn{
@@ -171,7 +245,7 @@ font-size:13px;
 transition:.25s;
 }
 
-/* prevent default coloring */
+/* ensure tag classes do NOT color the buttons by default */
 
 .filter-btn.tag-python,
 .filter-btn.tag-r,
@@ -191,30 +265,6 @@ background:#2f3a46;
 .filter-btn.active.tag-tableau{background:#E97627;}
 .filter-btn.active.tag-excel{background:#217346;}
 .filter-btn.active.tag-sheets{background:#34A853;}
-
-/* PACKAGE TAG FILTERS */
-
-.package-filters{
-display:flex;
-justify-content:center;
-flex-wrap:wrap;
-gap:8px;
-margin-bottom:25px;
-}
-
-.package-btn{
-padding:6px 10px;
-border-radius:14px;
-border:none;
-background:#3b4652;
-color:white;
-font-size:12px;
-cursor:pointer;
-}
-
-.package-btn.active{
-background:#4a90e2;
-}
 
 /* PROJECT WINDOW */
 
@@ -295,8 +345,38 @@ color:white;
 .tag-excel{background:#217346;}
 .tag-sheets{background:#34A853;}
 
+/* CERT */
+
+.cert-column{
+display:flex;
+justify-content:center;
+}
+
+.cert{
+background:white;
+border-radius:14px;
+padding:14px 18px;
+text-align:center;
+box-shadow:0 12px 30px rgba(0,0,0,0.08);
+max-width:220px;
+transition:all .25s ease;
+}
+
+.cert:hover{
+transform:translateY(-6px) scale(1.03);
+box-shadow:0 20px 40px rgba(0,0,0,0.15);
+}
+
+footer{
+text-align:center;
+padding:14px;
+background:#111;
+color:white;
+}
+
 </style>
 </head>
+
 <body>
 
 <header class="hero">
@@ -324,6 +404,42 @@ color:white;
 
 <div class="main-layout">
 
+<section id="about">
+<h2>About Me</h2>
+
+<div class="about-grid">
+
+<div>
+<img src="profile.jpg" class="profile-pic">
+</div>
+
+<div class="about-text">
+
+<p>Hi, I’m Alfred — an aspiring data analyst who enjoys turning messy data into clear insights and finding patterns that explain what’s really going on.</p>
+
+<p>Through hands-on projects, I’ve worked with Python, SQL, and visualization tools to analyze data and communicate findings in a way that’s easy to understand.</p>
+
+<p>I'm always looking for new problems to explore and new ways to learn.</p>
+
+</div>
+</div>
+</section>
+
+<section id="contact">
+<h2>Let's Connect!</h2>
+
+<form action="https://formsubmit.co/alfred.m.rico@gmail.com" method="POST" class="contact-form">
+
+<input type="text" name="name" placeholder="Name" required>
+<input type="email" name="email" placeholder="Email" required>
+
+<textarea name="message" rows="6" placeholder="Message" required></textarea>
+
+<button type="submit" class="apple-send">Send Message</button>
+
+</form>
+</section>
+
 <section id="projects">
 
 <h2>My Projects</h2>
@@ -340,23 +456,17 @@ color:white;
 
 </div>
 
-<div id="packageFilters" class="package-filters"></div>
-
 <div class="projects-window">
 
 <div class="projects-grid">
 
-<a class="project-card"
-data-tags="r"
-data-packages="dplyr tidyr ggplot2 plotly"
-href="https://shadyeggs.github.io/Fifa21-Data-Cleaning-Project/"
-target="_blank">
+<a class="project-card" data-tags="r"
+href="https://shadyeggs.github.io/Fifa21-Data-Cleaning-Project/" target="_blank">
 
 <img src="https://images.unsplash.com/photo-1518091043644-c1d4457512c6">
 
 <div class="project-overlay">
 <h3>Fifa 21 Data Cleaning</h3>
-
 <div class="project-tags">
 <span class="tag-r">R</span>
 <span>dplyr</span>
@@ -364,13 +474,12 @@ target="_blank">
 <span>ggplot2</span>
 <span>plotly</span>
 </div>
-
 </div>
+
 </a>
 
 <a class="project-card"
 data-tags="sql tableau excel sheets"
-data-packages="postgresql tableau"
 href="https://public.tableau.com/app/profile/alfred.rico/viz/CyclisticCaseStudy_17031395269510/Dashboard1"
 target="_blank">
 
@@ -391,6 +500,36 @@ target="_blank">
 </a>
 
 </div>
+</div>
+
+</section>
+
+<section id="certifications">
+
+<h2>Certifications</h2>
+
+<div class="cert-column">
+
+<a href="https://www.coursera.org/account/accomplishments/professional-cert/MSCMJL682NT9" target="_blank">
+
+<div class="cert">
+
+<img style="height:24px" src="https://upload.wikimedia.org/wikipedia/commons/2/2f/Google_2015_logo.svg">
+
+<div style="font-weight:700;font-size:14px;">
+Google Data Analytics Professional Certificate
+</div>
+
+<div style="font-size:11px;color:#666;">
+Issued via Coursera
+</div>
+
+<img style="height:16px" src="https://upload.wikimedia.org/wikipedia/commons/9/97/Coursera-Logo_600x600.svg">
+
+</div>
+
+</a>
+
 </div>
 
 </section>
@@ -428,6 +567,7 @@ canvas.width=hero.offsetWidth
 canvas.height=hero.offsetHeight
 
 bars=[]
+particles=[]
 
 const count=Math.floor(canvas.width/spacing)
 const totalWidth=count*spacing
@@ -446,11 +586,65 @@ color:palette[Math.floor(Math.random()*palette.length)]
 
 }
 
+for(let i=0;i<30;i++){
+particles.push({
+x:Math.random()*canvas.width,
+y:Math.random()*canvas.height,
+size:Math.random()*2+1,
+speed:Math.random()*0.4+0.1
+})
+}
+
+}
+
+function randomizeBars(){
+for(let i=0;i<6;i++){
+const index=Math.floor(Math.random()*bars.length)
+bars[index].target=Math.random()*120+60
+}
+}
+
+setInterval(randomizeBars,5000)
+
+function drawParticles(){
+
+particles.forEach(p=>{
+
+p.y-=p.speed
+
+if(p.y<0){
+p.y=canvas.height
+p.x=Math.random()*canvas.width
+}
+
+ctx.fillStyle="rgba(255,255,255,0.25)"
+ctx.beginPath()
+ctx.arc(p.x,p.y,p.size,0,Math.PI*2)
+ctx.fill()
+
+})
+
+}
+
+function drawRoundedRect(x,y,width,height,radius){
+
+ctx.beginPath()
+ctx.moveTo(x,y+radius)
+ctx.lineTo(x,y+height)
+ctx.lineTo(x+width,y+height)
+ctx.lineTo(x+width,y+radius)
+ctx.quadraticCurveTo(x+width,y,x+width-radius,y)
+ctx.lineTo(x+radius,y)
+ctx.quadraticCurveTo(x,y,x,y+radius)
+ctx.fill()
+
 }
 
 function animate(){
 
 ctx.clearRect(0,0,canvas.width,canvas.height)
+
+drawParticles()
 
 bars.forEach(bar=>{
 
@@ -458,7 +652,13 @@ bar.height+=(bar.target-bar.height)*0.05
 
 ctx.fillStyle=bar.color
 
-ctx.fillRect(bar.x,canvas.height-bar.height,barWidth,bar.height)
+drawRoundedRect(
+bar.x,
+canvas.height-bar.height,
+barWidth,
+bar.height,
+6
+)
 
 })
 
@@ -471,71 +671,61 @@ animate()
 
 window.addEventListener("resize",setupCanvas)
 
-/* PACKAGE FILTER UI */
+/* FILTER SYSTEM */
 
-const languagePackages={
-python:["pandas","numpy","matplotlib"],
-r:["dplyr","tidyr","ggplot2","plotly"],
-sql:["postgresql"],
-tableau:["tableau"],
-excel:["powerquery"],
-sheets:["query"]
+const filterButtons=document.querySelectorAll(".filter-btn")
+const projects=document.querySelectorAll(".project-card")
+
+let activeFilters=[]
+
+filterButtons.forEach(btn=>{
+
+btn.addEventListener("click",()=>{
+
+const filter=btn.dataset.filter
+
+if(filter==="all"){
+
+activeFilters=[]
+filterButtons.forEach(b=>b.classList.remove("active"))
+btn.classList.add("active")
+projects.forEach(card=>card.classList.remove("hide"))
+return
+
 }
 
-const packageContainer=document.getElementById("packageFilters")
-
-function populatePackages(activeLangs){
-
-packageContainer.innerHTML=""
-
-let packages=new Set()
-
-activeLangs.forEach(lang=>{
-if(languagePackages[lang]){
-languagePackages[lang].forEach(p=>packages.add(p))
-}
-})
-
-packages.forEach(pkg=>{
-
-const btn=document.createElement("button")
-
-btn.className="package-btn"
-btn.dataset.pkg=pkg
-btn.textContent=pkg
-
-btn.onclick=()=>{
 btn.classList.toggle("active")
-applyPackageFilters()
+
+document.querySelector('[data-filter="all"]').classList.remove("active")
+
+activeFilters=[...document.querySelectorAll(".filter-btn.active")]
+.map(b=>b.dataset.filter)
+.filter(f=>f!=="all")
+
+if(activeFilters.length===0){
+
+document.querySelector('[data-filter="all"]').classList.add("active")
+projects.forEach(card=>card.classList.remove("hide"))
+return
+
 }
-
-packageContainer.appendChild(btn)
-
-})
-
-}
-
-function applyPackageFilters(){
-
-const activePackages=[...document.querySelectorAll(".package-btn.active")]
-.map(b=>b.dataset.pkg)
 
 projects.forEach(card=>{
 
-const pkgs=card.dataset.packages || ""
+const tags=card.dataset.tags
+const match=activeFilters.every(f=>tags.includes(f))
 
-if(activePackages.length===0){
+if(match){
 card.classList.remove("hide")
-return
+}else{
+card.classList.add("hide")
 }
-
-const match=activePackages.every(p=>pkgs.includes(p))
-
-card.classList.toggle("hide",!match)
 
 })
 
-}
+})
+
+})
 
 </script>
 
