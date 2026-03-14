@@ -742,6 +742,30 @@ border-radius:10px;
 background:linear-gradient(180deg,#028391,#F85525);
 }
 
+
+
+/* PAPER PLANE JIGGLE */
+
+.apple-send i{
+font-size:18px;
+transition:transform .15s ease;
+}
+
+.apple-send:hover i{
+animation:planeJiggle .45s infinite;
+}
+
+@keyframes planeJiggle{
+
+0%{transform:rotate(0deg) translateX(0)}
+25%{transform:rotate(-8deg) translateX(-1px)}
+50%{transform:rotate(8deg) translateX(1px)}
+75%{transform:rotate(-6deg) translateX(-1px)}
+100%{transform:rotate(0deg) translateX(0)}
+
+}
+
+
 </style>
 
 </head>
