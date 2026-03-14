@@ -1911,37 +1911,6 @@ const b=parseInt(hex.slice(5,7),16)
 return `rgba(${r},${g},${b},${a})`
 }
 
-
-
-function getBarColor(index,total){
-
-const t=index/total
-
-/* brighter colors on edges */
-
-if(t<0.15 || t>0.85){
-
-const edgeColors=["#FAA968","#F85525"]
-return edgeColors[Math.floor(Math.random()*edgeColors.length)]
-
-}
-
-/* mid zone */
-
-if(t<0.35 || t>0.65){
-
-const midColors=["#028391","#F6DCAC"]
-return midColors[Math.floor(Math.random()*midColors.length)]
-
-}
-
-/* center */
-
-return "#01204E"
-
-}
-
-
 function setupCanvas(){
 
 const hero=document.querySelector(".hero")
