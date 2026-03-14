@@ -781,15 +781,19 @@ animation:planeBurstJiggle 5s infinite ease-in-out;
 
 
 
-/* SIMPLE PLANE SLIDE */
+/* SIMPLE SLIDE OUT OF BUTTON */
 
 .apple-send{
 position:relative;
-overflow:visible;
+overflow:hidden;
+}
+
+.apple-send i{
+position:relative;
 }
 
 .apple-send.launch i{
-animation:planeSlide .8s forwards linear;
+animation:planeSlide .7s forwards linear;
 }
 
 @keyframes planeSlide{
@@ -800,8 +804,8 @@ opacity:1;
 }
 
 100%{
-transform:rotate(40deg) translateX(260px);
-opacity:0;
+transform:rotate(40deg) translateX(70px);
+opacity:1;
 }
 
 }
@@ -1335,7 +1339,6 @@ return
 const formData = new FormData(contactForm)
 
 try{
-
 
 
 await fetch(contactForm.action,{
