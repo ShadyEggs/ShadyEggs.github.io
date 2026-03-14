@@ -742,6 +742,65 @@ border-radius:10px;
 background:linear-gradient(180deg,#028391,#F85525);
 }
 
+
+
+/* PAPER PLANE BUTTON */
+
+.send-btn{
+position:relative;
+overflow:hidden;
+display:flex;
+align-items:center;
+justify-content:center;
+gap:10px;
+}
+
+.send-plane{
+width:18px;
+height:18px;
+fill:white;
+transition:transform .2s ease;
+}
+
+/* hover jiggle */
+
+.send-btn:hover .send-plane{
+animation:planeJiggle .35s infinite alternate;
+}
+
+@keyframes planeJiggle{
+
+0%{transform:translateX(0) rotate(0deg)}
+50%{transform:translateX(2px) rotate(4deg)}
+100%{transform:translateX(-2px) rotate(-4deg)}
+
+}
+
+/* launch animation */
+
+.plane-launch{
+animation:planeFly .9s ease forwards;
+}
+
+@keyframes planeFly{
+
+0%{
+transform:translateX(0) rotate(0deg);
+opacity:1;
+}
+
+70%{
+transform:translateX(120px) rotate(10deg);
+opacity:1;
+}
+
+100%{
+transform:translateX(180px) rotate(10deg);
+opacity:0;
+}
+
+}
+
 </style>
 
 </head>
@@ -1280,6 +1339,64 @@ headers:{'Accept':'application/json'}
 console.log("Message sent")
 
 contactForm.reset()
+
+}catch(err){
+
+console.error("Submission error",err)
+
+}
+
+})
+
+}
+
+
+
+/* CONTACT FORM SECURITY + SEND ANIMATION */
+
+const contactForm = document.getElementById("secure-contact-form")
+const timestampField = document.getElementById("form-timestamp")
+
+if(contactForm && timestampField){
+
+timestampField.value = Date.now()
+
+contactForm.addEventListener("submit", async function(e){
+
+e.preventDefault()
+
+const timeTaken = Date.now() - parseInt(timestampField.value)
+
+if(timeTaken < 2000){
+console.log("Bot blocked")
+return
+}
+
+const formData = new FormData(contactForm)
+
+const plane = document.querySelector(".send-plane")
+const text = document.querySelector(".btn-text")
+
+try{
+
+await fetch(contactForm.action,{
+method:"POST",
+body:formData,
+headers:{'Accept':'application/json'}
+})
+
+plane.classList.add("plane-launch")
+
+text.textContent="Message Sent"
+
+setTimeout(()=>{
+
+plane.classList.remove("plane-launch")
+text.textContent="Send Message"
+
+contactForm.reset()
+
+},2000)
 
 }catch(err){
 
