@@ -12,13 +12,18 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 
-<link href="https://fonts.googleapis.com/css2?family=Lato:wght@400;700&family=Playfair+Display:wght@700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
 
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
 
 <style>
 
-body{font-family:'Lato',sans-serif;margin:0;background:#1f2933;scroll-behavior:smooth}
+body{
+font-family:'Inter',sans-serif;
+margin:0;
+background:#1f2933;
+scroll-behavior:smooth;
+}
 
 /* HERO */
 
@@ -50,7 +55,7 @@ background-size:40px 40px;
 .hero-content{position:relative;z-index:3;margin-top:-40px}
 
 .hero h1{
-font-family:'Playfair Display',serif;
+font-family:'IBM Plex Sans',sans-serif;
 font-size:44px;
 letter-spacing:.5px;
 margin-bottom:6px;
@@ -175,7 +180,7 @@ h2{
 text-align:center;
 margin-bottom:32px;
 color:white;
-font-family:'Playfair Display',serif;
+font-family:'IBM Plex Sans',sans-serif;
 font-size:26px;
 letter-spacing:.6px;
 position:relative;
@@ -1887,7 +1892,7 @@ Issued via Coursera
 const canvas=document.getElementById("dashboardCanvas")
 const ctx=canvas.getContext("2d")
 
-let bars=[],particles=[],particles=[]
+let bars=[]
 
 const spacing=28
 const barWidth=18
@@ -1945,19 +1950,6 @@ baseColor:color
 
 }
 
-/* PARTICLES */
-
-for(let i=0;i<40;i++){
-
-particles.push({
-x:Math.random()*canvas.width,
-y:Math.random()*canvas.height,
-size:Math.random()*2+1,
-speed:Math.random()*.35+.1
-})
-
-}
-
 }
 
 function randomizeBars(){
@@ -1973,17 +1965,6 @@ bars[index].target=Math.random()*120+60
 }
 
 setInterval(randomizeBars,4500)
-
-function /* particles disabled */{
-
-particles.forEach(p=>{
-
-p.y-=p.speed
-
-if(p.y<0){
-p.y=canvas.height
-p.x=Math.random()*canvas.width
-}
 
 ctx.fillStyle="rgba(255,255,255,.22)"
 
@@ -2048,7 +2029,7 @@ function animate(){
 
 ctx.clearRect(0,0,canvas.width,canvas.height)
 
-/* particles disabled */
+
 
 bars.forEach(bar=>{
 
