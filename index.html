@@ -779,6 +779,42 @@ animation:planeBurstJiggle 5s infinite ease-in-out;
 }
 
 
+
+
+/* PLANE LAUNCH ANIMATION */
+
+.apple-send{
+position:relative;
+overflow:hidden;
+}
+
+.apple-send.launch i{
+animation:planeLaunch .9s forwards ease-in;
+}
+
+@keyframes planeLaunch{
+
+0%{
+transform:rotate(40deg) translateX(0);
+opacity:1;
+}
+
+40%{
+transform:rotate(40deg) translateX(40px);
+}
+
+70%{
+transform:rotate(40deg) translateX(120px);
+opacity:1;
+}
+
+100%{
+transform:rotate(40deg) translateX(200px);
+opacity:0;
+}
+
+}
+
 </style>
 
 </head>
@@ -1309,15 +1345,29 @@ const formData = new FormData(contactForm)
 
 try{
 
+
+
 await fetch(contactForm.action,{
 method:"POST",
 body:formData,
 headers:{'Accept':'application/json'}
 })
 
-console.log("Message sent")
+const button = contactForm.querySelector(".apple-send")
+
+button.classList.add("launch")
+
+setTimeout(()=>{
+button.innerHTML="Message Sent"
+},700)
+
+setTimeout(()=>{
+button.innerHTML='<i class="fas fa-paper-plane"></i>'
+button.classList.remove("launch")
+},2700)
 
 contactForm.reset()
+
 
 }catch(err){
 
