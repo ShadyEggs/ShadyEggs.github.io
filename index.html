@@ -778,43 +778,55 @@ background:linear-gradient(180deg,#028391,#F85525);
 
 
 
-/* SEND BUTTON PLANE */
-
-.plane-icon{
-font-size:18px;
-color:#fff;
-transform:rotate(45deg);
-transition:transform 1s ease;
+.plane-wrapper{
+position:relative;
+display:flex;
+align-items:center;
+justify-content:center;
 }
 
-.apple-send{
-position:relative;
-overflow:hidden;
+.plane-icon{
+
+font-size:18px;
+color:white;
+
+transform:rotate(45deg);
+transition:transform 1.2s cubic-bezier(.25,.8,.25,1);
+
 }
 
 /* hover jiggle */
 
 .apple-send:hover .plane-icon{
+
 animation:planeJiggle .4s ease;
+
 }
 
 @keyframes planeJiggle{
+
 0%{transform:rotate(45deg)}
 25%{transform:rotate(40deg)}
 50%{transform:rotate(50deg)}
 75%{transform:rotate(42deg)}
 100%{transform:rotate(45deg)}
+
 }
 
-/* trail */
+/* gradient trail */
 
 .plane-trail{
+
 position:absolute;
-left:24px;
+
+left:0;
 top:50%;
+
 height:3px;
 width:0;
+
 transform:translateY(-50%);
+
 background:linear-gradient(
 90deg,
 #01204E,
@@ -823,28 +835,39 @@ background:linear-gradient(
 #FAA968,
 #F85525
 );
+
 border-radius:3px;
+
+opacity:0;
+
 }
 
-/* slide */
+/* launch animation */
 
 .apple-send.sending .plane-icon{
-transform:translateX(140px) rotate(45deg);
+
+transform:translateX(220px) rotate(45deg);
+
 }
 
 .apple-send.sending .plane-trail{
-animation:trailSlide 1s ease forwards;
+
+animation:trailFollow 1.2s ease forwards;
+
 }
 
-@keyframes trailSlide{
+@keyframes trailFollow{
+
 0%{
 width:0;
 opacity:1;
 }
+
 100%{
-width:130px;
+width:200px;
 opacity:0;
 }
+
 }
 
 
@@ -911,8 +934,10 @@ opacity:0;
 
 
 <button type="submit" class="apple-send">
+<div class="plane-wrapper">
 <i class="fas fa-paper-plane plane-icon"></i>
 <span class="plane-trail"></span>
+</div>
 </button>
 
 
@@ -1334,7 +1359,9 @@ function buildToolButtons(){
 
 const previousTools=[...activeTools]
 
+
 packageContainer.innerHTML=""
+activeTools=[]
 
 if(activeLanguages.length===0){
 return
@@ -1355,6 +1382,7 @@ const btn=document.createElement("button")
 if(previousTools.includes(tool)){
 btn.classList.add("active")
 }
+
 
 btn.className="filter-btn package-btn"
 btn.dataset.filter=tool
@@ -1454,8 +1482,6 @@ showProjects()
 
 
 
-/* CONTACT FORM HANDLER */
-
 window.addEventListener("DOMContentLoaded",()=>{
 
 const form=document.querySelector(".contact-form")
@@ -1480,7 +1506,7 @@ headers:{'Accept':'application/json'}
 setTimeout(()=>{
 button.classList.remove("sending")
 form.reset()
-},1000)
+},1200)
 
 })
 
