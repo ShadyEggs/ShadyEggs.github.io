@@ -778,52 +778,43 @@ background:linear-gradient(180deg,#028391,#F85525);
 
 
 
-/* plane icon */
+/* SEND BUTTON PLANE */
 
 .plane-icon{
-
 font-size:18px;
-color:#ffffff;
+color:#fff;
+transform:rotate(45deg);
+transition:transform 1s ease;
+}
 
-transform:rotate(45deg); /* makes plane point right */
-
+.apple-send{
 position:relative;
-z-index:2;
-
-transition:transform 1.2s ease, opacity 1.2s ease;
-
+overflow:hidden;
 }
 
 /* hover jiggle */
 
 .apple-send:hover .plane-icon{
-
-animation:planeJiggle .5s ease;
-
+animation:planeJiggle .4s ease;
 }
 
 @keyframes planeJiggle{
-
 0%{transform:rotate(45deg)}
 25%{transform:rotate(40deg)}
 50%{transform:rotate(50deg)}
 75%{transform:rotate(42deg)}
 100%{transform:rotate(45deg)}
-
 }
 
 /* trail */
 
 .plane-trail{
-
 position:absolute;
-
-left:20px;
+left:24px;
 top:50%;
-
 height:3px;
 width:0;
-
+transform:translateY(-50%);
 background:linear-gradient(
 90deg,
 #01204E,
@@ -832,42 +823,28 @@ background:linear-gradient(
 #FAA968,
 #F85525
 );
-
 border-radius:3px;
-
-transform:translateY(-50%);
-
-opacity:0;
-
 }
 
 /* slide */
 
 .apple-send.sending .plane-icon{
-
-transform:translateX(120px) rotate(45deg);
-opacity:0;
-
+transform:translateX(140px) rotate(45deg);
 }
 
 .apple-send.sending .plane-trail{
-
-animation:trailSlide 1.2s ease forwards;
-
+animation:trailSlide 1s ease forwards;
 }
 
 @keyframes trailSlide{
-
 0%{
 width:0;
 opacity:1;
 }
-
 100%{
-width:110px;
+width:130px;
 opacity:0;
 }
-
 }
 
 
@@ -925,21 +902,15 @@ opacity:0;
 
 <h2>Let's Connect!</h2>
 
-<form action="https://formsubmit.co/alfred.m.rico@gmail.com" method="POST" class="contact-form" id="contactForm">
-
-
-<input type="hidden" name="_captcha" value="false">
-<input type="hidden" name="_subject" value="Portfolio Contact Form">
-<input type="text" name="_honey" style="display:none">
+<form action="https://formsubmit.co/alfred.m.rico@gmail.com" method="POST" class="contact-form">
 
 <input type="text" name="name" placeholder="Name" required>
-
 <input type="email" name="email" placeholder="Email" required>
 
 <textarea name="message" rows="6" placeholder="Message" required></textarea>
 
 
-<button type="submit" class="apple-send" title="Send Message">
+<button type="submit" class="apple-send">
 <i class="fas fa-paper-plane plane-icon"></i>
 <span class="plane-trail"></span>
 </button>
@@ -1361,10 +1332,9 @@ let activeTools=[]
 
 function buildToolButtons(){
 
-
 const previousTools=[...activeTools]
-packageContainer.innerHTML=""
 
+packageContainer.innerHTML=""
 
 if(activeLanguages.length===0){
 return
@@ -1382,6 +1352,10 @@ Array.from(tools).sort().forEach(tool=>{
 
 const btn=document.createElement("button")
 
+if(previousTools.includes(tool)){
+btn.classList.add("active")
+}
+
 btn.className="filter-btn package-btn"
 btn.dataset.filter=tool
 btn.textContent=tool
@@ -1393,10 +1367,7 @@ btn.classList.toggle("active")
 activeTools=[...document.querySelectorAll(".package-btn.active")]
 .map(b=>b.dataset.filter)
 
-
-activeTools=[...document.querySelectorAll(".package-btn.active")].map(b=>b.dataset.filter)
 showProjects()
-
 
 }
 
@@ -1406,10 +1377,7 @@ packageContainer.appendChild(btn)
 
 }
 
-function 
-activeTools=[...document.querySelectorAll(".package-btn.active")].map(b=>b.dataset.filter)
-showProjects()
-{
+function showProjects(){
 
 projects.forEach(card=>{
 
@@ -1445,15 +1413,9 @@ document.querySelectorAll(".project-filters .filter-btn")
 
 allBtn.classList.add("active")
 
-
-const previousTools=[...activeTools]
 packageContainer.innerHTML=""
 
-
-
-activeTools=[...document.querySelectorAll(".package-btn.active")].map(b=>b.dataset.filter)
 showProjects()
-
 
 return
 }
@@ -1474,10 +1436,7 @@ activeLanguages=activeLanguages.filter(l=>l!=="all")
 if(activeLanguages.length===0){
 
 allBtn.classList.add("active")
-
-const previousTools=[...activeTools]
 packageContainer.innerHTML=""
-
 
 }else{
 
@@ -1485,30 +1444,26 @@ buildToolButtons()
 
 }
 
-
-activeTools=[...document.querySelectorAll(".package-btn.active")].map(b=>b.dataset.filter)
 showProjects()
-
 
 }
 
 })
 
-
-activeTools=[...document.querySelectorAll(".package-btn.active")].map(b=>b.dataset.filter)
 showProjects()
 
 
 
+/* CONTACT FORM HANDLER */
 
 window.addEventListener("DOMContentLoaded",()=>{
 
-const form=document.getElementById("contactForm")
+const form=document.querySelector(".contact-form")
 const button=document.querySelector(".apple-send")
 
 if(!form || !button) return
 
-form.addEventListener("submit",(e)=>{
+form.addEventListener("submit",async (e)=>{
 
 e.preventDefault()
 
@@ -1516,21 +1471,16 @@ button.classList.add("sending")
 
 const data=new FormData(form)
 
-setTimeout(()=>{
-
-fetch(form.action,{
+await fetch(form.action,{
 method:"POST",
 body:data,
-headers:{
-"Accept":"application/json"
-}
-})
-.then(()=>{
-button.classList.remove("sending")
-form.reset()
+headers:{'Accept':'application/json'}
 })
 
-},1200)
+setTimeout(()=>{
+button.classList.remove("sending")
+form.reset()
+},1000)
 
 })
 
