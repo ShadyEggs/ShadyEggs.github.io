@@ -356,31 +356,7 @@ inset 0 1px 0 rgba(255,255,255,.35);
 
 }
 
-/* tinted glass colors */
 
-
-.filter-btn.tag-python.active{
-
-background:linear-gradient(
-90deg,
-rgba(246,220,172,.26),
-rgba(55,118,171,.24)
-);
-
-border:1px solid rgba(255,255,255,.25);
-
-box-shadow:
-0 6px 14px rgba(0,0,0,.35),
-inset 0 0 10px rgba(255,255,255,.08);
-
-}
-
-.filter-btn.tag-r.active{background:rgba(39,109,195,.35)}
-.filter-btn.tag-sql.active{background:rgba(51,103,145,.35)}
-.filter-btn.tag-tableau.active{background:rgba(233,118,39,.35)}
-.filter-btn.tag-excel.active{background:rgba(33,115,70,.35)}
-.filter-btn.tag-sheets.active{background:rgba(52,168,83,.35)}
-.filter-btn.tag-all.active{background:rgba(74,144,226,.35)}
 
 .filter-btn:hover{
 
@@ -393,31 +369,7 @@ inset 0 -4px 8px rgba(0,0,0,.35);
 
 }
 
-/* tinted glass colors */
 
-
-.filter-btn.tag-python.active{
-
-background:linear-gradient(
-90deg,
-rgba(246,220,172,.26),
-rgba(55,118,171,.24)
-);
-
-border:1px solid rgba(255,255,255,.25);
-
-box-shadow:
-0 6px 14px rgba(0,0,0,.35),
-inset 0 0 10px rgba(255,255,255,.08);
-
-}
-
-.filter-btn.tag-r.active{background:rgba(39,109,195,.35)}
-.filter-btn.tag-sql.active{background:rgba(51,103,145,.35)}
-.filter-btn.tag-tableau.active{background:rgba(233,118,39,.35)}
-.filter-btn.tag-excel.active{background:rgba(33,115,70,.35)}
-.filter-btn.tag-sheets.active{background:rgba(52,168,83,.35)}
-.filter-btn.tag-all.active{background:rgba(74,144,226,.35)}
 
 
 /* MINIMAL TINTED GLASS FILTER HIGHLIGHTS */
@@ -776,6 +728,123 @@ border-radius:10px;
 background:linear-gradient(180deg,#028391,#F85525);
 }
 
+
+
+/* SEND BUTTON */
+
+.apple-send{
+
+width:100%;
+padding:14px;
+
+border:none;
+border-radius:999px;
+
+background:#1f2933;
+
+display:flex;
+align-items:center;
+justify-content:center;
+
+position:relative;
+overflow:hidden;
+
+cursor:pointer;
+
+box-shadow:
+0 6px 14px rgba(0,0,0,.35),
+inset 0 1px 0 rgba(255,255,255,.08);
+
+}
+
+/* plane icon */
+
+.plane-icon{
+
+font-size:20px;
+color:#ffffff;
+
+transition:transform .25s ease;
+
+}
+
+/* hover jiggle */
+
+.apple-send:hover .plane-icon{
+
+animation:planeJiggle .5s ease;
+
+}
+
+@keyframes planeJiggle{
+
+0%{transform:rotate(0deg)}
+25%{transform:rotate(-8deg)}
+50%{transform:rotate(8deg)}
+75%{transform:rotate(-6deg)}
+100%{transform:rotate(0deg)}
+
+}
+
+/* launch */
+
+.apple-send.sending .plane-icon{
+
+transform:translate(45px,-35px) rotate(20deg);
+opacity:0;
+
+}
+
+/* palette trail */
+
+.plane-trail{
+
+position:absolute;
+
+width:0;
+height:3px;
+
+left:50%;
+top:50%;
+
+opacity:0;
+
+background:linear-gradient(
+90deg,
+#01204E,
+#028391,
+#F6DCAC,
+#FAA968,
+#F85525
+);
+
+border-radius:3px;
+
+transform:translate(-50%,-50%);
+
+}
+
+.apple-send.sending .plane-trail{
+
+animation:trailLaunch .6s ease forwards;
+
+}
+
+@keyframes trailLaunch{
+
+0%{
+width:0;
+opacity:1;
+}
+
+100%{
+width:80px;
+opacity:0;
+transform:translate(-50%,-70%);
+}
+
+}
+
 </style>
 
 </head>
@@ -830,14 +899,26 @@ background:linear-gradient(180deg,#028391,#F85525);
 
 <h2>Let's Connect!</h2>
 
+
 <form action="https://formsubmit.co/alfred.m.rico@gmail.com" method="POST" class="contact-form">
+
+<input type="hidden" name="_captcha" value="false">
+<input type="hidden" name="_subject" value="Portfolio Contact Form">
+<input type="hidden" name="_next" value="#contact">
+<input type="text" name="_honey" style="display:none">
+
 
 <input type="text" name="name" placeholder="Name" required>
 <input type="email" name="email" placeholder="Email" required>
 
 <textarea name="message" rows="6" placeholder="Message" required></textarea>
 
-<button type="submit" class="apple-send">Send Message</button>
+
+<button type="submit" class="apple-send" title="Send Message">
+<i class="fas fa-paper-plane plane-icon"></i>
+<span class="plane-trail"></span>
+</button>
+
 
 </form>
 </section>
@@ -1253,15 +1334,12 @@ card.tags=card.dataset.tags.toLowerCase().split(" ")
 let activeLanguages=[]
 let activeTools=[]
 
-
 function buildToolButtons(){
 
-const previousTools=[...activeTools]
-
 packageContainer.innerHTML=""
+activeTools=[]
 
 if(activeLanguages.length===0){
-activeTools=[]
 return
 }
 
@@ -1273,23 +1351,13 @@ tools.add(tool)
 })
 })
 
-const validTools=Array.from(tools).sort()
-
-/* preserve previously selected tools */
-
-activeTools=previousTools.filter(tool=>validTools.includes(tool))
-
-validTools.forEach(tool=>{
+Array.from(tools).sort().forEach(tool=>{
 
 const btn=document.createElement("button")
 
 btn.className="filter-btn package-btn"
 btn.dataset.filter=tool
 btn.textContent=tool
-
-if(activeTools.includes(tool)){
-btn.classList.add("active")
-}
 
 btn.onclick=()=>{
 
@@ -1307,7 +1375,6 @@ packageContainer.appendChild(btn)
 })
 
 }
-
 
 function showProjects(){
 
@@ -1383,6 +1450,32 @@ showProjects()
 })
 
 showProjects()
+
+
+
+/* SEND BUTTON ANIMATION WITH DELAY */
+
+window.addEventListener("DOMContentLoaded",()=>{
+
+const sendButton=document.querySelector(".apple-send")
+
+if(sendButton){
+
+sendButton.addEventListener("click",(e)=>{
+
+e.preventDefault()
+
+sendButton.classList.add("sending")
+
+setTimeout(()=>{
+sendButton.closest("form").submit()
+},650)
+
+})
+
+}
+
+})
 
 </script>
 
