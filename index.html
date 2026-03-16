@@ -993,6 +993,7 @@ display:flex;
 flex-direction:column;
 align-items:center;
 width:100%;
+position:relative;
 }
 
 .hero-line{
@@ -1003,22 +1004,7 @@ letter-spacing:.8px;
 color:#cbd5e1;
 text-align:center;
 width:100%;
-}
-
-.hero-line.drop{
-animation:heroDrop 1.2s cubic-bezier(.25,.8,.25,1);
-}
-
-@keyframes heroDrop{
-
-0%{
-transform:translateY(-32px);
-}
-
-100%{
 transform:translateY(0);
-}
-
 }
 
 
@@ -1713,15 +1699,27 @@ setInterval(()=>{
 index = (index + 1) % phrases.length
 
 const newLine = createLine(phrases[index])
-newLine.classList.add("drop")
+
+newLine.style.transform = "translateY(-32px)"
 
 roller.insertBefore(newLine, roller.firstChild)
 
-if(roller.children.length > 2){
+/* force layout so animation runs */
+newLine.offsetHeight
+
+newLine.style.transition = "transform 1.2s cubic-bezier(.25,.8,.25,1)"
+newLine.style.transform = "translateY(0)"
+
+const oldLine = roller.children[1]
+
+oldLine.style.transition = "transform 1.2s cubic-bezier(.25,.8,.25,1)"
+oldLine.style.transform = "translateY(32px)"
+
 setTimeout(()=>{
-roller.removeChild(roller.lastChild)
-},1200)
+if(roller.children.length > 1){
+roller.removeChild(oldLine)
 }
+},1200)
 
 },2500)
 
