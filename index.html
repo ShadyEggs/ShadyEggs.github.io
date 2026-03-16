@@ -170,9 +170,9 @@ max-width:1100px;margin:60px auto;padding:0 30px;
 display:grid;
 grid-template-columns:1fr 1fr;
 grid-template-areas:
-"about highlights"
+"about contact"
 "projects projects"
-"contact certifications";
+"certifications certifications";
 gap:40px;
 }
 
@@ -862,18 +862,44 @@ opacity:1;
 
 
 
-/* PROJECT HIGHLIGHTS */
+/* HIGHLIGHT SLIDER */
 
-#highlights{
-grid-area:highlights;
+.highlights-wrapper{
+display:flex;
+align-items:center;
+gap:12px;
+}
+
+.highlights-track{
+overflow:hidden;
+width:520px;
 }
 
 .highlights-grid{
 display:grid;
-grid-template-columns:repeat(2,1fr);
+grid-template-columns:repeat(4,1fr);
 gap:20px;
-max-width:520px;
-margin:auto;
+transition:transform .4s ease;
+}
+
+.highlight-arrow{
+
+border:1px solid rgba(255,255,255,.15);
+background:rgba(255,255,255,.06);
+
+backdrop-filter:blur(10px);
+-webkit-backdrop-filter:blur(10px);
+
+color:white;
+font-size:20px;
+
+width:36px;
+height:36px;
+
+border-radius:50%;
+
+cursor:pointer;
+
 }
 
 
@@ -908,24 +934,25 @@ margin:auto;
 
 <div class="main-layout">
 
+
 <section id="about">
 <h2>About Me</h2>
 
-<div class="about-grid">
-
-<img src="profile.jpg" class="profile-pic">
-
 <div class="about-text">
 
-<p>Hi, I'm Alfred — a data analyst focused on turning messy datasets into clear, actionable insights.</p>
+<img src="profile.jpg" class="profile-pic about-profile">
 
-<p>Using tools like Python, SQL, and data visualization platforms, I explore patterns, build dashboards, and communicate findings that help explain what the data is really saying.</p>
+<p>I've always been a data collector — long before I knew the term "data analyst."</p>
 
-<p>My projects focus on exploratory data analysis, trend detection, and building clear visual stories from complex datasets.</p>
+<p>One of my earliest memories is of spending an afternoon watching anthills and carefully cataloging the ants’ behavior. That curiosity about patterns and systems has followed me ever since. I’ve always found myself collecting information about the things around me and looking for relationships hidden within.</p>
 
-</div>
+<p>Professionally, I spent over six years working as a behaviorist, where collecting and analyzing behavioral data was a central part of my work. Today I bring that same analytical mindset to data analysis, using tools like Python, SQL, and visualization platforms to explore datasets, clean and transform information, and uncover meaningful insights.</p>
+
+<p>For me, working with data isn’t something new — it’s a way of thinking that has been present throughout my life.</p>
+
 </div>
 </section>
+
 
 <section id="contact">
 
@@ -957,27 +984,29 @@ margin:auto;
 
 <h2>Project Highlights</h2>
 
+<div class="highlights-wrapper">
+
+<button class="highlight-arrow left">&#10094;</button>
+
+<div class="highlights-track">
+
 <div class="highlights-grid">
 
-<a class="project-card" href="#">
-<img src="https://images.unsplash.com/photo-1518091043644-c1d4457512c6?w=800&q=80">
-<div class="project-overlay"><h3>Project 1</h3></div>
-</a>
+<a class="project-card"><img src="https://images.unsplash.com/photo-1518091043644-c1d4457512c6?w=800&q=80"></a>
+<a class="project-card"><img src="https://images.unsplash.com/photo-1485965120184-e220f721d03e?w=800&q=80"></a>
+<a class="project-card"><img src="https://images.unsplash.com/photo-1518770660439-4636190af475?w=800&q=80"></a>
+<a class="project-card"><img src="https://images.unsplash.com/photo-1504384308090-c894fdcc538d?w=800&q=80"></a>
 
-<a class="project-card" href="#">
-<img src="https://images.unsplash.com/photo-1485965120184-e220f721d03e?w=800&q=80">
-<div class="project-overlay"><h3>Project 2</h3></div>
-</a>
+<a class="project-card"><img src="https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?w=800&q=80"></a>
+<a class="project-card"><img src="https://images.unsplash.com/photo-1519389950473-47ba0277781c?w=800&q=80"></a>
+<a class="project-card"><img src="https://images.unsplash.com/photo-1507146153580-69a1fe6d8aa1?w=800&q=80"></a>
+<a class="project-card"><img src="https://images.unsplash.com/photo-1500534314209-a25ddb2bd429?w=800&q=80"></a>
 
-<a class="project-card" href="#">
-<img src="https://images.unsplash.com/photo-1518770660439-4636190af475?w=800&q=80">
-<div class="project-overlay"><h3>Project 3</h3></div>
-</a>
+</div>
 
-<a class="project-card" href="#">
-<img src="https://images.unsplash.com/photo-1504384308090-c894fdcc538d?w=800&q=80">
-<div class="project-overlay"><h3>Project 4</h3></div>
-</a>
+</div>
+
+<button class="highlight-arrow right">&#10095;</button>
 
 </div>
 
@@ -1476,6 +1505,25 @@ console.error("Submission error",err)
 })
 
 }
+
+
+
+/* Highlight slider */
+
+const track = document.querySelector('.highlights-grid')
+
+let highlightIndex = 0
+
+document.querySelector('.highlight-arrow.right').onclick=()=>{
+highlightIndex=1
+track.style.transform='translateX(-540px)'
+}
+
+document.querySelector('.highlight-arrow.left').onclick=()=>{
+highlightIndex=0
+track.style.transform='translateX(0)'
+}
+
 
 </script>
 
