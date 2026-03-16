@@ -862,22 +862,47 @@ opacity:1;
 
 
 
-/* ABOUT TEXT WRAP FIX */
+/* ABOUT SECTION */
 
 .about-text{
 max-width:760px;
 margin:auto;
+background:rgba(255,255,255,.92);
+padding:32px;
+border-radius:18px;
 }
 
 .about-profile{
 float:left;
-margin:0 14px 8px 0;
+margin:0 16px 10px 0;
 }
 
-/* PROJECT HIGHLIGHTS LAYOUT */
+/* remove bubble arrow */
+
+.about-text::before{
+display:none;
+}
+
+/* profile glow */
+
+.profile-pic{
+box-shadow:
+0 10px 30px rgba(0,0,0,.15),
+0 0 18px rgba(2,131,145,.35),
+0 0 30px rgba(246,220,172,.15),
+0 0 40px rgba(250,169,104,.10);
+}
+
+/* HIGHLIGHTS */
 
 #highlights{
 grid-area:highlights;
+}
+
+.highlights-wrapper{
+display:flex;
+align-items:center;
+gap:12px;
 }
 
 .highlights-window{
@@ -892,15 +917,6 @@ gap:20px;
 transition:transform .35s ease;
 }
 
-.highlights-controls{
-display:flex;
-justify-content:center;
-gap:10px;
-margin-top:10px;
-}
-
-/* glass arrows */
-
 .highlight-arrow{
 
 border:1px solid rgba(255,255,255,.15);
@@ -909,14 +925,18 @@ background:rgba(255,255,255,.06);
 backdrop-filter:blur(10px);
 -webkit-backdrop-filter:blur(10px);
 
-color:#e5e7eb;
+color:white;
 
-width:36px;
-height:36px;
+width:38px;
+height:38px;
 
 border-radius:50%;
 
 cursor:pointer;
+
+display:flex;
+align-items:center;
+justify-content:center;
 
 }
 
@@ -934,18 +954,6 @@ grid-template-areas:
 #contact{
 max-width:520px;
 margin:auto;
-}
-
-/* MOBILE */
-
-@media (max-width:900px){
-
-.about-profile{
-float:none;
-display:block;
-margin:0 auto 16px auto;
-}
-
 }
 
 
@@ -980,24 +988,26 @@ margin:0 auto 16px auto;
 
 <div class="main-layout">
 
+
 <section id="about">
 <h2>About Me</h2>
 
-<div class="about-grid">
-
-<img src="profile.jpg" class="profile-pic">
-
 <div class="about-text">
 
-<p>Hi, I'm Alfred — a data analyst focused on turning messy datasets into clear, actionable insights.</p>
+<img src="profile.jpg" class="profile-pic about-profile">
 
-<p>Using tools like Python, SQL, and data visualization platforms, I explore patterns, build dashboards, and communicate findings that help explain what the data is really saying.</p>
+<p>I've always been a data collector — long before I knew the term "data analyst."</p>
 
-<p>My projects focus on exploratory data analysis, trend detection, and building clear visual stories from complex datasets.</p>
+<p>One of my earliest memories is of spending an afternoon watching anthills and carefully cataloging the ants’ behavior. That curiosity about patterns and systems has followed me ever since. I’ve always found myself collecting information about the things around me and looking for relationships hidden within.</p>
+
+<p>Professionally, I spent over six years working as a behaviorist, where collecting and analyzing behavioral data was a central part of my work. Today I bring that same analytical mindset to data analysis, using tools like Python, SQL, and visualization platforms to explore datasets, clean and transform information, and uncover meaningful insights.</p>
+
+<p>For me, working with data isn’t something new — it’s a way of thinking that has been present throughout my life.</p>
 
 </div>
-</div>
+
 </section>
+
 
 <section id="contact">
 
@@ -1023,9 +1033,44 @@ margin:0 auto 16px auto;
 </form>
 </section>
 
+
+
+<section id="highlights">
+
+<h2>My Project Highlights</h2>
+
+<div class="highlights-wrapper">
+
+<button class="highlight-arrow prev"><i class="fas fa-chevron-left"></i></button>
+
+<div class="highlights-window">
+
+<div class="highlights-grid">
+
+<a class="project-card"><img src="https://images.unsplash.com/photo-1518091043644-c1d4457512c6?w=800&q=80"></a>
+<a class="project-card"><img src="https://images.unsplash.com/photo-1485965120184-e220f721d03e?w=800&q=80"></a>
+<a class="project-card"><img src="https://images.unsplash.com/photo-1518770660439-4636190af475?w=800&q=80"></a>
+<a class="project-card"><img src="https://images.unsplash.com/photo-1504384308090-c894fdcc538d?w=800&q=80"></a>
+
+<a class="project-card"><img src="https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?w=800&q=80"></a>
+<a class="project-card"><img src="https://images.unsplash.com/photo-1519389950473-47ba0277781c?w=800&q=80"></a>
+<a class="project-card"><img src="https://images.unsplash.com/photo-1507146153580-69a1fe6d8aa1?w=800&q=80"></a>
+<a class="project-card"><img src="https://images.unsplash.com/photo-1500534314209-a25ddb2bd429?w=800&q=80"></a>
+
+</div>
+
+</div>
+
+<button class="highlight-arrow next"><i class="fas fa-chevron-right"></i></button>
+
+</div>
+
+</section>
+
+
 <section id="projects">
 
-<h2>My Projects</h2>
+<h2>My Project Library</h2>
 
 <div class="project-filters">
 <button class="filter-btn active tag-all" data-filter="all">All</button>
@@ -1518,26 +1563,21 @@ console.error("Submission error",err)
 
 
 
-/* Project highlight slider */
-
-const highlightGrid = document.querySelector(".highlights-grid")
+const highlightGrid=document.querySelector(".highlights-grid")
 
 if(highlightGrid){
 
-let page = 0
+let page=0
 
-document.querySelectorAll(".highlight-arrow").forEach(btn=>{
-
-btn.onclick = ()=>{
-
-if(btn.classList.contains("next")) page = 1
-else page = 0
-
-highlightGrid.style.transform = "translateX(" + (-540*page) + "px)"
-
+document.querySelector(".next").onclick=()=>{
+page=1
+highlightGrid.style.transform="translateX(-540px)"
 }
 
-})
+document.querySelector(".prev").onclick=()=>{
+page=0
+highlightGrid.style.transform="translateX(0)"
+}
 
 }
 
