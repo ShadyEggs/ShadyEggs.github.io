@@ -983,10 +983,10 @@ transition:opacity .35s ease;
 
 
 
-/* HERO ROLLER TEXT */
+/* HERO TEXT SLIDER */
 
-.hero-roller{
-height:22px;
+.hero-slider{
+height:24px;
 overflow:hidden;
 display:flex;
 justify-content:center;
@@ -994,13 +994,20 @@ align-items:center;
 margin-top:6px;
 }
 
-.roller-track{
+.hero-slider-track{
 display:flex;
 flex-direction:column;
-transition:transform .45s ease;
+transition:transform .55s ease;
+}
+
+.hero-slide{
 font-size:16px;
 letter-spacing:.8px;
 color:#cbd5e1;
+height:24px;
+display:flex;
+align-items:center;
+justify-content:center;
 }
 
 
@@ -1694,22 +1701,20 @@ heroRotator.style.opacity = 1
 
 
 
-/* HERO TEXT ROLLER */
+/* HERO TEXT SLIDE ROTATION */
 
-const roller = document.getElementById("hero-roller-track")
+const slider = document.getElementById("hero-slider-track")
 
-if(roller){
+if(slider){
 
-const lines = roller.children.length
 let index = 0
 
 setInterval(()=>{
 
-index = (index + 1) % lines
+index = (index + 1) % 2
+slider.style.transform = `translateY(-${index*24}px)`
 
-roller.style.transform = `translateY(-${index*22}px)`
-
-},2000)
+},2500)
 
 }
 
