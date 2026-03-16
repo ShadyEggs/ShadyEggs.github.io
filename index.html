@@ -862,7 +862,16 @@ opacity:1;
 
 
 
-/* PROFILE IMAGE INSIDE ABOUT BUBBLE */
+/* remove two-column grid */
+
+.about-grid{
+display:grid;
+grid-template-columns:1fr;
+max-width:900px;
+margin:auto;
+}
+
+/* profile image inside bubble */
 
 .about-profile{
 float:left;
@@ -876,7 +885,7 @@ max-width:900px;
 margin:auto;
 }
 
-/* remove old speech bubble arrow */
+/* remove arrow */
 
 .about-text::before{
 display:none;
@@ -893,7 +902,7 @@ line-height:1.65;
 font-weight:600;
 }
 
-/* glow matching hero palette */
+/* hero palette glow */
 
 .profile-pic{
 box-shadow:
@@ -903,7 +912,7 @@ box-shadow:
 0 0 40px rgba(250,169,104,.10);
 }
 
-/* mobile layout */
+/* mobile */
 
 @media (max-width:900px){
 
