@@ -1216,9 +1216,41 @@ max-width:100%;
 
 
 
-/* -------- MOBILE HIGHLIGHTS WINDOW FIX -------- */
+/* -------- MOBILE WIDTH ALIGNMENT -------- */
 
 @media (max-width:900px){
+
+/* keep everything aligned with hero width */
+
+.main-layout{
+max-width:100%;
+padding:0 16px;
+margin:40px auto;
+}
+
+/* ensure sections never exceed hero width */
+
+section{
+width:100%;
+max-width:100%;
+}
+
+/* contact form scaling */
+
+.contact-form{
+width:100%;
+box-sizing:border-box;
+padding:20px;
+}
+
+/* project library scaling */
+
+.projects-window{
+width:100%;
+max-width:100%;
+}
+
+/* highlights window centered */
 
 .highlights-wrapper{
 width:100%;
@@ -1228,9 +1260,11 @@ justify-content:center;
 .highlights-window{
 width:100%;
 max-width:440px;
-overflow:hidden;
 margin:auto;
+overflow:hidden;
 }
+
+/* maintain 2x2 highlights window */
 
 .highlights-grid{
 display:grid;
