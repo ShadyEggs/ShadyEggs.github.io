@@ -1216,48 +1216,47 @@ max-width:100%;
 
 
 
-/* ---------------- MOBILE HIGHLIGHTS FIX ---------------- */
+/* -------- MOBILE HIGHLIGHTS WINDOW (2x2 ONLY) -------- */
 
 @media (max-width:900px){
-
-/* highlight window size */
 
 .highlights-window{
 width:100%;
-max-width:100%;
+height:440px;
 overflow:hidden;
 }
 
-/* force 2x2 layout */
-
 .highlights-grid{
-
-grid-template-columns:repeat(2,1fr);
-grid-template-rows:repeat(2,1fr);
-
+grid-template-columns:repeat(2,1fr) !important;
+grid-template-rows:repeat(2,1fr) !important;
 gap:14px;
-
-}
-
-/* ensure highlight cards scale */
-
-.highlights-grid .project-card{
-aspect-ratio:1;
 }
 
 }
 
-/* ---------------- MOBILE NAV DROPDOWN FIX ---------------- */
+/* -------- MOBILE PROJECT LIBRARY (2x3) -------- */
 
 @media (max-width:900px){
 
-.mobile-dropdown{
+.projects-window{
+height:660px !important;
+overflow-y:auto;
+}
 
-left:auto;
+.projects-grid{
+grid-template-columns:repeat(2,1fr) !important;
+}
+
+}
+
+/* -------- NAV DROPDOWN FIX -------- */
+
+@media (max-width:900px){
+
+.nav-dropdown{
 right:0;
-
-transform:translateX(-100%);
-
+left:auto;
+top:40px;
 }
 
 }
@@ -1938,6 +1937,50 @@ updateArrows()
 
 
 
+
+
+/* FIX HIGHLIGHT SLIDE DISTANCE */
+
+const highlightGrid = document.querySelector(".highlights-grid")
+
+if(highlightGrid){
+
+let page = 0
+
+const next = document.querySelector(".highlight-arrow.next")
+const prev = document.querySelector(".highlight-arrow.prev")
+
+function updateArrows(){
+
+if(page === 0){
+prev.classList.add("hidden")
+next.classList.remove("hidden")
+}
+
+if(page === 1){
+next.classList.add("hidden")
+prev.classList.remove("hidden")
+}
+
+}
+
+next.onclick = () => {
+page = 1
+highlightGrid.style.transform = "translateX(-100%)"
+updateArrows()
+}
+
+prev.onclick = () => {
+page = 0
+highlightGrid.style.transform = "translateX(0)"
+updateArrows()
+}
+
+updateArrows()
+
+}
+
+
 /* HERO TEXT ROTATION */
 
 const heroRotator = document.getElementById("hero-rotator")
@@ -2006,17 +2049,6 @@ moreNav.classList.toggle("open")
 })
 
 }
-
-
-
-
-/* FIX MOBILE NAV LINK BEHAVIOR */
-
-document.querySelectorAll(".mobile-dropdown a").forEach(link=>{
-link.addEventListener("click",()=>{
-window.location = link.getAttribute("href")
-})
-})
 
 
 </script>
