@@ -1264,12 +1264,17 @@ scroll-snap-align:start;
 
 @media (max-width:900px){
 
+/* hide arrows on mobile */
+
 .highlight-arrow{
 display:none;
 }
 
+/* viewport stays same width as page */
+
 .highlights-window{
 width:100%;
+max-width:100%;
 overflow-x:auto;
 overflow-y:hidden;
 
@@ -1277,47 +1282,24 @@ scroll-snap-type:x mandatory;
 -webkit-overflow-scrolling:touch;
 }
 
-/* keep desktop card size but allow horizontal paging */
+/* grid becomes two pages side-by-side */
 
 .highlights-grid{
+display:flex;
+width:200%;
+gap:14px;
+}
+
+/* each page fills the viewport */
+
+.highlight-page{
+flex:0 0 100%;
+scroll-snap-align:start;
 
 display:grid;
-
-grid-template-columns:repeat(4,210px);
-grid-template-rows:repeat(2,210px);
-
-gap:14px;
-
-/* width of two pages */
-
-min-width:840px;
-
-}
-
-/* snap start of each page */
-
-.highlights-grid a:nth-child(1),
-.highlights-grid a:nth-child(5){
-scroll-snap-align:start;
-}
-
-}
-
-
-/* -------- MOBILE PROJECT LIBRARY (2x3 WINDOW) -------- */
-
-@media (max-width:900px){
-
-.projects-window{
-
-height:540px;
-overflow-y:auto;
-overflow-x:hidden;
-
-}
-
-.projects-grid{
 grid-template-columns:repeat(2,1fr);
+grid-template-rows:repeat(2,1fr);
+gap:14px;
 }
 
 }
@@ -1434,20 +1416,20 @@ grid-template-columns:repeat(2,1fr);
 
 <div class="highlights-window">
 
+
 <div class="highlights-grid">
 
-<!-- PAGE 1 -->
+<div class="highlight-page">
 
-<a class="project-card highlight-card" data-tags="python pandas matplotlib">
-<img src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=800&q=80">
-<div class="project-overlay">
-<h3>Sales Trend Analysis</h3>
-<div class="project-tags">
-<span class="tag-python">Python</span>
-<span class="tag-package">pandas</span>
-<span class="tag-package">matplotlib</span>
+</div>
+
+<div class="highlight-page">
+
+</div>
+
 </div>
 </div>
+
 </a>
 
 <a class="project-card highlight-card" data-tags="r ggplot2 dplyr">
