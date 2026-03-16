@@ -1216,12 +1216,53 @@ max-width:100%;
 
 
 
+
 /* -------- MOBILE HIGHLIGHTS 2x2 SWIPE PAGES -------- */
 
 @media (max-width:900px){
 
 .highlight-arrow{
 display:none;
+}
+
+/* viewport */
+.highlights-window{
+width:100%;
+overflow-x:auto;
+overflow-y:hidden;
+
+scroll-snap-type:x mandatory;
+-webkit-overflow-scrolling:touch;
+}
+
+/* two pages side-by-side */
+.highlights-grid{
+
+display:grid;
+
+/* 4 columns total (2 per page) */
+grid-template-columns:repeat(4,50vw);
+
+/* two rows */
+grid-template-rows:repeat(2,50vw);
+
+gap:14px;
+
+/* make grid exactly two pages wide */
+width:200vw;
+
+}
+
+/* snap page 1 */
+.highlights-grid a:nth-child(1){
+scroll-snap-align:start;
+}
+
+/* snap page 2 */
+.highlights-grid a:nth-child(5){
+scroll-snap-align:start;
+}
+
 }
 
 .highlights-window{
