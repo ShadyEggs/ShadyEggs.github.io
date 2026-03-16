@@ -1260,11 +1260,11 @@ scroll-snap-align:start;
 
 
 
-/* ---------- MOBILE HIGHLIGHTS FINAL FIX ---------- */
+/* -------- MOBILE HIGHLIGHTS FINAL FIX -------- */
 
 @media (max-width:900px){
 
-/* hide arrows on mobile */
+/* hide arrows */
 
 .highlight-arrow{
 display:none;
@@ -1281,22 +1281,28 @@ scroll-snap-type:x mandatory;
 -webkit-overflow-scrolling:touch;
 }
 
-/* create two pages */
+/* force two pages */
 
 .highlights-grid{
 
 display:grid;
+
+grid-auto-flow:column;
+
+/* two columns per page */
 
 grid-template-columns:repeat(4,50%);
 grid-template-rows:repeat(2,1fr);
 
 gap:14px;
 
+/* total width = two pages */
+
 width:200%;
 
 }
 
-/* snap to page start */
+/* snap page starts */
 
 .highlights-grid a:nth-child(1),
 .highlights-grid a:nth-child(5){
