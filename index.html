@@ -1368,7 +1368,7 @@ sheets:["formulas","apps-script"]
 
 const LANGUAGES=Object.keys(LANGUAGE_TOOLS)
 
-const projects=[...document.querySelectorAll(".project-card")]
+const projects=[...document.querySelectorAll("#projects .project-card")]
 const packageContainer=document.querySelector(".package-filters")
 
 projects.forEach(card=>{
@@ -1563,20 +1563,23 @@ console.error("Submission error",err)
 
 
 
-const highlightGrid=document.querySelector(".highlights-grid")
+const highlightGrid = document.querySelector(".highlights-grid")
 
 if(highlightGrid){
 
-let page=0
+let page = 0
 
-document.querySelector(".next").onclick=()=>{
-page=1
-highlightGrid.style.transform="translateX(-540px)"
+const next = document.querySelector(".highlight-arrow.next")
+const prev = document.querySelector(".highlight-arrow.prev")
+
+next.onclick = () => {
+page = 1
+highlightGrid.style.transform = "translateX(-540px)"
 }
 
-document.querySelector(".prev").onclick=()=>{
-page=0
-highlightGrid.style.transform="translateX(0)"
+prev.onclick = () => {
+page = 0
+highlightGrid.style.transform = "translateX(0)"
 }
 
 }
