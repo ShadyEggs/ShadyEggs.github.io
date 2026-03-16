@@ -1259,23 +1259,30 @@ scroll-snap-align:start;
 }
 
 
-
-/* MOBILE HIGHLIGHTS SIMPLE SWIPE */
+/* -------- MOBILE HIGHLIGHTS SWIPE -------- */
 
 @media (max-width:900px){
 
+.highlight-arrow{
+display:none;
+}
+
 .highlights-window{
+width:100%;
 overflow-x:auto;
 overflow-y:hidden;
 -webkit-overflow-scrolling:touch;
 }
 
 .highlights-grid{
-min-width:200%;
+display:grid;
+grid-template-columns:repeat(4,50vw);
+grid-template-rows:repeat(2,50vw);
+gap:14px;
+width:200vw;
 }
 
 }
-
 
 </style>
 
@@ -2015,7 +2022,7 @@ prev.classList.remove("hidden")
 next.onclick = () => {
 
 page = 1
-highlightGrid.style.transform = "translateX(-100%)"
+highlightGrid.style.transform = "translateX(-460px)"
 
 updateArrows()
 
