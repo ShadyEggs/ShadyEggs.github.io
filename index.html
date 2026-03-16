@@ -1004,6 +1004,85 @@ letter-spacing:.9px;
 }
 
 
+
+
+/* -------- MOBILE LAYOUT OPTIMIZATION -------- */
+
+@media (max-width:600px){
+
+.main-layout{
+grid-template-columns:1fr;
+grid-template-areas:
+"about"
+"highlights"
+"projects"
+"contact"
+"certifications";
+gap:22px;
+margin:30px auto;
+padding:0 16px;
+}
+
+/* smaller section headers */
+
+h2{
+font-size:22px;
+margin-bottom:18px;
+}
+
+/* collapsible about */
+
+#about .about-text{
+display:none;
+}
+
+#about.open .about-text{
+display:block;
+}
+
+#about h2{
+cursor:pointer;
+}
+
+/* ---------- PROJECT LIBRARY MOBILE GRID ---------- */
+
+.projects-window{
+height:420px;
+overflow-y:auto;
+}
+
+.projects-grid{
+grid-template-columns:repeat(2,1fr);
+gap:14px;
+}
+
+/* ensures square cards */
+
+.project-card{
+aspect-ratio:1;
+border-radius:12px;
+}
+
+/* highlights fit mobile width */
+
+.highlights-window{
+width:100%;
+}
+
+.highlights-grid{
+grid-template-columns:repeat(2,1fr);
+grid-template-rows:auto;
+}
+
+/* contact form tighter */
+
+.contact-form{
+padding:26px;
+}
+
+}
+
+
 </style>
 
 </head>
@@ -1691,6 +1770,27 @@ heroRotator.style.opacity = 1
 },3500)
 
 }
+
+
+
+/* MOBILE ABOUT DROPDOWN */
+
+const aboutSection = document.getElementById("about")
+
+if(aboutSection){
+
+const aboutHeader = aboutSection.querySelector("h2")
+
+aboutHeader.addEventListener("click",()=>{
+
+if(window.innerWidth <= 600){
+aboutSection.classList.toggle("open")
+}
+
+})
+
+}
+
 
 </script>
 
