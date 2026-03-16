@@ -1216,7 +1216,7 @@ max-width:100%;
 
 
 
-/* -------- MOBILE HIGHLIGHTS 2x2 PAGINATION FIX -------- */
+/* ----- MOBILE HIGHLIGHTS FIX (HORIZONTAL PAGING) ----- */
 
 @media (max-width:900px){
 
@@ -1227,22 +1227,17 @@ overflow:hidden;
 
 .highlights-grid{
 
-grid-template-columns:repeat(2,1fr);
-grid-template-rows:repeat(4,1fr);
+display:grid;
+
+grid-template-columns:repeat(4,1fr);
+grid-template-rows:repeat(2,1fr);
 
 gap:14px;
 
-}
+width:200%;
 
-.highlight-card{
-aspect-ratio:1;
-}
+transition:transform .35s ease;
 
-/* show only first 4 cards (2x2) per page */
-
-.highlights-window{
-max-height:calc((100vw - 60px)/2 * 2 + 28px);
-overflow:hidden;
 }
 
 }
@@ -1959,57 +1954,7 @@ console.error("Submission error",err)
 
 
 
-
-
-/* MOBILE HIGHLIGHTS PAGINATION */
-
 const highlightGrid = document.querySelector(".highlights-grid")
-
-if(highlightGrid){
-
-let page = 0
-
-const next = document.querySelector(".highlight-arrow.next")
-const prev = document.querySelector(".highlight-arrow.prev")
-
-function updateArrows(){
-
-if(page === 0){
-prev.classList.add("hidden")
-next.classList.remove("hidden")
-}
-
-if(page === 1){
-next.classList.add("hidden")
-prev.classList.remove("hidden")
-}
-
-}
-
-next.onclick = () => {
-
-page = 1
-
-highlightGrid.style.transform = "translateY(-50%)"
-
-updateArrows()
-
-}
-
-prev.onclick = () => {
-
-page = 0
-
-highlightGrid.style.transform = "translateY(0)"
-
-updateArrows()
-
-}
-
-updateArrows()
-
-}
-
 
 if(highlightGrid){
 
