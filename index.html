@@ -915,7 +915,7 @@ display:grid;
 grid-template-columns:repeat(4,210px);
 grid-template-rows:repeat(2,210px);
 gap:20px;
-transition:transform .7s cubic-bezier(.25,.8,.25,1);
+transition:transform .35s ease;
 }
 
 .highlight-arrow{
@@ -1216,61 +1216,77 @@ max-width:100%;
 
 
 
-/* -------- MOBILE WIDTH ALIGNMENT -------- */
+/* -------- MOBILE PROPORTIONAL SCALING -------- */
 
 @media (max-width:900px){
 
-/* keep everything aligned with hero width */
+/* shrink overall layout to match hero width */
 
 .main-layout{
-max-width:100%;
-padding:0 16px;
-margin:40px auto;
+max-width:520px;
+margin:30px auto;
+padding:0 14px;
+gap:28px;
 }
 
-/* ensure sections never exceed hero width */
+/* tighten section spacing */
 
 section{
 width:100%;
 max-width:100%;
 }
 
-/* contact form scaling */
+/* slightly reduce headings */
+
+h2{
+font-size:22px;
+margin-bottom:20px;
+}
+
+/* contact section */
 
 .contact-form{
-width:100%;
-box-sizing:border-box;
-padding:20px;
+padding:18px;
 }
 
-/* project library scaling */
+/* project library */
 
 .projects-window{
-width:100%;
 max-width:100%;
+height:auto;
 }
 
-/* highlights window centered */
-
-.highlights-wrapper{
-width:100%;
-justify-content:center;
+.projects-grid{
+grid-template-columns:repeat(2,1fr);
+gap:12px;
 }
+
+/* highlight section scaled */
 
 .highlights-window{
-width:100%;
-max-width:440px;
+max-width:420px;
 margin:auto;
-overflow:hidden;
 }
 
-/* maintain 2x2 highlights window */
+.highlights-grid{
+grid-template-columns:repeat(4,190px);
+grid-template-rows:repeat(2,190px);
+gap:16px;
+}
+
+}
+
+/* smaller phones */
+
+@media (max-width:600px){
+
+.main-layout{
+max-width:440px;
+}
 
 .highlights-grid{
-display:grid;
-grid-template-columns:repeat(4,210px);
-grid-template-rows:repeat(2,210px);
-gap:20px;
+grid-template-columns:repeat(4,170px);
+grid-template-rows:repeat(2,170px);
 }
 
 }
