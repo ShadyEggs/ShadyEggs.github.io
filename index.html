@@ -36,7 +36,7 @@ scroll-behavior:smooth;
 
 .hero{
 position:relative;height:32vh;min-height:240px;
-display:flex;align-items:center;justify-content:center;
+display:flex;align-items:start;justify-content:center;
 text-align:center;overflow:hidden;color:white;
 background:
 radial-gradient(circle at 20% 30%,rgba(120,120,120,.35),transparent 40%),
@@ -216,7 +216,7 @@ border-radius:2px;
 .about-grid{
 display:grid;
 grid-template-columns:200px 1fr;
-gap:30px;align-items:center;
+gap:30px;align-items:start;
 }
 
 .profile-pic{
@@ -244,7 +244,7 @@ position:relative;
 
 background:rgba(255,255,255,.92);
 
-padding:30px;
+padding:34px 32px;
 
 border-radius:18px;
 
@@ -255,6 +255,18 @@ inset 0 1px 0 rgba(255,255,255,.6);
 transition:transform .3s ease,box-shadow .3s ease;
 
 }
+
+
+
+.about-text p{
+margin-bottom:14px;
+line-height:1.65;
+}
+
+.about-text p:first-child{
+font-weight:600;
+}
+
 
 .about-text:hover{
 transform:scale(1.03);
@@ -467,26 +479,6 @@ background:rgba(74,144,226,.20);
 
 border:1px solid rgba(255,255,255,.25);
 
-}
-
-
-
-
-/* PROJECT CARD FADE ANIMATION */
-
-.project-card{
-opacity:1;
-transform:scale(1);
-transition:
-opacity .35s ease,
-transform .35s ease,
-box-shadow .35s ease;
-}
-
-.project-card.hide{
-opacity:0;
-transform:scale(.92);
-pointer-events:none;
 }
 
 
@@ -918,15 +910,19 @@ opacity:1;
 
 <img src="profile.jpg" class="profile-pic">
 
+
 <div class="about-text">
 
-<p>Hi, I'm Alfred — a data analyst focused on turning messy datasets into clear, actionable insights.</p>
+<p>I've always been a data collector — long before I knew the term "data analyst."</p>
 
-<p>Using tools like Python, SQL, and data visualization platforms, I explore patterns, build dashboards, and communicate findings that help explain what the data is really saying.</p>
+<p>One of my earliest memories is of spending an afternoon watching anthills and carefully cataloging the ants’ behavior. That curiosity about patterns and systems has followed me ever since. I’ve always found myself collecting information about the things around me and looking for relationships hidden within.</p>
 
-<p>My projects focus on exploratory data analysis, trend detection, and building clear visual stories from complex datasets.</p>
+<p>Professionally, I spent over six years working as a behaviorist, where collecting and analyzing behavioral data was a central part of my work. Today I bring that same analytical mindset to data analysis, using tools like Python, SQL, and visualization platforms to explore datasets, clean and transform information, and uncover meaningful insights.</p>
+
+<p>For me, working with data isn’t something new — it’s a way of thinking that has been present throughout my life.</p>
 
 </div>
+
 </div>
 </section>
 
