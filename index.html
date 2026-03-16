@@ -1006,7 +1006,7 @@ letter-spacing:.9px;
 
 
 
-/* ---------------- MOBILE ABOUT TOGGLE ---------------- */
+/* ABOUT TOGGLE */
 
 .about-toggle-pic{
 display:none;
@@ -1020,7 +1020,7 @@ display:block;
 position:relative;
 
 width:160px;
-margin:10px auto 20px;
+margin:10px auto 30px;
 
 cursor:pointer;
 
@@ -1041,13 +1041,13 @@ linear-gradient(135deg,#01204E,#028391,#F6DCAC,#FAA968) border-box;
 
 }
 
-/* CENTERED GLASS ARROW */
+/* PERFECT CENTER + HALF ON/OFF */
 
 .about-arrow{
 
 position:absolute;
 
-bottom:-6px;
+bottom:-19px;
 left:50%;
 
 transform:translateX(-50%);
@@ -1072,7 +1072,7 @@ color:white;
 
 }
 
-/* hide about bubble initially */
+/* ABOUT SWAP */
 
 #about .about-text{
 display:none;
@@ -1086,11 +1086,7 @@ display:block;
 display:none;
 }
 
-}
-
-/* ---------------- MOBILE GRID ORDER ---------------- */
-
-@media (max-width:900px){
+/* MOBILE GRID ORDER */
 
 .main-layout{
 grid-template-areas:
@@ -1099,6 +1095,51 @@ grid-template-areas:
 "projects"
 "contact"
 "certifications";
+}
+
+}
+
+/* NAV DROPDOWN */
+
+.nav-more{
+display:none;
+}
+
+@media (max-width:900px){
+
+.nav-more{
+display:block;
+position:relative;
+}
+
+.nav-dropdown{
+
+display:none;
+
+position:absolute;
+
+top:40px;
+left:0;
+
+background:rgba(255,255,255,.06);
+
+backdrop-filter:blur(10px);
+
+border:1px solid rgba(255,255,255,.08);
+
+border-radius:10px;
+
+padding:10px;
+
+}
+
+.nav-dropdown a{
+display:block;
+padding:8px 12px;
+}
+
+.nav-more.open .nav-dropdown{
+display:block;
 }
 
 }
@@ -1132,8 +1173,15 @@ grid-template-areas:
 <li><a href="#about">About Me</a></li>
 <li><a href="#highlights">My Project Highlights</a></li>
 <li><a href="#projects">My Project Library</a></li>
-<li><a href="#contact">Contact</a></li>
-<li><a href="#certifications">Certifications</a></li>
+
+<li class="nav-more">
+<a href="#">More <i class="fas fa-chevron-down"></i></a>
+<div class="nav-dropdown">
+<a href="#contact">Contact</a>
+<a href="#certifications">Certifications</a>
+</div>
+</li>
+
 </ul>
 </nav>
 
@@ -1804,7 +1852,7 @@ heroRotator.style.opacity = 1
 
 
 
-/* MOBILE ABOUT TOGGLE */
+/* ABOUT TOGGLE */
 
 const aboutSection = document.getElementById("about")
 const togglePic = document.querySelector(".about-toggle-pic")
@@ -1821,6 +1869,21 @@ aboutSection.classList.add("open")
 aboutBubble.addEventListener("click",()=>{
 
 aboutSection.classList.remove("open")
+
+})
+
+}
+
+/* NAV DROPDOWN */
+
+const moreNav = document.querySelector(".nav-more")
+
+if(moreNav){
+
+moreNav.addEventListener("click",(e)=>{
+
+e.preventDefault()
+moreNav.classList.toggle("open")
 
 })
 
