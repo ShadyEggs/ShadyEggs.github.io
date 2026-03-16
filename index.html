@@ -979,7 +979,7 @@ pointer-events:none;
 
 /* HERO TEXT CONVEYOR */
 
-.hero-roller-window{
+.hero-slide-window{
 height:30px;
 overflow:hidden;
 display:flex;
@@ -988,39 +988,21 @@ align-items:center;
 margin-top:6px;
 }
 
-#hero-roller{
+#hero-slide-track{
 display:flex;
 flex-direction:column;
 align-items:center;
-width:100%;
+transition:transform 1.1s cubic-bezier(.25,.8,.25,1);
 }
 
-.hero-line{
-display:flex;
-justify-content:center;
-align-items:center;
-text-align:center;
-
+.hero-slide{
 height:30px;
 line-height:30px;
-
 font-size:16px;
 letter-spacing:.8px;
 color:#cbd5e1;
-
-animation:heroDrop 1.2s cubic-bezier(.25,.8,.25,1) forwards;
-}
-
-@keyframes heroDrop{
-
-0%{
-transform:translateY(-34px);
-}
-
-100%{
-transform:translateY(0);
-}
-
+text-align:center;
+width:100%;
 }
 
 
@@ -1037,8 +1019,11 @@ transform:translateY(0);
 <h1>Alfred Rico</h1>
 
 
-<div class="hero-roller-window">
-<div id="hero-roller"></div>
+<div class="hero-slide-window">
+<div id="hero-slide-track">
+<div class="hero-slide">Data Cleaning • Transformation • Visualization</div>
+<div class="hero-slide">Python • SQL • R • Tableau</div>
+</div>
 </div>
 
 
@@ -1690,37 +1675,34 @@ updateArrows()
 
 /* HERO TEXT CONVEYOR */
 
+const track = document.getElementById("hero-slide-track")
+
+if(track){
+
 const phrases = [
 "Data Cleaning • Transformation • Visualization",
 "Python • SQL • R • Tableau"
 ]
 
-const roller = document.getElementById("hero-roller")
-
-if(roller){
-
 let index = 0
-
-function addLine(text){
-
-const line = document.createElement("div")
-line.className = "hero-line"
-line.textContent = text
-
-roller.insertBefore(line, roller.firstChild)
-
-if(roller.children.length > 2){
-roller.removeChild(roller.lastChild)
-}
-
-}
-
-addLine(phrases[0])
 
 setInterval(()=>{
 
 index = (index + 1) % phrases.length
-addLine(phrases[index])
+
+track.style.transform = "translateY(30px)"
+
+setTimeout(()=>{
+
+track.style.transition = "none"
+track.appendChild(track.firstElementChild)
+track.style.transform = "translateY(0)"
+
+requestAnimationFrame(()=>{
+track.style.transition = "transform 1.1s cubic-bezier(.25,.8,.25,1)"
+})
+
+},1100)
 
 },2500)
 
