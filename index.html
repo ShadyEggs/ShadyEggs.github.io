@@ -1216,7 +1216,7 @@ max-width:100%;
 
 
 
-/* ----- MOBILE HIGHLIGHTS FIX (HORIZONTAL PAGING) ----- */
+/* ----- MOBILE HIGHLIGHTS FINAL FIX (4 CARDS PER PAGE) ----- */
 
 @media (max-width:900px){
 
@@ -1229,10 +1229,14 @@ overflow:hidden;
 
 display:grid;
 
+/* 4 columns total → 2 columns per page */
+
 grid-template-columns:repeat(4,1fr);
 grid-template-rows:repeat(2,1fr);
 
 gap:14px;
+
+/* two pages wide */
 
 width:200%;
 
