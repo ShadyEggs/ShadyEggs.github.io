@@ -958,6 +958,20 @@ margin:auto;
 }
 
 
+
+
+/* highlight arrow fade logic */
+
+.highlight-arrow{
+transition:opacity .35s ease;
+}
+
+.highlight-arrow.hidden{
+opacity:0;
+pointer-events:none;
+}
+
+
 </style>
 
 </head>
@@ -1573,15 +1587,39 @@ let page = 0
 const next = document.querySelector(".highlight-arrow.next")
 const prev = document.querySelector(".highlight-arrow.prev")
 
+function updateArrows(){
+
+if(page === 0){
+prev.classList.add("hidden")
+next.classList.remove("hidden")
+}
+
+if(page === 1){
+next.classList.add("hidden")
+prev.classList.remove("hidden")
+}
+
+}
+
 next.onclick = () => {
+
 page = 1
 highlightGrid.style.transform = "translateX(-460px)"
+
+updateArrows()
+
 }
 
 prev.onclick = () => {
+
 page = 0
 highlightGrid.style.transform = "translateX(0)"
+
+updateArrows()
+
 }
+
+updateArrows()
 
 }
 
