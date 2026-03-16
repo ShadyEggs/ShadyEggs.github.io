@@ -470,6 +470,26 @@ border:1px solid rgba(255,255,255,.25);
 }
 
 
+
+
+/* PROJECT CARD FADE ANIMATION */
+
+.project-card{
+opacity:1;
+transform:scale(1);
+transition:
+opacity .35s ease,
+transform .35s ease,
+box-shadow .35s ease;
+}
+
+.project-card.hide{
+opacity:0;
+transform:scale(.92);
+pointer-events:none;
+}
+
+
 /* PROJECT GRID */
 
 .projects-window{max-width:920px;margin:auto;height:650px;overflow-y:auto}
