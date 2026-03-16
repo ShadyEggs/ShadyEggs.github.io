@@ -1216,7 +1216,7 @@ max-width:100%;
 
 
 
-/* ---------------- MOBILE HIGHLIGHTS FIX ---------------- */
+/* -------- MOBILE HIGHLIGHTS WINDOW FIX -------- */
 
 @media (max-width:900px){
 
@@ -1227,14 +1227,16 @@ justify-content:center;
 
 .highlights-window{
 width:100%;
-max-width:100%;
+max-width:440px;
 overflow:hidden;
+margin:auto;
 }
 
 .highlights-grid{
-grid-template-columns:repeat(2,1fr) !important;
-grid-template-rows:repeat(2,1fr) !important;
-gap:14px;
+display:grid;
+grid-template-columns:repeat(4,210px);
+grid-template-rows:repeat(2,210px);
+gap:20px;
 }
 
 }
