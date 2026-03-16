@@ -1147,11 +1147,11 @@ display:block;
 
 
 
-/* ---------------- MOBILE LAYOUT FIX ---------------- */
+/* ---------------- MOBILE SCALING FIX ---------------- */
 
 @media (max-width:900px){
 
-/* align sections with hero */
+/* align all sections with hero width */
 
 .main-layout{
 max-width:100%;
@@ -1159,22 +1159,23 @@ padding:0 16px;
 margin:40px auto;
 }
 
-/* reduce oversized contact box */
+/* reduce oversized contact form */
 
 .contact-form{
-padding:24px;
+padding:22px;
 }
 
-/* prevent giant project window */
+/* improve hero proportion on phones */
 
-.projects-window{
-height:auto;
+.hero{
+height:28vh;
+min-height:200px;
 }
 
-/* keep section spacing consistent */
+/* adjust hero text position */
 
-section{
-margin-bottom:30px;
+.hero-content{
+margin-top:-20px;
 }
 
 }
