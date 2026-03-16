@@ -974,19 +974,13 @@ pointer-events:none;
 
 
 
-/* hero text rotation animation */
-
-#hero-rotator{
-transition:opacity .35s ease;
-}
-
 
 
 
 /* HERO TEXT CONVEYOR */
 
 .hero-roller-window{
-height:24px;
+height:26px;
 overflow:hidden;
 display:flex;
 justify-content:center;
@@ -998,16 +992,29 @@ margin-top:4px;
 display:flex;
 flex-direction:column;
 align-items:center;
-font-size:16px;
-letter-spacing:.8px;
-color:#cbd5e1;
 }
 
 .hero-line{
-height:24px;
+height:26px;
 display:flex;
 align-items:center;
 justify-content:center;
+font-size:16px;
+letter-spacing:.8px;
+color:#cbd5e1;
+animation:heroDrop 1.15s cubic-bezier(.25,.8,.25,1) forwards;
+}
+
+@keyframes heroDrop{
+
+0%{
+transform:translateY(-26px);
+}
+
+100%{
+transform:translateY(0);
+}
+
 }
 
 
@@ -1673,36 +1680,6 @@ updateArrows()
 
 
 
-/* HERO TEXT ROTATION */
-
-const heroRotator = document.getElementById("hero-rotator")
-
-if(heroRotator){
-
-const phrases = [
-"Data Cleaning • Transformation • Visualization",
-"Python • SQL • R • Tableau"
-]
-
-let index = 0
-
-setInterval(()=>{
-
-index = (index + 1) % phrases.length
-
-heroRotator.style.opacity = 0
-
-setTimeout(()=>{
-
-heroRotator.textContent = phrases[index]
-heroRotator.style.opacity = 1
-
-},300)
-
-},3500)
-
-}
-
 
 
 /* HERO TEXT CONVEYOR */
@@ -1718,19 +1695,18 @@ if(roller){
 
 let index = 0
 
-function addLine(text, top=false){
+function addLine(text){
 
 const line = document.createElement("div")
 line.className = "hero-line"
 line.textContent = text
 
-if(top){
 roller.insertBefore(line, roller.firstChild)
-}else{
-roller.appendChild(line)
+
+if(roller.children.length > 2){
+roller.removeChild(roller.lastChild)
 }
 
-return line
 }
 
 addLine(phrases[0])
@@ -1738,20 +1714,7 @@ addLine(phrases[0])
 setInterval(()=>{
 
 index = (index + 1) % phrases.length
-
-const newLine = addLine(phrases[index], true)
-
-roller.style.transition = "transform .55s ease"
-roller.style.transform = "translateY(24px)"
-
-setTimeout(()=>{
-
-roller.style.transition = "none"
-roller.style.transform = "translateY(0)"
-
-roller.removeChild(roller.lastChild)
-
-},550)
+addLine(phrases[index])
 
 },2500)
 
