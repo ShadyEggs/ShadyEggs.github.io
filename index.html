@@ -1006,12 +1006,17 @@ letter-spacing:.9px;
 
 
 
-/* MOBILE ABOUT TOGGLE */
+/* ---------------- MOBILE ABOUT TOGGLE ---------------- */
+
+.about-toggle-pic{
+display:none;
+}
 
 @media (max-width:900px){
 
 .about-toggle-pic{
 
+display:block;
 position:relative;
 
 width:160px;
@@ -1036,12 +1041,16 @@ linear-gradient(135deg,#01204E,#028391,#F6DCAC,#FAA968) border-box;
 
 }
 
+/* CENTERED GLASS ARROW */
+
 .about-arrow{
 
 position:absolute;
 
 bottom:-6px;
-right:45%;
+left:50%;
+
+transform:translateX(-50%);
 
 width:38px;
 height:38px;
@@ -1063,22 +1072,33 @@ color:white;
 
 }
 
+/* hide about bubble initially */
+
 #about .about-text{
-
 display:none;
-
 }
 
 #about.open .about-text{
-
 display:block;
-
 }
 
 #about.open .about-toggle-pic{
-
 display:none;
+}
 
+}
+
+/* ---------------- MOBILE GRID ORDER ---------------- */
+
+@media (max-width:900px){
+
+.main-layout{
+grid-template-areas:
+"about"
+"highlights"
+"projects"
+"contact"
+"certifications";
 }
 
 }
@@ -1124,15 +1144,14 @@ display:none;
 <h2>About Me</h2>
 
 
+
 <div class="about-toggle-pic">
-
 <img src="profile.jpg">
-
 <div class="about-arrow">
 <i class="fas fa-chevron-down"></i>
 </div>
-
 </div>
+
 
 <div class="about-text">
 
@@ -1785,15 +1804,15 @@ heroRotator.style.opacity = 1
 
 
 
-/* MOBILE ABOUT SWAP */
+/* MOBILE ABOUT TOGGLE */
 
 const aboutSection = document.getElementById("about")
-const aboutTogglePic = document.querySelector(".about-toggle-pic")
+const togglePic = document.querySelector(".about-toggle-pic")
 const aboutBubble = document.querySelector("#about .about-text")
 
-if(aboutTogglePic){
+if(togglePic){
 
-aboutTogglePic.addEventListener("click",()=>{
+togglePic.addEventListener("click",()=>{
 
 aboutSection.classList.add("open")
 
