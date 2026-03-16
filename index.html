@@ -974,33 +974,40 @@ pointer-events:none;
 
 
 
+/* hero text rotation animation */
+
+#hero-rotator{
+transition:opacity .35s ease;
+}
 
 
 
-/* HERO TEXT SLIDER */
 
-.hero-slide-window{
+/* HERO TEXT CONVEYOR */
+
+.hero-roller-window{
 height:24px;
 overflow:hidden;
 display:flex;
 justify-content:center;
+align-items:center;
 margin-top:4px;
 }
 
-.hero-slide-track{
+#hero-roller{
 display:flex;
 flex-direction:column;
-transition:transform .55s ease;
+align-items:center;
+font-size:16px;
+letter-spacing:.8px;
+color:#cbd5e1;
 }
 
-.hero-slide{
+.hero-line{
 height:24px;
 display:flex;
 align-items:center;
 justify-content:center;
-font-size:16px;
-letter-spacing:.8px;
-color:#cbd5e1;
 }
 
 
@@ -1017,11 +1024,8 @@ color:#cbd5e1;
 <h1>Alfred Rico</h1>
 
 
-<div class="hero-slide-window">
-<div class="hero-slide-track" id="hero-slide-track">
-<div class="hero-slide">Data Cleaning • Transformation • Visualization</div>
-<div class="hero-slide">Python • SQL • R • Tableau</div>
-</div>
+<div class="hero-roller-window">
+<div id="hero-roller"></div>
 </div>
 
 
@@ -1669,20 +1673,85 @@ updateArrows()
 
 
 
+/* HERO TEXT ROTATION */
 
+const heroRotator = document.getElementById("hero-rotator")
 
-/* HERO TEXT SLIDE */
+if(heroRotator){
 
-const heroSlider = document.getElementById("hero-slide-track")
-
-if(heroSlider){
+const phrases = [
+"Data Cleaning • Transformation • Visualization",
+"Python • SQL • R • Tableau"
+]
 
 let index = 0
 
 setInterval(()=>{
 
-index = (index + 1) % 2
-heroSlider.style.transform = `translateY(-${index*24}px)`
+index = (index + 1) % phrases.length
+
+heroRotator.style.opacity = 0
+
+setTimeout(()=>{
+
+heroRotator.textContent = phrases[index]
+heroRotator.style.opacity = 1
+
+},300)
+
+},3500)
+
+}
+
+
+
+/* HERO TEXT CONVEYOR */
+
+const phrases = [
+"Data Cleaning • Transformation • Visualization",
+"Python • SQL • R • Tableau"
+]
+
+const roller = document.getElementById("hero-roller")
+
+if(roller){
+
+let index = 0
+
+function addLine(text, top=false){
+
+const line = document.createElement("div")
+line.className = "hero-line"
+line.textContent = text
+
+if(top){
+roller.insertBefore(line, roller.firstChild)
+}else{
+roller.appendChild(line)
+}
+
+return line
+}
+
+addLine(phrases[0])
+
+setInterval(()=>{
+
+index = (index + 1) % phrases.length
+
+const newLine = addLine(phrases[index], true)
+
+roller.style.transition = "transform .55s ease"
+roller.style.transform = "translateY(24px)"
+
+setTimeout(()=>{
+
+roller.style.transition = "none"
+roller.style.transform = "translateY(0)"
+
+roller.removeChild(roller.lastChild)
+
+},550)
 
 },2500)
 
