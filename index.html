@@ -977,7 +977,7 @@ pointer-events:none;
 
 
 
-/* HERO TEXT DROP */
+/* HERO TEXT CONVEYOR */
 
 .hero-roller-window{
 height:32px;
@@ -993,7 +993,7 @@ display:flex;
 flex-direction:column;
 align-items:center;
 width:100%;
-position:relative;
+transform:translateY(0);
 }
 
 .hero-line{
@@ -1004,7 +1004,6 @@ letter-spacing:.8px;
 color:#cbd5e1;
 text-align:center;
 width:100%;
-transform:translateY(0);
 }
 
 
@@ -1022,7 +1021,10 @@ transform:translateY(0);
 
 
 <div class="hero-roller-window">
-<div id="hero-roller"></div>
+<div id="hero-roller">
+<div class="hero-line">Data Cleaning • Transformation • Visualization</div>
+<div class="hero-line">Python • SQL • R • Tableau</div>
+</div>
 </div>
 
 
@@ -1672,7 +1674,7 @@ updateArrows()
 
 
 
-/* HERO TEXT DROP */
+/* HERO TEXT CONVEYOR */
 
 const phrases = [
 "Data Cleaning • Transformation • Visualization",
@@ -1685,40 +1687,17 @@ if(roller){
 
 let index = 0
 
-function createLine(text){
-const line = document.createElement("div")
-line.className = "hero-line"
-line.textContent = text
-return line
-}
-
-roller.appendChild(createLine(phrases[0]))
-
 setInterval(()=>{
 
-index = (index + 1) % phrases.length
-
-const newLine = createLine(phrases[index])
-
-newLine.style.transform = "translateY(-32px)"
-
-roller.insertBefore(newLine, roller.firstChild)
-
-/* force layout so animation runs */
-newLine.offsetHeight
-
-newLine.style.transition = "transform 1.2s cubic-bezier(.25,.8,.25,1)"
-newLine.style.transform = "translateY(0)"
-
-const oldLine = roller.children[1]
-
-oldLine.style.transition = "transform 1.2s cubic-bezier(.25,.8,.25,1)"
-oldLine.style.transform = "translateY(32px)"
+roller.style.transition = "transform 1.2s cubic-bezier(.25,.8,.25,1)"
+roller.style.transform = "translateY(32px)"
 
 setTimeout(()=>{
-if(roller.children.length > 1){
-roller.removeChild(oldLine)
-}
+
+roller.style.transition = "none"
+roller.appendChild(roller.firstElementChild)
+roller.style.transform = "translateY(0)"
+
 },1200)
 
 },2500)
