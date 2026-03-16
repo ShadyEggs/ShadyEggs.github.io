@@ -1214,6 +1214,61 @@ max-width:100%;
 }
 
 
+
+
+/* ---------------- MOBILE GRID FIX ---------------- */
+
+@media (max-width:900px){
+
+/* ---------- PROJECT HIGHLIGHTS (2x2) ---------- */
+
+.highlights-window{
+width:100%;
+max-width:100%;
+overflow:hidden;
+}
+
+.highlights-grid{
+
+grid-template-columns:repeat(2,1fr);
+grid-template-rows:repeat(2,1fr);
+
+gap:14px;
+
+}
+
+/* ---------- PROJECT LIBRARY (2x3 visible) ---------- */
+
+.projects-window{
+
+width:100%;
+max-width:100%;
+
+/* height fits exactly 3 rows */
+
+height:660px;
+
+overflow-y:auto;
+
+}
+
+.projects-grid{
+
+grid-template-columns:repeat(2,1fr);
+
+gap:14px;
+
+}
+
+/* ensure cards scale cleanly */
+
+.project-card{
+aspect-ratio:1;
+}
+
+}
+
+
 </style>
 
 </head>
