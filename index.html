@@ -862,21 +862,27 @@ opacity:1;
 
 
 
-/* PROFILE IMAGE INSIDE CHAT BUBBLE */
+/* PROFILE IMAGE INSIDE ABOUT BUBBLE */
 
 .about-profile{
 float:left;
 margin:0 18px 10px 0;
 }
 
-/* Wider chat bubble */
+/* wider bubble */
 
 .about-text{
 max-width:900px;
 margin:auto;
 }
 
-/* Paragraph readability */
+/* remove old speech bubble arrow */
+
+.about-text::before{
+display:none;
+}
+
+/* paragraph readability */
 
 .about-text p{
 margin-bottom:14px;
@@ -887,7 +893,7 @@ line-height:1.65;
 font-weight:600;
 }
 
-/* Palette glow matching hero animation */
+/* glow matching hero palette */
 
 .profile-pic{
 box-shadow:
@@ -897,7 +903,7 @@ box-shadow:
 0 0 40px rgba(250,169,104,.10);
 }
 
-/* Mobile layout */
+/* mobile layout */
 
 @media (max-width:900px){
 
