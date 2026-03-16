@@ -972,6 +972,15 @@ pointer-events:none;
 }
 
 
+
+
+/* hero text rotation animation */
+
+#hero-rotator{
+transition:opacity .35s ease;
+}
+
+
 </style>
 
 </head>
@@ -983,7 +992,9 @@ pointer-events:none;
 
 <div class="hero-content">
 <h1>Alfred Rico</h1>
-<p>Aspiring Data Analyst</p>
+
+<p id="hero-rotator">Data Cleaning • Transformation • Visualization</p>
+
 
 <div class="social-links">
 <a href="https://www.linkedin.com/in/alfred-rico-3992338a/" target="_blank"><i class="fab fa-linkedin"></i></a>
@@ -1625,6 +1636,38 @@ updateArrows()
 
 }
 
+
+
+
+/* HERO TEXT ROTATION */
+
+const heroRotator = document.getElementById("hero-rotator")
+
+if(heroRotator){
+
+const phrases = [
+"Data Cleaning • Transformation • Visualization",
+"Python • SQL • R • Tableau"
+]
+
+let index = 0
+
+setInterval(()=>{
+
+index = (index + 1) % phrases.length
+
+heroRotator.style.opacity = 0
+
+setTimeout(()=>{
+
+heroRotator.textContent = phrases[index]
+heroRotator.style.opacity = 1
+
+},300)
+
+},3500)
+
+}
 
 </script>
 
