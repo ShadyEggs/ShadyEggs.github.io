@@ -1217,12 +1217,38 @@ max-width:100%;
 
 
 /* ===============================
-   MOBILE GRID CORRECTIONS
-================================ */
+MOBILE NAVIGATION ADJUSTMENTS
+=============================== */
 
 @media (max-width:900px){
 
-/* ---- PROJECT HIGHLIGHTS 2x2 ---- */
+/* swap highlight/library order */
+
+nav ul{
+flex-wrap:wrap;
+}
+
+nav ul li:nth-child(2){
+order:3;
+}
+
+nav ul li:nth-child(3){
+order:2;
+}
+
+/* remove underline from MORE button */
+
+.nav-more a::after{
+display:none !important;
+}
+
+}
+
+/* ===============================
+MOBILE HIGHLIGHT PAGINATION
+=============================== */
+
+@media (max-width:900px){
 
 .highlights-window{
 width:100%;
@@ -1231,28 +1257,10 @@ overflow:hidden;
 }
 
 .highlights-grid{
-grid-template-columns:repeat(2,1fr) !important;
-grid-template-rows:repeat(2,1fr) !important;
+display:grid;
+grid-template-columns:repeat(4,1fr);
+grid-auto-flow:column;
 gap:14px;
-}
-
-/* ---- PROJECT LIBRARY 2x3 ---- */
-
-.projects-window{
-height:660px !important;
-overflow-y:auto;
-}
-
-.projects-grid{
-grid-template-columns:repeat(2,1fr) !important;
-}
-
-/* ---- NAV DROPDOWN POSITION ---- */
-
-.nav-dropdown{
-right:0;
-left:auto;
-top:40px;
 }
 
 }
@@ -1911,7 +1919,7 @@ prev.classList.remove("hidden")
 next.onclick = () => {
 
 page = 1
-highlightGrid.style.transform = "translateX(-100%)"
+highlightGrid.style.transform = "translateX(-460px)"
 
 updateArrows()
 
@@ -1931,6 +1939,54 @@ updateArrows()
 }
 
 
+
+
+
+
+/* FIX MOBILE HIGHLIGHT PAGINATION */
+
+const highlightGrid = document.querySelector(".highlights-grid")
+
+if(highlightGrid){
+
+let page = 0
+
+const next = document.querySelector(".highlight-arrow.next")
+const prev = document.querySelector(".highlight-arrow.prev")
+
+function updateArrows(){
+
+if(page === 0){
+prev.classList.add("hidden")
+next.classList.remove("hidden")
+}
+
+if(page === 1){
+next.classList.add("hidden")
+prev.classList.remove("hidden")
+}
+
+}
+
+next.onclick = () => {
+
+page = 1
+highlightGrid.style.transform = "translateX(-100%)"
+updateArrows()
+
+}
+
+prev.onclick = () => {
+
+page = 0
+highlightGrid.style.transform = "translateX(0)"
+updateArrows()
+
+}
+
+updateArrows()
+
+}
 
 
 /* HERO TEXT ROTATION */
