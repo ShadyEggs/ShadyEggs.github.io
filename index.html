@@ -906,6 +906,32 @@ opacity:1;
 
 }
 
+
+
+/* =========================================
+   HARD OVERRIDE — MOBILE PROJECT GRID FIX
+   ========================================= */
+
+@media (max-width:600px){
+
+  .projects-window{
+    height: 360px !important;
+    overflow-y: auto !important;
+    overflow-x: hidden !important;
+  }
+
+  .projects-grid{
+    display: grid !important;
+    grid-template-columns: repeat(2, 1fr) !important;
+    gap: 12px !important;
+  }
+
+  .project-card{
+    aspect-ratio: 1 / 1 !important;
+  }
+
+}
+
 </style>
 
 </head>
