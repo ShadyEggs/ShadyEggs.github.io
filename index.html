@@ -1290,6 +1290,20 @@ scroll-snap-align:start;
 
 
 
+/* ===== SAFE LAYOUT CONSTRAINTS ===== */
+
+/* keep sections inside hero width */
+section{
+max-width:1200px;
+margin-left:auto;
+margin-right:auto;
+}
+
+/* center section titles */
+section h2{
+text-align:center;
+}
+
 /* ===== MOBILE HIGHLIGHTS FIX ===== */
 
 @media (max-width:900px){
@@ -1299,8 +1313,8 @@ display:none;
 }
 
 #highlights .highlights-window{
-width:100vw;
-max-width:100vw;
+width:100%;
+max-width:100%;
 overflow-x:auto;
 overflow-y:hidden;
 scroll-snap-type:x mandatory;
@@ -1308,15 +1322,11 @@ scroll-snap-type:x mandatory;
 }
 
 #highlights .highlights-grid{
-
 display:grid;
-
-grid-template-columns:repeat(4,50vw);
-grid-template-rows:repeat(2,50vw);
-
+grid-template-columns:repeat(4,50%);
+grid-template-rows:repeat(2,auto);
 gap:14px;
-
-width:200vw;
+width:200%;
 }
 
 #highlights .highlights-grid a{
