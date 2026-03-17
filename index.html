@@ -1492,57 +1492,19 @@ transform:rotate(180deg);
 
 
 /* ================================
-   MOBILE NAV SMART ANCHOR
+   MOBILE NAV SMOOTH SCOOP EFFECT
    ================================ */
 
 @media (max-width:900px){
 
-/* DEFAULT (TOP OF PAGE) */
 nav{
-position:relative;
-width:100%;
-z-index:50;
-}
-
-/* WHEN SCROLLED */
-nav.fixed{
-position:fixed;
+position:sticky;
 top:0;
-left:0;
-width:100%;
-z-index:9999;
-}
+z-index:1000;
 
-/* BODY OFFSET ONLY WHEN FIXED */
-body.nav-fixed{
-padding-top:72px;
-}
-
-/* DROPDOWN OVERLAY (NO PUSH) */
-nav ul{
-position:absolute;
-top:100%;
-left:0;
-width:100%;
-
-display:none;
-flex-direction:column;
-gap:16px;
-padding:20px 0;
-
-background:rgba(20,30,40,.95);
-
-border-bottom:1px solid rgba(255,255,255,.1);
-}
-
-/* SHOW MENU */
-nav.active ul{
-display:flex;
-}
-
-/* CENTER ITEMS */
-nav ul li{
-text-align:center;
+/* smooth motion */
+transition:transform 0.15s linear;
+will-change:transform;
 }
 
 }
@@ -2411,22 +2373,27 @@ document.addEventListener("click", (e)=>{
 
 
 /* ================================
-   MOBILE NAV SMART SCROLL
+   MOBILE NAV SMOOTH SCROLL EFFECT
    ================================ */
 
-const mobileNav = document.querySelector("nav")
+let lastScrollY = window.scrollY
 
 window.addEventListener("scroll", ()=>{
 
   if(window.innerWidth > 900) return
 
-  if(window.scrollY > 10){
-    mobileNav.classList.add("fixed")
-    document.body.classList.add("nav-fixed")
-  }else{
-    mobileNav.classList.remove("fixed")
-    document.body.classList.remove("nav-fixed")
-  }
+  const nav = document.querySelector("nav")
+  if(!nav) return
+
+  const currentY = window.scrollY
+
+  // limit movement (prevents over-shift)
+  const offset = Math.min(currentY, 60)
+
+  // smooth "pickup"
+  nav.style.transform = `translateY(-${offset}px)`
+
+  lastScrollY = currentY
 
 })
 
