@@ -1163,65 +1163,45 @@ border-radius:50%;
 
 
 /* ================================
-   MOBILE ABOUT COLLAPSE SYSTEM
+   MOBILE ABOUT FINAL FIX
    ================================ */
 
 @media (max-width:900px){
 
-.about-mobile-wrapper{
-position:relative;
-display:flex;
-justify-content:center;
-margin-bottom:10px;
-}
-
-/* avatar (collapsed state) */
-.about-mobile-img{
-width:160px;
-height:160px;
-border-radius:50%;
-cursor:pointer;
-z-index:2;
-}
-
-/* expand button */
-.about-expand-btn{
-position:absolute;
-bottom:-12px;
-left:50%;
-transform:translateX(-50%);
-width:36px;
-height:36px;
-border-radius:50%;
-
-background:rgba(255,255,255,.15);
-backdrop-filter:blur(10px);
-
-display:flex;
-align-items:center;
-justify-content:center;
-
-color:white;
-font-size:14px;
-cursor:pointer;
-
-border:1px solid rgba(255,255,255,.25);
-}
-
-/* collapsed */
-.about-text.collapsed p{
-display:none;
-}
-
-/* hide bubble styling when collapsed */
+/* REMOVE BUBBLE IN COLLAPSED STATE */
 .about-text.collapsed{
-padding:10px;
-text-align:center;
+background:transparent !important;
+box-shadow:none !important;
+padding:0 !important;
 }
 
-/* expanded */
+/* REMOVE CHAT POINTER */
+.about-text::before{
+display:none !important;
+}
+
+/* CENTER IMAGE WHEN EXPANDED */
+.about-text.expanded .about-mobile-img{
+display:block;
+margin:0 auto 16px auto;
+float:none;
+}
+
+/* ENSURE TEXT FULL WIDTH */
 .about-text.expanded p{
 display:block;
+text-align:left;
+}
+
+/* CENTER COLLAPSED IMAGE */
+.about-mobile-wrapper{
+display:flex;
+justify-content:center;
+}
+
+/* clean spacing */
+.about-text.expanded{
+padding:20px;
 }
 
 }
@@ -1263,17 +1243,9 @@ display:block;
 
 <div class="about-grid">
 
-<div class="about-text" id="aboutBubble">
+<div class="about-text">
 
-
-<div class="about-mobile-wrapper">
-
-<img src="profile.jpg" class="profile-pic about-mobile-img" id="aboutAvatar">
-
-<div class="about-expand-btn" id="aboutExpand">
-<i class="fas fa-chevron-down"></i>
-</div>
-
+<img src="profile.jpg" class="profile-pic about-inline">
 
 <p>I've always been a data collector — long before I knew the term "data analyst."</p>
 
@@ -1284,7 +1256,7 @@ display:block;
 <p>For me, working with data isn’t something new — it’s a way of thinking that has been present throughout my life.</p>
 
 </div>
-</div>
+
 </div>
 </section>
 
@@ -1951,41 +1923,6 @@ hTrack.addEventListener("touchend", ()=>{
 setupDesktopNav()
 updateHighlights()
 window.addEventListener("resize", updateHighlights)
-
-
-
-/* ================================
-   MOBILE ABOUT TOGGLE
-   ================================ */
-
-const aboutBubble = document.getElementById("aboutBubble")
-const aboutAvatar = document.getElementById("aboutAvatar")
-const aboutExpand = document.getElementById("aboutExpand")
-
-function collapseAbout(){
-  aboutBubble.classList.add("collapsed")
-  aboutBubble.classList.remove("expanded")
-}
-
-function expandAbout(){
-  aboutBubble.classList.remove("collapsed")
-  aboutBubble.classList.add("expanded")
-}
-
-/* default = collapsed on mobile */
-if(window.innerWidth <= 900){
-  collapseAbout()
-}
-
-/* interactions */
-aboutAvatar.addEventListener("click", expandAbout)
-aboutExpand.addEventListener("click", expandAbout)
-
-aboutBubble.addEventListener("click", (e)=>{
-  if(e.target.tagName !== "IMG" && window.innerWidth <= 900){
-    collapseAbout()
-  }
-})
 
 </script>
 
