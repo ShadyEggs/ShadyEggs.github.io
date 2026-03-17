@@ -18,7 +18,6 @@
 
 <style>
 
-
 body{
 font-family:'Inter',sans-serif;
 margin:0;
@@ -30,7 +29,6 @@ radial-gradient(circle at 80% 70%,rgba(255,255,255,.025),transparent 45%),
 
 scroll-behavior:smooth;
 }
-
 
 /* HERO */
 
@@ -359,7 +357,6 @@ inset 0 1px 0 rgba(255,255,255,.35);
 
 /* tinted glass colors */
 
-
 .filter-btn.tag-python.active{
 
 background:linear-gradient(
@@ -396,7 +393,6 @@ inset 0 -4px 8px rgba(0,0,0,.35);
 
 /* tinted glass colors */
 
-
 .filter-btn.tag-python.active{
 
 background:linear-gradient(
@@ -420,7 +416,6 @@ inset 0 0 10px rgba(255,255,255,.08);
 .filter-btn.tag-sheets.active{background:rgba(52,168,83,.35)}
 .filter-btn.tag-all.active{background:rgba(74,144,226,.35)}
 
-
 /* MINIMAL TINTED GLASS FILTER HIGHLIGHTS */
 
 .filter-btn.active{
@@ -437,7 +432,6 @@ inset 0 0 10px rgba(255,255,255,.08);
 }
 
 /* language tint colors */
-
 
 .filter-btn.tag-python.active{
 
@@ -470,7 +464,6 @@ border:1px solid rgba(255,255,255,.25);
 
 }
 
-
 /* PROJECT GRID */
 
 .projects-window{max-width:920px;margin:auto;height:650px;overflow-y:auto}
@@ -480,7 +473,6 @@ display:grid;
 grid-template-columns:repeat(4,1fr);
 gap:20px;
 }
-
 
 .project-card{
 
@@ -510,14 +502,12 @@ box-shadow .35s ease;
 
 }
 
-
 .project-card.hide{display:none}
 
 .project-card img{
 width:100%;height:100%;object-fit:cover;
 transition:transform .4s ease,filter .4s ease;
 }
-
 
 .project-card:hover{
 
@@ -633,7 +623,6 @@ margin-bottom:24px;
 
 }
 
-
 /* ------------------------------
    MOBILE PROJECT GRID (2x3)
 ------------------------------ */
@@ -667,8 +656,6 @@ margin:auto;
 
 /* smaller phones */
 
-
-
 .projects-grid{
 
 grid-template-columns:repeat(2,1fr);
@@ -676,7 +663,6 @@ grid-template-columns:repeat(2,1fr);
 }
 
 }
-
 
 /* ---------------- HERO GRADIENT RESTORE ---------------- */
 
@@ -704,7 +690,6 @@ scrollbar-width:auto;
 scrollbar-color:#028391 rgba(255,255,255,.06);
 }
 
-
 /* Certification link style fix */
 #certifications a{
 text-decoration:none;
@@ -715,7 +700,6 @@ color:white;
 text-decoration:none;
 color:white;
 }
-
 
 /* CLEAN PROJECT SCROLLBAR */
 
@@ -736,8 +720,6 @@ border-radius:10px;
 .projects-window::-webkit-scrollbar-thumb:hover{
 background:linear-gradient(180deg,#028391,#F85525);
 }
-
-
 
 /* PAPER PLANE ORIENTED EAST + SOFT BURST JIGGLE */
 
@@ -773,9 +755,6 @@ animation:planeBurstJiggle 5s infinite ease-in-out;
 
 }
 
-
-
-
 /* ANGLED SLIDE PATH (45° COUNTER-CLOCKWISE, 2x LENGTH) */
 
 .apple-send{
@@ -791,8 +770,6 @@ position:relative;
 animation:planeSlide .7s forwards linear;
 }
 
-
-
 /* FINAL PLANE SLIDE PATH (40° COUNTER-CLOCKWISE) */
 
 .apple-send{
@@ -807,8 +784,6 @@ position:relative;
 .apple-send.launch i{
 animation:planeSlide .7s forwards linear;
 }
-
-
 
 /* FINAL PLANE SLIDE PATH (+20%) */
 
@@ -839,7 +814,6 @@ opacity:1;
 
 }
 
-
 100%{
 transform:rotate(40deg) translate(130px,-110px);
 opacity:1;
@@ -847,15 +821,12 @@ opacity:1;
 
 }
 
-
 100%{
 transform:rotate(40deg) translate(120px,-120px);
 opacity:1;
 }
 
 }
-
-
 
 /* ================================
    FINAL MOBILE PROJECT FIX (2x2 VIEW)
@@ -881,7 +852,29 @@ opacity:1;
 
 }
 
+/* =========================================
+   HARD OVERRIDE — MOBILE PROJECT GRID FIX
+   ========================================= */
 
+@media (max-width:600px){
+
+  .projects-window{
+    height: 360px !important;
+    overflow-y: auto !important;
+    overflow-x: hidden !important;
+  }
+
+  .projects-grid{
+    display: grid !important;
+    grid-template-columns: repeat(2, 1fr) !important;
+    gap: 12px !important;
+  }
+
+  .project-card{
+    aspect-ratio: 1 / 1 !important;
+  }
+
+}
 
 /* =========================================
    HARD OVERRIDE — MOBILE PROJECT GRID FIX
@@ -907,8 +900,6 @@ opacity:1;
 
 }
 
-
-
 /* =========================================
    HARD OVERRIDE — MOBILE PROJECT GRID FIX
    ========================================= */
@@ -932,34 +923,6 @@ opacity:1;
   }
 
 }
-
-
-
-/* =========================================
-   HARD OVERRIDE — MOBILE PROJECT GRID FIX
-   ========================================= */
-
-@media (max-width:600px){
-
-  .projects-window{
-    height: 360px !important;
-    overflow-y: auto !important;
-    overflow-x: hidden !important;
-  }
-
-  .projects-grid{
-    display: grid !important;
-    grid-template-columns: repeat(2, 1fr) !important;
-    gap: 12px !important;
-  }
-
-  .project-card{
-    aspect-ratio: 1 / 1 !important;
-  }
-
-}
-
-
 
 /* ================================
    PROJECT HIGHLIGHTS (FINAL)
@@ -1061,8 +1024,6 @@ gap:12px;
 
 }
 
-
-
 /* ================================
    DESKTOP GRID OVERRIDE (FINAL)
    ================================ */
@@ -1082,8 +1043,6 @@ grid-template-areas:
 #certifications{grid-area:certifications}
 
 }
-
-
 
 /* ================================
    PROJECT GRID FIX (DESKTOP 4x3)
@@ -1111,8 +1070,6 @@ aspect-ratio:1;
 
 }
 
-
-
 /* ================================
    HIGHLIGHTS WIDTH / CLIP FIX
    ================================ */
@@ -1127,8 +1084,6 @@ will-change:transform;
 min-width:100%;
 box-sizing:border-box;
 }
-
-
 
 /* ================================
    ABOUT SECTION (DESKTOP REBUILD)
@@ -1161,8 +1116,6 @@ border-radius:50%;
 
 }
 
-
-
 /* ================================
    MOBILE ABOUT (IMAGE INSIDE BUBBLE)
    ================================ */
@@ -1193,8 +1146,6 @@ padding:22px;
 }
 
 }
-
-
 
 /* ================================
    MOBILE ABOUT TOGGLE (FINAL)
@@ -1238,8 +1189,6 @@ padding:22px;
 }
 
 }
-
-
 
 /* ================================
    ABOUT ARROW (DESKTOP SAFE)
@@ -1292,8 +1241,6 @@ display:none;
 
 }
 
-
-
 /* ================================
    MOBILE SECTION REORDER (SAFE)
    ================================ */
@@ -1313,8 +1260,6 @@ flex-direction:column;
 #certifications{order:5;}
 
 }
-
-
 
 /* ================================
    HIGHLIGHTS ARROWS (GLASS STYLE - DESKTOP)
@@ -1353,8 +1298,6 @@ transform:scale(1.08);
 
 }
 
-
-
 /* ================================
    HIGHLIGHTS ARROW VISIBILITY
    ================================ */
@@ -1367,8 +1310,6 @@ pointer-events:none;
 }
 
 }
-
-
 
 /* ================================
    DESKTOP NAV SPACING FIX (CONSISTENT)
@@ -1386,8 +1327,6 @@ list-style:none;
 }
 
 }
-
-
 
 /* ================================
    MOBILE NAV DROPDOWN
@@ -1433,8 +1372,6 @@ display:none;
 }
 }
 
-
-
 /* ================================
    MOBILE NAV SINGLE CHEVRON
    ================================ */
@@ -1456,14 +1393,6 @@ color:white;
 cursor:pointer;
 }
 
-.mobile-nav-toggle .chev{
-display:flex;
-align-items:center;
-justify-content:center;
-font-size:14px;
-opacity:.8;
-}
-
 /* subtle polish */
 .mobile-nav-toggle:hover{
 opacity:.85;
@@ -1471,26 +1400,16 @@ opacity:.85;
 
 }
 
-
-
 /* ================================
    MOBILE NAV CHEVRON ANIMATION
    ================================ */
 
 @media (max-width:900px){
 
-.mobile-nav-toggle .chev i{
-transition:transform .25s ease;
-}
-
 /* rotate when open */
-nav.active .mobile-nav-toggle .chev i{
-transform:rotate(180deg);
-}
+nav.active 
 
 }
-
-
 
 /* ================================
    MOBILE NAV DROPDOWN (NO PUSH FIX)
@@ -1533,8 +1452,6 @@ text-align:center;
 
 }
 
-
-
 /* ================================
    HERO ROTATING TEXT
    ================================ */
@@ -1567,11 +1484,7 @@ transition:opacity .35s ease;
 
 <nav>
 
-<div class="mobile-nav-toggle" id="mobileNavToggle">
-<span class="menu-text">Menu</span>
-<span class="chev"><i class="fas fa-chevron-down"></i></span>
-</div>
-
+<div class="mobile-nav-toggle" id="mobileNavToggle">Index</div>
 
 <ul>
 <li><a href="#about">About Me</a></li>
@@ -1585,7 +1498,6 @@ transition:opacity .35s ease;
 
 <div class="main-layout">
 
-
 <section id="about">
 <h2>About Me</h2>
 
@@ -1596,7 +1508,6 @@ transition:opacity .35s ease;
 <div class="about-arrow" id="aboutArrow">
 <i class="fas fa-chevron-down"></i>
 </div>
-
 
 <img src="profile.jpg" class="profile-pic about-inline">
 
@@ -1690,7 +1601,6 @@ transition:opacity .35s ease;
 
 <div class="projects-grid">
 
-
 <a class="project-card" data-tags="r dplyr tidyr ggplot2 plotly"
 href="https://shadyeggs.github.io/Fifa21-Data-Cleaning-Project/" target="_blank">
 
@@ -1733,10 +1643,6 @@ target="_blank">
 </div>
 </div>
 </section>
-
-
-
-
 
 <section id="certifications">
 
@@ -1958,7 +1864,6 @@ requestAnimationFrame(animate)
 setupCanvas()
 animate()
 
-
 /* ================================
    CANVAS RESIZE (WIDTH-LOCK FIX)
    ================================ */
@@ -1974,8 +1879,6 @@ window.addEventListener("resize", ()=>{
   }
 
 })
-
-
 
 /* FINAL FILTER SYSTEM */
 
@@ -2121,7 +2024,6 @@ showProjects()
 
 showProjects()
 
-
 /* CONTACT FORM SECURITY + NO REDIRECT */
 
 const contactForm = document.getElementById("secure-contact-form")
@@ -2146,9 +2048,6 @@ const formData = new FormData(contactForm)
 
 try{
 
-
-
-
 await fetch(contactForm.action,{
 method:"POST",
 body:formData,
@@ -2170,9 +2069,6 @@ button.classList.remove("launch")
 
 contactForm.reset()
 
-
-
-
 }catch(err){
 
 console.error("Submission error",err)
@@ -2182,8 +2078,6 @@ console.error("Submission error",err)
 })
 
 }
-
-
 
 /* ================================
    PROJECT HIGHLIGHTS (SMOOTH SWIPE)
@@ -2293,8 +2187,6 @@ setupDesktopNav()
 updateHighlights()
 window.addEventListener("resize", updateHighlights)
 
-
-
 /* ================================
    MOBILE ABOUT TOGGLE LOGIC
    ================================ */
@@ -2329,8 +2221,6 @@ aboutBubble.addEventListener("click", ()=>{
 
 })
 
-
-
 /* ================================
    ABOUT ARROW CLICK (SAFE)
    ================================ */
@@ -2344,8 +2234,6 @@ if(aboutArrow){
     expandAbout()
   })
 }
-
-
 
 /* ================================
    HIGHLIGHTS ARROW STATE CONTROL
@@ -2385,8 +2273,6 @@ updateHighlights = function(){
 /* run once */
 setTimeout(updateArrowVisibility, 100)
 
-
-
 /* ================================
    MOBILE NAV TOGGLE
    ================================ */
@@ -2399,8 +2285,6 @@ if(toggle){
     nav.classList.toggle("active")
   })
 }
-
-
 
 /* ================================
    MOBILE NAV OUTSIDE CLICK CLOSE
@@ -2420,8 +2304,6 @@ document.addEventListener("click", (e)=>{
   }
 
 })
-
-
 
 /* ================================
    MOBILE NAV CLOSE ON SCROLL
@@ -2449,8 +2331,6 @@ window.addEventListener("scroll", ()=>{
   lastScrollY = window.scrollY
 
 })
-
-
 
 /* ================================
    HERO TEXT ROTATION
