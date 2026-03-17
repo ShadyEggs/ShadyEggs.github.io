@@ -1489,6 +1489,49 @@ transform:rotate(180deg);
 
 }
 
+
+
+/* ================================
+   MOBILE NAV DROPDOWN (NO PUSH FIX)
+   ================================ */
+
+@media (max-width:900px){
+
+/* make nav anchor context */
+nav{
+position:sticky;
+top:0;
+z-index:50;
+}
+
+/* dropdown becomes overlay */
+nav ul{
+position:absolute;
+top:100%;
+left:0;
+width:100%;
+
+display:none;
+flex-direction:column;
+gap:16px;
+padding:20px 0;
+
+background:rgba(31,41,51,.98); /* matches site tone */
+
+}
+
+/* show menu */
+nav.active ul{
+display:flex;
+}
+
+/* keep items centered */
+nav ul li{
+text-align:center;
+}
+
+}
+
 </style>
 
 </head>
