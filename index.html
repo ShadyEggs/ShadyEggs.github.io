@@ -80,21 +80,14 @@ margin-top:4px;
 
 /* NAV */
 
-nav{
+/* ================================
+   NAV — UNIFIED STICKY (DESKTOP + MOBILE)
+   ================================ */
 
+nav{
 position:sticky;
 top:0;
 z-index:50;
-
-background:rgba(255,255,255,.06);
-
-backdrop-filter:blur(10px);
--webkit-backdrop-filter:blur(10px);
-
-border-bottom:1px solid rgba(255,255,255,.08);
-
-box-shadow:0 6px 16px rgba(0,0,0,.35);
-
 }
 
 nav ul{
@@ -1489,27 +1482,6 @@ transform:rotate(180deg);
 
 }
 
-
-
-/* ================================
-   MOBILE NAV TRUE SCOOP (NO PUSH)
-   ================================ */
-
-@media (max-width:900px){
-
-.hero{
-will-change:transform;
-transition:transform 0.1s linear;
-}
-
-nav{
-position:sticky;
-top:0;
-z-index:50;
-}
-
-}
-
 </style>
 
 </head>
@@ -2368,31 +2340,6 @@ document.addEventListener("click", (e)=>{
   if(nav.classList.contains("active") && !nav.contains(e.target)){
     nav.classList.remove("active")
   }
-
-})
-
-
-
-/* ================================
-   HERO-BASED SCOOP EFFECT
-   ================================ */
-
-const hero = document.querySelector(".hero")
-
-window.addEventListener("scroll", ()=>{
-
-  if(window.innerWidth > 900) return
-  if(!hero) return
-
-  const scrollY = window.scrollY
-
-  // how tightly it anchors (lower = tighter)
-  const maxShift = 80
-
-  const shift = Math.min(scrollY, maxShift)
-
-  // move hero up instead of nav
-  hero.style.transform = `translateY(-${shift}px)`
 
 })
 
