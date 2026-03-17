@@ -1432,6 +1432,35 @@ display:none;
 }
 }
 
+
+
+/* ================================
+   MOBILE NAV IMPROVED
+   ================================ */
+
+@media (max-width:900px){
+
+.mobile-nav-toggle{
+display:flex;
+justify-content:center;
+align-items:center;
+gap:8px;
+height:60px;
+
+font-size:16px;
+font-weight:600;
+color:white;
+
+cursor:pointer;
+}
+
+/* slight polish */
+.mobile-nav-toggle:hover{
+opacity:.8;
+}
+
+}
+
 </style>
 
 </head>
@@ -1456,6 +1485,9 @@ display:none;
 <nav>
 
 <div class="mobile-nav-toggle" id="mobileNavToggle">
+<span class="menu-icon"><i class="fas fa-bars"></i></span>
+<span class="menu-text">Menu</span>
+
 <i class="fas fa-bars"></i>
 </div>
 
@@ -2270,6 +2302,25 @@ if(toggle){
     nav.classList.toggle("active")
   })
 }
+
+
+
+/* ================================
+   MOBILE NAV OUTSIDE CLICK CLOSE
+   ================================ */
+
+document.addEventListener("click", (e)=>{
+
+  if(window.innerWidth > 900) return
+
+  const nav = document.querySelector("nav")
+
+  // if menu is open AND click is outside nav
+  if(nav.classList.contains("active") && !nav.contains(e.target)){
+    nav.classList.remove("active")
+  }
+
+})
 
 </script>
 
