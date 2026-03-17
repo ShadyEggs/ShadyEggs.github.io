@@ -544,10 +544,9 @@ footer{text-align:center;padding:14px;background:#111;color:white}
 .main-layout{
 grid-template-columns:1fr;
 grid-template-areas:
-"about"
-"contact"
-"projects"
-"certifications";
+"about contact"
+"projects projects"
+"certifications certifications";
 }
 
 .about-grid{grid-template-columns:1fr;text-align:center}
@@ -838,9 +837,9 @@ box-shadow:
 
 .main-layout{
 grid-template-areas:
-"about highlights"
+"about contact"
 "projects projects"
-"contact certifications";
+"certifications certifications";
 }
 
 /* CONTACT WIDTH */
@@ -971,11 +970,9 @@ display:none;
 
 .main-layout{
 grid-template-areas:
-"about"
-"highlights"
-"projects"
-"contact"
-"certifications";
+"about contact"
+"projects projects"
+"certifications certifications";
 }
 
 }
@@ -1290,64 +1287,26 @@ scroll-snap-align:start;
 
 
 /* ===========================
-   FINAL HIGHLIGHTS SYSTEM
+   STATIC 2x4 HIGHLIGHTS GRID
 =========================== */
 
 #highlights{
 margin-top:40px;
 }
 
-.highlights-viewport{
-max-width:460px;
+.highlights-grid{
+max-width:920px;
 margin:auto;
-overflow-x:auto;
-scroll-snap-type:x mandatory;
-}
-
-.highlights-track{
 display:grid;
-grid-template-columns:repeat(8, 220px);
-grid-template-rows:repeat(2, 220px);
+grid-template-columns:repeat(4,1fr);
+grid-template-rows:repeat(2,1fr);
 gap:20px;
-width:max-content;
 }
-
-.highlight-card{
-display:block;
-border-radius:16px;
-overflow:hidden;
-position:relative;
-scroll-snap-align:start;
-}
-
-.highlight-card img{
-width:100%;
-height:100%;
-object-fit:cover;
-}
-
-.highlight-card .overlay{
-position:absolute;
-bottom:0;
-left:0;
-right:0;
-padding:12px;
-background:linear-gradient(transparent,rgba(0,0,0,.85));
-color:white;
-font-weight:600;
-}
-
-/* MOBILE */
 
 @media (max-width:900px){
 
-.highlights-viewport{
-max-width:100%;
-}
-
-.highlights-track{
-grid-template-columns:repeat(8, 45vw);
-grid-template-rows:repeat(2, 45vw);
+.highlights-grid{
+grid-template-columns:repeat(2,1fr);
 gap:14px;
 }
 
@@ -1378,6 +1337,7 @@ gap:14px;
 <nav>
 <ul>
 <li><a href="#about">About Me</a></li>
+
 <li><a href="#highlights">My Project Highlights</a></li>
 <li><a href="#projects">My Project Library</a></li>
 
@@ -1424,50 +1384,48 @@ gap:14px;
 
 <h2>My Project Highlights</h2>
 
-<div class="highlights-viewport">
-<div class="highlights-track">
+<div class="highlights-grid">
 
-<a class="highlight-card" href="#">
+<a class="project-card" href="#">
 <img src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=800&q=80">
-<div class="overlay"><h3>Sales Trend Analysis</h3></div>
+<div class="project-overlay"><h3>Sales Trend Analysis</h3></div>
 </a>
 
-<a class="highlight-card" href="#">
+<a class="project-card" href="#">
 <img src="https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=800&q=80">
-<div class="overlay"><h3>Customer Segmentation</h3></div>
+<div class="project-overlay"><h3>Customer Segmentation</h3></div>
 </a>
 
-<a class="highlight-card" href="#">
+<a class="project-card" href="#">
 <img src="https://images.unsplash.com/photo-1504384308090-c894fdcc538d?w=800&q=80">
-<div class="overlay"><h3>Marketing Dashboard</h3></div>
+<div class="project-overlay"><h3>Marketing Dashboard</h3></div>
 </a>
 
-<a class="highlight-card" href="#">
+<a class="project-card" href="#">
 <img src="https://images.unsplash.com/photo-1498050108023-c5249f4df085?w=800&q=80">
-<div class="overlay"><h3>Financial Reporting</h3></div>
+<div class="project-overlay"><h3>Financial Reporting</h3></div>
 </a>
 
-<a class="highlight-card" href="#">
+<a class="project-card" href="#">
 <img src="https://images.unsplash.com/photo-1488229297570-58520851e868?w=800&q=80">
-<div class="overlay"><h3>Data Pipeline Build</h3></div>
+<div class="project-overlay"><h3>Data Pipeline Build</h3></div>
 </a>
 
-<a class="highlight-card" href="#">
+<a class="project-card" href="#">
 <img src="https://images.unsplash.com/photo-1551434678-e076c223a692?w=800&q=80">
-<div class="overlay"><h3>Database Optimization</h3></div>
+<div class="project-overlay"><h3>Database Optimization</h3></div>
 </a>
 
-<a class="highlight-card" href="#">
+<a class="project-card" href="#">
 <img src="https://images.unsplash.com/photo-1526378722484-bd91ca387e72?w=800&q=80">
-<div class="overlay"><h3>KPI Visualization</h3></div>
+<div class="project-overlay"><h3>KPI Visualization</h3></div>
 </a>
 
-<a class="highlight-card" href="#">
+<a class="project-card" href="#">
 <img src="https://images.unsplash.com/photo-1519389950473-47ba0277781c?w=800&q=80">
-<div class="overlay"><h3>Spreadsheet Automation</h3></div>
+<div class="project-overlay"><h3>Spreadsheet Automation</h3></div>
 </a>
 
-</div>
 </div>
 
 </section>
@@ -1496,119 +1454,7 @@ gap:14px;
 </form>
 </section>
 
-<section id="highlights">
 
-<h2>My Project Highlights</h2>
-
-<div class="highlights-wrapper">
-
-<button class="highlight-arrow prev"><i class="fas fa-chevron-left"></i></button>
-
-<div class="highlights-window">
-
-<div class="highlights-grid">
-
-<!-- PAGE 1 -->
-
-<a class="project-card highlight-card" data-tags="python pandas matplotlib">
-<img src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=800&q=80">
-<div class="project-overlay">
-<h3>Sales Trend Analysis</h3>
-<div class="project-tags">
-<span class="tag-python">Python</span>
-<span class="tag-package">pandas</span>
-<span class="tag-package">matplotlib</span>
-</div>
-</div>
-</a>
-
-<a class="project-card highlight-card" data-tags="r ggplot2 dplyr">
-<img src="https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=800&q=80">
-<div class="project-overlay">
-<h3>Customer Segmentation</h3>
-<div class="project-tags">
-<span class="tag-r">R</span>
-<span class="tag-package">dplyr</span>
-<span class="tag-package">ggplot2</span>
-</div>
-</div>
-</a>
-
-<a class="project-card highlight-card" data-tags="sql tableau">
-<img src="https://images.unsplash.com/photo-1504384308090-c894fdcc538d?w=800&q=80">
-<div class="project-overlay">
-<h3>Marketing Dashboard</h3>
-<div class="project-tags">
-<span class="tag-sql">SQL</span>
-<span class="tag-tableau">Tableau</span>
-</div>
-</div>
-</a>
-
-<a class="project-card highlight-card" data-tags="excel pivot">
-<img src="https://images.unsplash.com/photo-1498050108023-c5249f4df085?w=800&q=80">
-<div class="project-overlay">
-<h3>Financial Reporting</h3>
-<div class="project-tags">
-<span class="tag-excel">Excel</span>
-<span class="tag-package">pivot</span>
-</div>
-</div>
-</a>
-
-<!-- PAGE 2 -->
-
-<a class="project-card highlight-card" data-tags="python numpy">
-<img src="https://images.unsplash.com/photo-1488229297570-58520851e868?w=800&q=80">
-<div class="project-overlay">
-<h3>Data Pipeline Build</h3>
-<div class="project-tags">
-<span class="tag-python">Python</span>
-<span class="tag-package">numpy</span>
-</div>
-</div>
-</a>
-
-<a class="project-card highlight-card" data-tags="sql postgres">
-<img src="https://images.unsplash.com/photo-1551434678-e076c223a692?w=800&q=80">
-<div class="project-overlay">
-<h3>Database Optimization</h3>
-<div class="project-tags">
-<span class="tag-sql">SQL</span>
-<span class="tag-package">postgres</span>
-</div>
-</div>
-</a>
-
-<a class="project-card highlight-card" data-tags="tableau dashboard">
-<img src="https://images.unsplash.com/photo-1526378722484-bd91ca387e72?w=800&q=80">
-<div class="project-overlay">
-<h3>KPI Visualization</h3>
-<div class="project-tags">
-<span class="tag-tableau">Tableau</span>
-<span class="tag-package">dashboard</span>
-</div>
-</div>
-</a>
-
-<a class="project-card highlight-card" data-tags="sheets formulas">
-<img src="https://images.unsplash.com/photo-1519389950473-47ba0277781c?w=800&q=80">
-<div class="project-overlay">
-<h3>Spreadsheet Automation</h3>
-<div class="project-tags">
-<span class="tag-sheets">Sheets</span>
-<span class="tag-package">formulas</span>
-</div>
-</div>
-</a>
-
-</div>
-</div>
-
-<button class="highlight-arrow next"><i class="fas fa-chevron-right"></i></button>
-
-</div>
-</section>
 
 <section id="projects">
 
@@ -2094,21 +1940,7 @@ console.error("Submission error",err)
 
 }
 
-const highlightGrid = window.innerWidth > 900 ? document.querySelector(".highlights-grid") : null
 
-if(highlightGrid){
-
-let page = 0
-
-const next = document.querySelector(".highlight-arrow.next")
-const prev = document.querySelector(".highlight-arrow.prev")
-
-function updateArrows(){
-
-if(page === 0){
-prev.classList.add("hidden")
-next.classList.remove("hidden")
-}
 
 if(page === 1){
 next.classList.add("hidden")
