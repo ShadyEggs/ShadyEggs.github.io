@@ -1492,7 +1492,7 @@ transform:rotate(180deg);
 
 
 /* ================================
-   MOBILE NAV SMOOTH SCOOP EFFECT
+   MOBILE NAV SCOOP EFFECT (CLEAN)
    ================================ */
 
 @media (max-width:900px){
@@ -1500,11 +1500,10 @@ transform:rotate(180deg);
 nav{
 position:sticky;
 top:0;
-z-index:1000;
+z-index:50;
 
-/* smooth motion */
-transition:transform 0.15s linear;
-will-change:transform;
+/* smooth visual transition */
+transition:margin-top 0.15s linear;
 }
 
 }
@@ -2373,27 +2372,25 @@ document.addEventListener("click", (e)=>{
 
 
 /* ================================
-   MOBILE NAV SMOOTH SCROLL EFFECT
+   MOBILE NAV SCOOP LOGIC
    ================================ */
 
-let lastScrollY = window.scrollY
+const navEl = document.querySelector("nav")
 
 window.addEventListener("scroll", ()=>{
 
   if(window.innerWidth > 900) return
+  if(!navEl) return
 
-  const nav = document.querySelector("nav")
-  if(!nav) return
+  const scrollY = window.scrollY
 
-  const currentY = window.scrollY
+  // max offset (controls "scoop depth")
+  const maxOffset = 60
 
-  // limit movement (prevents over-shift)
-  const offset = Math.min(currentY, 60)
+  const offset = Math.min(scrollY, maxOffset)
 
-  // smooth "pickup"
-  nav.style.transform = `translateY(-${offset}px)`
-
-  lastScrollY = currentY
+  // negative margin creates "pickup" illusion
+  navEl.style.marginTop = `-${offset}px`
 
 })
 
