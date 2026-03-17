@@ -1193,6 +1193,51 @@ padding:22px;
 
 }
 
+
+
+/* ================================
+   MOBILE ABOUT TOGGLE (FINAL)
+   ================================ */
+
+@media (max-width:900px){
+
+/* remove pointer */
+.about-text::before{
+display:none;
+}
+
+/* layout */
+.about-grid{
+display:block;
+}
+
+/* image centered inside bubble */
+.about-text img{
+display:block;
+margin:0 auto 18px auto;
+float:none !important;
+}
+
+/* COLLAPSED STATE */
+.about-text.collapsed{
+background:transparent !important;
+box-shadow:none !important;
+padding:0 !important;
+text-align:center;
+}
+
+/* hide text when collapsed */
+.about-text.collapsed p{
+display:none;
+}
+
+/* EXPANDED STATE */
+.about-text.expanded{
+padding:22px;
+}
+
+}
+
 </style>
 
 </head>
@@ -1230,7 +1275,7 @@ padding:22px;
 
 <div class="about-grid">
 
-<div class="about-text">
+<div class="about-text" id="aboutBubble">
 
 <img src="profile.jpg" class="profile-pic about-inline">
 
@@ -1910,6 +1955,42 @@ hTrack.addEventListener("touchend", ()=>{
 setupDesktopNav()
 updateHighlights()
 window.addEventListener("resize", updateHighlights)
+
+
+
+/* ================================
+   MOBILE ABOUT TOGGLE LOGIC
+   ================================ */
+
+const aboutBubble = document.getElementById("aboutBubble")
+
+function collapseAbout(){
+  aboutBubble.classList.add("collapsed")
+  aboutBubble.classList.remove("expanded")
+}
+
+function expandAbout(){
+  aboutBubble.classList.remove("collapsed")
+  aboutBubble.classList.add("expanded")
+}
+
+/* default collapsed on mobile */
+if(window.innerWidth <= 900){
+  collapseAbout()
+}
+
+/* toggle behavior */
+aboutBubble.addEventListener("click", ()=>{
+
+  if(window.innerWidth > 900) return
+
+  if(aboutBubble.classList.contains("collapsed")){
+    expandAbout()
+  }else{
+    collapseAbout()
+  }
+
+})
 
 </script>
 
