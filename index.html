@@ -1489,6 +1489,63 @@ transform:rotate(180deg);
 
 }
 
+
+
+/* ================================
+   MOBILE NAV OVERLAY (NO PUSH)
+   ================================ */
+
+@media (max-width:900px){
+
+nav{
+position:sticky;
+top:0;
+z-index:1000;
+}
+
+/* container reference */
+nav{
+position:relative;
+}
+
+/* dropdown menu */
+nav ul{
+position:absolute;
+top:100%;
+left:0;
+width:100%;
+
+display:none;
+flex-direction:column;
+gap:16px;
+padding:18px 0;
+
+background:rgba(20,30,40,.85);
+backdrop-filter:blur(12px);
+-webkit-backdrop-filter:blur(12px);
+
+border-bottom:1px solid rgba(255,255,255,.1);
+
+box-shadow:0 12px 30px rgba(0,0,0,.5);
+}
+
+/* show dropdown */
+nav.active ul{
+display:flex;
+}
+
+/* center items */
+nav ul li{
+text-align:center;
+}
+
+/* prevent layout shift */
+.main-layout{
+margin-top:0 !important;
+}
+
+}
+
 </style>
 
 </head>
