@@ -961,7 +961,7 @@ opacity:1;
 
 
 /* ================================
-   PROJECT HIGHLIGHTS (2x2 MAX SIZE)
+   PROJECT HIGHLIGHTS (MAX SIZE FINAL)
    ================================ */
 
 #highlights{
@@ -971,26 +971,14 @@ padding:0 30px;
 box-sizing:border-box;
 }
 
+/* container */
 .highlights-container{
-display:flex;
-align-items:center;
 width:100%;
 }
 
-/* arrows stay inside */
-.highlight-nav{
-flex:0 0 auto;
-background:rgba(0,0,0,.5);
-border:none;
-color:white;
-font-size:28px;
-padding:12px 14px;
-cursor:pointer;
-}
-
-/* window fills remaining space */
+/* window fills full width (no arrows taking space on mobile) */
 .highlights-window{
-flex:1;
+width:100%;
 overflow:hidden;
 }
 
@@ -1001,15 +989,15 @@ transition:transform .4s ease;
 width:100%;
 }
 
-/* PAGE = 2x2 GRID */
+/* 2x2 grid ALWAYS */
 .highlight-page{
 min-width:100%;
 display:grid;
 grid-template-columns:repeat(2,1fr);
-gap:18px;
+gap:20px;
 }
 
-/* cards scale to MAX */
+/* cards max size */
 .highlight-card{
 width:100%;
 aspect-ratio:1;
@@ -1041,21 +1029,39 @@ background:linear-gradient(transparent,rgba(0,0,0,.85));
 color:white;
 }
 
-/* MOBILE (same 2x2, tighter spacing) */
-@media (max-width:600px){
+/* DESKTOP ARROWS ONLY */
+@media (min-width:601px){
 
-#highlights{
-padding:0 16px;
-}
-
-.highlight-page{
-grid-template-columns:repeat(2,1fr);
-gap:12px;
+.highlights-container{
+display:flex;
+align-items:center;
 }
 
 .highlight-nav{
-font-size:22px;
-padding:8px 10px;
+flex:0 0 auto;
+background:rgba(0,0,0,.5);
+border:none;
+color:white;
+font-size:28px;
+padding:12px 14px;
+cursor:pointer;
+}
+
+.highlights-window{
+flex:1;
+}
+
+}
+
+/* MOBILE — maximize width */
+@media (max-width:600px){
+
+#highlights{
+padding:0 12px; /* tighter = bigger cards */
+}
+
+.highlight-page{
+gap:12px;
 }
 
 }
@@ -1206,8 +1212,6 @@ target="_blank">
 
 <div class="highlights-container">
 
-<button class="highlight-nav prev">&#10094;</button>
-
 <div class="highlights-window">
 <div class="highlights-track">
 
@@ -1231,8 +1235,6 @@ target="_blank">
 
 </div>
 </div>
-
-<button class="highlight-nav next">&#10095;</button>
 
 </div>
 
@@ -1670,29 +1672,85 @@ console.error("Submission error",err)
 
 
 /* ================================
-   PROJECT HIGHLIGHTS PAGINATION
+   PROJECT HIGHLIGHTS FINAL NAV
    ================================ */
 
+const hContainer = document.querySelector(".highlights-container")
 const hTrack = document.querySelector(".highlights-track")
-const hPrev = document.querySelector(".highlight-nav.prev")
-const hNext = document.querySelector(".highlight-nav.next")
 
 let hIndex = 0
 
 function updateHighlights(){
-hTrack.style.transform = `translateX(-${hIndex * 100}%)`
+  hTrack.style.transform = `translateX(-${hIndex * 100}%)`
 }
 
-hNext.addEventListener("click", ()=>{
-if(hIndex < 1) hIndex++
-updateHighlights()
-})
+/* DESKTOP ARROWS ONLY */
+function setupDesktopNav(){
 
-hPrev.addEventListener("click", ()=>{
-if(hIndex > 0) hIndex--
-updateHighlights()
-})
+  if(window.innerWidth <= 600) return
 
+  const prev = document.createElement("button")
+  const next = document.createElement("button")
+
+  prev.className = "highlight-nav prev"
+  next.className = "highlight-nav next"
+
+  prev.innerHTML = "&#10094;"
+  next.innerHTML = "&#10095;"
+
+  hContainer.prepend(prev)
+  hContainer.appendChild(next)
+
+  next.addEventListener("click", ()=>{
+    if(hIndex < 1){
+      hIndex++
+      updateHighlights()
+    }
+  })
+
+  prev.addEventListener("click", ()=>{
+    if(hIndex > 0){
+      hIndex--
+      updateHighlights()
+    }
+  })
+}
+
+/* MOBILE SWIPE */
+let startX = 0
+let endX = 0
+const SWIPE_THRESHOLD = 50
+
+hTrack.addEventListener("touchstart", (e)=>{
+  startX = e.touches[0].clientX
+}, { passive: true })
+
+hTrack.addEventListener("touchend", (e)=>{
+  endX = e.changedTouches[0].clientX
+  handleSwipe()
+}, { passive: true })
+
+function handleSwipe(){
+
+  const distance = startX - endX
+
+  if(distance > SWIPE_THRESHOLD){
+    if(hIndex < 1){
+      hIndex++
+      updateHighlights()
+    }
+  }
+
+  if(distance < -SWIPE_THRESHOLD){
+    if(hIndex > 0){
+      hIndex--
+      updateHighlights()
+    }
+  }
+}
+
+/* INIT */
+setupDesktopNav()
 updateHighlights()
 
 </script>
