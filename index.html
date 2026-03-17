@@ -1183,10 +1183,13 @@ scroll-snap-align:start;
 
 
 
-/* ===== MOBILE HIGHLIGHTS FINAL OVERRIDE ===== */
-/* ensures 2x2 pages with horizontal swipe */
+/* ===== MOBILE HIGHLIGHTS FINAL GRID OVERRIDE ===== */
 
 @media (max-width:900px){
+
+#highlights .highlight-arrow{
+display:none;
+}
 
 #highlights .highlights-window{
 width:100%;
@@ -1200,8 +1203,8 @@ scroll-snap-type:x mandatory;
 
 display:grid;
 
-grid-template-columns:repeat(4,50%);
-grid-template-rows:repeat(2,auto);
+grid-template-columns:50% 50% 50% 50%;
+grid-template-rows:auto auto;
 
 gap:14px;
 
@@ -1209,8 +1212,6 @@ gap:14px;
 width:200%;
 
 }
-
-/* snap anchors */
 
 #highlights .highlights-grid a:nth-child(1),
 #highlights .highlights-grid a:nth-child(5){
