@@ -18,7 +18,6 @@
 
 <style>
 
-
 body{
 font-family:'Inter',sans-serif;
 margin:0;
@@ -30,7 +29,6 @@ radial-gradient(circle at 80% 70%,rgba(255,255,255,.025),transparent 45%),
 
 scroll-behavior:smooth;
 }
-
 
 /* HERO */
 
@@ -358,23 +356,6 @@ inset 0 1px 0 rgba(255,255,255,.35);
 
 /* tinted glass colors */
 
-
-.filter-btn.tag-python.active{
-
-background:linear-gradient(
-90deg,
-rgba(246,220,172,.26),
-rgba(55,118,171,.24)
-);
-
-border:1px solid rgba(255,255,255,.25);
-
-box-shadow:
-0 6px 14px rgba(0,0,0,.35),
-inset 0 0 10px rgba(255,255,255,.08);
-
-}
-
 .filter-btn.tag-r.active{background:rgba(39,109,195,.35)}
 .filter-btn.tag-sql.active{background:rgba(51,103,145,.35)}
 .filter-btn.tag-tableau.active{background:rgba(233,118,39,.35)}
@@ -395,30 +376,12 @@ inset 0 -4px 8px rgba(0,0,0,.35);
 
 /* tinted glass colors */
 
-
-.filter-btn.tag-python.active{
-
-background:linear-gradient(
-90deg,
-rgba(246,220,172,.26),
-rgba(55,118,171,.24)
-);
-
-border:1px solid rgba(255,255,255,.25);
-
-box-shadow:
-0 6px 14px rgba(0,0,0,.35),
-inset 0 0 10px rgba(255,255,255,.08);
-
-}
-
 .filter-btn.tag-r.active{background:rgba(39,109,195,.35)}
 .filter-btn.tag-sql.active{background:rgba(51,103,145,.35)}
 .filter-btn.tag-tableau.active{background:rgba(233,118,39,.35)}
 .filter-btn.tag-excel.active{background:rgba(33,115,70,.35)}
 .filter-btn.tag-sheets.active{background:rgba(52,168,83,.35)}
 .filter-btn.tag-all.active{background:rgba(74,144,226,.35)}
-
 
 /* MINIMAL TINTED GLASS FILTER HIGHLIGHTS */
 
@@ -436,7 +399,6 @@ inset 0 0 10px rgba(255,255,255,.08);
 }
 
 /* language tint colors */
-
 
 .filter-btn.tag-python.active{
 
@@ -469,7 +431,6 @@ border:1px solid rgba(255,255,255,.25);
 
 }
 
-
 /* PROJECT GRID */
 
 .projects-window{max-width:920px;margin:auto;height:650px;overflow-y:auto}
@@ -479,7 +440,6 @@ display:grid;
 grid-template-columns:repeat(4,1fr);
 gap:20px;
 }
-
 
 .project-card{
 
@@ -509,14 +469,12 @@ box-shadow .35s ease;
 
 }
 
-
 .project-card.hide{display:none}
 
 .project-card img{
 width:100%;height:100%;object-fit:cover;
 transition:transform .4s ease,filter .4s ease;
 }
-
 
 .project-card:hover{
 
@@ -632,7 +590,6 @@ margin-bottom:24px;
 
 }
 
-
 /* ------------------------------
    MOBILE PROJECT GRID (2x3)
 ------------------------------ */
@@ -682,7 +639,6 @@ grid-template-columns:repeat(2,1fr);
 
 }
 
-
 /* ---------------- HERO GRADIENT RESTORE ---------------- */
 
 .hero{
@@ -709,7 +665,6 @@ scrollbar-width:auto;
 scrollbar-color:#028391 rgba(255,255,255,.06);
 }
 
-
 /* Certification link style fix */
 #certifications a{
 text-decoration:none;
@@ -720,7 +675,6 @@ color:white;
 text-decoration:none;
 color:white;
 }
-
 
 /* CLEAN PROJECT SCROLLBAR */
 
@@ -741,8 +695,6 @@ border-radius:10px;
 .projects-window::-webkit-scrollbar-thumb:hover{
 background:linear-gradient(180deg,#028391,#F85525);
 }
-
-
 
 /* PAPER PLANE ORIENTED EAST + SOFT BURST JIGGLE */
 
@@ -778,9 +730,6 @@ animation:planeBurstJiggle 5s infinite ease-in-out;
 
 }
 
-
-
-
 /* ANGLED SLIDE PATH (45° COUNTER-CLOCKWISE, 2x LENGTH) */
 
 .apple-send{
@@ -796,8 +745,6 @@ position:relative;
 animation:planeSlide .7s forwards linear;
 }
 
-
-
 /* FINAL PLANE SLIDE PATH (40° COUNTER-CLOCKWISE) */
 
 .apple-send{
@@ -812,8 +759,6 @@ position:relative;
 .apple-send.launch i{
 animation:planeSlide .7s forwards linear;
 }
-
-
 
 /* FINAL PLANE SLIDE PATH (+20%) */
 
@@ -844,7 +789,6 @@ opacity:1;
 
 }
 
-
 100%{
 transform:rotate(40deg) translate(130px,-110px);
 opacity:1;
@@ -852,15 +796,12 @@ opacity:1;
 
 }
 
-
 100%{
 transform:rotate(40deg) translate(120px,-120px);
 opacity:1;
 }
 
 }
-
-
 
 /* ABOUT SECTION */
 
@@ -957,9 +898,6 @@ max-width:520px;
 margin:auto;
 }
 
-
-
-
 /* highlight arrow fade logic */
 
 .highlight-arrow{
@@ -971,17 +909,11 @@ opacity:0;
 pointer-events:none;
 }
 
-
-
-
 /* hero text rotation animation */
 
 #hero-rotator{
 transition:opacity .35s ease;
 }
-
-
-
 
 /* ---------------- MOBILE HERO IMPROVEMENTS ---------------- */
 
@@ -1002,9 +934,6 @@ letter-spacing:.9px;
 }
 
 }
-
-
-
 
 /* ABOUT TOGGLE */
 
@@ -1144,9 +1073,6 @@ display:block;
 
 }
 
-
-
-
 /* ---------------- MOBILE SECTION SCALING ---------------- */
 
 @media (max-width:900px){
@@ -1213,11 +1139,7 @@ max-width:100%;
 
 }
 
-
-
-
-
-/* -------- MOBILE HIGHLIGHTS 2x2 PAGES -------- */
+/* -------- MOBILE HIGHLIGHTS 2x2 SWIPE PAGES -------- */
 
 @media (max-width:900px){
 
@@ -1225,28 +1147,6 @@ max-width:100%;
 display:none;
 }
 
-.highlights-window{
-width:100%;
-max-width:100%;
-overflow-x:auto;
-overflow-y:hidden;
--webkit-overflow-scrolling:touch;
-}
-
-.highlights-grid{
-display:grid;
-grid-template-columns:repeat(4,50%);
-grid-template-rows:repeat(2,auto);
-gap:14px;
-width:200%;
-}
-
-.highlights-grid a:nth-child(1),
-.highlights-grid a:nth-child(5){
-scroll-snap-align:start;
-}
-
-}
 .highlights-window{
 width:100%;
 overflow-x:auto;
@@ -1295,7 +1195,6 @@ scroll-snap-align:start;
 
 <p id="hero-rotator">Data Cleaning • Transformation • Visualization</p>
 
-
 <div class="social-links">
 <a href="https://www.linkedin.com/in/alfred-rico-3992338a/" target="_blank"><i class="fab fa-linkedin"></i></a>
 <a href="https://github.com/ShadyEggs" target="_blank"><i class="fab fa-github"></i></a>
@@ -1323,11 +1222,8 @@ scroll-snap-align:start;
 
 <div class="main-layout">
 
-
 <section id="about">
 <h2>About Me</h2>
-
-
 
 <div class="about-toggle-pic">
 <img src="profile.jpg">
@@ -1335,7 +1231,6 @@ scroll-snap-align:start;
 <i class="fas fa-chevron-down"></i>
 </div>
 </div>
-
 
 <div class="about-text">
 
@@ -1352,7 +1247,6 @@ scroll-snap-align:start;
 </div>
 
 </section>
-
 
 <section id="contact">
 
@@ -1377,10 +1271,6 @@ scroll-snap-align:start;
 
 </form>
 </section>
-
-
-
-
 
 <section id="highlights">
 
@@ -1496,8 +1386,6 @@ scroll-snap-align:start;
 </div>
 </section>
 
-
-
 <section id="projects">
 
 <h2>My Project Library</h2>
@@ -1517,7 +1405,6 @@ scroll-snap-align:start;
 <div class="projects-window">
 
 <div class="projects-grid">
-
 
 <a class="project-card" data-tags="r dplyr tidyr ggplot2 plotly"
 href="https://shadyeggs.github.io/Fifa21-Data-Cleaning-Project/" target="_blank">
@@ -1784,7 +1671,6 @@ animate()
 
 window.addEventListener("resize",setupCanvas)
 
-
 /* FINAL FILTER SYSTEM */
 
 const LANGUAGE_TOOLS={
@@ -1929,7 +1815,6 @@ showProjects()
 
 showProjects()
 
-
 /* CONTACT FORM SECURITY + NO REDIRECT */
 
 const contactForm = document.getElementById("secure-contact-form")
@@ -1954,9 +1839,6 @@ const formData = new FormData(contactForm)
 
 try{
 
-
-
-
 await fetch(contactForm.action,{
 method:"POST",
 body:formData,
@@ -1978,9 +1860,6 @@ button.classList.remove("launch")
 
 contactForm.reset()
 
-
-
-
 }catch(err){
 
 console.error("Submission error",err)
@@ -1990,8 +1869,6 @@ console.error("Submission error",err)
 })
 
 }
-
-
 
 const highlightGrid = window.innerWidth > 900 ? document.querySelector(".highlights-grid") : null
 
@@ -2038,9 +1915,6 @@ updateArrows()
 
 }
 
-
-
-
 /* HERO TEXT ROTATION */
 
 const heroRotator = document.getElementById("hero-rotator")
@@ -2070,8 +1944,6 @@ heroRotator.style.opacity = 1
 },3500)
 
 }
-
-
 
 /* ABOUT TOGGLE */
 
@@ -2109,7 +1981,6 @@ moreNav.classList.toggle("open")
 })
 
 }
-
 
 </script>
 
