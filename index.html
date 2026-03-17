@@ -2464,6 +2464,45 @@ if(rotatingText){
 
 }
 
+
+
+/* ================================
+   MOBILE CANVAS SCROLL FIX (SAFE)
+   ================================ */
+
+let isScrolling = false
+let scrollTimeout
+
+window.addEventListener("scroll", ()=>{
+
+  if(window.innerWidth > 900) return
+
+  isScrolling = true
+
+  clearTimeout(scrollTimeout)
+
+  scrollTimeout = setTimeout(()=>{
+    isScrolling = false
+  }, 150)
+
+})
+
+/* override resize behavior safely */
+const originalSetupCanvas = setupCanvas
+
+window.removeEventListener("resize", setupCanvas)
+
+window.addEventListener("resize", ()=>{
+
+  // block resize-triggered redraw during scroll
+  if(window.innerWidth <= 900 && isScrolling){
+    return
+  }
+
+  originalSetupCanvas()
+
+})
+
 </script>
 
 </body>
