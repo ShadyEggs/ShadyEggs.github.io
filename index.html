@@ -1492,18 +1492,20 @@ transform:rotate(180deg);
 
 
 /* ================================
-   MOBILE NAV SCOOP EFFECT (CLEAN)
+   MOBILE NAV TRUE SCOOP (NO PUSH)
    ================================ */
 
 @media (max-width:900px){
+
+.hero{
+will-change:transform;
+transition:transform 0.1s linear;
+}
 
 nav{
 position:sticky;
 top:0;
 z-index:50;
-
-/* smooth visual transition */
-transition:margin-top 0.15s linear;
 }
 
 }
@@ -2372,25 +2374,25 @@ document.addEventListener("click", (e)=>{
 
 
 /* ================================
-   MOBILE NAV SCOOP LOGIC
+   HERO-BASED SCOOP EFFECT
    ================================ */
 
-const navEl = document.querySelector("nav")
+const hero = document.querySelector(".hero")
 
 window.addEventListener("scroll", ()=>{
 
   if(window.innerWidth > 900) return
-  if(!navEl) return
+  if(!hero) return
 
   const scrollY = window.scrollY
 
-  // max offset (controls "scoop depth")
-  const maxOffset = 60
+  // how tightly it anchors (lower = tighter)
+  const maxShift = 80
 
-  const offset = Math.min(scrollY, maxOffset)
+  const shift = Math.min(scrollY, maxShift)
 
-  // negative margin creates "pickup" illusion
-  navEl.style.marginTop = `-${offset}px`
+  // move hero up instead of nav
+  hero.style.transform = `translateY(-${shift}px)`
 
 })
 
