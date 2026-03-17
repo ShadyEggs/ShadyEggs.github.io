@@ -1435,7 +1435,7 @@ display:none;
 
 
 /* ================================
-   MOBILE NAV IMPROVED
+   MOBILE NAV CHEVRON FIX (CLEAN)
    ================================ */
 
 @media (max-width:900px){
@@ -1444,7 +1444,8 @@ display:none;
 display:flex;
 justify-content:center;
 align-items:center;
-gap:8px;
+gap:10px;
+
 height:60px;
 
 font-size:16px;
@@ -1454,9 +1455,17 @@ color:white;
 cursor:pointer;
 }
 
-/* slight polish */
-.mobile-nav-toggle:hover{
+.mobile-nav-toggle .chev{
+display:flex;
+align-items:center;
+justify-content:center;
+font-size:14px;
 opacity:.8;
+}
+
+/* subtle polish */
+.mobile-nav-toggle:hover{
+opacity:.85;
 }
 
 }
@@ -1485,10 +1494,9 @@ opacity:.8;
 <nav>
 
 <div class="mobile-nav-toggle" id="mobileNavToggle">
-<span class="menu-icon"><i class="fas fa-bars"></i></span>
+<span class="chev"><i class="fas fa-chevron-down"></i></span>
 <span class="menu-text">Menu</span>
-
-<i class="fas fa-bars"></i>
+<span class="chev"><i class="fas fa-chevron-down"></i></span>
 </div>
 
 
@@ -2302,25 +2310,6 @@ if(toggle){
     nav.classList.toggle("active")
   })
 }
-
-
-
-/* ================================
-   MOBILE NAV OUTSIDE CLICK CLOSE
-   ================================ */
-
-document.addEventListener("click", (e)=>{
-
-  if(window.innerWidth > 900) return
-
-  const nav = document.querySelector("nav")
-
-  // if menu is open AND click is outside nav
-  if(nav.classList.contains("active") && !nav.contains(e.target)){
-    nav.classList.remove("active")
-  }
-
-})
 
 </script>
 
