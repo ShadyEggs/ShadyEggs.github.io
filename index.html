@@ -1532,17 +1532,6 @@ text-align:center;
 
 }
 
-
-
-/* ================================
-   HERO ROTATING TEXT
-   ================================ */
-
-#rotating-text{
-display:inline-block;
-transition:opacity .35s ease;
-}
-
 </style>
 
 </head>
@@ -1554,7 +1543,7 @@ transition:opacity .35s ease;
 
 <div class="hero-content">
 <h1>Alfred Rico</h1>
-<p><span id="rotating-text">Python • SQL • R • Tableau</span></p>
+<p>Aspiring Data Analyst</p>
 
 <div class="social-links">
 <a href="https://www.linkedin.com/in/alfred-rico-3992338a/" target="_blank"><i class="fab fa-linkedin"></i></a>
@@ -2432,35 +2421,6 @@ window.addEventListener("scroll", ()=>{
   lastScrollY = window.scrollY
 
 })
-
-
-
-/* ================================
-   HERO TEXT ROTATION
-   ================================ */
-
-const textEl = document.getElementById("rotating-text")
-
-const textSets = [
-  "Python • SQL • R • Tableau",
-  "Data Exploration • Transformation • Visualization"
-]
-
-let textIndex = 0
-
-setInterval(()=>{
-
-  if(!textEl) return
-
-  textEl.style.opacity = 0
-
-  setTimeout(()=>{
-    textIndex = (textIndex + 1) % textSets.length
-    textEl.textContent = textSets[textIndex]
-    textEl.style.opacity = 1
-  }, 200)
-
-}, 3000)
 
 </script>
 
