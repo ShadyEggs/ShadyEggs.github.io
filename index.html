@@ -2467,7 +2467,7 @@ if(rotatingText){
 
 
 /* ================================
-   MOBILE CANVAS SCROLL FIX (SAFE)
+   MOBILE CANVAS FINAL STABILITY FIX
    ================================ */
 
 let isScrolling = false
@@ -2487,15 +2487,24 @@ window.addEventListener("scroll", ()=>{
 
 })
 
-/* override resize behavior safely */
 const originalSetupCanvas = setupCanvas
 
 window.removeEventListener("resize", setupCanvas)
 
 window.addEventListener("resize", ()=>{
 
-  // block resize-triggered redraw during scroll
-  if(window.innerWidth <= 900 && isScrolling){
+  if(window.innerWidth > 900){
+    originalSetupCanvas()
+    return
+  }
+
+  // block during scroll
+  if(isScrolling){
+    return
+  }
+
+  // block near top (address bar glitch zone)
+  if(window.scrollY < 40){
     return
   }
 
