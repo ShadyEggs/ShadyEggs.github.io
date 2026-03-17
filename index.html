@@ -1352,6 +1352,21 @@ transform:scale(1.08);
 
 }
 
+
+
+/* ================================
+   HIGHLIGHTS ARROW VISIBILITY
+   ================================ */
+
+@media (min-width:901px){
+
+.highlight-nav.hidden{
+opacity:0;
+pointer-events:none;
+}
+
+}
+
 </style>
 
 </head>
@@ -2126,6 +2141,46 @@ if(aboutArrow){
     expandAbout()
   })
 }
+
+
+
+/* ================================
+   HIGHLIGHTS ARROW STATE CONTROL
+   ================================ */
+
+function updateArrowVisibility(){
+
+  if(window.innerWidth <= 900) return
+
+  const prev = document.querySelector(".highlight-nav.prev")
+  const next = document.querySelector(".highlight-nav.next")
+
+  if(!prev || !next) return
+
+  // page 1
+  if(hIndex === 0){
+    prev.classList.add("hidden")
+    next.classList.remove("hidden")
+  }
+
+  // page 2
+  if(hIndex === 1){
+    next.classList.add("hidden")
+    prev.classList.remove("hidden")
+  }
+
+}
+
+/* hook into existing update */
+const originalUpdate = updateHighlights
+
+updateHighlights = function(){
+  originalUpdate()
+  updateArrowVisibility()
+}
+
+/* run once */
+setTimeout(updateArrowVisibility, 100)
 
 </script>
 
