@@ -1210,6 +1210,84 @@ scroll-snap-align:start;
 
 }
 
+
+
+/* ===========================
+   REBUILT PROJECT HIGHLIGHTS
+=========================== */
+
+#highlights{
+grid-area:highlights;
+}
+
+#highlights .highlights-wrapper{
+display:flex;
+align-items:center;
+gap:12px;
+}
+
+#highlights .highlights-window{
+width:440px;
+overflow:hidden;
+}
+
+#highlights .highlights-grid{
+display:grid;
+grid-template-columns:repeat(4,210px);
+grid-template-rows:repeat(2,210px);
+gap:20px;
+transition:transform .35s ease;
+}
+
+#highlights .highlight-arrow{
+border:1px solid rgba(255,255,255,.15);
+background:rgba(255,255,255,.06);
+backdrop-filter:blur(10px);
+color:white;
+width:38px;
+height:38px;
+border-radius:50%;
+cursor:pointer;
+display:flex;
+align-items:center;
+justify-content:center;
+}
+
+/* ===== MOBILE HIGHLIGHTS ===== */
+
+@media (max-width:900px){
+
+#highlights .highlight-arrow{
+display:none;
+}
+
+#highlights .highlights-window{
+width:100%;
+overflow-x:auto;
+overflow-y:hidden;
+scroll-snap-type:x mandatory;
+-webkit-overflow-scrolling:touch;
+}
+
+#highlights .highlights-grid{
+
+display:grid;
+
+/* smaller cards */
+grid-template-columns:repeat(4,25vw);
+grid-template-rows:repeat(2,25vw);
+
+gap:14px;
+
+width:200%;
+}
+
+#highlights .highlights-grid a{
+scroll-snap-align:start;
+}
+
+}
+
 </style>
 
 </head>
