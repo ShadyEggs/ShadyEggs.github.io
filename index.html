@@ -1492,22 +1492,29 @@ transform:rotate(180deg);
 
 
 /* ================================
-   MOBILE NAV CORE FIX (ANCHOR + OVERLAY)
+   MOBILE NAV SMART ANCHOR
    ================================ */
 
 @media (max-width:900px){
 
-/* FORCE NAV TO STAY AT TOP */
+/* DEFAULT (TOP OF PAGE) */
 nav{
-position:fixed !important;
+position:relative;
+width:100%;
+z-index:50;
+}
+
+/* WHEN SCROLLED */
+nav.fixed{
+position:fixed;
 top:0;
 left:0;
 width:100%;
 z-index:9999;
 }
 
-/* PREVENT CONTENT HIDING */
-body{
+/* BODY OFFSET ONLY WHEN FIXED */
+body.nav-fixed{
 padding-top:72px;
 }
 
@@ -2397,6 +2404,28 @@ document.addEventListener("click", (e)=>{
   // if open and clicked outside nav
   if(nav.classList.contains("active") && !nav.contains(e.target)){
     nav.classList.remove("active")
+  }
+
+})
+
+
+
+/* ================================
+   MOBILE NAV SMART SCROLL
+   ================================ */
+
+const mobileNav = document.querySelector("nav")
+
+window.addEventListener("scroll", ()=>{
+
+  if(window.innerWidth > 900) return
+
+  if(window.scrollY > 10){
+    mobileNav.classList.add("fixed")
+    document.body.classList.add("nav-fixed")
+  }else{
+    mobileNav.classList.remove("fixed")
+    document.body.classList.remove("nav-fixed")
   }
 
 })
