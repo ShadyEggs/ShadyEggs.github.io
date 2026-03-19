@@ -1544,6 +1544,44 @@ inset 0 1px 0 rgba(255,255,255,.08);
 
 }
 
+
+/* =========================================
+   MOBILE HIGHLIGHTS (SCROLL SNAP REBUILD)
+   ========================================= */
+
+@media (max-width:600px){
+
+  .highlights-window{
+    overflow-x:auto !important;
+    overflow-y:hidden !important;
+    scroll-snap-type:x mandatory;
+    -webkit-overflow-scrolling:touch;
+  }
+
+  .highlights-window::-webkit-scrollbar{
+    display:none;
+  }
+
+  .highlights-track{
+    display:flex !important;
+    width:200% !important; /* 2 pages */
+    transform:none !important;
+  }
+
+  .highlight-page{
+    flex:0 0 100%;
+    scroll-snap-align:start;
+    display:grid;
+    grid-template-columns:repeat(2,1fr);
+    gap:12px;
+  }
+
+  .highlight-card{
+    aspect-ratio:1;
+  }
+
+}
+
 </style>
 
 </head>
@@ -2221,53 +2259,42 @@ console.error("Submission error",err)
 }
 
 /* ================================
-   PROJECT HIGHLIGHTS (REBUILT — STABLE)
+   PROJECT HIGHLIGHTS (SMOOTH SWIPE)
    ================================ */
 
+const hContainer = document.querySelector(".highlights-container")
 const hTrack = document.querySelector(".highlights-track")
-const hContainer = document.querySelector(".highlights-window")
 
 let hIndex = 0
-const totalPages = 2
+let startX = 0
+let currentX = 0
+let isDragging = false
+let trackStart = 0
 
-function updateHighlights(){
-  const width = hContainer.offsetWidth
-  hTrack.style.transition = "transform .35s ease"
-  hTrack.style.transform = `translateX(-${hIndex * width}px)`
+function if(window.innerWidth <= 600) return;
+setTranslate(x, animate = true){
+  if(animate){
+    hTrack.style.transition = "transform .35s ease"
+  }else{
+    hTrack.style.transition = "none"
+  }
+  hTrack.style.transform = `translateX(${x}px)`
 }
 
-/* ===== TOUCH SWIPE (CLEAN) ===== */
+function getTranslateForIndex(index){
+  const windowEl = document.querySelector(".highlights-window")
+  return -index * windowEl.offsetWidth
+}
 
-let startX = 0
-let endX = 0
+function updateHighlights(){
+  if(window.innerWidth <= 600) return;
+setTranslate(getTranslateForIndex(hIndex))
+}
 
-hTrack.addEventListener("touchstart", (e)=>{
-  startX = e.touches[0].clientX
-}, { passive:true })
-
-hTrack.addEventListener("touchend", (e)=>{
-  endX = e.changedTouches[0].clientX
-
-  const delta = endX - startX
-  const threshold = 50
-
-  if(delta < -threshold && hIndex < totalPages - 1){
-    hIndex++
-  }
-  else if(delta > threshold && hIndex > 0){
-    hIndex--
-  }
-
-  updateHighlights()
-})
-
-/* ===== DESKTOP BUTTONS ===== */
-
+/* DESKTOP NAV */
 function setupDesktopNav(){
 
   if(window.innerWidth <= 600) return
-
-  const container = document.querySelector(".highlights-container")
 
   const prev = document.createElement("button")
   const next = document.createElement("button")
@@ -2278,30 +2305,75 @@ function setupDesktopNav(){
   prev.innerHTML = "&#10094;"
   next.innerHTML = "&#10095;"
 
-  container.prepend(prev)
-  container.appendChild(next)
+  hContainer.prepend(prev)
+  hContainer.appendChild(next)
 
-  prev.onclick = ()=>{
+  next.addEventListener("click", ()=>{
+    if(hIndex < 1){
+      hIndex++
+      updateHighlights()
+    }
+  })
+
+  prev.addEventListener("click", ()=>{
     if(hIndex > 0){
       hIndex--
       updateHighlights()
     }
-  }
-
-  next.onclick = ()=>{
-    if(hIndex < totalPages - 1){
-      hIndex++
-      updateHighlights()
-    }
-  }
-
+  })
 }
 
+/* SMOOTH SWIPE */
+
+
+if(window.innerWidth <= 600){
+  console.log("Mobile highlights: JS swipe disabled");
+  return;
+}
+
+hTrack.addEventListener("touchstart", (e)=>{
+  isDragging = true
+  startX = e.touches[0].clientX
+  trackStart = getTranslateForIndex(hIndex)
+}, { passive: true })
+
+hTrack.addEventListener("touchmove", (e)=>{
+  if(!isDragging) return
+
+  currentX = e.touches[0].clientX
+  let delta = currentX - startX
+
+  let move = trackStart + delta
+
+  // resistance
+  if((hIndex === 0 && delta > 0) || (hIndex === 1 && delta < 0)){
+    move = trackStart + delta * 0.35
+  }
+
+  if(window.innerWidth <= 600) return;
+setTranslate(move, false)
+}, { passive: true })
+
+hTrack.addEventListener("touchend", ()=>{
+  if(!isDragging) return
+  isDragging = false
+
+  let delta = currentX - startX
+  const threshold = hContainer.offsetWidth * 0.2
+
+  if(delta < -threshold && hIndex < 1){
+    hIndex++
+  } else if(delta > threshold && hIndex > 0){
+    hIndex--
+  }
+
+  updateHighlights()
+})
+
+/* INIT */
 setupDesktopNav()
 updateHighlights()
-
 window.addEventListener("resize", updateHighlights)
-
 
 /* ================================
    MOBILE ABOUT TOGGLE LOGIC
