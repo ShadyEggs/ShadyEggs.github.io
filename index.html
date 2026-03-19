@@ -431,6 +431,15 @@ inset 0 0 10px rgba(255,255,255,.08);
 
 }
 
+
+.filter-btn.tag-jupyter.active{
+  background: rgba(255,255,255,.18);
+  border:1px solid rgba(255,255,255,.12);
+  box-shadow:
+    0 6px 14px rgba(0,0,0,.35),
+    inset 0 0 10px rgba(255,255,255,.08);
+}
+
 /* language tint colors */
 
 .filter-btn.tag-python.active{
@@ -1574,6 +1583,7 @@ inset 0 1px 0 rgba(255,255,255,.08);
 </div>
 </section>
 
+
 <section id="highlights">
 
 <h2>My Project Highlights</h2>
@@ -1583,21 +1593,42 @@ inset 0 1px 0 rgba(255,255,255,.08);
 <div class="highlights-window">
 <div class="highlights-track">
 
+<!-- PAGE 1 -->
 <div class="highlight-page">
 
-<div class="highlight-card"></div></div>
-<div class="highlight-card"></div></div>
-<div class="highlight-card"></div></div>
-<div class="highlight-card"></div></div>
+<a class="highlight-card" 
+href="https://shadyeggs.github.io/EDA-with-Python/" 
+target="_blank"
+data-tags="python numpy pandas jupyter">
+
+<img src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=800&q=80">
+
+<div class="highlight-overlay">
+<h3>EDA with Python</h3>
+
+<div class="project-tags">
+<span class="tag-python">Python</span>
+<span class="tag-package">NumPy</span>
+<span class="tag-package">Pandas</span>
+<span class="tag-package">Jupyter</span>
+</div>
+
+</div>
+</a>
+
+<div class="highlight-card"></div>
+<div class="highlight-card"></div>
+<div class="highlight-card"></div>
 
 </div>
 
+<!-- PAGE 2 -->
 <div class="highlight-page">
 
-<div class="highlight-card"></div></div>
-<div class="highlight-card"></div></div>
-<div class="highlight-card"></div></div>
-<div class="highlight-card"></div></div>
+<div class="highlight-card"></div>
+<div class="highlight-card"></div>
+<div class="highlight-card"></div>
+<div class="highlight-card"></div>
 
 </div>
 
@@ -1607,6 +1638,7 @@ inset 0 1px 0 rgba(255,255,255,.08);
 </div>
 
 </section>
+
 <section id="contact">
 
 <h2>Let's Connect!</h2>
@@ -1638,6 +1670,7 @@ inset 0 1px 0 rgba(255,255,255,.08);
 <div class="project-filters">
 <button class="filter-btn active tag-all" data-filter="all">All</button>
 <button class="filter-btn tag-python" data-filter="python">Python</button>
+<button class="filter-btn tag-jupyter" data-filter="jupyter">Jupyter</button>
 <button class="filter-btn tag-r" data-filter="r">R</button>
 <button class="filter-btn tag-sql" data-filter="sql">SQL</button>
 <button class="filter-btn tag-tableau" data-filter="tableau">Tableau</button>
