@@ -2318,27 +2318,6 @@ function setupDesktopNav(){
 
 /* SMOOTH SWIPE */
 
-
-/* === SWIPE CLAMP FIX === */
-hTrack.addEventListener("touchmove", (e)=>{
-  if(!isDragging) return
-
-  currentX = e.touches[0].clientX
-  let delta = currentX - startX
-
-  let move = trackStart + delta
-
-  const maxLeft = 0
-  const maxRight = -hContainer.offsetWidth
-
-  // HARD CLAMP (prevents overscroll lock)
-  if(move > maxLeft) move = maxLeft
-  if(move < maxRight) move = maxRight
-
-  setTranslate(move, false)
-}, { passive: true })
-
-
 hTrack.addEventListener("touchstart", (e)=>{
   isDragging = true
   startX = e.touches[0].clientX
@@ -2366,9 +2345,7 @@ hTrack.addEventListener("touchend", ()=>{
   isDragging = false
 
   let delta = currentX - startX
-
-  // stronger threshold = more intentional swipe
-  const threshold = hContainer.offsetWidth * 0.35
+  const threshold = hContainer.offsetWidth * 0.2
 
   if(delta < -threshold && hIndex < 1){
     hIndex++
@@ -2376,9 +2353,70 @@ hTrack.addEventListener("touchend", ()=>{
     hIndex--
   }
 
-  // ALWAYS snap cleanly to a page
   updateHighlights()
 })
+
+
+
+/* === FINAL SWIPE FIX (NO LOCK, FULLY STABLE) === */
+
+// total pages
+function getPageCount(){
+  return document.querySelectorAll(".highlight-page").length
+}
+
+// updated translate calc
+function getTranslateForIndex(index){
+  const windowEl = document.querySelector(".highlights-window")
+  return -index * windowEl.offsetWidth
+}
+
+// CLAMP INDEX SAFELY
+function clampIndex(index){
+  const max = getPageCount() - 1
+  return Math.max(0, Math.min(index, max))
+}
+
+/* REPLACE touchend */
+hTrack.addEventListener("touchend", ()=>{
+  if(!isDragging) return
+  isDragging = false
+
+  let delta = currentX - startX
+  const width = hContainer.offsetWidth
+  const threshold = width * 0.25
+
+  if(delta < -threshold){
+    hIndex++
+  } else if(delta > threshold){
+    hIndex--
+  }
+
+  // clamp to valid range
+  hIndex = clampIndex(hIndex)
+
+  updateHighlights()
+})
+
+/* REPLACE touchmove (CLAMP FIX) */
+hTrack.addEventListener("touchmove", (e)=>{
+  if(!isDragging) return
+
+  currentX = e.touches[0].clientX
+  let delta = currentX - startX
+
+  let move = trackStart + delta
+
+  const maxLeft = 0
+  const maxRight = -(getPageCount() - 1) * hContainer.offsetWidth
+
+  // HARD CLAMP
+  if(move > maxLeft) move = maxLeft
+  if(move < maxRight) move = maxRight
+
+  setTranslate(move, false)
+}, { passive: true })
+
 
 /* INIT */
 setupDesktopNav()
