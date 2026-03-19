@@ -2318,6 +2318,27 @@ function setupDesktopNav(){
 
 /* SMOOTH SWIPE */
 
+
+/* === SWIPE CLAMP FIX === */
+hTrack.addEventListener("touchmove", (e)=>{
+  if(!isDragging) return
+
+  currentX = e.touches[0].clientX
+  let delta = currentX - startX
+
+  let move = trackStart + delta
+
+  const maxLeft = 0
+  const maxRight = -hContainer.offsetWidth
+
+  // HARD CLAMP (prevents overscroll lock)
+  if(move > maxLeft) move = maxLeft
+  if(move < maxRight) move = maxRight
+
+  setTranslate(move, false)
+}, { passive: true })
+
+
 hTrack.addEventListener("touchstart", (e)=>{
   isDragging = true
   startX = e.touches[0].clientX
@@ -2345,7 +2366,9 @@ hTrack.addEventListener("touchend", ()=>{
   isDragging = false
 
   let delta = currentX - startX
-  const threshold = hContainer.offsetWidth * 0.2
+
+  // stronger threshold = more intentional swipe
+  const threshold = hContainer.offsetWidth * 0.35
 
   if(delta < -threshold && hIndex < 1){
     hIndex++
@@ -2353,6 +2376,7 @@ hTrack.addEventListener("touchend", ()=>{
     hIndex--
   }
 
+  // ALWAYS snap cleanly to a page
   updateHighlights()
 })
 
