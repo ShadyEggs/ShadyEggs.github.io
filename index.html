@@ -1580,7 +1580,7 @@ inset 0 1px 0 rgba(255,255,255,.08);
 
 
 /* =========================================
-   MOBILE HIGHLIGHTS (NO CAROUSEL SYSTEM)
+   MOBILE HIGHLIGHTS — EXACT 2x2 VIEW
    ========================================= */
 
 @media (max-width:900px){
@@ -1596,9 +1596,13 @@ inset 0 1px 0 rgba(255,255,255,.08);
     display:contents;
   }
 
+  /* THIS IS THE KEY FIX */
   .highlights-window{
     overflow-y:auto;
-    max-height:420px;
+    overflow-x:hidden;
+
+    /* EXACTLY 2 ROWS */
+    max-height: calc((100vw - 48px) / 2 * 2 + 12px);
   }
 
 }
@@ -2342,14 +2346,50 @@ function setupDesktopNav(){
   })
 }
 
+/* SMOOTH SWIPE */
 
+hTrack.addEventListener("touchstart", (e)=>{
+  isDragging = true
+  startX = e.touches[0].clientX
+  trackStart = getTranslateForIndex(hIndex)
+}, { passive: true })
 
-/* INIT (DESKTOP ONLY) */
-if(window.innerWidth > 900){
-  setupDesktopNav()
+hTrack.addEventListener("touchmove", (e)=>{
+  if(!isDragging) return
+
+  currentX = e.touches[0].clientX
+  let delta = currentX - startX
+
+  let move = trackStart + delta
+
+  // resistance
+  if((hIndex === 0 && delta > 0) || (hIndex === 1 && delta < 0)){
+    move = trackStart + delta * 0.35
+  }
+
+  setTranslate(move, false)
+}, { passive: true })
+
+hTrack.addEventListener("touchend", ()=>{
+  if(!isDragging) return
+  isDragging = false
+
+  let delta = currentX - startX
+  const threshold = hContainer.offsetWidth * 0.2
+
+  if(delta < -threshold && hIndex < 1){
+    hIndex++
+  } else if(delta > threshold && hIndex > 0){
+    hIndex--
+  }
+
   updateHighlights()
-  window.addEventListener("resize", updateHighlights)
-}
+})
+
+/* INIT */
+setupDesktopNav()
+updateHighlights()
+window.addEventListener("resize", updateHighlights)
 
 /* ================================
    MOBILE ABOUT TOGGLE LOGIC
