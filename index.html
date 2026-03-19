@@ -375,7 +375,7 @@ inset 0 0 10px rgba(255,255,255,.08);
 
 .filter-btn.tag-r.active{background:rgba(39,109,195,.35)}
 .filter-btn.tag-sql.active{background:rgba(51,103,145,.35)}
-.filter-btn.tag-tableau.active{background:rgba(233,118,39,.35)}
+
 .filter-btn.tag-excel.active{background:rgba(33,115,70,.35)}
 .filter-btn.tag-sheets.active{background:rgba(52,168,83,.35)}
 .filter-btn.tag-all.active{background:rgba(74,144,226,.35)}
@@ -411,7 +411,7 @@ inset 0 0 10px rgba(255,255,255,.08);
 
 .filter-btn.tag-r.active{background:rgba(39,109,195,.35)}
 .filter-btn.tag-sql.active{background:rgba(51,103,145,.35)}
-.filter-btn.tag-tableau.active{background:rgba(233,118,39,.35)}
+
 .filter-btn.tag-excel.active{background:rgba(33,115,70,.35)}
 .filter-btn.tag-sheets.active{background:rgba(52,168,83,.35)}
 .filter-btn.tag-all.active{background:rgba(74,144,226,.35)}
@@ -432,8 +432,32 @@ inset 0 0 10px rgba(255,255,255,.08);
 }
 
 
+
+
+
+
+/* JUPYTER (ORANGE — CONSISTENT WITH SYSTEM) */
 .filter-btn.tag-jupyter.active{
-  background: rgba(255,255,255,.18);
+  background: linear-gradient(
+    90deg,
+    rgba(240,136,62,.35),
+    rgba(255,173,96,.25)
+  );
+  border:1px solid rgba(255,255,255,.12);
+  box-shadow:
+    0 6px 14px rgba(0,0,0,.35),
+    inset 0 0 10px rgba(255,255,255,.08);
+}
+
+/* TABLEAU (MULTI-COLOR LOGO BLEND) */
+.filter-btn.tag-tableau.active{
+  background: linear-gradient(
+    90deg,
+    rgba(0,123,199,.28),
+    rgba(0,166,153,.25),
+    rgba(233,118,39,.28),
+    rgba(246,220,172,.25)
+  );
   border:1px solid rgba(255,255,255,.12);
   box-shadow:
     0 6px 14px rgba(0,0,0,.35),
@@ -460,7 +484,7 @@ inset 0 0 10px rgba(255,255,255,.08);
 
 .filter-btn.tag-r.active{background:rgba(39,109,195,.22)}
 .filter-btn.tag-sql.active{background:rgba(51,103,145,.22)}
-.filter-btn.tag-tableau.active{background:rgba(233,118,39,.22)}
+
 .filter-btn.tag-excel.active{background:rgba(33,115,70,.22)}
 .filter-btn.tag-sheets.active{background:rgba(52,168,83,.22)}
 .filter-btn.tag-all.active{background:rgba(74,144,226,.22)}
@@ -1604,7 +1628,8 @@ data-tags="python numpy pandas jupyter">
 <img src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=800&q=80">
 
 <div class="highlight-overlay">
-<h3>EDA with Python</h3>
+<h3>TikTok Claims Project</h3>
+<p style="font-size:12px; color:#ccc; margin:2px 0 6px;">EDA with Python</p>
 
 <div class="project-tags">
 <span class="tag-python">Python</span>
