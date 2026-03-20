@@ -1,61 +1,75 @@
-# Alfred Rico - Data Analysis Portfolio
+# Alfred Rico — Data Analyst Portfolio
 
-Welcome! This repository contains the complete template for a professional, one-page data analysis portfolio website, hosted for free on GitHub Pages.
+🔗 **Live Portfolio:** https://shadyeggs.github.io/
 
-## About This Portfolio Template
+---
 
-This portfolio is designed to demonstrate skills in:
-- Data visualization and storytelling
-- Data modeling and analysis
-- Creating interactive, professional dashboards
-- Transforming complex data into actionable insights
+## Preview
 
-## 🚀 Projects
+![Portfolio Preview](portfolio-preview.png)
 
-This template is set up to showcase your best work. You can easily customize the project cards in the `index.html` file.
+---
 
-### Project Title One
-*A brief description of your project, the tools used, and the key insights derived.*
+## Overview
 
-### Project Title Two
-*A brief description of your project, the tools used, and the key insights derived.*
+This repository contains the source code for my personal data analyst portfolio website.
+It showcases end-to-end projects focused on exploratory data analysis, statistical reasoning, and data-driven insights.
 
-### Project Title Three
-*A brief description of your project, the tools used, and the key insights derived.*
+The goal of this portfolio is to demonstrate not just technical ability, but the ability to communicate findings clearly and structure analytical work in a meaningful way.
 
+---
 
-## 🛠️ Skills
+## Featured Project
 
-Update the `index.html` file to reflect your personal technical skillset. The template is organized into key categories:
+### TikTok Claims Classification (EDA with Python)
 
-- **Data Visualization**: Power BI, Tableau, Matplotlib, etc.
-- **Data Analysis**: SQL, Python (Pandas), R, Excel, etc.
-- **Data Modeling**: Power Query, DAX, Star Schema Design, etc.
-- **Tools**: List any other relevant tools like Power BI Service, specific cloud platforms, etc.
+🔗 https://shadyeggs.github.io/EDA-with-Python/
 
-## 💡 How to Use This Template
+* Conducted exploratory data analysis on ~19,000 TikTok videos
+* Identified engagement patterns differentiating claim vs opinion content
+* Engineered engagement rate features (likes, comments, shares per view)
+* Highlighted the impact of outliers and skewed distributions on analysis
+* Established a foundation for downstream predictive modeling
 
-Creating your own portfolio from this template is a simple, four-step process.
+---
 
-### 1. Create a New Repository from this Template
-Click the green **"Use this template"** button at the top of this repository page, then select **"Create a new repository"**.
+## Skills Demonstrated
 
-### 2. Name Your Repository for GitHub Pages
-This is the most important step. To turn your portfolio into a live website, you **must** name your new repository in the following format:
-`your-username.github.io`
-*(Replace `your-username` with your actual GitHub username.)*
+* Exploratory Data Analysis (EDA)
+* Data Cleaning & Transformation
+* Statistical Analysis
+* Feature Engineering
+* Data Interpretation & Insight Communication
 
-### 3. Customize Your Portfolio
-Open the `index.html` file and begin personalizing it. The file contains helpful `<!--💡UPDATE: ... -->` comments to guide you on where to change:
-- Your name and title
-- Social media links
-- The "About Me" section
-- Your project titles, descriptions, and links
-- Your list of skills
+---
 
-### 4. Add Your Files
-- Upload your profile photo and project preview images to the `assets/images/` folder.
-- Upload your CV (e.g., in PDF format) to the `assets/` folder.
-- Create your favicon and add it to the root folder.
+## Tech Stack
 
-Once you commit your changes, your new portfolio website will be live at `https://your-username.github.io` within a few minutes!
+* **Python** (Pandas, NumPy)
+* **Jupyter Notebook**
+* **HTML / CSS / JavaScript**
+* **GitHub Pages**
+
+---
+
+## Repository Structure
+
+* `index.html` → Main portfolio homepage
+* `EDA-with-Python/` → Project-specific webpage and analysis
+* Additional projects will be added as the portfolio expands
+
+---
+
+## Purpose
+
+This portfolio is designed to present analytical work in a structured, accessible format that mirrors real-world data workflows — from raw data inspection to insight generation.
+
+---
+
+## Contact
+
+* GitHub: https://github.com/ShadyEggs
+
+---
+
+© 2026 Alfred Rico
