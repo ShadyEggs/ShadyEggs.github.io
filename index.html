@@ -1607,6 +1607,65 @@ inset 0 1px 0 rgba(255,255,255,.08);
 
 }
 
+
+
+/* =========================================
+   DESKTOP EXPANSION (SAFE OVERRIDE)
+   ========================================= */
+
+@media (min-width:1200px){
+
+  .main-layout{
+    max-width:1400px;
+    padding:0 60px;
+    gap:60px;
+  }
+
+  .hero{
+    height:40vh;
+  }
+
+  .hero h1{
+    font-size:56px;
+  }
+
+  .hero p{
+    font-size:18px;
+  }
+
+  .about-text{
+    font-size:16px;
+    line-height:1.7;
+  }
+
+  .projects-window{
+    max-width:1200px;
+    height:760px;
+  }
+
+  .projects-grid{
+    grid-template-columns:repeat(4,1fr);
+    gap:24px;
+  }
+
+  #highlights{
+    max-width:1400px;
+  }
+
+  .highlight-page{
+    gap:24px;
+  }
+
+  .contact-form{
+    padding:50px;
+  }
+
+  .cert{
+    max-width:260px;
+  }
+
+}
+
 </style>
 
 </head>
