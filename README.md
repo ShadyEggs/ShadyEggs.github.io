@@ -6,24 +6,29 @@
 
 ## Overview
 
-This repository contains the source code for my personal data analyst portfolio website.
-It showcases end-to-end projects focused on exploratory data analysis, statistical reasoning, and data-driven insights.
+This repository contains the source code for my data analyst portfolio in which my projects focus on exploratory data analysis, feature engineering, and data driven insights.
 
-The goal of this portfolio is to demonstrate not just technical ability, but the ability to communicate findings clearly and structure analytical work in a meaningful way.
+The goal of this portfolio is to demonstrate both technical skills and the ability to communicate insights clearly and structure analysis in a meaningful way.
 
 ---
 
-## Featured Project
+## Featured Projects
 
-### TikTok Claims Classification (EDA with Python)
-
-🔗 https://AlfredRico.github.io/EDA-with-Python/
-
-* Conducted exploratory data analysis on ~19,000 TikTok videos
-* Identified engagement patterns differentiating claim vs opinion content
-* Engineered engagement rate features (likes, comments, shares per view)
-* Highlighted the impact of outliers and skewed distributions on analysis
-* Established a foundation for downstream predictive modeling
+### **Unicorn Company Analysis** | Pandas, matplotlib
+- Analyzed global startup data (valuation, funding, investors) to identify trends across high-growth companies
+- Identified high-valuation companies with relatively low investor participation, highlighting potential investment opportunities
+- Performed data cleaning and transformation to standardize financial metrics and enable cross-company comparison
+### **NOAA Lightning Strike Analysis** | Pandas, NumPy, Time Series Analysis
+- Analyzed large-scale NOAA lightning strike dataset to evaluate temporal distribution patterns
+- Identified seasonal trends and fluctuations in lightning frequency across time periods
+- Aggregated and transformed time-series data to support trend analysis and visualization
+### **EDA with Python** | Pandas, NumPy, Data Cleaning
+- Conducted exploratory data analysis on structured datasets, including handling missing values and outliers
+- Applied statistical summaries and visualizations to uncover patterns and relationships within the data
+- Transformed raw data into analysis-ready formats to improve interpretability and usability
+### **Date String Manipulation with Python** | Pandas, matplotlib, seaborn
+- Standardized inconsistent date formats across datasets to improve data quality and consistency
+- Implemented parsing and transformation techniques to ensure accurate time-based analysis
 
 ---
 
@@ -42,14 +47,6 @@ The goal of this portfolio is to demonstrate not just technical ability, but the
 * **Python** (Pandas, NumPy, matplotlib, seaborn)
 * **Jupyter Notebook**
 * **GitHub Pages**
-
----
-
-## Repository Structure
-
-* `index.html` → Main portfolio homepage
-* `EDA-with-Python/` → Project-specific webpage and analysis
-* Additional projects will be added as the portfolio expands
 
 ---
 
