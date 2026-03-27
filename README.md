@@ -59,6 +59,7 @@ This portfolio is designed to present analytical work in a structured, accessibl
 ## Contact
 
 * GitHub: https://github.com/AlfredRico
+* LinkedIn: www.linkedin.com/in/alfred-rico-3992338a
 
 ---
 
