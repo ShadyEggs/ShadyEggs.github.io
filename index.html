@@ -1644,11 +1644,10 @@ inset 0 1px 0 rgba(255,255,255,.08);
 
 
 /* =========================================
-   GLOBAL SCROLLABLE TAGS (DESKTOP + MOBILE)
+   GLOBAL SCROLLABLE TAGS (ALL DEVICES)
    ========================================= */
 
-.project-tags,
-.project-subtags{
+.project-tags{
   display:flex;
   flex-wrap:nowrap;
   overflow-x:auto;
@@ -1659,33 +1658,44 @@ inset 0 1px 0 rgba(255,255,255,.08);
   scrollbar-width:none;
 }
 
-.project-tags::-webkit-scrollbar,
-.project-subtags::-webkit-scrollbar{
+.project-tags::-webkit-scrollbar{
   display:none;
 }
 
-.project-tags span,
-.project-subtags span{
+.project-tags span{
   flex:0 0 auto;
   white-space:nowrap;
 }
 
-/* subtags styling */
-.project-subtags span{
-  font-size:11px;
-  color:#cbd5e1;
-  background:rgba(255,255,255,.08);
-  padding:3px 8px;
-  border-radius:6px;
-  margin-top:4px;
+/* =========================================
+   SCROLLABLE SUBHEADER (SINGLE LINE TEXT)
+   ========================================= */
+
+.project-subheader{
+  display:block;
+  white-space:nowrap;
+  overflow-x:auto;
+  overflow-y:hidden;
+
+  font-size:12px;
+  color:#ccc;
+  margin:2px 0 6px;
+
+  scrollbar-width:none;
 }
 
-/* optional desktop interaction polish */
-.project-tags{
+.project-subheader::-webkit-scrollbar{
+  display:none;
+}
+
+/* optional desktop polish */
+.project-tags,
+.project-subheader{
   cursor:grab;
 }
 
-.project-tags:active{
+.project-tags:active,
+.project-subheader:active{
   cursor:grabbing;
 }
 
@@ -1771,7 +1781,7 @@ data-tags="python pandas numpy seaborn datetime matplotlib pyplot jupyter">
 
 <div class="highlight-overlay">
 <h3>NOAA Lightning Strike Analysis</h3>
-<p style="font-size:12px; color:#ccc; margin:2px 0 6px;">
+<p class="project-subheader">
 EDA Structuring/Feature Engineering/Multi-Year Data Integration/Visualization
 </p>
 
@@ -1798,11 +1808,7 @@ data-tags="python pandas numpy datetime matplotlib pyplot jupyter">
 
 <div class="highlight-overlay">
 <h3>NOAA Lightning Strike Analysis</h3>
-<div class="project-subtags">
-<span>Python EDA</span>
-<span>Feature Engineering</span>
-<span>Visualization</span>
-</div>
+<p class="project-subheader">Python EDA/Feature Engineering/Visualization</p>
 
 <div class="project-tags">
 <span class="tag-python">Python</span>
@@ -1826,11 +1832,7 @@ data-tags="python pandas matplotlib jupyter">
 
 <div class="highlight-overlay">
 <h3>Unicorn Company Analysis</h3>
-<div class="project-subtags">
-<span>Python EDA</span>
-<span>Feature Engineering</span>
-<span>Visualization</span>
-</div>
+<p class="project-subheader">Python EDA/Feature Engineering/Visualization</p>
 
 <div class="project-tags">
 <span class="tag-python">Python</span>
@@ -1851,11 +1853,7 @@ data-tags="python pandas matplotlib seaborn jupyter">
 
 <div class="highlight-overlay">
 <h3>NOAA Lightning Strike Analysis</h3>
-<div class="project-subtags">
-<span>Date String Manipulation</span>
-<span>Feature Engineering</span>
-<span>Visualization</span>
-</div>
+<p class="project-subheader">Date String Manipulation/Feature Engineering/Visualization</p>
 
 <div class="project-tags">
 <span class="tag-python">Python</span>
@@ -1881,10 +1879,7 @@ data-tags="python numpy pandas jupyter">
 
 <div class="highlight-overlay">
 <h3>TikTok Claims Project</h3>
-<div class="project-subtags">
-<span>Python EDA</span>
-<span>Feature Engineering</span>
-</div>
+<p class="project-subheader">Python EDA/Feature Engineering</p>
 
 <div class="project-tags">
 <span class="tag-python">Python</span>
@@ -1963,7 +1958,7 @@ href="https://AlfredRico.github.io/Fifa21-Data-Cleaning-Project/">
 <div class="project-overlay">
 <h3>Fifa 21 Data Cleaning</h3>
 
-<p style="font-size:12px; color:#ccc; margin:2px 0 6px;">
+<p class="project-subheader">
 Data Cleaning with R
 </p>
   
@@ -1987,7 +1982,7 @@ href="https://public.tableau.com/app/profile/alfred.rico/viz/CyclisticCaseStudy_
 <div class="project-overlay">
 <h3>Cyclistic Case Study</h3>
 
-<p style="font-size:12px; color:#ccc; margin:2px 0 6px;">
+<p class="project-subheader">
 Visualization with Tableau
 </p>
   
@@ -2011,7 +2006,7 @@ href="https://AlfredRico.github.io/EDA-with-Python/">
 <div class="project-overlay">
 <h3>TikTok Claims Project</h3>
 
-<p style="font-size:12px; color:#ccc; margin:2px 0 6px;">
+<p class="project-subheader">
 Python EDA/Feature Engingeering
 </p>
 
@@ -2034,11 +2029,7 @@ href="https://AlfredRico.github.io/EDA-Feature-Engineering-with-Python/">
 
 <div class="project-overlay">
 <h3>NOAA Lightning Strike Analysis</h3>
-<div class="project-subtags">
-<span>Python EDA</span>
-<span>Feature Engineering</span>
-<span>Visualization</span>
-</div>
+<p class="project-subheader">Python EDA/Feature Engineering/Visualization</p>
 
 <div class="project-tags">
 <span class="tag-python">Python</span>
@@ -2063,7 +2054,7 @@ href="https://AlfredRico.github.io/Unicorn-Company-Analysis/">
 <div class="project-overlay">
 <h3>Unicorn Company Analysis</h3>
 
-<p style="font-size:12px; color:#ccc; margin:2px 0 6px;">
+<p class="project-subheader">
 Python EDA/Feature Engineering/Visualization
 </p>
 
@@ -2088,7 +2079,7 @@ href="https://AlfredRico.github.io/Date-String-Manipulations-with-Python/">
 <div class="project-overlay">
 <h3>NOAA Lightning Strike Analysis</h3>
 
-<p style="font-size:12px; color:#ccc; margin:2px 0 6px;">
+<p class="project-subheader">
 Date String Manipulations/Feature Engineering/Visualization
 </p>
 
@@ -2114,7 +2105,7 @@ href="https://alfredrico.github.io/EDA-Structuring-with-Python/">
 <div class="project-overlay">
 <h3>NOAA Lightning Strike Analysis</h3>
 
-<p style="font-size:12px; color:#ccc; margin:2px 0 6px;">
+<p class="project-subheader">
 EDA Structuring/Feature Engineering/Multi-Year Data Integration/Visualization
 </p>
 
