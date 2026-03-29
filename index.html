@@ -1768,7 +1768,6 @@ inset 0 1px 0 rgba(255,255,255,.08);
   overflow-y:hidden;
   gap:6px;
   padding-bottom:2px;
-
   scrollbar-width:none;
 }
 
@@ -1782,7 +1781,7 @@ inset 0 1px 0 rgba(255,255,255,.08);
 }
 
 /* =========================================
-   SCROLLABLE SUBHEADER (SINGLE LINE)
+   SCROLLABLE SUBHEADER
    ========================================= */
 
 .project-subheader{
@@ -1790,11 +1789,9 @@ inset 0 1px 0 rgba(255,255,255,.08);
   white-space:nowrap;
   overflow-x:auto;
   overflow-y:hidden;
-
   font-size:12px;
   color:#ccc;
   margin:2px 0 6px;
-
   scrollbar-width:none;
 }
 
@@ -1803,17 +1800,70 @@ inset 0 1px 0 rgba(255,255,255,.08);
 }
 
 /* =========================================
-   MOBILE TITLE SPACING (KEY FIX)
+   MOBILE TITLE SPACING
    ========================================= */
 
 @media (max-width:600px){
-
   .project-overlay h3,
   .highlight-overlay h3{
-    margin-top:6px;   /* 👈 subtle push down */
+    margin-top:6px;
     font-size:15px;
   }
+}
 
+/* =========================================
+   MOBILE HIGHLIGHTS = VERTICAL SCROLL (MATCH LIBRARY)
+   ========================================= */
+
+@media (max-width:900px){
+
+  .highlights-window{
+    height:420px;              /* match project window feel */
+    overflow-y:auto;
+    overflow-x:hidden;
+
+    -webkit-overflow-scrolling:touch;
+  }
+
+  .highlights-track{
+    display:grid !important;
+    grid-template-columns:repeat(2,1fr);
+    gap:12px;
+
+    transform:none !important;
+  }
+
+  .highlight-page{
+    display:contents;
+  }
+
+}
+
+/* =========================================
+   MATCH SCROLLBAR STYLE (BLUE)
+   ========================================= */
+
+.highlights-window{
+  scrollbar-width:auto;
+  scrollbar-color:#028391 rgba(255,255,255,.06);
+}
+
+.highlights-window::-webkit-scrollbar{
+  width:10px;
+}
+
+.highlights-window::-webkit-scrollbar-track{
+  background:rgba(255,255,255,.05);
+  border-radius:10px;
+}
+
+.highlights-window::-webkit-scrollbar-thumb{
+  background:linear-gradient(180deg,#028391,#FAA968);
+  border-radius:10px;
+}
+
+.highlights-window::-webkit-scrollbar-thumb:hover{
+  background:linear-gradient(180deg,#028391,#F85525);
 }
 
 </style>
