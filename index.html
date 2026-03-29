@@ -1800,28 +1800,40 @@ inset 0 1px 0 rgba(255,255,255,.08);
 }
 
 /* =========================================
-   MOBILE TITLE SPACING
+   MOBILE TITLE FIX (HIGHLIGHTS ONLY)
    ========================================= */
 
 @media (max-width:600px){
-  .project-overlay h3,
+
   .highlight-overlay h3{
+
     margin-top:6px;
     font-size:15px;
+    line-height:1.2;
+
+    /* 🔥 HARD CONTROL */
+    display:-webkit-box;
+    -webkit-line-clamp:2;
+    -webkit-box-orient:vertical;
+
+    overflow:hidden;
+    text-overflow:ellipsis;
+
+    max-height:2.4em; /* ensures 2 lines max */
   }
+
 }
 
 /* =========================================
-   MOBILE HIGHLIGHTS = VERTICAL SCROLL (MATCH LIBRARY)
+   MOBILE HIGHLIGHTS VERTICAL SCROLL
    ========================================= */
 
 @media (max-width:900px){
 
   .highlights-window{
-    height:420px;              /* match project window feel */
+    height:420px;
     overflow-y:auto;
     overflow-x:hidden;
-
     -webkit-overflow-scrolling:touch;
   }
 
@@ -1829,7 +1841,6 @@ inset 0 1px 0 rgba(255,255,255,.08);
     display:grid !important;
     grid-template-columns:repeat(2,1fr);
     gap:12px;
-
     transform:none !important;
   }
 
@@ -1840,7 +1851,7 @@ inset 0 1px 0 rgba(255,255,255,.08);
 }
 
 /* =========================================
-   MATCH SCROLLBAR STYLE (BLUE)
+   MATCH SCROLLBAR STYLE
    ========================================= */
 
 .highlights-window{
@@ -1860,10 +1871,6 @@ inset 0 1px 0 rgba(255,255,255,.08);
 .highlights-window::-webkit-scrollbar-thumb{
   background:linear-gradient(180deg,#028391,#FAA968);
   border-radius:10px;
-}
-
-.highlights-window::-webkit-scrollbar-thumb:hover{
-  background:linear-gradient(180deg,#028391,#F85525);
 }
 
 </style>
@@ -3067,18 +3074,18 @@ function autoFitTitles(){
 
   if(window.innerWidth > 600) return;
 
-  const titles = document.querySelectorAll('.project-overlay h3, .highlight-overlay h3');
+  const titles = document.querySelectorAll('.highlight-overlay h3');
 
   titles.forEach(title => {
 
-    let maxSize = 17;
-    let minSize = 11;
+    let size = 17;
+    let min = 12;
 
-    title.style.fontSize = maxSize + 'px';
+    title.style.fontSize = size + 'px';
 
-    while(title.scrollHeight > title.clientHeight && maxSize > minSize){
-      maxSize -= 0.5;
-      title.style.fontSize = maxSize + 'px';
+    while(title.scrollHeight > title.clientHeight && size > min){
+      size -= 0.5;
+      title.style.fontSize = size + 'px';
     }
 
   });
