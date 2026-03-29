@@ -1756,6 +1756,66 @@ inset 0 1px 0 rgba(255,255,255,.08);
   }
 }
 
+
+/* =========================================
+   GLOBAL SCROLLABLE TAGS
+   ========================================= */
+
+.project-tags{
+  display:flex;
+  flex-wrap:nowrap;
+  overflow-x:auto;
+  overflow-y:hidden;
+  gap:6px;
+  padding-bottom:2px;
+
+  scrollbar-width:none;
+}
+
+.project-tags::-webkit-scrollbar{
+  display:none;
+}
+
+.project-tags span{
+  flex:0 0 auto;
+  white-space:nowrap;
+}
+
+/* =========================================
+   SCROLLABLE SUBHEADER (SINGLE LINE)
+   ========================================= */
+
+.project-subheader{
+  display:block;
+  white-space:nowrap;
+  overflow-x:auto;
+  overflow-y:hidden;
+
+  font-size:12px;
+  color:#ccc;
+  margin:2px 0 6px;
+
+  scrollbar-width:none;
+}
+
+.project-subheader::-webkit-scrollbar{
+  display:none;
+}
+
+/* =========================================
+   MOBILE TITLE SPACING (KEY FIX)
+   ========================================= */
+
+@media (max-width:600px){
+
+  .project-overlay h3,
+  .highlight-overlay h3{
+    margin-top:6px;   /* 👈 subtle push down */
+    font-size:15px;
+  }
+
+}
+
 </style>
 
 </head>
@@ -2950,6 +3010,32 @@ function autoFitTitles(){
 window.addEventListener('load', autoFitTitles);
 
 /* run on resize */
+window.addEventListener('resize', autoFitTitles);
+
+
+function autoFitTitles(){
+
+  if(window.innerWidth > 600) return;
+
+  const titles = document.querySelectorAll('.project-overlay h3, .highlight-overlay h3');
+
+  titles.forEach(title => {
+
+    let maxSize = 17;
+    let minSize = 11;
+
+    title.style.fontSize = maxSize + 'px';
+
+    while(title.scrollHeight > title.clientHeight && maxSize > minSize){
+      maxSize -= 0.5;
+      title.style.fontSize = maxSize + 'px';
+    }
+
+  });
+
+}
+
+window.addEventListener('load', autoFitTitles);
 window.addEventListener('resize', autoFitTitles);
 
 </script>
