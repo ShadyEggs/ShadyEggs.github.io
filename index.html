@@ -1875,6 +1875,29 @@ inset 0 1px 0 rgba(255,255,255,.08);
 
 </style>
 
+
+<style>
+
+/* ===== DESKTOP COLUMN ALIGNMENT FIX ===== */
+@media (min-width:901px){
+
+  .main-layout{
+    align-items: start; /* prevents uneven vertical stretching */
+  }
+
+  #about, #highlights{
+    margin-top: 0;
+  }
+
+  /* ensure both sections align visually */
+  #about, #highlights{
+    display: block;
+  }
+
+}
+
+</style>
+
 </head>
 <body>
 
