@@ -1867,6 +1867,21 @@ inset 0 1px 0 rgba(255,255,255,.08);
   border-radius:10px;
 }
 
+
+/* ===== DRAGGING STATE ===== */
+.project-tags.dragging,
+.project-subheader.dragging {
+  cursor: grabbing;
+}
+
+
+/* ===== PREVENT IMAGE DRAG (DESKTOP UX FIX) ===== */
+.project-card img {
+  user-drag: none;
+  -webkit-user-drag: none;
+  user-select: none;
+}
+
 </style>
 <style>
 
@@ -1886,6 +1901,21 @@ inset 0 1px 0 rgba(255,255,255,.08);
     display: block;
   }
 
+}
+
+
+/* ===== DRAGGING STATE ===== */
+.project-tags.dragging,
+.project-subheader.dragging {
+  cursor: grabbing;
+}
+
+
+/* ===== PREVENT IMAGE DRAG (DESKTOP UX FIX) ===== */
+.project-card img {
+  user-drag: none;
+  -webkit-user-drag: none;
+  user-select: none;
 }
 
 </style>
@@ -2872,6 +2902,69 @@ function autoFitTitles(){
 
 window.addEventListener('load', autoFitTitles);
 window.addEventListener('resize', autoFitTitles);
+
+
+/* =========================================
+   DESKTOP CLICK + DRAG SCROLL (TAGS + SUBHEADERS)
+   ========================================= */
+
+function enableDragScroll(selector){
+
+  const elements = document.querySelectorAll(selector)
+
+  elements.forEach(el => {
+
+    let isDown = false
+    let startX
+    let scrollLeft
+
+    el.addEventListener('mousedown', (e) => {
+      if (window.innerWidth <= 900) return
+
+      isDown = true
+      el.classList.add('dragging')
+
+      startX = e.pageX - el.offsetLeft
+      scrollLeft = el.scrollLeft
+    })
+
+    el.addEventListener('mouseleave', () => {
+      isDown = false
+      el.classList.remove('dragging')
+    })
+
+    el.addEventListener('mouseup', () => {
+      isDown = false
+      el.classList.remove('dragging')
+    })
+
+    el.addEventListener('mousemove', (e) => {
+      if (!isDown) return
+      e.preventDefault()
+
+      const x = e.pageX - el.offsetLeft
+      const walk = (x - startX) * 1.2
+
+      el.scrollLeft = scrollLeft - walk
+    })
+
+  })
+
+}
+
+enableDragScroll('.project-tags')
+enableDragScroll('.project-subheader')
+
+
+/* =========================================
+   PREVENT NATIVE IMAGE / LINK DRAG
+   ========================================= */
+
+document.querySelectorAll('.project-card, .project-card img').forEach(el => {
+  el.addEventListener('dragstart', (e) => {
+    e.preventDefault()
+  })
+})
 
 </script>
 </body>
