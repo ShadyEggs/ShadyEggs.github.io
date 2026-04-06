@@ -1882,6 +1882,21 @@ inset 0 1px 0 rgba(255,255,255,.08);
   user-select: none;
 }
 
+
+/* ===== ABOUT TEXT POLISH (NON-BLOAT) ===== */
+.about-text p {
+  margin: 0;                /* remove default spacing */
+}
+
+.about-text p + p {
+  text-indent: 1.2em;       /* subtle separation */
+  margin-top: 6px;          /* VERY tight spacing */
+}
+
+.about-text {
+  line-height: 1.55;        /* controlled readability */
+}
+
 </style>
 <style>
 
