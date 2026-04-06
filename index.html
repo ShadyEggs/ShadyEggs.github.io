@@ -1874,6 +1874,14 @@ inset 0 1px 0 rgba(255,255,255,.08);
   cursor: grabbing;
 }
 
+
+/* ===== PREVENT IMAGE DRAG (DESKTOP UX FIX) ===== */
+.project-card img {
+  user-drag: none;
+  -webkit-user-drag: none;
+  user-select: none;
+}
+
 </style>
 <style>
 
@@ -1900,6 +1908,14 @@ inset 0 1px 0 rgba(255,255,255,.08);
 .project-tags.dragging,
 .project-subheader.dragging {
   cursor: grabbing;
+}
+
+
+/* ===== PREVENT IMAGE DRAG (DESKTOP UX FIX) ===== */
+.project-card img {
+  user-drag: none;
+  -webkit-user-drag: none;
+  user-select: none;
 }
 
 </style>
@@ -2938,6 +2954,17 @@ function enableDragScroll(selector){
 
 enableDragScroll('.project-tags')
 enableDragScroll('.project-subheader')
+
+
+/* =========================================
+   PREVENT NATIVE IMAGE / LINK DRAG
+   ========================================= */
+
+document.querySelectorAll('.project-card, .project-card img').forEach(el => {
+  el.addEventListener('dragstart', (e) => {
+    e.preventDefault()
+  })
+})
 
 </script>
 </body>
