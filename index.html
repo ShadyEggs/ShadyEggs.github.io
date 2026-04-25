@@ -1670,7 +1670,6 @@ inset 0 1px 0 rgba(255,255,255,.08);
 }
 
 
-
 /* =========================================
    GLOBAL SCROLLABLE TAGS (ALL DEVICES)
    ========================================= */
@@ -1946,6 +1945,55 @@ inset 0 1px 0 rgba(255,255,255,.08);
   user-select: none;
 }
 
+
+/* =========================================
+   FINAL HIGHLIGHTS SINGLE-CARD PATCH
+   ========================================= */
+
+#highlights{
+  margin:0;
+}
+
+#highlights .highlights-container,
+#highlights .highlights-window,
+#highlights .highlights-track{
+  width:100%;
+  height:auto !important;
+  max-height:none !important;
+  overflow:visible !important;
+  display:block !important;
+  transform:none !important;
+}
+
+#highlights .highlight-page{
+  display:grid !important;
+  grid-template-columns:repeat(2,1fr);
+  gap:20px;
+  min-width:0 !important;
+}
+
+#highlights .highlight-card:empty{
+  display:none !important;
+}
+
+#highlights .highlight-card img{
+  user-drag:none;
+  -webkit-user-drag:none;
+  user-select:none;
+  pointer-events:none;
+}
+
+#highlights .highlight-nav{
+  display:none !important;
+}
+
+@media (max-width:600px){
+  #highlights .highlight-page{
+    grid-template-columns:repeat(2,1fr);
+    gap:12px;
+  }
+}
+
 </style>
 </head>
 <body>
@@ -1990,11 +2038,9 @@ inset 0 1px 0 rgba(255,255,255,.08);
 <div class="highlights-container">
 <div class="highlights-window">
 <div class="highlights-track">
-<!-- PAGE 1 -->
 <div class="highlight-page">
-
 <a class="highlight-card" data-tags="python pandas numpy matplotlib seaborn jupyter" href="https://github.com/AlfredRico/Provider-Directory-Validation-Project">
-<img src="images/provider_directory_validation_card.svg" alt="Provider Directory Validation Analysis"/>
+<img src="images/provider_directory_validation_card.svg" alt="Provider Directory Validation Analysis" draggable="false"/>
 <div class="highlight-overlay">
 <h3>Provider Directory Validation Analysis</h3>
 <p class="project-subheader">
@@ -2009,14 +2055,8 @@ Python EDA/Data Structuring/Data Engineering/Data Validation
 <span class="tag-jupyter">Jupyter</span>
 </div>
 </div>
-</a><div class="highlight-card"></div><div class="highlight-card"></div><div class="highlight-card"></div></div>
-<!-- PAGE 2 -->
-<div class="highlight-page">
-
-<div class="highlight-card"></div>
-<div class="highlight-card"></div>
-<div class="highlight-card"></div>
-<div class="highlight-card"></div><div class="highlight-card"></div><div class="highlight-card"></div><div class="highlight-card"></div></div>
+</a>
+</div>
 </div>
 </div>
 </div>
@@ -2050,7 +2090,6 @@ Python EDA/Data Structuring/Data Engineering/Data Validation
 <div class="package-filters"></div>
 <div class="projects-window">
 <div class="projects-grid">
-
 
 
 <a class="project-card" data-tags="python numpy pandas matplotlib seaborn tableau" href="https://github.com/AlfredRico/TikTok-Analysis-EDA-Visualization">
@@ -2725,114 +2764,6 @@ console.error("Submission error",err)
 }
 
 /* ================================
-   PROJECT HIGHLIGHTS (SMOOTH SWIPE)
-   ================================ */
-
-const hContainer = document.querySelector(".highlights-container")
-const hTrack = document.querySelector(".highlights-track")
-
-let hIndex = 0
-let startX = 0
-let currentX = 0
-let isDragging = false
-let trackStart = 0
-
-function setTranslate(x, animate = true){
-  if(animate){
-    hTrack.style.transition = "transform .35s ease"
-  }else{
-    hTrack.style.transition = "none"
-  }
-  hTrack.style.transform = `translateX(${x}px)`
-}
-
-function getTranslateForIndex(index){
-  const windowEl = document.querySelector(".highlights-window")
-  return -index * windowEl.offsetWidth
-}
-
-function updateHighlights(){
-  setTranslate(getTranslateForIndex(hIndex))
-}
-
-/* DESKTOP NAV */
-function setupDesktopNav(){
-
-  if(window.innerWidth <= 600) return
-
-  const prev = document.createElement("button")
-  const next = document.createElement("button")
-
-  prev.className = "highlight-nav prev"
-  next.className = "highlight-nav next"
-
-  prev.innerHTML = "&#10094;"
-  next.innerHTML = "&#10095;"
-
-  hContainer.prepend(prev)
-  hContainer.appendChild(next)
-
-  next.addEventListener("click", ()=>{
-    if(hIndex < 1){
-      hIndex++
-      updateHighlights()
-    }
-  })
-
-  prev.addEventListener("click", ()=>{
-    if(hIndex > 0){
-      hIndex--
-      updateHighlights()
-    }
-  })
-}
-
-/* SMOOTH SWIPE */
-
-hTrack.addEventListener("touchstart", (e)=>{
-  isDragging = true
-  startX = e.touches[0].clientX
-  trackStart = getTranslateForIndex(hIndex)
-}, { passive: true })
-
-hTrack.addEventListener("touchmove", (e)=>{
-  if(!isDragging) return
-
-  currentX = e.touches[0].clientX
-  let delta = currentX - startX
-
-  let move = trackStart + delta
-
-  // resistance
-  if((hIndex === 0 && delta > 0) || (hIndex === 1 && delta < 0)){
-    move = trackStart + delta * 0.35
-  }
-
-  setTranslate(move, false)
-}, { passive: true })
-
-hTrack.addEventListener("touchend", ()=>{
-  if(!isDragging) return
-  isDragging = false
-
-  let delta = currentX - startX
-  const threshold = hContainer.offsetWidth * 0.2
-
-  if(delta < -threshold && hIndex < 1){
-    hIndex++
-  } else if(delta > threshold && hIndex > 0){
-    hIndex--
-  }
-
-  updateHighlights()
-})
-
-/* INIT */
-setupDesktopNav()
-updateHighlights()
-window.addEventListener("resize", updateHighlights)
-
-/* ================================
    MOBILE ABOUT TOGGLE LOGIC
    ================================ */
 
@@ -2890,43 +2821,6 @@ if(bubbleArrowUp){
   });
 }
 
-/* ================================
-   HIGHLIGHTS ARROW STATE CONTROL
-   ================================ */
-
-function updateArrowVisibility(){
-
-  if(window.innerWidth <= 900) return
-
-  const prev = document.querySelector(".highlight-nav.prev")
-  const next = document.querySelector(".highlight-nav.next")
-
-  if(!prev || !next) return
-
-  // page 1
-  if(hIndex === 0){
-    prev.classList.add("hidden")
-    next.classList.remove("hidden")
-  }
-
-  // page 2
-  if(hIndex === 1){
-    next.classList.add("hidden")
-    prev.classList.remove("hidden")
-  }
-
-}
-
-/* hook into existing update */
-const originalUpdate = updateHighlights
-
-updateHighlights = function(){
-  originalUpdate()
-  updateArrowVisibility()
-}
-
-/* run once */
-setTimeout(updateArrowVisibility, 100)
 
 /* ================================
    MOBILE NAV TOGGLE
@@ -3128,7 +3022,7 @@ enableDragScroll('.project-subheader')
    PREVENT NATIVE IMAGE / LINK DRAG
    ========================================= */
 
-document.querySelectorAll('.project-card, .project-card img').forEach(el => {
+document.querySelectorAll('.project-card, .project-card img, .highlight-card, .highlight-card img').forEach(el => {
   el.addEventListener('dragstart', (e) => {
     e.preventDefault()
   })
